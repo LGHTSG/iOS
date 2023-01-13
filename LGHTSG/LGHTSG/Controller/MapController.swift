@@ -15,20 +15,41 @@ class MapController: UIViewController {
     
     //MARK: - Properties
     
-    /*private lazy var mapView: NMFMapView = {
-     let map = NMFMapView(frame: CGRect(x: 50, y: 110, width: 300, height: 300))
+    private lazy var mapView: NMFMapView = {
+     let map = NMFMapView(frame: CGRect(x: 50, y: 110, width: 337, height: 314))
           return map
      }()
-     */
+     
     
     private lazy var replaceView: UIView = {
         
-        let uview = UIView(frame: CGRect(x: 50, y: 110, width: 300, height: 300))
+        let uview = UIView(frame: CGRect(x: 27, y: 88, width: 337, height: 314))
         uview.backgroundColor = .blue
         return uview
     }()
-     
+  
     
+    private lazy var dropDown: DropDown = {
+        let drop = DropDown()
+        drop.dataSource = ["item1", "item2", "item3", "item4", "item5", "item6"]
+        drop.layer.cornerRadius = 5
+        drop.backgroundColor = .lightGray
+        drop.selectionBackgroundColor = .gray
+        drop.setupCornerRadius(5)
+        drop.dismissMode = .automatic
+        drop.show()
+        
+        return drop
+    }()
+    
+    private lazy var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.backgroundColor = .white
+        scroll.showsVerticalScrollIndicator = false
+        
+        return scroll
+    }()
     
     
     //MARK: - Lifecycle
@@ -36,6 +57,7 @@ class MapController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        setMarker()
     }
     
     
@@ -43,11 +65,40 @@ class MapController: UIViewController {
     
     //MARK: - Helper
     
-    private func configure (){
-        view.addSubview(replaceView)
-
+    private func setMarker(){
+        
+        let marker = NMFMarker()
+        marker.position = NMGLatLng(lat: 37.360553, lng: 127.110446)
+        marker.iconTintColor = UIColor.red
+        marker.width = 30
+        marker.height = 40
+        marker.mapView = mapView
+    
+        let infoWindow = NMFInfoWindow()
+        let dataSource = NMFInfoWindowDefaultTextSource.data()
+        dataSource.title = "분당중학교"
+        infoWindow.dataSource = dataSource
+        
+        infoWindow.open(with: marker)
     }
+    
+    private func configure (){
+        view.backgroundColor = .black
+        view.addSubview(replaceView)
+        view.addSubview(scrollView)
+        
+        scrollView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(replaceView.snp.bottom).offset(57)
+            $0.width.equalTo(362)
+            $0.height.equalTo(280)
+        
+        }
+    }
+    
+   
 }
+    
 
     //MARK: - swiftUI
 
