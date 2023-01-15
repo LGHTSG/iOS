@@ -13,36 +13,109 @@ import SwiftUI
 
 class MapController: UIViewController {
     
-    //MARK: - Properties
+    //MARK: - Map
     
     private lazy var mapView: NMFMapView = {
-     let map = NMFMapView(frame: CGRect(x: 50, y: 110, width: 337, height: 314))
+     let map = NMFMapView(frame: CGRect(x: 50, y: 110, width: 360, height: 270))
           return map
      }()
      
     
     private lazy var replaceView: UIView = {
         
-        let uview = UIView(frame: CGRect(x: 27, y: 88, width: 337, height: 314))
-        uview.backgroundColor = .blue
+        let uview = UIView(frame: CGRect(x: 15, y: 200, width: 360, height: 270))
+        uview.backgroundColor = .white
         return uview
     }()
   
+    //MARK: - DropDown
+
+    private lazy var dropDownView: UIView = {
+        let dropView = UIView(frame: CGRect(x: 15, y: 144, width: 360, height: 38))
+        dropView.backgroundColor = .darkGray
+    
+        dropView.layer.cornerRadius = 5
+        dropView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapTopItem(_:)))
+                dropView.addGestureRecognizer(tapGesture)
+                dropView.isUserInteractionEnabled = true
+        
+        return dropView
+    }()
+    
+    private lazy var chevronView: UIImageView = {
+        let img = UIImageView()
+        img.image = UIImage(systemName: "chevron.right")
+        img.tintColor = .white
+        
+        return img
+    }()
+    
+    
+    private lazy var dropDownLabel: UILabel = {
+        let dropLabel = UILabel()
+        dropLabel.text = "선택해주세요"
+        dropLabel.textColor = .white
+        return dropLabel
+    }()
     
     private lazy var dropDown: DropDown = {
         let drop = DropDown()
         drop.dataSource = ["item1", "item2", "item3", "item4", "item5", "item6"]
-        drop.layer.cornerRadius = 5
-        drop.backgroundColor = .lightGray
+        drop.textColor = .white
+        drop.anchorView = dropDownView
+        drop.bottomOffset = CGPoint(x: 0, y: dropDownView.bounds.height)
+        drop.backgroundColor = .darkGray
         drop.selectionBackgroundColor = .gray
-        drop.setupCornerRadius(5)
         drop.dismissMode = .automatic
-        drop.show()
+     
         
         return drop
     }()
     
-    private lazy var scrollView: UIScrollView = {
+    //MARK: - TwoButton
+
+    private lazy var priceButton: UIButton = {
+        let btn = UIButton(frame: CGRect(x: 15, y: 493, width: 100, height: 30))
+        btn.setTitle("가격", for: .normal)
+        
+        btn.layer.cornerRadius = 10
+        btn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        btn.backgroundColor = .darkGray
+        
+        return btn
+    }()
+    
+    private lazy var saleButton: UIButton = {
+        let btn = UIButton(frame: CGRect(x: 120, y: 493, width: 100, height: 30))
+        btn.setTitle("매물", for: .normal)
+
+        btn.layer.cornerRadius = 10
+        btn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        btn.backgroundColor = .darkGray
+     
+        return btn
+    }()
+    //MARK: - SegmentController
+    private lazy var segmentCtrl: UISegmentedControl = {
+        let items = ["1주", "3달", "1년", "5년"]
+        let seg = UISegmentedControl(items: items)
+        seg.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
+        seg.layer.cornerRadius = 5.0
+        seg.backgroundColor = .darkGray
+        seg.tintColor = .lightGray
+        seg.selectedSegmentTintColor = .white
+        
+        return seg
+    }()
+
+    
+    
+    //MARK: - ForSale
+
+    // 매물누르면 스크롤뷰 나와야함.
+    private lazy var saleView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
         scroll.backgroundColor = .white
@@ -58,10 +131,8 @@ class MapController: UIViewController {
         super.viewDidLoad()
         configure()
         setMarker()
+        setDropDown()
     }
-    
-    
-    
     
     //MARK: - Helper
     
@@ -85,31 +156,87 @@ class MapController: UIViewController {
     private func configure (){
         view.backgroundColor = .black
         view.addSubview(replaceView)
-        view.addSubview(scrollView)
+        //view.addSubview(scrollView)
         
-        scrollView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(replaceView.snp.bottom).offset(57)
-            $0.width.equalTo(362)
-            $0.height.equalTo(280)
-        
+        [dropDownView, dropDownLabel, dropDown, chevronView, priceButton, saleButton,segmentCtrl]
+          .forEach {view.addSubview($0)}
+
+        dropDownLabel.snp.makeConstraints{
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(94)
+            $0.leading.equalToSuperview().inset(25)
+            
         }
+        chevronView.snp.makeConstraints{
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(94)
+            $0.trailing.equalToSuperview().inset(30)
+            
+        }
+        
+        segmentCtrl.snp.makeConstraints{
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(priceButton.snp.bottom).offset(202)
+
+            $0.width.equalTo(360)
+            $0.height.equalTo(27.5)
+
+        }
+        
+       /* scrollView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(replaceView.snp.bottom).offset(64)
+            $0.width.equalTo(360)
+            $0.height.equalTo(220)
+        
+        }*/
     }
     
+    
+    private func setDropDown(){
+        
+        dropDown.selectionAction = { [weak self] (index, item) in
+            self!.dropDownLabel.text = item
+            self!.chevronView.image = UIImage.init(systemName: "chevron.right")
+        }
+        
+        dropDown.cancelAction = { [weak self] in
+            self!.chevronView.image = UIImage.init(systemName: "chevron.right")
+            
+        }
+    }
+        
+    @objc func didTapTopItem(_ gesture: UITapGestureRecognizer){
+        dropDown.show()
+        self.chevronView.image = UIImage.init(systemName: "chevron.down")
+        
+    }
+    
+    @objc func indexChanged(_ sender: UISegmentedControl){
+        switch sender.selectedSegmentIndex{
+                case 0:
+                    print("1주")
+                case 1:
+                    print("3달")
+                case 2:
+                    print("1년")
+                case 3:
+                    print("5년")
+                default:
+                    break
+            }
+    }
    
 }
-    
 
-    //MARK: - swiftUI
+    //MARK: - SwiftUI
 
-struct MyViewController_PreViews: PreviewProvider {
-static var previews: some View {
-    MapController().toPreview() //원하는 VC를 여기다 입력하면 된다.
-}
-}
-extension UIViewController {
-private struct Preview: UIViewControllerRepresentable {
-        let viewController: UIViewController
+    struct MyViewController_PreViews: PreviewProvider {
+        static var previews: some View {
+            MapController().toPreview() //원하는 VC를 여기다 입력하면 된다.
+        }
+    }
+    extension UIViewController {
+        private struct Preview: UIViewControllerRepresentable {
+            let viewController: UIViewController
 
         func makeUIViewController(context: Context) -> UIViewController {
             return viewController
@@ -119,7 +246,7 @@ private struct Preview: UIViewControllerRepresentable {
         }
     }
 
-func toPreview() -> some View {
-    Preview(viewController: self)
-}
+        func toPreview() -> some View {
+            Preview(viewController: self)
+        }
 }
