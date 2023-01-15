@@ -155,7 +155,7 @@ class MapController: UIViewController {
     
     private func configure (){
         view.backgroundColor = .black
-        view.addSubview(replaceView)
+        view.addSubview(mapView)
         //view.addSubview(scrollView)
         
         [dropDownView, dropDownLabel, dropDown, chevronView, priceButton, saleButton,segmentCtrl]
