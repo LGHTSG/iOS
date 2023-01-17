@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowscene = (scene as? UIWindowScene) else { return }
                 window = UIWindow(windowScene: windowscene)
                 window?.backgroundColor = .systemBackground
-                window?.rootViewController = MapController()
+                window?.rootViewController = EstateController()
                 window?.tintColor = .label
                 window?.makeKeyAndVisible()
     }

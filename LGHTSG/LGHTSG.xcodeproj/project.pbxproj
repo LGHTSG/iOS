@@ -18,7 +18,9 @@
 		0755755F296BFC4B00B8AF77 /* RegisterationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0755755E296BFC4B00B8AF77 /* RegisterationController.swift */; };
 		07557561296BFC5900B8AF77 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07557560296BFC5900B8AF77 /* MainTabController.swift */; };
 		07557563296BFCD300B8AF77 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07557562296BFCD300B8AF77 /* Cell.swift */; };
-		0783C0FA297034FA00EDABA3 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783C0F9297034FA00EDABA3 /* MapController.swift */; };
+		0783C0FA297034FA00EDABA3 /* EstateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783C0F9297034FA00EDABA3 /* EstateController.swift */; };
+		0783C0FE297512F200EDABA3 /* ChartsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783C0FD297512F200EDABA3 /* ChartsModel.swift */; };
+		0783C100297664D400EDABA3 /* EstateDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783C0FF297664D400EDABA3 /* EstateDetailController.swift */; };
 		8E910354CAD5238FB38C267D /* Pods_LGHTSG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,7 +36,9 @@
 		0755755E296BFC4B00B8AF77 /* RegisterationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationController.swift; sourceTree = "<group>"; };
 		07557560296BFC5900B8AF77 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		07557562296BFCD300B8AF77 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
-		0783C0F9297034FA00EDABA3 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
+		0783C0F9297034FA00EDABA3 /* EstateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstateController.swift; sourceTree = "<group>"; };
+		0783C0FD297512F200EDABA3 /* ChartsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChartsModel.swift; path = LGHTSG/Controller/ChartsModel.swift; sourceTree = SOURCE_ROOT; };
+		0783C0FF297664D400EDABA3 /* EstateDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstateDetailController.swift; sourceTree = "<group>"; };
 		1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LGHTSG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F7EA128F8EC33ED812CADCA /* Pods-LGHTSG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.release.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.release.xcconfig"; sourceTree = "<group>"; };
 		9154F7534146417B8EBDBECC /* Pods-LGHTSG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.debug.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.debug.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 		071E0554296BB8210020282F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0783C0FD297512F200EDABA3 /* ChartsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -140,7 +145,8 @@
 			children = (
 				0755755A296BFC2100B8AF77 /* Authentication */,
 				07557560296BFC5900B8AF77 /* MainTabController.swift */,
-				0783C0F9297034FA00EDABA3 /* MapController.swift */,
+				0783C0F9297034FA00EDABA3 /* EstateController.swift */,
+				0783C0FF297664D400EDABA3 /* EstateDetailController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -293,9 +299,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0783C0FA297034FA00EDABA3 /* MapController.swift in Sources */,
+				0783C0FA297034FA00EDABA3 /* EstateController.swift in Sources */,
 				071E0545296BB7B50020282F /* ViewController.swift in Sources */,
+				0783C100297664D400EDABA3 /* EstateDetailController.swift in Sources */,
 				0755755C296BFC3300B8AF77 /* LoginController.swift in Sources */,
+				0783C0FE297512F200EDABA3 /* ChartsModel.swift in Sources */,
 				07557563296BFCD300B8AF77 /* Cell.swift in Sources */,
 				07557561296BFC5900B8AF77 /* MainTabController.swift in Sources */,
 				071E0541296BB7B50020282F /* AppDelegate.swift in Sources */,

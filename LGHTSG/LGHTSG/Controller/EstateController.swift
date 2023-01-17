@@ -11,32 +11,57 @@ import DropDown
 import SnapKit
 import SwiftUI
 import Charts
+import CoreLocation
 
-class MapController: UIViewController {
+class EstateController: UIViewController, ChartViewDelegate {
     
     //MARK: - Map
     
     private lazy var mapView: NMFMapView = {
-     let map = NMFMapView(frame: CGRect(x: 15, y: 200, width: 360, height: 270))
-          return map
+        let map = NMFMapView()
+        let camera = map.cameraPosition
+        print(camera)
+        
+        return map
      }()
      
-    
     private lazy var replaceView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
         
-        let uview = UIView(frame: CGRect(x: 15, y: 200, width: 360, height: 270))
-        uview.backgroundColor = .white
-        return uview
+        return view
     }()
-  
+    
+    private lazy var replaceView2: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        
+        return view
+    }()
+    
+    private lazy var replaceView3: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        
+        return view
+    }()
+
+    private lazy var locationView: NMFNaverMapView = {
+        let locView = NMFNaverMapView()
+        locView.showLocationButton = true
+        
+        return locView
+    }()
+    
+      
     //MARK: - DropDown
 
     private lazy var dropDownView: UIView = {
-        let dropView = UIView(frame: CGRect(x: 15, y: 145, width: 360, height: 38))
+        let dropView = UIView()
         dropView.backgroundColor = UIColor(named: "dropdown")
         dropView.layer.cornerRadius = 5
         dropView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        
+        dropView.frame.size.height = 38
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapTopItem(_:)))
                 dropView.addGestureRecognizer(tapGesture)
                 dropView.isUserInteractionEnabled = true
@@ -65,12 +90,10 @@ class MapController: UIViewController {
         drop.dataSource = ["item1", "item2", "item3", "item4", "item5", "item6"]
         drop.textColor = .white
         drop.anchorView = dropDownView
-        drop.bottomOffset = CGPoint(x: 0, y: dropDownView.bounds.height + 1)
         drop.backgroundColor = UIColor(named: "dropdown")
         drop.selectionBackgroundColor = .gray
         drop.dismissMode = .automatic
      
-        
         return drop
     }()
     
@@ -89,7 +112,7 @@ class MapController: UIViewController {
     var flag = true
     
     private lazy var priceButton: UIButton = {
-        let btn = UIButton(frame: CGRect(x: 15, y: 493, width: 100, height: 30))
+        let btn = UIButton()
         btn.setTitle("가격", for: .normal)
         btn.layer.cornerRadius = 10
         btn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -101,7 +124,7 @@ class MapController: UIViewController {
     }()
     
     private lazy var saleButton: UIButton = {
-        let btn = UIButton(frame: CGRect(x: 120, y: 493, width: 100, height: 30))
+        let btn = UIButton()
         btn.setTitle("매물", for: .normal)
         btn.layer.cornerRadius = 10
         btn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -127,8 +150,6 @@ class MapController: UIViewController {
         return seg
     }()
 
-    
-    
     //MARK: - ForSale
 
     // 매물누르면 스크롤뷰 나와야함.
@@ -141,7 +162,8 @@ class MapController: UIViewController {
         return scroll
     }()
     
-    
+    //var lineChart = LineChartView()
+
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -149,9 +171,32 @@ class MapController: UIViewController {
         configure()
         setMarker()
         setDropDown()
+       // setChart()
+    
     }
     
+   /* override func viewDidLayoutSubviews() {
+        lineChart.frame = CGRect(x: 15, y: 537, width: 360, height: 170)
+        lineChart.backgroundColor = .white
+        view.addSubview(lineChart)
+        
+        var entries = [ChartDataEntry]()
+        for x in 0..<10{
+            entries.append(ChartDataEntry(x: Double(x), y: Double(x)))
+        }
+        
+        let set = LineChartDataSet(entries: entries)
+        set.colors = ChartColorTemplates.material()
+        let data = LineChartData(dataSet: set)
+        lineChart.data = data
+    }*/
+    
     //MARK: - Helper
+    /*
+    private func setChart(){
+        lineChart.delegate = self
+    }
+    */
     
     private func setMarker(){
         
@@ -162,6 +207,8 @@ class MapController: UIViewController {
         marker.height = 40
         marker.mapView = mapView
     
+        
+        
         let infoWindow = NMFInfoWindow()
         let dataSource = NMFInfoWindowDefaultTextSource.data()
         dataSource.title = "분당중학교"
@@ -173,11 +220,57 @@ class MapController: UIViewController {
     private func configure (){
         view.backgroundColor = .black
         view.addSubview(replaceView)
+        mapView.addSubview(locationView)
         //view.addSubview(scrollView)
-        
-        [dropDownView, dropDownLabel, dropDown, chevronView, priceButton, saleButton,segmentCtrl,lineImage,lineImage2]
-          .forEach {view.addSubview($0)}
+      
+        dropDown.bottomOffset = CGPoint(x: 0, y: dropDownView.bounds.height + 1)
 
+        [dropDownView, dropDownLabel, dropDown, chevronView, priceButton, saleButton,lineImage,lineImage2,segmentCtrl,replaceView2]
+          .forEach {view.addSubview($0)}
+        
+        
+        
+        replaceView2.snp.makeConstraints{
+            $0.top.equalTo(lineImage2.snp.bottom).offset(14)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-127)
+            $0.leading.equalToSuperview().inset(15)
+            $0.trailing.equalToSuperview().inset(15)
+            
+        }
+        
+        
+        saleButton.snp.makeConstraints{
+            $0.leading.equalTo(priceButton.snp.trailing).offset(5)
+            $0.trailing.equalToSuperview().inset(170)
+            $0.top.equalTo(replaceView.snp.bottom).offset(24)
+        }
+        
+        priceButton.snp.makeConstraints{
+            $0.leading.equalToSuperview().inset(15)
+            $0.trailing.equalToSuperview().inset(275)
+            $0.top.equalTo(replaceView.snp.bottom).offset(24)
+            
+        }
+        
+        replaceView.snp.makeConstraints{
+            $0.top.equalTo(dropDownView.snp.bottom).offset(16)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-375)
+            $0.leading.equalToSuperview().inset(15)
+            $0.trailing.equalToSuperview().inset(15)
+       
+        }
+        
+        locationView.snp.makeConstraints{
+            $0.top.equalTo(mapView.snp.bottom).offset(5)
+        }
+        
+        dropDownView.snp.makeConstraints{
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(86)
+            $0.leading.equalToSuperview().inset(15)
+            $0.trailing.equalToSuperview().inset(15)
+            $0.height.equalTo(38)
+        }
+     
         dropDownLabel.snp.makeConstraints{
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(94)
             $0.leading.equalToSuperview().inset(25)
@@ -190,24 +283,23 @@ class MapController: UIViewController {
         }
         
         segmentCtrl.snp.makeConstraints{
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(priceButton.snp.bottom).offset(202)
-
-            $0.width.equalTo(360)
-            $0.height.equalTo(27.5)
+            $0.top.equalTo(replaceView2.snp.bottom).offset(8)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-91)
+            $0.leading.equalToSuperview().inset(15)
+            $0.trailing.equalToSuperview().inset(15)
 
         }
         lineImage.snp.makeConstraints{
             $0.leading.equalToSuperview().inset(15)
+            $0.trailing.equalToSuperview().inset(15)
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(123)
             $0.width.equalTo(360)
-
         }
+        
         lineImage2.snp.makeConstraints{
             $0.leading.equalToSuperview().inset(15)
-            $0.top.equalTo(lineImage.snp.top).offset(339)
-            $0.width.equalTo(360)
-
+            $0.trailing.equalToSuperview().inset(15)
+            $0.top.equalTo(replaceView.snp.bottom).offset(56)
         }
         
        /* scrollView.snp.makeConstraints {
@@ -242,6 +334,8 @@ class MapController: UIViewController {
             
         }
         flag = false
+        
+        
     }
     
     @objc func didTapSaleBtn(){
@@ -253,6 +347,7 @@ class MapController: UIViewController {
 
         }
         flag = true
+        
     }
     
     @objc func didTapTopItem(_ gesture: UITapGestureRecognizer){
@@ -275,14 +370,26 @@ class MapController: UIViewController {
                     break
             }
     }
-   
+    var infoWindow = NMFInfoWindow()
+    var defaultInfoWindowImage = NMFInfoWindowDefaultTextSource.data()
+}
+    //MARK: - extension
+extension EstateController: NMFMapViewTouchDelegate {
+   func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
+       infoWindow.close()
+       
+       let latlngStr = String(format: "좌표:(%.5f, %.5f)", latlng.lat, latlng.lng)
+       defaultInfoWindowImage.title = latlngStr
+       infoWindow.position = latlng
+       infoWindow.open(with: mapView)
+   }
 }
 
     //MARK: - SwiftUI
 
     struct MyViewController_PreViews: PreviewProvider {
         static var previews: some View {
-            MapController().toPreview() //원하는 VC를 여기다 입력하면 된다.
+            EstateController().toPreview() //원하는 VC를 여기다 입력하면 된다.
         }
     }
     extension UIViewController {
