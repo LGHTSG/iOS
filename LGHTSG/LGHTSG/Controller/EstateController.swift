@@ -191,31 +191,8 @@ class EstateController: UIViewController, ChartViewDelegate {
         lineChart.data = data
     }*/
     
-    //MARK: - Helper
-    /*
-    private func setChart(){
-        lineChart.delegate = self
-    }
-    */
-    
-    private func setMarker(){
-        
-        let marker = NMFMarker()
-        marker.position = NMGLatLng(lat: 37.360553, lng: 127.110446)
-        marker.iconTintColor = UIColor.red
-        marker.width = 30
-        marker.height = 40
-        marker.mapView = mapView
-    
-        
-        
-        let infoWindow = NMFInfoWindow()
-        let dataSource = NMFInfoWindowDefaultTextSource.data()
-        dataSource.title = "분당중학교"
-        infoWindow.dataSource = dataSource
-        
-        infoWindow.open(with: marker)
-    }
+   
+    //MARK: - Configure
     
     private func configure (){
         view.backgroundColor = .black
@@ -311,6 +288,29 @@ class EstateController: UIViewController, ChartViewDelegate {
         }*/
     }
     
+    //MARK: - Helper
+    /*
+    private func setChart(){
+        lineChart.delegate = self
+    }
+    */
+    
+    private func setMarker(){
+        
+        let marker = NMFMarker()
+        marker.position = NMGLatLng(lat: 37.360553, lng: 127.110446)
+        marker.iconTintColor = UIColor.red
+        marker.width = 30
+        marker.height = 40
+        marker.mapView = mapView
+    
+        let infoWindow = NMFInfoWindow()
+        let dataSource = NMFInfoWindowDefaultTextSource.data()
+        dataSource.title = "분당중학교"
+        infoWindow.dataSource = dataSource
+        
+        infoWindow.open(with: marker)
+    }
     
     private func setDropDown(){
         
@@ -331,11 +331,8 @@ class EstateController: UIViewController, ChartViewDelegate {
             saleButton.setTitleColor(.white, for: .normal)
             priceButton.backgroundColor = .white
             priceButton.setTitleColor(.black, for: .normal)
-            
         }
         flag = false
-        
-        
     }
     
     @objc func didTapSaleBtn(){
@@ -373,6 +370,7 @@ class EstateController: UIViewController, ChartViewDelegate {
     var infoWindow = NMFInfoWindow()
     var defaultInfoWindowImage = NMFInfoWindowDefaultTextSource.data()
 }
+
     //MARK: - extension
 extension EstateController: NMFMapViewTouchDelegate {
    func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {

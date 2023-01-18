@@ -17,7 +17,7 @@
 		0755755C296BFC3300B8AF77 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0755755B296BFC3300B8AF77 /* LoginController.swift */; };
 		0755755F296BFC4B00B8AF77 /* RegisterationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0755755E296BFC4B00B8AF77 /* RegisterationController.swift */; };
 		07557561296BFC5900B8AF77 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07557560296BFC5900B8AF77 /* MainTabController.swift */; };
-		07557563296BFCD300B8AF77 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07557562296BFCD300B8AF77 /* Cell.swift */; };
+		07557563296BFCD300B8AF77 /* EstateDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07557562296BFCD300B8AF77 /* EstateDetailCell.swift */; };
 		0783C0FA297034FA00EDABA3 /* EstateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783C0F9297034FA00EDABA3 /* EstateController.swift */; };
 		0783C0FE297512F200EDABA3 /* ChartsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783C0FD297512F200EDABA3 /* ChartsModel.swift */; };
 		0783C100297664D400EDABA3 /* EstateDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783C0FF297664D400EDABA3 /* EstateDetailController.swift */; };
@@ -35,7 +35,7 @@
 		0755755B296BFC3300B8AF77 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		0755755E296BFC4B00B8AF77 /* RegisterationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationController.swift; sourceTree = "<group>"; };
 		07557560296BFC5900B8AF77 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
-		07557562296BFCD300B8AF77 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		07557562296BFCD300B8AF77 /* EstateDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstateDetailCell.swift; sourceTree = "<group>"; };
 		0783C0F9297034FA00EDABA3 /* EstateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstateController.swift; sourceTree = "<group>"; };
 		0783C0FD297512F200EDABA3 /* ChartsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChartsModel.swift; path = LGHTSG/Controller/ChartsModel.swift; sourceTree = SOURCE_ROOT; };
 		0783C0FF297664D400EDABA3 /* EstateDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstateDetailController.swift; sourceTree = "<group>"; };
@@ -128,7 +128,7 @@
 		071E0558296BB8510020282F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				07557562296BFCD300B8AF77 /* Cell.swift */,
+				07557562296BFCD300B8AF77 /* EstateDetailCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -304,7 +304,7 @@
 				0783C100297664D400EDABA3 /* EstateDetailController.swift in Sources */,
 				0755755C296BFC3300B8AF77 /* LoginController.swift in Sources */,
 				0783C0FE297512F200EDABA3 /* ChartsModel.swift in Sources */,
-				07557563296BFCD300B8AF77 /* Cell.swift in Sources */,
+				07557563296BFCD300B8AF77 /* EstateDetailCell.swift in Sources */,
 				07557561296BFC5900B8AF77 /* MainTabController.swift in Sources */,
 				071E0541296BB7B50020282F /* AppDelegate.swift in Sources */,
 				071E0543296BB7B50020282F /* SceneDelegate.swift in Sources */,
