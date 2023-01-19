@@ -5,7 +5,7 @@
 //
 //
 import UIKit
-final class UnderlineSegmentedControl: UISegmentedControl {
+class UnderlineSegmentedControl: UISegmentedControl {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -27,7 +27,7 @@ final class UnderlineSegmentedControl: UISegmentedControl {
     fatalError()
   }
   
-  private func removeBackgroundAndDivider() {
+  func removeBackgroundAndDivider() {
     let image = UIImage()
     self.setBackgroundImage(image, for: .normal, barMetrics: .default)
     self.setBackgroundImage(image, for: .selected, barMetrics: .default)

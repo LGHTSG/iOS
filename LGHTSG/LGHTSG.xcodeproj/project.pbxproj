@@ -15,6 +15,9 @@
 		071E054A296BB7B70020282F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 071E0549296BB7B70020282F /* Assets.xcassets */; };
 		07557561296BFC5900B8AF77 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07557560296BFC5900B8AF77 /* MainTabController.swift */; };
 		07557563296BFCD300B8AF77 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07557562296BFCD300B8AF77 /* Cell.swift */; };
+		F02807672979628100DDA7B1 /* ChartMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02807662979628100DDA7B1 /* ChartMarker.swift */; };
+		F028076A297962AD00DDA7B1 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = F0280769297962AD00DDA7B1 /* Charts */; };
+		F028076C297962BF00DDA7B1 /* StockDateSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028076B297962BF00DDA7B1 /* StockDateSegmentControl.swift */; };
 		F045C16129756C0200E71129 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F045C16029756C0200E71129 /* LoginController.swift */; };
 		F045C16329756C0F00E71129 /* RegisterationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F045C16229756C0F00E71129 /* RegisterationController.swift */; };
 		F045C16929756C6B00E71129 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F045C16829756C6B00E71129 /* LaunchScreen.storyboard */; };
@@ -37,6 +40,8 @@
 		071E054E296BB7B70020282F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07557560296BFC5900B8AF77 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		07557562296BFCD300B8AF77 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		F02807662979628100DDA7B1 /* ChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartMarker.swift; sourceTree = "<group>"; };
+		F028076B297962BF00DDA7B1 /* StockDateSegmentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockDateSegmentControl.swift; sourceTree = "<group>"; };
 		F045C16029756C0200E71129 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		F045C16229756C0F00E71129 /* RegisterationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterationController.swift; sourceTree = "<group>"; };
 		F045C16829756C6B00E71129 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -56,6 +61,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07120DF3296EDF6E00ABF98F /* Alamofire in Frameworks */,
+				F028076A297962AD00DDA7B1 /* Charts in Frameworks */,
 				07120DF6296EDF7A00ABF98F /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -172,6 +178,8 @@
 				F047B2D9297154C400810AB4 /* UnderlineView.swift */,
 				F047B2DB2971B5AC00810AB4 /* HomeTableCell.swift */,
 				F047B2D52970912600810AB4 /* UnderlineSegmentedControl.swift */,
+				F02807662979628100DDA7B1 /* ChartMarker.swift */,
+				F028076B297962BF00DDA7B1 /* StockDateSegmentControl.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -195,6 +203,7 @@
 			packageProductDependencies = (
 				07120DF2296EDF6E00ABF98F /* Alamofire */,
 				07120DF5296EDF7A00ABF98F /* SnapKit */,
+				F0280769297962AD00DDA7B1 /* Charts */,
 			);
 			productName = LGHTSG;
 			productReference = 071E053D296BB7B50020282F /* LGHTSG.app */;
@@ -227,6 +236,7 @@
 			packageReferences = (
 				07120DF1296EDF6E00ABF98F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				07120DF4296EDF7A00ABF98F /* XCRemoteSwiftPackageReference "SnapKit" */,
+				F0280768297962AD00DDA7B1 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 071E053E296BB7B50020282F /* Products */;
 			projectDirPath = "";
@@ -254,6 +264,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F02807672979628100DDA7B1 /* ChartMarker.swift in Sources */,
+				F028076C297962BF00DDA7B1 /* StockDateSegmentControl.swift in Sources */,
 				071E0545296BB7B50020282F /* ViewController.swift in Sources */,
 				F0C7CBB1296EF269007C8BCE /* ExploreViewController.swift in Sources */,
 				07557563296BFCD300B8AF77 /* Cell.swift in Sources */,
@@ -485,6 +497,14 @@
 				kind = branch;
 			};
 		};
+		F0280768297962AD00DDA7B1 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -497,6 +517,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 07120DF4296EDF7A00ABF98F /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		F0280769297962AD00DDA7B1 /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F0280768297962AD00DDA7B1 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
