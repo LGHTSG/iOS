@@ -8,28 +8,27 @@
 import UIKit
 import Charts
 import SnapKit
-//struct ChartData : LineChartData{
-//    var xvalue: String
-//    var yvalue: Double
-//}
 final class ExploreViewController : UIViewController{
-    var months : [Double] = [1, 2, 3, 4, 5, 6, 7 , 8, 9, 10, 11, 12, 13, 14,15]
-    var unitsSold : [Double] = [898900, 8182000,333300, 739200, 980000, 3199000,123300,122220,125600,320000,123123,4124000, 122330, 12312, 124241]
+    var stockPriceData = StockPriceModel()
+    var EstatePriceData = EstatePriceModel()
     var segmentControl = StockDateSegmentControl(items: ["1주", "3달", "1년","5년"])
-    
     lazy var lineChartView : LineChartView = {
         let chartView = LineChartView()
         return chartView
     }()
+
     override func viewDidLoad(){
         super.viewDidLoad()
+        
+        
         setDatePicker()
         setLineChartView()
+       
     }
 }
 
 extension ExploreViewController {
-    func setLineData(lineChartView: LineChartView, lineChartDataEntries: [ChartDataEntry]) {
+    func setLineData(lineChartView: LineChartView, lineChartDataEntries: [ChartDataEntry], xAxis : [String], recentPrice : Double) {
         // Entry들을 이용해 Data Set 만들기(그런데 우리는 각 포인트를 나타내줄 필요가 없어서 지워줌
         let lineChartdataSet = LineChartDataSet(entries: lineChartDataEntries, label: "주가")
         lineChartdataSet.drawValuesEnabled = false
@@ -52,9 +51,11 @@ extension ExploreViewController {
         lineChartView.xAxis.enabled = false // 위쪽 label
         lineChartView.xAxis.drawGridLinesEnabled = false
         lineChartView.xAxis.drawAxisLineEnabled = false
+        lineChartView.doubleTapToZoomEnabled = false
         // 아래 뜨는 어떤항목인지 알려주는 label 제거
         lineChartView.legend.enabled = false
-        let marker = ChartMarker()
+        lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: xAxis)
+        let marker = ChartMarker(pricedate: xAxis, recentprice: recentPrice)
         marker.chartheight = lineChartView.frame.height
         marker.chartView = lineChartView
         lineChartView.marker = marker
@@ -66,28 +67,40 @@ extension ExploreViewController {
         lineChartView.data?.setValueFormatter(DefaultValueFormatter(formatter:formatter))
     }
     // entry 만들기
-    func entryData(xvalues: [Double], yvalues: [Double]) -> [ChartDataEntry] {
+    func entryData(yvalues: [Int]) -> [ChartDataEntry] {
         // entry 담을 array
         var lineDataEntries: [ChartDataEntry] = []
         // 담기
         for i in 0 ..< yvalues.count {
-            let lineDataEntry = ChartDataEntry(x: xvalues[i], y: yvalues[i])
+            let lineDataEntry = ChartDataEntry(x: Double(i), y: Double(yvalues[i]))
             lineDataEntries.append(lineDataEntry)
         }
         // 반환
         return lineDataEntries
     }
     private func setLineChartView() {
-        
-        view.addSubview(lineChartView)
-        setLineData(lineChartView: lineChartView, lineChartDataEntries: self.entryData(xvalues : months, yvalues: self.unitsSold))
-        lineChartView.snp.makeConstraints{
-            $0.center.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
-            $0.top.bottom.equalToSuperview().inset(140)
-        
-        }
-        
+//        stockPriceData.requestStockPrice(stockIdx: 1, onCompleted: { (pricelists, transctiontime) in
+//            DispatchQueue.main.async {
+//                self.view.addSubview(self.lineChartView)
+//                self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: pricelists), xAxis: transctiontime, recentPrice : Double(pricelists.last!))
+//                self.lineChartView.snp.makeConstraints{
+//                    $0.center.equalToSuperview()
+//                    $0.leading.trailing.equalToSuperview()
+//                    $0.top.bottom.equalToSuperview().inset(140)
+//                }
+//            }
+//        })
+        EstatePriceData.requestStockPrice(EstateIdx: 1, onCompleted: { (pricelists, transctiontime) in
+            DispatchQueue.main.async {
+                self.view.addSubview(self.lineChartView)
+                self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: pricelists), xAxis: transctiontime, recentPrice : Double(pricelists.last!))
+                self.lineChartView.snp.makeConstraints{
+                    $0.center.equalToSuperview()
+                    $0.leading.trailing.equalToSuperview()
+                    $0.top.bottom.equalToSuperview().inset(140)
+                }
+            }
+        })
     }
     
 }
