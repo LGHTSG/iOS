@@ -8,8 +8,8 @@ import SnapKit
 import Foundation
 import UIKit
 final class HomeViewController : UIViewController{
+    private var segmentControl = UnderlineSegmentedControl(items: ["나의 자산", "판매한 자산"])
     var changepercent : String = "-7.2%"
-    var segmentControl = UnderlineSegmentedControl(items: ["나의 자산", "판매한 자산"])
     var tableview = UITableView()
     var underline1 = UnderlineView()
     var underline2 = UnderlineView()
@@ -20,7 +20,7 @@ final class HomeViewController : UIViewController{
         SetNavigationBar()
         setTobTabbar()
         segmentControl.addTarget(self, action: #selector(clicksegment), for: .valueChanged)
-        swipeGestureNavigationBar()
+//        swipeGestureNavigationBar()
         setTable()
 //        assetmodel.delegate = self
 //        assetmodel.getAsset()
@@ -39,17 +39,7 @@ final class HomeViewController : UIViewController{
 
 }
 private extension HomeViewController{
-    // 위아래 스와이프를 통해 검색창이 뜰수 있도록 하기
-    func swipeGestureNavigationBar(){
-        let down = UISwipeGestureRecognizer(target: self, action: #selector(showsearchbar))
-        down.direction = .down
-        let swipeup = UISwipeGestureRecognizer(target: self, action: #selector(shownavigationBar))
-        swipeup.direction = .up
-        self.view.addGestureRecognizer(down)
-        self.tableview.addGestureRecognizer(down)
-        self.view.addGestureRecognizer(swipeup)
-        self.tableview.addGestureRecognizer(swipeup)
-    }
+
     // 네비게이션바 다시 생성
     @objc func shownavigationBar(){
         SetNavigationBar()
@@ -71,8 +61,9 @@ private extension HomeViewController{
         let profileBtn = UIBarButtonItem(customView:realbtn )
         navigationItem.rightBarButtonItem = profileBtn
     }
+
     @objc func showsearchbar(){
-        layoutSearchBar()
+        print(navigationItem.leftBarButtonItem)
     }
     func layoutSearchBar(){
         let searchbar = UISearchBar()
@@ -93,6 +84,7 @@ private extension HomeViewController{
         view.addSubview(segmentControl)
         view.addSubview(underline1)
         view.addSubview(underline2)
+        underline1.backgroundColor = .white
         segmentControl.snp.makeConstraints{
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.leading.trailing.equalToSuperview()
@@ -152,9 +144,13 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource {
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if self.tableview.contentOffset.y < 0 {
-            layoutSearchBar()
+            let MaintabC = MainTabController()
+            MaintabC.showsearchbar()
         }
-        else if tableview.contentOffset.y>100 { SetNavigationBar() }
+        else if tableview.contentOffset.y>100 {
+            let MaintabC = MainTabController()
+            MaintabC.shownavigationBar()
+        }
     }
 }
 //extension HomeViewController : AssetModelProtocol{

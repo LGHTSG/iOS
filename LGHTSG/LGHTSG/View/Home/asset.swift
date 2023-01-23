@@ -7,8 +7,13 @@
 
 import Foundation
 struct asset : Decodable {
-    let name : String
-    let price : String
-    let changePercent : String
-    let changeDate : String
+    let body : [body]
+    struct body : Decodable{
+        let name : String
+        let price : Int
+        let rafeOfChange : Int
+        let rateCalDateDiff : String
+        let iconImage : String
+    }
+
 }

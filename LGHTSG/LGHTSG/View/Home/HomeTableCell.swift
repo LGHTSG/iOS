@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
+import Kingfisher
 class HomeTableCell : UITableViewCell {
     var countLabel : UILabel = {
         let label = UILabel()
@@ -44,42 +45,45 @@ class HomeTableCell : UITableViewCell {
 //    }
 }
 extension HomeTableCell {
-//    func setup(with assetinfo : asset){
-//        [countLabel, nameLabel, priceLabel, pricePercent, changeDate, iconimage].forEach{
-//            addSubview($0)
-//        }
-//        nameLabel.text = assetinfo.name
-//        priceLabel.text = assetinfo.price
-//        changeDate.text = assetinfo.changeDate
-//        pricePercent.text = assetinfo.changePercent
-//        countLabel.snp.makeConstraints{
-//            $0.leading.equalToSuperview()
-//            $0.centerY.equalToSuperview()
-//        }
-//        iconimage.snp.makeConstraints{
-//            $0.leading.equalTo(countLabel.snp.trailing).offset(8.66)
-//            $0.top.bottom.equalToSuperview()
-//        }
-//        nameLabel.snp.makeConstraints{
-//            $0.leading.equalTo(iconimage.snp.trailing).offset(16.34)
-//            $0.top.trailing.equalToSuperview()
-//
-//        }
-//        priceLabel.snp.makeConstraints{
-//            $0.leading.equalTo(nameLabel.snp.leading)
-//            $0.top.equalTo(nameLabel.snp.bottom).offset(5)
-//            $0.bottom.equalToSuperview()
-//        }
-//        pricePercent.snp.makeConstraints{
-//            $0.leading.equalTo(priceLabel.snp.trailing).offset(8)
-//            $0.top.equalTo(priceLabel.snp.bottom).offset(6)
-//
-//        }
-//        changeDate.snp.makeConstraints{
-//            $0.leading.equalTo(pricePercent.snp.trailing).offset(9)
-//            $0.top.equalTo(pricePercent.snp.top)
-//        }
-//    }
+    func setup(with assetinfo : asset.body){
+        [countLabel, nameLabel, priceLabel, pricePercent, changeDate, iconimage].forEach{
+            addSubview($0)
+        }
+        nameLabel.text = assetinfo.name
+        priceLabel.text = String(assetinfo.price)+"원"
+        changeDate.text = assetinfo.rateCalDateDiff
+        pricePercent.text = String(assetinfo.rafeOfChange)
+        let url = URL(string: assetinfo.iconImage)
+        iconimage.kf.setImage(with: url)
+        countLabel.snp.makeConstraints{
+            $0.leading.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-12)
+        }
+        iconimage.snp.makeConstraints{
+            $0.leading.equalToSuperview().offset(23.66)
+            $0.top.equalToSuperview()
+            $0.height.width.equalTo(44)
+            $0.bottom.equalToSuperview().offset(-12)
+        }
+        nameLabel.snp.makeConstraints{
+            $0.leading.equalTo(iconimage.snp.trailing).offset(16.34)
+            $0.top.equalToSuperview()
+            
+        }
+        priceLabel.snp.makeConstraints{
+            $0.leading.equalTo(nameLabel.snp.leading)
+            $0.top.equalTo(nameLabel.snp.bottom).offset(5)
+        }
+        pricePercent.snp.makeConstraints{
+            $0.leading.equalTo(priceLabel.snp.trailing).offset(8)
+            $0.top.equalTo(priceLabel.snp.top)
+        }
+        changeDate.snp.makeConstraints{
+            $0.leading.equalTo(pricePercent.snp.trailing).offset(9)
+            $0.top.equalTo(pricePercent.snp.top)
+        }
+    }
     func setuppp(){
         [countLabel, nameLabel, priceLabel, pricePercent, changeDate, iconimage].forEach{
             addSubview($0)

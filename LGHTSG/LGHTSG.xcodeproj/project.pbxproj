@@ -14,7 +14,6 @@
 		071E0545296BB7B50020282F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071E0544296BB7B50020282F /* ViewController.swift */; };
 		071E054A296BB7B70020282F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 071E0549296BB7B70020282F /* Assets.xcassets */; };
 		07557561296BFC5900B8AF77 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07557560296BFC5900B8AF77 /* MainTabController.swift */; };
-		07557563296BFCD300B8AF77 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07557562296BFCD300B8AF77 /* Cell.swift */; };
 		F02807672979628100DDA7B1 /* ChartMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02807662979628100DDA7B1 /* ChartMarker.swift */; };
 		F028076A297962AD00DDA7B1 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = F0280769297962AD00DDA7B1 /* Charts */; };
 		F028076C297962BF00DDA7B1 /* StockDateSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028076B297962BF00DDA7B1 /* StockDateSegmentControl.swift */; };
@@ -29,6 +28,10 @@
 		F047B2DE2972E06100810AB4 /* AssetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F047B2DD2972E06100810AB4 /* AssetModel.swift */; };
 		F04A11F3297D00860074C0ED /* realEstates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A11F2297D00860074C0ED /* realEstates.swift */; };
 		F04A11F5297D01600074C0ED /* EstatePriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A11F4297D01600074C0ED /* EstatePriceModel.swift */; };
+		F04A11F7297D1DA10074C0ED /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A11F6297D1DA10074C0ED /* ChartViewController.swift */; };
+		F04A11F9297D50E20074C0ED /* StockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A11F8297D50E20074C0ED /* StockView.swift */; };
+		F04A1201297E65AF0074C0ED /* TableCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A1200297E65AF0074C0ED /* TableCellModel.swift */; };
+		F04A1204297E7D350074C0ED /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F04A1203297E7D350074C0ED /* Kingfisher */; };
 		F09CA69A297AFB870017E2A6 /* StockPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09CA699297AFB870017E2A6 /* StockPrice.swift */; };
 		F09CA69C297AFCE60017E2A6 /* StockPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09CA69B297AFCE60017E2A6 /* StockPriceModel.swift */; };
 		F0C7CBAF296EF260007C8BCE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C7CBAE296EF260007C8BCE /* HomeViewController.swift */; };
@@ -43,7 +46,6 @@
 		071E0549296BB7B70020282F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		071E054E296BB7B70020282F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07557560296BFC5900B8AF77 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
-		07557562296BFCD300B8AF77 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		F02807662979628100DDA7B1 /* ChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartMarker.swift; sourceTree = "<group>"; };
 		F028076B297962BF00DDA7B1 /* StockDateSegmentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockDateSegmentControl.swift; sourceTree = "<group>"; };
 		F045C16029756C0200E71129 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -57,6 +59,9 @@
 		F047B2DD2972E06100810AB4 /* AssetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AssetModel.swift; path = LGHTSG/View/Home/AssetModel.swift; sourceTree = SOURCE_ROOT; };
 		F04A11F2297D00860074C0ED /* realEstates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = realEstates.swift; sourceTree = "<group>"; };
 		F04A11F4297D01600074C0ED /* EstatePriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EstatePriceModel.swift; path = LGHTSG/Model/EstatePriceModel.swift; sourceTree = SOURCE_ROOT; };
+		F04A11F6297D1DA10074C0ED /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
+		F04A11F8297D50E20074C0ED /* StockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockView.swift; sourceTree = "<group>"; };
+		F04A1200297E65AF0074C0ED /* TableCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCellModel.swift; sourceTree = SOURCE_ROOT; };
 		F09CA699297AFB870017E2A6 /* StockPrice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockPrice.swift; sourceTree = "<group>"; };
 		F09CA69B297AFCE60017E2A6 /* StockPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockPriceModel.swift; sourceTree = SOURCE_ROOT; };
 		F0C7CBAE296EF260007C8BCE /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F04A1204297E7D350074C0ED /* Kingfisher in Frameworks */,
 				07120DF3296EDF6E00ABF98F /* Alamofire in Frameworks */,
 				F028076A297962AD00DDA7B1 /* Charts in Frameworks */,
 				07120DF6296EDF7A00ABF98F /* SnapKit in Frameworks */,
@@ -133,6 +139,7 @@
 		071E0556296BB8380020282F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				F04A1200297E65AF0074C0ED /* TableCellModel.swift */,
 				F047B2DD2972E06100810AB4 /* AssetModel.swift */,
 				F09CA69B297AFCE60017E2A6 /* StockPriceModel.swift */,
 				F04A11F4297D01600074C0ED /* EstatePriceModel.swift */,
@@ -150,7 +157,8 @@
 		071E0558296BB8510020282F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				07557562296BFCD300B8AF77 /* Cell.swift */,
+				F047B2D02970515700810AB4 /* SellAssetView.swift */,
+				F04A11F8297D50E20074C0ED /* StockView.swift */,
 				F047B2D229705CCA00810AB4 /* Home */,
 			);
 			path = View;
@@ -170,6 +178,7 @@
 				07557560296BFC5900B8AF77 /* MainTabController.swift */,
 				F0C7CBAE296EF260007C8BCE /* HomeViewController.swift */,
 				F0C7CBB0296EF269007C8BCE /* ExploreViewController.swift */,
+				F04A11F6297D1DA10074C0ED /* ChartViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -186,7 +195,6 @@
 		F047B2D229705CCA00810AB4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				F047B2D02970515700810AB4 /* SellAssetView.swift */,
 				F047B2D9297154C400810AB4 /* UnderlineView.swift */,
 				F047B2DB2971B5AC00810AB4 /* HomeTableCell.swift */,
 				F047B2D52970912600810AB4 /* UnderlineSegmentedControl.swift */,
@@ -216,6 +224,7 @@
 				07120DF2296EDF6E00ABF98F /* Alamofire */,
 				07120DF5296EDF7A00ABF98F /* SnapKit */,
 				F0280769297962AD00DDA7B1 /* Charts */,
+				F04A1203297E7D350074C0ED /* Kingfisher */,
 			);
 			productName = LGHTSG;
 			productReference = 071E053D296BB7B50020282F /* LGHTSG.app */;
@@ -249,6 +258,7 @@
 				07120DF1296EDF6E00ABF98F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				07120DF4296EDF7A00ABF98F /* XCRemoteSwiftPackageReference "SnapKit" */,
 				F0280768297962AD00DDA7B1 /* XCRemoteSwiftPackageReference "Charts" */,
+				F04A1202297E7D350074C0ED /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 071E053E296BB7B50020282F /* Products */;
 			projectDirPath = "";
@@ -280,12 +290,13 @@
 				F028076C297962BF00DDA7B1 /* StockDateSegmentControl.swift in Sources */,
 				071E0545296BB7B50020282F /* ViewController.swift in Sources */,
 				F0C7CBB1296EF269007C8BCE /* ExploreViewController.swift in Sources */,
-				07557563296BFCD300B8AF77 /* Cell.swift in Sources */,
 				F04A11F3297D00860074C0ED /* realEstates.swift in Sources */,
 				F047B2D82970955100810AB4 /* asset.swift in Sources */,
 				07557561296BFC5900B8AF77 /* MainTabController.swift in Sources */,
 				F047B2D12970515700810AB4 /* SellAssetView.swift in Sources */,
+				F04A11F9297D50E20074C0ED /* StockView.swift in Sources */,
 				F047B2DA297154C400810AB4 /* UnderlineView.swift in Sources */,
+				F04A1201297E65AF0074C0ED /* TableCellModel.swift in Sources */,
 				F047B2DC2971B5AC00810AB4 /* HomeTableCell.swift in Sources */,
 				071E0541296BB7B50020282F /* AppDelegate.swift in Sources */,
 				F0C7CBAF296EF260007C8BCE /* HomeViewController.swift in Sources */,
@@ -297,6 +308,7 @@
 				F045C16129756C0200E71129 /* LoginController.swift in Sources */,
 				F09CA69C297AFCE60017E2A6 /* StockPriceModel.swift in Sources */,
 				F047B2DE2972E06100810AB4 /* AssetModel.swift in Sources */,
+				F04A11F7297D1DA10074C0ED /* ChartViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,6 +533,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		F04A1202297E7D350074C0ED /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -538,6 +558,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F0280768297962AD00DDA7B1 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
+		};
+		F04A1203297E7D350074C0ED /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F04A1202297E7D350074C0ED /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
