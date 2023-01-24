@@ -451,6 +451,7 @@
 				DEVELOPMENT_TEAM = 2V279GTPCN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LGHTSG/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보 제공을 허용합니까?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -480,6 +481,7 @@
 				DEVELOPMENT_TEAM = 2V279GTPCN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LGHTSG/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보 제공을 허용합니까?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

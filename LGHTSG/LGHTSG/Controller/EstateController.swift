@@ -11,17 +11,16 @@ import DropDown
 import SnapKit
 import SwiftUI
 import Charts
+import Alamofire
 import CoreLocation
 
-class EstateController: UIViewController, ChartViewDelegate {
-    
+
+class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDelegate {
+        
     //MARK: - Map
     
     private lazy var mapView: NMFMapView = {
         let map = NMFMapView()
-        let camera = map.cameraPosition
-        print(camera)
-        
         return map
      }()
      
@@ -38,21 +37,6 @@ class EstateController: UIViewController, ChartViewDelegate {
         
         return view
     }()
-    
-    private lazy var replaceView3: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        
-        return view
-    }()
-
-    private lazy var locationView: NMFNaverMapView = {
-        let locView = NMFNaverMapView()
-        locView.showLocationButton = true
-        
-        return locView
-    }()
-    
       
     //MARK: - DropDown
 
@@ -162,42 +146,23 @@ class EstateController: UIViewController, ChartViewDelegate {
         return scroll
     }()
     
-    //var lineChart = LineChartView()
-
     //MARK: - Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
         setMarker()
         setDropDown()
-       // setChart()
-    
+        setUpLocation()
+        
     }
-    
-   /* override func viewDidLayoutSubviews() {
-        lineChart.frame = CGRect(x: 15, y: 537, width: 360, height: 170)
-        lineChart.backgroundColor = .white
-        view.addSubview(lineChart)
-        
-        var entries = [ChartDataEntry]()
-        for x in 0..<10{
-            entries.append(ChartDataEntry(x: Double(x), y: Double(x)))
-        }
-        
-        let set = LineChartDataSet(entries: entries)
-        set.colors = ChartColorTemplates.material()
-        let data = LineChartData(dataSet: set)
-        lineChart.data = data
-    }*/
     
    
     //MARK: - Configure
     
     private func configure (){
         view.backgroundColor = .black
-        view.addSubview(replaceView)
-        mapView.addSubview(locationView)
+        view.addSubview(mapView)
         //view.addSubview(scrollView)
       
         dropDown.bottomOffset = CGPoint(x: 0, y: dropDownView.bounds.height + 1)
@@ -219,26 +184,22 @@ class EstateController: UIViewController, ChartViewDelegate {
         saleButton.snp.makeConstraints{
             $0.leading.equalTo(priceButton.snp.trailing).offset(5)
             $0.trailing.equalToSuperview().inset(170)
-            $0.top.equalTo(replaceView.snp.bottom).offset(24)
+            $0.top.equalTo(mapView.snp.bottom).offset(24)
         }
         
         priceButton.snp.makeConstraints{
             $0.leading.equalToSuperview().inset(15)
             $0.trailing.equalToSuperview().inset(275)
-            $0.top.equalTo(replaceView.snp.bottom).offset(24)
+            $0.top.equalTo(mapView.snp.bottom).offset(24)
             
         }
         
-        replaceView.snp.makeConstraints{
+        mapView.snp.makeConstraints{
             $0.top.equalTo(dropDownView.snp.bottom).offset(16)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-375)
             $0.leading.equalToSuperview().inset(15)
             $0.trailing.equalToSuperview().inset(15)
        
-        }
-        
-        locationView.snp.makeConstraints{
-            $0.top.equalTo(mapView.snp.bottom).offset(5)
         }
         
         dropDownView.snp.makeConstraints{
@@ -276,26 +237,67 @@ class EstateController: UIViewController, ChartViewDelegate {
         lineImage2.snp.makeConstraints{
             $0.leading.equalToSuperview().inset(15)
             $0.trailing.equalToSuperview().inset(15)
-            $0.top.equalTo(replaceView.snp.bottom).offset(56)
+            $0.top.equalTo(mapView.snp.bottom).offset(56)
         }
         
        /* scrollView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(replaceView.snp.bottom).offset(64)
+            $0.top.equalTo(mapView.snp.bottom).offset(64)
             $0.width.equalTo(360)
             $0.height.equalTo(220)
         
         }*/
     }
+  
     
     //MARK: - Helper
-    /*
-    private func setChart(){
-        lineChart.delegate = self
-    }
-    */
+  /*
+    private func get(){
+        let url = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc"
+        AF.request(url, method: .get, headers: [ "X-NCP-APIGW-API-KEY-ID" : "t1d90xy372","X-NCP-APIGW-API-KEY" : "1iHB4AscQ8qLpAlct1s4h098xjv22nuxSzf9IbPu"
+        ])
+          .validate()
+          .responseDecodable(of: WordListModel.self, completionHandler: { response in
+            print("moooo >>> \(response)")
+            self.model = response.value?.dots
+            self.dropDownView.reloadData()
+          })
+    }*/
+    //MARK: - Location
+    var locationManager = CLLocationManager()
     
-    private func setMarker(){
+    func setUpLocation(){
+        locationManager.delegate = self
+        //거리정확도설정
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        //사용자에게허용받기alert띄우기
+        locationManager.requestWhenInUseAuthorization()
+        //아이폰설정에서의위치서비스가켜진상태라면
+        locationManager.startUpdatingLocation()//위치정보받아오기시작
+        
+        var mylat = locationManager.location?.coordinate.latitude
+        var mylng = locationManager.location?.coordinate.longitude
+        
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: mylat!, lng: mylng!))
+        cameraUpdate.animation = .easeIn
+        
+        mapView.moveCamera(cameraUpdate)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        print("didUpdateLocations") 
+        if let location = locations.first {
+            print("lat: \(location.coordinate.latitude)")
+            print("lon: \(location.coordinate.longitude)")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+    
+    //MARK: - setMarker
+     func setMarker(){
         
         let marker = NMFMarker()
         marker.position = NMGLatLng(lat: 37.360553, lng: 127.110446)
@@ -312,7 +314,7 @@ class EstateController: UIViewController, ChartViewDelegate {
         infoWindow.open(with: marker)
     }
     
-    private func setDropDown(){
+     func setDropDown(){
         
         dropDown.selectionAction = { [weak self] (index, item) in
             self!.dropDownLabel.text = item
@@ -321,7 +323,6 @@ class EstateController: UIViewController, ChartViewDelegate {
         
         dropDown.cancelAction = { [weak self] in
             self!.chevronView.image = UIImage.init(systemName: "chevron.right")
-            
         }
     }
         
@@ -365,22 +366,8 @@ class EstateController: UIViewController, ChartViewDelegate {
                     print("5년")
                 default:
                     break
-            }
+        }
     }
-    var infoWindow = NMFInfoWindow()
-    var defaultInfoWindowImage = NMFInfoWindowDefaultTextSource.data()
-}
-
-    //MARK: - extension
-extension EstateController: NMFMapViewTouchDelegate {
-   func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
-       infoWindow.close()
-       
-       let latlngStr = String(format: "좌표:(%.5f, %.5f)", latlng.lat, latlng.lng)
-       defaultInfoWindowImage.title = latlngStr
-       infoWindow.position = latlng
-       infoWindow.open(with: mapView)
-   }
 }
 
     //MARK: - SwiftUI
