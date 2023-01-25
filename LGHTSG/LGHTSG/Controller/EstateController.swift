@@ -154,7 +154,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         setMarker()
         setDropDown()
         setUpLocation()
-        
+        get()
     }
     
    
@@ -249,20 +249,24 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         }*/
     }
   
-    
+
     //MARK: - Helper
-  /*
-    private func get(){
-        let url = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc"
+    var model: [Result]?
+    var label: [Result]?
+
+    func get(){
+        let url = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?request=coordsToaddr&coords=129.1133567,35.2982640&sourcecrs=epsg:4326&output=json&orders=addr,admcode,roadaddr"
+        
         AF.request(url, method: .get, headers: [ "X-NCP-APIGW-API-KEY-ID" : "t1d90xy372","X-NCP-APIGW-API-KEY" : "1iHB4AscQ8qLpAlct1s4h098xjv22nuxSzf9IbPu"
         ])
           .validate()
-          .responseDecodable(of: WordListModel.self, completionHandler: { response in
-            print("moooo >>> \(response)")
-            self.model = response.value?.dots
-            self.dropDownView.reloadData()
-          })
-    }*/
+          .responseDecodable(of: ReverseModel.self, completionHandler: { response in
+              self.model = response.value?.results
+              self.label = self.model
+              print(self.label!)
+        })
+    }
+
     //MARK: - Location
     var locationManager = CLLocationManager()
     
@@ -275,20 +279,22 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         //아이폰설정에서의위치서비스가켜진상태라면
         locationManager.startUpdatingLocation()//위치정보받아오기시작
         
-        var mylat = locationManager.location?.coordinate.latitude
-        var mylng = locationManager.location?.coordinate.longitude
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: (locationManager.location?.coordinate.latitude)!, lng: (locationManager.location?.coordinate.longitude)!))
         
-        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: mylat!, lng: mylng!))
         cameraUpdate.animation = .easeIn
-        
+        cameraUpdate.animation = .fly
+        cameraUpdate.animationDuration = 1
         mapView.moveCamera(cameraUpdate)
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
-        print("didUpdateLocations") 
+        print("didUpdateLocations")
         if let location = locations.first {
+            
             print("lat: \(location.coordinate.latitude)")
             print("lon: \(location.coordinate.longitude)")
+
         }
     }
     
