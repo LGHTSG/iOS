@@ -23,6 +23,7 @@ class StockView : UIView {
     private var StockaTableView = UITableView()
     override init(frame: CGRect) {
         super.init(frame: frame)
+       
         setView()
         StockaTableView.dataSource = self
         segment.addTarget(self, action: #selector(clickSegment), for: .valueChanged)

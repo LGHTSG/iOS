@@ -17,6 +17,7 @@
 		F02807672979628100DDA7B1 /* ChartMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02807662979628100DDA7B1 /* ChartMarker.swift */; };
 		F028076A297962AD00DDA7B1 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = F0280769297962AD00DDA7B1 /* Charts */; };
 		F028076C297962BF00DDA7B1 /* StockDateSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028076B297962BF00DDA7B1 /* StockDateSegmentControl.swift */; };
+		F02EFA8B297F76CC00BA34B1 /* ResellPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02EFA8A297F76CC00BA34B1 /* ResellPrice.swift */; };
 		F045C16129756C0200E71129 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F045C16029756C0200E71129 /* LoginController.swift */; };
 		F045C16329756C0F00E71129 /* RegisterationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F045C16229756C0F00E71129 /* RegisterationController.swift */; };
 		F045C16929756C6B00E71129 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F045C16829756C6B00E71129 /* LaunchScreen.storyboard */; };
@@ -32,6 +33,7 @@
 		F04A11F9297D50E20074C0ED /* StockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A11F8297D50E20074C0ED /* StockView.swift */; };
 		F04A1201297E65AF0074C0ED /* TableCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A1200297E65AF0074C0ED /* TableCellModel.swift */; };
 		F04A1204297E7D350074C0ED /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F04A1203297E7D350074C0ED /* Kingfisher */; };
+		F04A1207297EC46C0074C0ED /* resellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A1206297EC46C0074C0ED /* resellView.swift */; };
 		F09CA69A297AFB870017E2A6 /* StockPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09CA699297AFB870017E2A6 /* StockPrice.swift */; };
 		F09CA69C297AFCE60017E2A6 /* StockPriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09CA69B297AFCE60017E2A6 /* StockPriceModel.swift */; };
 		F0C7CBAF296EF260007C8BCE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C7CBAE296EF260007C8BCE /* HomeViewController.swift */; };
@@ -48,6 +50,7 @@
 		07557560296BFC5900B8AF77 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		F02807662979628100DDA7B1 /* ChartMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartMarker.swift; sourceTree = "<group>"; };
 		F028076B297962BF00DDA7B1 /* StockDateSegmentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockDateSegmentControl.swift; sourceTree = "<group>"; };
+		F02EFA8A297F76CC00BA34B1 /* ResellPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResellPrice.swift; sourceTree = "<group>"; };
 		F045C16029756C0200E71129 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		F045C16229756C0F00E71129 /* RegisterationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterationController.swift; sourceTree = "<group>"; };
 		F045C16829756C6B00E71129 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -62,6 +65,7 @@
 		F04A11F6297D1DA10074C0ED /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		F04A11F8297D50E20074C0ED /* StockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockView.swift; sourceTree = "<group>"; };
 		F04A1200297E65AF0074C0ED /* TableCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCellModel.swift; sourceTree = SOURCE_ROOT; };
+		F04A1206297EC46C0074C0ED /* resellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resellView.swift; sourceTree = "<group>"; };
 		F09CA699297AFB870017E2A6 /* StockPrice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockPrice.swift; sourceTree = "<group>"; };
 		F09CA69B297AFCE60017E2A6 /* StockPriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockPriceModel.swift; sourceTree = SOURCE_ROOT; };
 		F0C7CBAE296EF260007C8BCE /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 			children = (
 				F047B2D72970955100810AB4 /* asset.swift */,
 				F09CA699297AFB870017E2A6 /* StockPrice.swift */,
+				F02EFA8A297F76CC00BA34B1 /* ResellPrice.swift */,
 				F04A11F2297D00860074C0ED /* realEstates.swift */,
 			);
 			path = Model;
@@ -158,7 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				F047B2D02970515700810AB4 /* SellAssetView.swift */,
-				F04A11F8297D50E20074C0ED /* StockView.swift */,
+				F04A1205297EC4590074C0ED /* Explore */,
 				F047B2D229705CCA00810AB4 /* Home */,
 			);
 			path = View;
@@ -202,6 +207,15 @@
 				F028076B297962BF00DDA7B1 /* StockDateSegmentControl.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		F04A1205297EC4590074C0ED /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				F04A11F8297D50E20074C0ED /* StockView.swift */,
+				F04A1206297EC46C0074C0ED /* resellView.swift */,
+			);
+			path = Explore;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,8 +311,10 @@
 				F04A11F9297D50E20074C0ED /* StockView.swift in Sources */,
 				F047B2DA297154C400810AB4 /* UnderlineView.swift in Sources */,
 				F04A1201297E65AF0074C0ED /* TableCellModel.swift in Sources */,
+				F02EFA8B297F76CC00BA34B1 /* ResellPrice.swift in Sources */,
 				F047B2DC2971B5AC00810AB4 /* HomeTableCell.swift in Sources */,
 				071E0541296BB7B50020282F /* AppDelegate.swift in Sources */,
+				F04A1207297EC46C0074C0ED /* resellView.swift in Sources */,
 				F0C7CBAF296EF260007C8BCE /* HomeViewController.swift in Sources */,
 				071E0543296BB7B50020282F /* SceneDelegate.swift in Sources */,
 				F047B2D62970912600810AB4 /* UnderlineSegmentedControl.swift in Sources */,

@@ -13,7 +13,12 @@ class ExploreViewController : UIViewController {
     let underline2 = UnderlineView()
     let underline3 = UnderlineView()
     let underline4 = UnderlineView()
+
     let stockView = StockView()
+    private lazy var reSellView : resellView = {
+        let view = resellView()
+        return view
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         setTobTabbar()
@@ -65,24 +70,28 @@ class ExploreViewController : UIViewController {
             underline3.backgroundColor = .darkGray
             underline4.backgroundColor  = .darkGray
             stockView.alpha = 0
+            reSellView.alpha = 0
         case 1:
             underline1.backgroundColor = .darkGray
             underline2.backgroundColor = .white
             underline3.backgroundColor = .darkGray
             underline4.backgroundColor = .darkGray
             stockView.alpha = 0
+            reSellView.alpha = 0
         case 2:
             underline1.backgroundColor = .darkGray
             underline2.backgroundColor = .darkGray
             underline3.backgroundColor = .white
             underline4.backgroundColor = .darkGray
             stockView.alpha = 1
+            reSellView.alpha = 0
         case 3:
             underline1.backgroundColor = .darkGray
             underline2.backgroundColor = .darkGray
             underline3.backgroundColor = .darkGray
             underline4.backgroundColor = .white
             stockView.alpha = 0
+            reSellView.alpha = 1
         default: break
         }
     }
@@ -90,8 +99,15 @@ class ExploreViewController : UIViewController {
 extension ExploreViewController {
     
     private func setView(){
+        self.view.addSubview(reSellView)
         self.view.addSubview(stockView)
         stockView.alpha = 0
+        reSellView.alpha = 0
+        reSellView.snp.makeConstraints{
+            $0.leading.trailing.equalToSuperview().inset(23)
+            $0.top.equalTo(underline4.snp.bottom).offset(32)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
         stockView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview().inset(23)
             $0.top.equalTo(underline4.snp.bottom).offset(32)
