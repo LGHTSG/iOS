@@ -49,9 +49,26 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapTopItem(_:)))
                 dropView.addGestureRecognizer(tapGesture)
                 dropView.isUserInteractionEnabled = true
-        
+        dropView.addSubview(dropDownLabel)
+        dropView.addSubview(cityTextField)
         return dropView
     }()
+    
+    private lazy var cityTextField: UITextField = {
+        var tf = UITextField()
+        tf.frame.size.height = 48
+        tf.backgroundColor = .clear
+        tf.textColor = .white
+        tf.tintColor = .white
+        tf.autocapitalizationType = .none
+        tf.autocorrectionType = .no
+        tf.spellCheckingType = .no
+        tf.keyboardType = .emailAddress
+        /*tf.addTarget(self, action: #selector(textFieldDidTap(_:)), for: .editingChanged)*/
+        return tf
+    }()
+    
+    
     
     private lazy var chevronView: UIImageView = {
         let img = UIImageView()
@@ -64,7 +81,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     
     private lazy var dropDownLabel: UILabel = {
         let dropLabel = UILabel()
-        dropLabel.text = "선택해주세요"
+        dropLabel.text = "입력해주세요"
         dropLabel.textColor = .white
         return dropLabel
     }()
@@ -170,7 +187,12 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         [dropDownView, dropDownLabel, dropDown, chevronView, priceButton, saleButton,lineImage,lineImage2,segmentCtrl,replaceView2]
           .forEach {view.addSubview($0)}
         
-        
+        cityTextField.snp.makeConstraints{
+            $0.top.equalTo(dropDownView.snp.top).offset(6)
+            $0.leading.equalTo(dropDownView.snp.leading).offset(10)
+            $0.trailing.equalTo(dropDownView.snp.trailing).offset(-30)
+            $0.bottom.equalTo(dropDownView.snp.bottom).offset(-6)
+        }
         
         replaceView2.snp.makeConstraints{
             $0.top.equalTo(lineImage2.snp.bottom).offset(14)
@@ -179,7 +201,6 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
             $0.trailing.equalToSuperview().inset(15)
             
         }
-        
         
         saleButton.snp.makeConstraints{
             $0.leading.equalTo(priceButton.snp.trailing).offset(5)
@@ -210,8 +231,10 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         }
      
         dropDownLabel.snp.makeConstraints{
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(94)
-            $0.leading.equalToSuperview().inset(25)
+            $0.top.equalTo(dropDownView.snp.top).offset(6)
+            $0.leading.equalTo(dropDownView.snp.leading).offset(10)
+            $0.trailing.equalTo(dropDownView.snp.trailing).offset(-30)
+            $0.bottom.equalTo(dropDownView.snp.bottom).offset(-6)
             
         }
         chevronView.snp.makeConstraints{
@@ -240,31 +263,48 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
             $0.top.equalTo(mapView.snp.bottom).offset(56)
         }
         
-       /* scrollView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(mapView.snp.bottom).offset(64)
-            $0.width.equalTo(360)
-            $0.height.equalTo(220)
-        
-        }*/
     }
   
 
     //MARK: - Helper
-    var model: [Result]?
-    var label: [Result]?
+    
+    var si : [Character] = []
+    var gu : [Character] = []
+    var dong : [Character] = []
 
-    func get(){
+    private func get() {
         let url = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?request=coordsToaddr&coords=129.1133567,35.2982640&sourcecrs=epsg:4326&output=json&orders=addr,admcode,roadaddr"
+        let header: HTTPHeaders = [ "X-NCP-APIGW-API-KEY-ID" : "t1d90xy372","X-NCP-APIGW-API-KEY" : "1iHB4AscQ8qLpAlct1s4h098xjv22nuxSzf9IbPu" ]
         
-        AF.request(url, method: .get, headers: [ "X-NCP-APIGW-API-KEY-ID" : "t1d90xy372","X-NCP-APIGW-API-KEY" : "1iHB4AscQ8qLpAlct1s4h098xjv22nuxSzf9IbPu"
-        ])
-          .validate()
-          .responseDecodable(of: ReverseModel.self, completionHandler: { response in
-              self.model = response.value?.results
-              self.label = self.model
-              print(self.label!)
-        })
+        AF.request(url, method: .get, headers: header)
+            .validate(statusCode: 200..<300)
+            .responseData { response in
+                switch response.result {
+                case .success(let res):
+                    let decoder = JSONDecoder()
+                    do {
+                        let data = try decoder.decode(ReverseModel.self, from: res)
+                        //self.model.append(contentsOf: data.results)
+                        self.si.append(contentsOf: data.results[0].region.area1.name)
+                        var siString = String(self.si)
+                        print(siString)
+                        self.gu.append(contentsOf: data.results[0].region.area2.name)
+                        var guString = String(self.gu)
+                        print(guString)
+                        self.dong.append(contentsOf: data.results[0].region.area3.name)
+                        var dongString = String(self.dong)
+                        print(dongString)
+                        var label = siString + " " + guString + " " + dongString
+                        
+                        self.dropDownLabel.text = label
+                        
+                    } catch {
+                        print("errorr in decode")
+                    }
+                case .failure(let err):
+                    print(err.localizedDescription)
+                }
+            }
     }
 
     //MARK: - Location
@@ -286,16 +326,14 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         cameraUpdate.animationDuration = 1
         mapView.moveCamera(cameraUpdate)
         
+        let marker = NMFMarker()
+        marker.position = NMGLatLng(lat: locationManager.location?.coordinate.latitude ?? 0, lng: locationManager.location?.coordinate.longitude ?? 0)
+            marker.mapView = mapView
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
-        print("didUpdateLocations")
-        if let location = locations.first {
-            
-            print("lat: \(location.coordinate.latitude)")
-            print("lon: \(location.coordinate.longitude)")
-
-        }
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
