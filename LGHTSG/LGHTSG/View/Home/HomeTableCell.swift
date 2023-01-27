@@ -52,7 +52,7 @@ extension HomeTableCell {
         nameLabel.text = assetinfo.name
         priceLabel.text = String(assetinfo.price)+"원"
         changeDate.text = assetinfo.rateCalDateDiff
-        pricePercent.text = String(assetinfo.rafeOfChange)
+        pricePercent.text = String(assetinfo.rateOfChange)
         let url = URL(string: assetinfo.iconImage)
         iconimage.kf.setImage(with: url)
         countLabel.snp.makeConstraints{
@@ -91,13 +91,14 @@ extension HomeTableCell {
         nameLabel.text = resellinfo.name
         priceLabel.text = String(resellinfo.price)+"원"
         changeDate.text = resellinfo.rateCalDateDiff
-        if(resellinfo.rateOfChange[resellinfo.rateOfChange.startIndex] == "-"){
+        let stringofratechange = String( resellinfo.rateOfChange)
+        if(stringofratechange[stringofratechange.startIndex] == "-"){
             pricePercent.textColor = .blue
         }else {
             pricePercent.textColor = .red
         }
-        pricePercent.text = String(resellinfo.rateOfChange)
-        let url = URL(string: resellinfo.image1)
+        pricePercent.text = stringofratechange
+        let url = URL(string: resellinfo.iconImage)
         iconimage.kf.setImage(with: url)
         countLabel.snp.makeConstraints{
             $0.leading.equalToSuperview()

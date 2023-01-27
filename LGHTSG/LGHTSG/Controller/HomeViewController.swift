@@ -20,7 +20,7 @@ final class HomeViewController : UIViewController{
         SetNavigationBar()
         setTobTabbar()
         segmentControl.addTarget(self, action: #selector(clicksegment), for: .valueChanged)
-//        swipeGestureNavigationBar()
+
         setTable()
 //        assetmodel.delegate = self
 //        assetmodel.getAsset()
@@ -63,7 +63,7 @@ private extension HomeViewController{
     }
 
     @objc func showsearchbar(){
-        print(navigationItem.leftBarButtonItem)
+        layoutSearchBar()
     }
     func layoutSearchBar(){
         let searchbar = UISearchBar()
@@ -144,12 +144,10 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource {
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if self.tableview.contentOffset.y < 0 {
-            let MaintabC = MainTabController()
-            MaintabC.showsearchbar()
+            layoutSearchBar()
         }
         else if tableview.contentOffset.y>100 {
-            let MaintabC = MainTabController()
-            MaintabC.shownavigationBar()
+            SetNavigationBar()
         }
     }
 }

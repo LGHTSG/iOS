@@ -12,7 +12,6 @@ struct StockPrice : Decodable {
         let price : Int
         let transactionTime : String
     }
-
 }
 //struct StockHeader : Decodable{
 //    let resultMsg : String

@@ -8,6 +8,7 @@ import UIKit
 import Foundation
 import SnapKit
 class StockView : UIView {
+    var delegate : showNavigationDelegate?
     lazy private var  segment : UISegmentedControl = {
         let control  = UnderlineSegmentedControl(items: ["급상승", "급하락", "거래량", "시가총액"])
         control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.darkGray, .font : UIFont.systemFont(ofSize: 16, weight: .semibold)], for: .normal)
@@ -26,6 +27,7 @@ class StockView : UIView {
        
         setView()
         StockaTableView.dataSource = self
+        StockaTableView.delegate = self
         segment.addTarget(self, action: #selector(clickSegment), for: .valueChanged)
     }
     //segment이벤트 받아서 급상승, 급하락, 거래량, 시가총액을 구분. 
@@ -74,7 +76,7 @@ class StockView : UIView {
         }
     }
 }
-extension StockView : UITableViewDataSource {
+extension StockView : UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return stockDataLists.count
     }
@@ -83,6 +85,13 @@ extension StockView : UITableViewDataSource {
         cell.setup(with: stockDataLists[indexPath.row])
         cell.countLabel.text = "\(indexPath.row+1)"
         return cell
-        
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if StockaTableView.contentOffset.y < 0 {
+            delegate?.showSearchBar()
+        }
+        else if StockaTableView.contentOffset.y>100 {
+            delegate?.hideSearchBar()
+        } 
     }
 }

@@ -10,9 +10,9 @@ class ResellPrice : Decodable {
     let body : [body]
     struct body : Decodable{
         let name : String
-        let price : String
-        let rateOfChange : String
+        let price : Int
+        let rateOfChange : Double
         let rateCalDateDiff : String
-        let image1 : String
+        let iconImage : String
     }
 }

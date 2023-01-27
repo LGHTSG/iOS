@@ -11,7 +11,7 @@ struct asset : Decodable {
     struct body : Decodable{
         let name : String
         let price : Int
-        let rafeOfChange : Int
+        let rateOfChange : Double
         let rateCalDateDiff : String
         let iconImage : String
     }

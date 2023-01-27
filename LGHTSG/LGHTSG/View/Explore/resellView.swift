@@ -8,9 +8,15 @@
 import UIKit
 import Foundation
 import SnapKit
+protocol showNavigationDelegate{
+    func hideSearchBar()
+    func showSearchBar()
+}
 class resellView : UIView{
+    var delegate : showNavigationDelegate?
     let AssetModel = TableCellModel()
     var resellDataLists = [ResellPrice.body]()
+    var resellSearchLists = [ResellPrice.body]()
     lazy private var segment : UISegmentedControl = {
         let control  = UnderlineSegmentedControl(items: ["급상승", "급하락", "거래량"])
         control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.darkGray, .font : UIFont.systemFont(ofSize: 16, weight: .semibold)], for: .normal)
@@ -22,12 +28,15 @@ class resellView : UIView{
         }
         return control
     }()
-    private var resellTableView = UITableView()
+    var resellTableView = UITableView()
     override init(frame: CGRect) {
         super.init(frame: frame)
         setView()
         resellTableView.dataSource = self
+        resellTableView.delegate = self
         segment.addTarget(self, action: #selector(clickSegment), for: .valueChanged)
+//        let superview = ExploreViewController()
+//        superview.delegate1 = self
     }
     //segment이벤트 받아서 급상승, 급하락, 거래량
     @objc func clickSegment(_ sender : UISegmentedControl){
@@ -70,17 +79,28 @@ class resellView : UIView{
         }
     }
 }
-extension resellView : UITableViewDataSource {
+extension resellView : UITableViewDataSource , UITableViewDelegate, UIScrollViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return resellDataLists.count
-    }
+        if(ExploreViewController.isSearching){
+            return resellSearchLists.count
+        }else{
+            return resellDataLists.count  }}
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTabeCell", for: indexPath) as? HomeTableCell else {return UITableViewCell()}
-        cell.setup(with: resellDataLists[indexPath.row])
+        if(ExploreViewController.isSearching){
+            cell.setup(with: resellSearchLists[indexPath.row])
+        }else{
+            cell.setup(with: resellDataLists[indexPath.row])}
         cell.countLabel.text = "\(indexPath.row+1)"
         return cell
         
     }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if resellTableView.contentOffset.y < 0 {
+            delegate?.showSearchBar()
+        }
+        else if resellTableView.contentOffset.y>100 {
+            delegate?.hideSearchBar()
+        }
+    }
 }
-
-
