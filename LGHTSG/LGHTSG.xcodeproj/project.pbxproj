@@ -21,6 +21,8 @@
 		0783C0FA297034FA00EDABA3 /* EstateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783C0F9297034FA00EDABA3 /* EstateController.swift */; };
 		0783C100297664D400EDABA3 /* EstateDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783C0FF297664D400EDABA3 /* EstateDetailController.swift */; };
 		078666BC2980BF9B000ADCBE /* ReverseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078666BB2980BF9B000ADCBE /* ReverseModel.swift */; };
+		078666BE2983844D000ADCBE /* GeocodingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078666BD2983844D000ADCBE /* GeocodingModel.swift */; };
+		0791E9292984B395008BDEAB /* EstateSaleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791E9282984B395008BDEAB /* EstateSaleCell.swift */; };
 		8E910354CAD5238FB38C267D /* Pods_LGHTSG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +41,8 @@
 		0783C0F9297034FA00EDABA3 /* EstateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstateController.swift; sourceTree = "<group>"; };
 		0783C0FF297664D400EDABA3 /* EstateDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstateDetailController.swift; sourceTree = "<group>"; };
 		078666BB2980BF9B000ADCBE /* ReverseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseModel.swift; sourceTree = "<group>"; };
+		078666BD2983844D000ADCBE /* GeocodingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingModel.swift; sourceTree = "<group>"; };
+		0791E9282984B395008BDEAB /* EstateSaleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstateSaleCell.swift; sourceTree = "<group>"; };
 		1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LGHTSG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F7EA128F8EC33ED812CADCA /* Pods-LGHTSG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.release.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.release.xcconfig"; sourceTree = "<group>"; };
 		9154F7534146417B8EBDBECC /* Pods-LGHTSG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.debug.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.debug.xcconfig"; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				078666BB2980BF9B000ADCBE /* ReverseModel.swift */,
+				078666BD2983844D000ADCBE /* GeocodingModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				07557562296BFCD300B8AF77 /* EstateDetailCell.swift */,
+				0791E9282984B395008BDEAB /* EstateSaleCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -300,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0783C0FA297034FA00EDABA3 /* EstateController.swift in Sources */,
+				0791E9292984B395008BDEAB /* EstateSaleCell.swift in Sources */,
 				071E0545296BB7B50020282F /* ViewController.swift in Sources */,
 				0783C100297664D400EDABA3 /* EstateDetailController.swift in Sources */,
 				0755755C296BFC3300B8AF77 /* LoginController.swift in Sources */,
@@ -308,6 +315,7 @@
 				071E0541296BB7B50020282F /* AppDelegate.swift in Sources */,
 				071E0543296BB7B50020282F /* SceneDelegate.swift in Sources */,
 				078666BC2980BF9B000ADCBE /* ReverseModel.swift in Sources */,
+				078666BE2983844D000ADCBE /* GeocodingModel.swift in Sources */,
 				0755755F296BFC4B00B8AF77 /* RegisterationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

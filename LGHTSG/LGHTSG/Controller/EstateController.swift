@@ -9,14 +9,13 @@ import UIKit
 import NMapsMap
 import DropDown
 import SnapKit
-import SwiftUI
 import Charts
 import Alamofire
 import CoreLocation
 
 
-class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDelegate {
-        
+class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDelegate, NMFMapViewTouchDelegate, UITableViewDelegate,UITableViewDataSource{
+    
     //MARK: - Map
     
     private lazy var mapView: NMFMapView = {
@@ -47,9 +46,8 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         dropView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         dropView.frame.size.height = 38
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapTopItem(_:)))
-                dropView.addGestureRecognizer(tapGesture)
-                dropView.isUserInteractionEnabled = true
-        dropView.addSubview(dropDownLabel)
+        dropView.addGestureRecognizer(tapGesture)
+        dropView.isUserInteractionEnabled = true
         dropView.addSubview(cityTextField)
         return dropView
     }()
@@ -64,11 +62,14 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         tf.autocorrectionType = .no
         tf.spellCheckingType = .no
         tf.keyboardType = .emailAddress
-        /*tf.addTarget(self, action: #selector(textFieldDidTap(_:)), for: .editingChanged)*/
+        tf.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         return tf
     }()
-    
-    
+    //실시간으로 tf 바뀌는거 받아오는거
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        self.dropDown.dataSource[0] = self.cityTextField.text!
+    }
+
     
     private lazy var chevronView: UIImageView = {
         let img = UIImageView()
@@ -78,23 +79,20 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         return img
     }()
     
+    var items = [String]()
+        let samples = ["서울", "부산", "온수", "건대", "온수", "부천", "송파", "가", "가나", "가나다", "가나다라", "가카타파하", "에이", "a", "ab", "abc", "apple", "mac", "azxy"]
     
-    private lazy var dropDownLabel: UILabel = {
-        let dropLabel = UILabel()
-        dropLabel.text = "입력해주세요"
-        dropLabel.textColor = .white
-        return dropLabel
-    }()
     
     private lazy var dropDown: DropDown = {
         let drop = DropDown()
-        drop.dataSource = ["item1", "item2", "item3", "item4", "item5", "item6"]
+        drop.dataSource = samples
+        //drop.dataSource = ["item1", "item2", "item3", "item4", "item5", "item6"]
         drop.textColor = .white
         drop.anchorView = dropDownView
         drop.backgroundColor = UIColor(named: "dropdown")
         drop.selectionBackgroundColor = .gray
         drop.dismissMode = .automatic
-     
+
         return drop
     }()
     
@@ -163,17 +161,27 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         return scroll
     }()
     
+    private lazy var tableView: UITableView = {
+        let table = UITableView()
+        table.backgroundColor = .clear
+        table.alpha = 0
+        return table
+        
+    }()
+    
     //MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.touchDelegate = self
         configure()
-        setMarker()
         setDropDown()
         setUpLocation()
-        get()
+        setupTableView()
+        reverseget()
+        geocodeget()
     }
-    
+   
    
     //MARK: - Configure
     
@@ -183,9 +191,16 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         //view.addSubview(scrollView)
       
         dropDown.bottomOffset = CGPoint(x: 0, y: dropDownView.bounds.height + 1)
-
-        [dropDownView, dropDownLabel, dropDown, chevronView, priceButton, saleButton,lineImage,lineImage2,segmentCtrl,replaceView2]
+        [dropDownView, dropDown, chevronView, priceButton, saleButton,lineImage,lineImage2,segmentCtrl,replaceView2,tableView]
           .forEach {view.addSubview($0)}
+        
+        
+        tableView.snp.makeConstraints{
+            $0.top.equalTo(lineImage2.snp.bottom).offset(14)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-91)
+            $0.leading.equalToSuperview().inset(15)
+            $0.trailing.equalToSuperview().inset(15)
+        }
         
         cityTextField.snp.makeConstraints{
             $0.top.equalTo(dropDownView.snp.top).offset(6)
@@ -230,13 +245,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
             $0.height.equalTo(38)
         }
      
-        dropDownLabel.snp.makeConstraints{
-            $0.top.equalTo(dropDownView.snp.top).offset(6)
-            $0.leading.equalTo(dropDownView.snp.leading).offset(10)
-            $0.trailing.equalTo(dropDownView.snp.trailing).offset(-30)
-            $0.bottom.equalTo(dropDownView.snp.bottom).offset(-6)
-            
-        }
+      
         chevronView.snp.makeConstraints{
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(94)
             $0.trailing.equalToSuperview().inset(30)
@@ -268,13 +277,15 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
 
     //MARK: - Helper
     
-    var si : [Character] = []
-    var gu : [Character] = []
-    var dong : [Character] = []
-
-    private func get() {
-        let url = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?request=coordsToaddr&coords=129.1133567,35.2982640&sourcecrs=epsg:4326&output=json&orders=addr,admcode,roadaddr"
+    
+    //좌표 찍으면 tf에 주소가 찍혀야함.
+    func reverseget() {
+        var alabel = ""
+        let url = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?request=coordsToaddr&coords=126.647063,37.450851&sourcecrs=epsg:4326&output=json&orders=legalcode,admcode,roadaddr"
         let header: HTTPHeaders = [ "X-NCP-APIGW-API-KEY-ID" : "t1d90xy372","X-NCP-APIGW-API-KEY" : "1iHB4AscQ8qLpAlct1s4h098xjv22nuxSzf9IbPu" ]
+        var si : [Character] = []
+        var gu : [Character] = []
+        var dong : [Character] = []
         
         AF.request(url, method: .get, headers: header)
             .validate(statusCode: 200..<300)
@@ -285,21 +296,70 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
                     do {
                         let data = try decoder.decode(ReverseModel.self, from: res)
                         //self.model.append(contentsOf: data.results)
-                        self.si.append(contentsOf: data.results[0].region.area1.name)
-                        var siString = String(self.si)
-                        print(siString)
-                        self.gu.append(contentsOf: data.results[0].region.area2.name)
-                        var guString = String(self.gu)
-                        print(guString)
-                        self.dong.append(contentsOf: data.results[0].region.area3.name)
-                        var dongString = String(self.dong)
-                        print(dongString)
-                        var label = siString + " " + guString + " " + dongString
-                        
-                        self.dropDownLabel.text = label
+                        si.append(contentsOf: data.results[0].region.area1.name)
+                        let siString = String(si)
+                        gu.append(contentsOf: data.results[0].region.area2.name)
+                        let guString = String(gu)
+                        dong.append(contentsOf: data.results[0].region.area3.name)
+                        let dongString = String(dong)
+                        alabel = siString + " " + guString + " " + dongString
+                        self.cityTextField.text = alabel
+                        print(alabel)
                         
                     } catch {
-                        print("errorr in decode")
+                        print("erorr in decode")
+                    }
+                case .failure(let err):
+                    print(err.localizedDescription)
+                }
+            }
+
+    }
+    //마커 1개만 찍고싶음 추가하자..
+    func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
+        //print("\(latlng.lat), \(latlng.lng)")
+        let coord = "\(latlng.lng)" + "," + "\(latlng.lat)"
+        print(coord)
+        let marker = NMFMarker()
+        marker.position = NMGLatLng(lat: latlng.lat, lng: latlng.lng)
+        marker.isHideCollidedMarkers = true
+        marker.mapView = mapView
+        
+    }
+
+    //MARK: - geocoding
+    
+    
+
+    // 텍스트를 입력받아 그 값을 토대로 좌표제공 받아 카메라 이동 및 마커 찍어주면 됨.
+    // 한글입력하면 좌표 추출완료. 그러면 tf값을 hello로 일단 옮기자. 그러면 tf값의 도시의 그 좌표값이 나오는데 그걸로 카메라 이동 및 좌표찍기
+    func geocodeget() {
+        let url = "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query="
+        let hello = "인천광역시 미추홀구 용현동"
+        let encodeAddress = hello.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        var lat : [Character] = []
+        var lng : [Character] = []
+        
+        let header: HTTPHeaders = [ "X-NCP-APIGW-API-KEY-ID" : "t1d90xy372","X-NCP-APIGW-API-KEY" : "1iHB4AscQ8qLpAlct1s4h098xjv22nuxSzf9IbPu" ]
+        
+        AF.request(url + encodeAddress, method: .get, headers: header)
+            .validate(statusCode: 200..<300)
+            .responseData { response in
+                switch response.result {
+                case .success(let res):
+                    let decoder = JSONDecoder()
+                    do {
+                        let data = try decoder.decode(GeocodingModel.self, from: res)
+                        //self.model.append(contentsOf: data.results)
+                        lat.append(contentsOf: data.addresses[0].x)
+                        let latString = String(lat)
+                        lng.append(contentsOf: data.addresses[0].y)
+                        let lngString = String(lng)
+                        var label1 = latString + " " + lngString
+                        print(label1)
+                        
+                    } catch {
+                        print("erorr in decode")
                     }
                 case .failure(let err):
                     print(err.localizedDescription)
@@ -307,6 +367,8 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
             }
     }
 
+   
+    
     //MARK: - Location
     var locationManager = CLLocationManager()
     
@@ -319,7 +381,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         //아이폰설정에서의위치서비스가켜진상태라면
         locationManager.startUpdatingLocation()//위치정보받아오기시작
         
-        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: (locationManager.location?.coordinate.latitude)!, lng: (locationManager.location?.coordinate.longitude)!))
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: locationManager.location?.coordinate.latitude ?? 0, lng: locationManager.location?.coordinate.longitude ?? 0))
         
         cameraUpdate.animation = .easeIn
         cameraUpdate.animation = .fly
@@ -340,37 +402,22 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         print(error)
     }
     
-    //MARK: - setMarker
-     func setMarker(){
-        
-        let marker = NMFMarker()
-        marker.position = NMGLatLng(lat: 37.360553, lng: 127.110446)
-        marker.iconTintColor = UIColor.red
-        marker.width = 30
-        marker.height = 40
-        marker.mapView = mapView
-    
-        let infoWindow = NMFInfoWindow()
-        let dataSource = NMFInfoWindowDefaultTextSource.data()
-        dataSource.title = "분당중학교"
-        infoWindow.dataSource = dataSource
-        
-        infoWindow.open(with: marker)
-    }
-    
+    //MARK: - setDropDown
+     
      func setDropDown(){
-        
         dropDown.selectionAction = { [weak self] (index, item) in
-            self!.dropDownLabel.text = item
+            self!.cityTextField.text = item
             self!.chevronView.image = UIImage.init(systemName: "chevron.right")
         }
-        
         dropDown.cancelAction = { [weak self] in
             self!.chevronView.image = UIImage.init(systemName: "chevron.right")
         }
     }
         
     @objc func didTapPriceBtn(){
+        replaceView2.alpha = 1
+        segmentCtrl.alpha = 1
+        tableView.alpha = 0
         if flag == true {
             saleButton.backgroundColor = UIColor(named: "dropdown")
             saleButton.setTitleColor(.white, for: .normal)
@@ -378,21 +425,30 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
             priceButton.setTitleColor(.black, for: .normal)
         }
         flag = false
+        
     }
     
     @objc func didTapSaleBtn(){
+        replaceView2.alpha = 0
+        segmentCtrl.alpha = 0
+        tableView.alpha = 1
         if flag == false {
             priceButton.backgroundColor = UIColor(named: "dropdown")
             priceButton.setTitleColor(.white, for: .normal)
             saleButton.backgroundColor = .white
             saleButton.setTitleColor(.black, for: .normal)
-
+            
         }
         flag = true
         
     }
     
     @objc func didTapTopItem(_ gesture: UITapGestureRecognizer){
+        guard let text = cityTextField.text, !text.replacingOccurrences(of: " ", with: "").isEmpty else {
+               return
+           }
+        cityTextField.resignFirstResponder()
+        
         dropDown.show()
         self.chevronView.image = UIImage.init(systemName: "chevron.down")
         
@@ -412,28 +468,38 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
                     break
         }
     }
-}
-
-    //MARK: - SwiftUI
-
-    struct MyViewController_PreViews: PreviewProvider {
-        static var previews: some View {
-            EstateController().toPreview() //원하는 VC를 여기다 입력하면 된다.
-        }
+    //MARK: - TableView
+    
+    func setupTableView(){
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(EstateSaleCell.self, forCellReuseIdentifier: EstateSaleCell.identifier)
     }
-    extension UIViewController {
-        private struct Preview: UIViewControllerRepresentable {
-            let viewController: UIViewController
-
-        func makeUIViewController(context: Context) -> UIViewController {
-            return viewController
+    
+    //cell 높이조절
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+            return 55
         }
-
-        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-        }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
     }
-
-        func toPreview() -> some View {
-            Preview(viewController: self)
-        }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: EstateSaleCell.identifier, for: indexPath) as? EstateSaleCell else { return UITableViewCell() }
+        
+        cell.number.text = "1"
+        cell.number.textColor = .white
+        cell.title.text = "서울특별시 강남구 논현동 아파트"
+        cell.title.textColor = .white
+        cell.area.text = "22,303,921 원/m"
+        cell.area.textColor = .gray
+        cell.price.text = "+ 3.0%"
+        cell.price.textColor = .red
+        cell.period.text = "3달 전 대비"
+        cell.period.textColor = .gray
+        
+        return cell
+    }
+    
 }

@@ -193,26 +193,3 @@ class EstateDetailController: UIViewController, UITableViewDelegate, UITableView
 }
 
 
-//MARK: - SwiftUI
-
-struct MysViewController_PreViews: PreviewProvider {
-    static var previews: some View {
-        EstateDetailController().toPreview() //원하는 VC를 여기다 입력하면 된다.
-    }
-}
-extension UIViewController {
-    private struct Preview: UIViewControllerRepresentable {
-        let viewController: UIViewController
-
-    func makeUIViewController(context: Context) -> UIViewController {
-        return viewController
-    }
-
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-    }
-}
-
-    func tosPreview() -> some View {
-        Preview(viewController: self)
-    }
-}

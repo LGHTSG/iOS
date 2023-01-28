@@ -7,12 +7,14 @@ PODS:
   - NMapsGeometry (1.0.1)
   - NMapsMap (3.16.1):
     - NMapsGeometry
+  - RxSwift (6.5.0)
   - SwiftAlgorithms (1.0.0)
 
 DEPENDENCIES:
   - Charts
   - DropDown
   - NMapsMap
+  - RxSwift (= 6.5.0)
 
 SPEC REPOS:
   trunk:
@@ -20,6 +22,7 @@ SPEC REPOS:
     - DropDown
     - NMapsGeometry
     - NMapsMap
+    - RxSwift
     - SwiftAlgorithms
 
 SPEC CHECKSUMS:
@@ -27,8 +30,9 @@ SPEC CHECKSUMS:
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   NMapsGeometry: 53c573ead66466681cf123f99f698dc8071a4b83
   NMapsMap: 926c3a303d381a24bec8da3cd6e198f50af93ae9
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
 
-PODFILE CHECKSUM: 0bc9adeb49455951b0f3e15155883890a71680ff
+PODFILE CHECKSUM: 533687374e20d6f8bdc3a7dd91031da053e24fe6
 
 COCOAPODS: 1.11.3
