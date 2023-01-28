@@ -93,11 +93,13 @@ extension HomeTableCell {
         changeDate.text = resellinfo.rateCalDateDiff
         let stringofratechange = String( resellinfo.rateOfChange)
         if(stringofratechange[stringofratechange.startIndex] == "-"){
+            pricePercent.text = "\(stringofratechange)%"
             pricePercent.textColor = .blue
         }else {
+            pricePercent.text = "+\(stringofratechange)%"
             pricePercent.textColor = .red
         }
-        pricePercent.text = stringofratechange
+        
         let url = URL(string: resellinfo.iconImage)
         iconimage.kf.setImage(with: url)
         countLabel.snp.makeConstraints{

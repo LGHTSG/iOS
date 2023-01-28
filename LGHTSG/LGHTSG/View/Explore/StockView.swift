@@ -21,6 +21,7 @@ class StockView : UIView {
     }()
     let AssetModel = TableCellModel()
     var stockDataLists = [asset.body]()
+    var selectDelegate : SelectRowItemDelegate?
     private var StockaTableView = UITableView()
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -92,6 +93,9 @@ extension StockView : UITableViewDataSource, UITableViewDelegate{
         }
         else if StockaTableView.contentOffset.y>100 {
             delegate?.hideSearchBar()
-        } 
+        }
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectDelegate?.clickRowItem()
     }
 }

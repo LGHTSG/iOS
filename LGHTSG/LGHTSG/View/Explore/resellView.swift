@@ -12,8 +12,12 @@ protocol showNavigationDelegate{
     func hideSearchBar()
     func showSearchBar()
 }
-class resellView : UIView{
+protocol SelectRowItemDelegate {
+    func clickRowItem()
+}
+class resellView : UIViewController{
     var delegate : showNavigationDelegate?
+    var selectDelegate : SelectRowItemDelegate?
     let AssetModel = TableCellModel()
     var resellDataLists = [ResellPrice.body]()
     var resellSearchLists = [ResellPrice.body]()
@@ -29,14 +33,27 @@ class resellView : UIView{
         return control
     }()
     var resellTableView = UITableView()
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        setView()
+//        resellTableView.dataSource = self
+//        resellTableView.delegate = self
+//        segment.addTarget(self, action: #selector(clickSegment), for: .valueChanged)
+////        let superview = ExploreViewController()
+////        superview.delegate1 = self
+//    }
+//    convenience init(){
+//        self.init()
+//    }
+    init(){
+        super.init(nibName: nil, bundle: nil)
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
         setView()
         resellTableView.dataSource = self
         resellTableView.delegate = self
         segment.addTarget(self, action: #selector(clickSegment), for: .valueChanged)
-//        let superview = ExploreViewController()
-//        superview.delegate1 = self
     }
     //segment이벤트 받아서 급상승, 급하락, 거래량
     @objc func clickSegment(_ sender : UISegmentedControl){
@@ -66,12 +83,12 @@ class resellView : UIView{
     func setView() {
         resellTableView.register(HomeTableCell.self, forCellReuseIdentifier: "HomeTabeCell")
         resellTableView.separatorStyle = .none
-        self.addSubview(segment)
+        self.view.addSubview(segment)
         segment.snp.makeConstraints{
             $0.leading.top.equalToSuperview()
             $0.height.equalTo(18)
         }
-        self.addSubview(resellTableView)
+        self.view.addSubview(resellTableView)
         resellTableView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(segment.snp.bottom).offset(22)
@@ -102,5 +119,24 @@ extension resellView : UITableViewDataSource , UITableViewDelegate, UIScrollView
         else if resellTableView.contentOffset.y>100 {
             delegate?.hideSearchBar()
         }
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let ChartVc = ChartViewController()
+        
+       
+        if(ExploreViewController.isSearching){
+            ChartVc.nameText =  resellSearchLists[indexPath.row].name
+            ChartVc.changeDateText = String(resellSearchLists[indexPath.row].rateOfChange)
+            ChartVc.pricePercentText = resellSearchLists[indexPath.row].rateCalDateDiff
+            ChartVc.PriceText  = "\(String(resellSearchLists[indexPath.row].price))원"
+            ChartVc.idx = resellSearchLists[indexPath.row].idx
+        }else{
+            ChartVc.nameText =  resellDataLists[indexPath.row].name
+            ChartVc.changeDateText = String(resellDataLists[indexPath.row].rateOfChange)
+            ChartVc.pricePercentText = resellDataLists[indexPath.row].rateCalDateDiff
+            ChartVc.PriceText  = "\(String(resellDataLists[indexPath.row].price))원"
+            ChartVc.idx = resellDataLists[indexPath.row].idx
+        }
+        self.navigationController?.pushViewController(ChartVc, animated: true)
     }
 }

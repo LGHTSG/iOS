@@ -17,16 +17,18 @@ class ExploreViewController : UIViewController {
     let underline2 = UnderlineView()
     let underline3 = UnderlineView()
     let underline4 = UnderlineView()
+    var resellVC = resellView()
     static var isSearching = false
     let stockView = StockView()
-    private lazy var reSellView : resellView = {
-        let view = resellView()
-        return view
-    }()
+//    private lazy var reSellView : resellView = {
+//        let view = resellView(coder: NSCoder)
+//        return view
+//    }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        reSellView.delegate = self
+//        reSellView.delegate = self
         stockView.delegate = self
+        resellVC.selectDelegate = self
         SetNavigationBar()
         setTobTabbar()
         setView()
@@ -72,33 +74,51 @@ class ExploreViewController : UIViewController {
     @objc func clickfoursegment(_ sender : UISegmentedControl){
         switch sender.selectedSegmentIndex {
         case 0:
+            resellVC.removeFromParent()
+            resellVC.view.removeFromSuperview()
             underline1.backgroundColor = .white
             underline2.backgroundColor = .darkGray
             underline3.backgroundColor = .darkGray
             underline4.backgroundColor  = .darkGray
             stockView.alpha = 0
-            reSellView.alpha = 0
+//            reSellView.alpha = 0
         case 1:
+            resellVC.removeFromParent()
+            resellVC.view.removeFromSuperview()
             underline1.backgroundColor = .darkGray
             underline2.backgroundColor = .white
             underline3.backgroundColor = .darkGray
             underline4.backgroundColor = .darkGray
             stockView.alpha = 0
-            reSellView.alpha = 0
+//            reSellView.alpha = 0
         case 2:
+            resellVC.removeFromParent()
+            resellVC.view.removeFromSuperview()
             underline1.backgroundColor = .darkGray
             underline2.backgroundColor = .darkGray
             underline3.backgroundColor = .white
             underline4.backgroundColor = .darkGray
             stockView.alpha = 1
-            reSellView.alpha = 0
+//            reSellView.alpha = 0
         case 3:
             underline1.backgroundColor = .darkGray
             underline2.backgroundColor = .darkGray
             underline3.backgroundColor = .darkGray
             underline4.backgroundColor = .white
             stockView.alpha = 0
-            reSellView.alpha = 1
+            
+            resellVC.delegate = self
+            self.addChild(resellVC)
+            self.view.addSubview(resellVC.view)
+            resellVC.view.snp.makeConstraints{
+                $0.leading.trailing.equalToSuperview().inset(23)
+                $0.top.equalTo(underline4.snp.bottom).offset(32)
+                $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            }
+            
+            
+            
+//            reSellView.alpha = 1
         default: break
         }
     }
@@ -106,15 +126,11 @@ class ExploreViewController : UIViewController {
 extension ExploreViewController {
     
     private func setView(){
-        self.view.addSubview(reSellView)
+
         self.view.addSubview(stockView)
         stockView.alpha = 0
-        reSellView.alpha = 0
-        reSellView.snp.makeConstraints{
-            $0.leading.trailing.equalToSuperview().inset(23)
-            $0.top.equalTo(underline4.snp.bottom).offset(32)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
-        }
+//        reSellView.alpha = 0
+
         stockView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview().inset(23)
             $0.top.equalTo(underline4.snp.bottom).offset(32)
@@ -168,6 +184,21 @@ extension ExploreViewController : showNavigationDelegate{
         }
     }
 }
+extension ExploreViewController : SelectRowItemDelegate {
+    func clickRowItem() {
+        let chartVC = ChartViewController()
+//        self.addChild(chartVC)
+//        self.view.addSubview(chartVC.view)
+//        chartVC.view.snp.makeConstraints{
+//            $0.leading.trailing.equalToSuperview().inset(23)
+//            $0.top.equalTo(underline4.snp.bottom).offset(32)
+//            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+//        }
+//        self.navigationController?.pushViewController(ChartViewController(), animated: true)
+////        resellVC.present(chartVC, animated: true)
+//        show(chartVC, sender: .none)
+    }
+}
 extension ExploreViewController :UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if(searchText.isEmpty){
@@ -175,10 +206,10 @@ extension ExploreViewController :UISearchBarDelegate {
         }
         else{
             ExploreViewController.isSearching = true
-            reSellView.resellSearchLists = reSellView.resellDataLists.filter{
+            resellVC.resellSearchLists = resellVC.resellDataLists.filter{
                 $0.name.contains(searchText)
             }}
-        reSellView.resellTableView.reloadData()
-//        delegate1?.searchData(data: searchText)
+        resellVC.resellTableView.reloadData()
+
     }
 }
