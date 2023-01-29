@@ -18,6 +18,9 @@
 		0755755F296BFC4B00B8AF77 /* RegisterationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0755755E296BFC4B00B8AF77 /* RegisterationController.swift */; };
 		07557561296BFC5900B8AF77 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07557560296BFC5900B8AF77 /* MainTabController.swift */; };
 		07557563296BFCD300B8AF77 /* EstateDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07557562296BFCD300B8AF77 /* EstateDetailCell.swift */; };
+		0764F26B298642EF00F446CB /* SearchItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764F26A298642EF00F446CB /* SearchItemCell.swift */; };
+		0764F26D2986653500F446CB /* AreaListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764F26C2986653500F446CB /* AreaListModel.swift */; };
+		0764F26F29866A6500F446CB /* APIToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764F26E29866A6500F446CB /* APIToken.swift */; };
 		0783C0FA297034FA00EDABA3 /* EstateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783C0F9297034FA00EDABA3 /* EstateController.swift */; };
 		0783C100297664D400EDABA3 /* EstateDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783C0FF297664D400EDABA3 /* EstateDetailController.swift */; };
 		078666BC2980BF9B000ADCBE /* ReverseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078666BB2980BF9B000ADCBE /* ReverseModel.swift */; };
@@ -38,6 +41,9 @@
 		0755755E296BFC4B00B8AF77 /* RegisterationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationController.swift; sourceTree = "<group>"; };
 		07557560296BFC5900B8AF77 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		07557562296BFCD300B8AF77 /* EstateDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstateDetailCell.swift; sourceTree = "<group>"; };
+		0764F26A298642EF00F446CB /* SearchItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemCell.swift; sourceTree = "<group>"; };
+		0764F26C2986653500F446CB /* AreaListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaListModel.swift; sourceTree = "<group>"; };
+		0764F26E29866A6500F446CB /* APIToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIToken.swift; sourceTree = "<group>"; };
 		0783C0F9297034FA00EDABA3 /* EstateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstateController.swift; sourceTree = "<group>"; };
 		0783C0FF297664D400EDABA3 /* EstateDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstateDetailController.swift; sourceTree = "<group>"; };
 		078666BB2980BF9B000ADCBE /* ReverseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseModel.swift; sourceTree = "<group>"; };
@@ -103,6 +109,7 @@
 			children = (
 				078666BB2980BF9B000ADCBE /* ReverseModel.swift */,
 				078666BD2983844D000ADCBE /* GeocodingModel.swift */,
+				0764F26C2986653500F446CB /* AreaListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -112,6 +119,7 @@
 			children = (
 				071E0540296BB7B50020282F /* AppDelegate.swift */,
 				071E0542296BB7B50020282F /* SceneDelegate.swift */,
+				0764F26E29866A6500F446CB /* APIToken.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -135,6 +143,7 @@
 			children = (
 				07557562296BFCD300B8AF77 /* EstateDetailCell.swift */,
 				0791E9282984B395008BDEAB /* EstateSaleCell.swift */,
+				0764F26A298642EF00F446CB /* SearchItemCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -310,12 +319,15 @@
 				071E0545296BB7B50020282F /* ViewController.swift in Sources */,
 				0783C100297664D400EDABA3 /* EstateDetailController.swift in Sources */,
 				0755755C296BFC3300B8AF77 /* LoginController.swift in Sources */,
+				0764F26B298642EF00F446CB /* SearchItemCell.swift in Sources */,
 				07557563296BFCD300B8AF77 /* EstateDetailCell.swift in Sources */,
 				07557561296BFC5900B8AF77 /* MainTabController.swift in Sources */,
 				071E0541296BB7B50020282F /* AppDelegate.swift in Sources */,
 				071E0543296BB7B50020282F /* SceneDelegate.swift in Sources */,
+				0764F26F29866A6500F446CB /* APIToken.swift in Sources */,
 				078666BC2980BF9B000ADCBE /* ReverseModel.swift in Sources */,
 				078666BE2983844D000ADCBE /* GeocodingModel.swift in Sources */,
+				0764F26D2986653500F446CB /* AreaListModel.swift in Sources */,
 				0755755F296BFC4B00B8AF77 /* RegisterationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
