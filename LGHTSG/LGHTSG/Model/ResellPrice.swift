@@ -14,6 +14,6 @@ class ResellPrice : Decodable {
         let rateOfChange : Double
         let rateCalDateDiff : String
         let idx : Int
-        let iconImage : String
+        let imageUrl : String
     }
 }

@@ -6,6 +6,7 @@
 //
 import UIKit
 import Charts
+import Kingfisher
 import SnapKit
 import Foundation
 class ChartViewController : UIViewController {
@@ -16,8 +17,16 @@ class ChartViewController : UIViewController {
     var idx : Int?
     var pricePercentText : String?
     var changeDateText : String?
+    var imageURL : String?
     var priceListDatas = [Int]()
     var timeListDatas = [String]()
+    let contentView = UIView()
+    private let contentScrollView : UIScrollView = {
+        let scrollview = UIScrollView()
+        scrollview.backgroundColor = .systemBackground
+        scrollview.translatesAutoresizingMaskIntoConstraints = false
+        return scrollview
+    }()
     lazy var lineChartView : LineChartView = {
         let chartView = LineChartView()
         return chartView
@@ -65,14 +74,22 @@ class ChartViewController : UIViewController {
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         return label
     }()
-    
+    private lazy var imageView : UIImageView = {
+       let imgview = UIImageView()
+        if let imageURL = imageURL{
+            let url = URL(string: imageURL)
+            
+            imgview.kf.setImage(with: url)
+        } 
+        return imgview
+    }()
 
     private var lineImage = UnderlineView()
     
     
     //MARK: - SegmentControl
     private lazy var segmentCtrl: UISegmentedControl = {
-        let items = ["1일","1주", "3달", "1년", "3년"]
+        let items = ["일","월", "1년", "3년"]
         let seg = UISegmentedControl(items: items)
         seg.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
         seg.layer.cornerRadius = 0.7
@@ -119,16 +136,25 @@ class ChartViewController : UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configure()
         setLineChartView()
-//        setupTableView()
+        configure()
+
     }
     //MARK: - TableViewSetting
     func setupTableView(){
+        contentView.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(EstateDetailCell.self, forCellReuseIdentifier: EstateDetailCell.identifier)
+        tableView.separatorStyle = .none
+        tableView.snp.makeConstraints{
+            $0.top.equalTo(lineImage.snp.bottom)
+            $0.height.equalTo(150)
+            $0.leading.equalToSuperview().inset(33)
+            $0.trailing.equalToSuperview().inset(33)
+            $0.bottom.equalTo(sellButton.snp.top ).offset(-10)
+            
+        }
     }
     @objc func indexChanged(_ sender: UISegmentedControl){
         switch sender.selectedSegmentIndex{
@@ -195,9 +221,8 @@ extension ChartViewController {
         lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: xAxis)
         
         let marker = ChartMarker(pricedate: xAxis, recentprice: recentPrice)
-        marker.chartheight = lineChartView.frame.origin.y - lineChartView.frame.height
         marker.chartView = lineChartView
-        marker.chartx = lineChartView.frame.origin.x + lineChartView.frame.width
+        marker.chartx = contentView.frame.width - 10
         lineChartView.marker = marker
         lineChartView.drawMarkers = true
         // 데이터 소수점 제거
@@ -241,10 +266,11 @@ extension ChartViewController {
 //        })
         stockPriceData.requestResellPrice(resellIdx: self.idx!, onCompleted: { (pricelists, transctiontime) in
             DispatchQueue.main.async {
-                self.view.addSubview(self.lineChartView)
                 self.priceListDatas = pricelists
                 self.timeListDatas = transctiontime
                 self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: pricelists), xAxis: transctiontime, recentPrice : Double(pricelists.last!))
+                
+                self.chartUI()
                 self.setupTableView()
                 
             }
@@ -256,40 +282,30 @@ extension ChartViewController {
 
 extension ChartViewController {
     //MARK: - Configure
-    private func configure(){
-        lineImage.backgroundColor = .label
-        [nameLabel, priceLabel, pricePercent,changeDate, sellButton, tableView, lineImage,dealLabel, revenueLabel, segmentCtrl,lineChartView]
-            .forEach {view.addSubview($0)}
-        nameLabel.snp.makeConstraints{
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top ).offset(10)
-            $0.leading.equalToSuperview().inset(15)
-        }
-        priceLabel.snp.makeConstraints{
-            $0.top.equalTo(nameLabel.snp.bottom).offset(8)
-            $0.leading.equalTo(nameLabel.snp.leading)
-        }
-        pricePercent.snp.makeConstraints{
-            $0.top.equalTo(nameLabel.snp.bottom).offset(9)
-            $0.leading.equalTo(priceLabel.snp.trailing).offset(8)
-        }
-        changeDate.snp.makeConstraints{
-            $0.top.equalTo(nameLabel.snp.bottom).offset(10)
-            $0.leading.equalTo(pricePercent.snp.trailing).offset(8)
-        }
+    private func chartUI(){
+        [lineChartView, imageView,lineImage,dealLabel, revenueLabel, segmentCtrl].forEach{contentView.addSubview($0)}
         lineChartView.snp.makeConstraints{
-            $0.top.equalTo(priceLabel.snp.bottom).offset(30)
-            $0.leading.equalToSuperview().inset(15)
-            $0.trailing.equalToSuperview().inset(15)
-            $0.bottom.equalTo(segmentCtrl.snp.top).inset(8)
+            $0.top.equalTo(priceLabel.snp.bottom).offset(20)
+//            $0.width.equalTo(contentView.snp.width)
+            $0.leading.trailing.equalTo(contentView ).inset(15)
+            $0.height.equalTo(220)
+//            $0.bottom.equalTo(segmentCtrl.snp.top).inset(8)
         }
+   
         segmentCtrl.snp.makeConstraints{
-            $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(15)
-            $0.trailing.equalToSuperview().inset(15)
+            $0.top.equalTo(lineChartView.snp.bottom)
+            $0.leading.equalTo(contentView.snp.leading).offset(15)
+            $0.trailing.equalTo(contentView.snp.trailing).offset(-15)
+//            $0.trailing.equalToSuperview().inset(15)
+        }
+        imageView.snp.makeConstraints{
+            $0.top.equalTo(segmentCtrl.snp.bottom).offset(20)
+            $0.width.height.equalTo(300)
+            $0.centerX.equalToSuperview()
         }
         revenueLabel.snp.makeConstraints{
             $0.leading.equalToSuperview().inset(33)
-            $0.top.equalTo(segmentCtrl.snp.bottom).offset(24)
+            $0.top.equalTo(imageView.snp.bottom).offset(30)
         }
         
         dealLabel.snp.makeConstraints{
@@ -304,18 +320,51 @@ extension ChartViewController {
             $0.top.equalTo(dealLabel.snp.bottom).offset(4)
         }
         
-        tableView.snp.makeConstraints{
-            $0.top.equalTo(lineImage.snp.bottom)
-            $0.bottom.equalTo(sellButton.snp.top).offset(-10)
-            $0.leading.equalToSuperview().inset(33)
-            $0.trailing.equalToSuperview().inset(33)
+   
+    }
+    private func configure(){
+        lineImage.backgroundColor = .label
+        self.view.addSubview(contentScrollView)
+        // 스크롤뷰 세로로
+        contentScrollView.addSubview(contentView)
+        [ nameLabel, priceLabel, pricePercent,changeDate, sellButton]
+            .forEach {contentView.addSubview($0)}
+        contentScrollView.snp.makeConstraints{
+            $0.top.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide )
+        }
+        contentView.snp.makeConstraints{
+            $0.top.leading.trailing.bottom.equalTo(contentScrollView.contentLayoutGuide)
+            $0.width.equalTo(contentScrollView.frameLayoutGuide)
+//            $0.width.equalToSuperview()
+//            $0.centerX.top.bottom.equalToSuperview()
+        }
+        
+        nameLabel.snp.makeConstraints{
+            $0.top.equalTo(contentView).offset(10)
+            $0.leading.equalTo(contentView.snp.leading).inset(15)
+            
+        }
+        priceLabel.snp.makeConstraints{
+            $0.top.equalTo(nameLabel.snp.bottom).offset(8)
+            $0.leading.equalTo(nameLabel.snp.leading)
+        }
+        pricePercent.snp.makeConstraints{
+            $0.top.equalTo(nameLabel.snp.bottom).offset(9)
+            $0.leading.equalTo(priceLabel.snp.trailing).offset(8)
+        }
+        changeDate.snp.makeConstraints{
+            $0.top.equalTo(nameLabel.snp.bottom).offset(10)
+            $0.leading.equalTo(pricePercent.snp.trailing).offset(8)
         }
         
         sellButton.snp.makeConstraints{
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
-            $0.leading.equalToSuperview().inset(33)
+//            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
+            $0.bottom.equalToSuperview().offset(-10)
+//            $0.leading.equalToSuperview().inset(33)
+//            $0.trailing.equalToSuperview().inset(33)
             $0.height.equalTo(48)
-            $0.trailing.equalToSuperview().inset(33)
+            $0.width.equalToSuperview().inset(20)
+            $0.centerX.equalToSuperview()
         }
     }
 }

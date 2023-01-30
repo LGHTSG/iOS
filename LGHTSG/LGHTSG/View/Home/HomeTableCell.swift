@@ -54,6 +54,7 @@ extension HomeTableCell {
         changeDate.text = assetinfo.rateCalDateDiff
         pricePercent.text = String(assetinfo.rateOfChange)
         let url = URL(string: assetinfo.iconImage)
+        iconimage.clipsToBounds = true
         iconimage.kf.setImage(with: url)
         countLabel.snp.makeConstraints{
             $0.leading.equalToSuperview()
@@ -100,8 +101,11 @@ extension HomeTableCell {
             pricePercent.textColor = .red
         }
         
-        let url = URL(string: resellinfo.iconImage)
-        iconimage.kf.setImage(with: url)
+        let url = URL(string: resellinfo.imageUrl)
+        // kf 이미지 둥그렇게
+        let processor = RoundCornerImageProcessor(cornerRadius: 500)
+        
+        iconimage.kf.setImage(with: url , options: [.processor(processor)])
         countLabel.snp.makeConstraints{
             $0.leading.equalToSuperview()
             $0.top.equalToSuperview()

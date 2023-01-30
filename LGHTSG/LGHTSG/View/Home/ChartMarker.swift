@@ -18,7 +18,7 @@ class ChartMarker: MarkerView {
     var pricetext = ""
     var pricepercent : String  = ""
     var recentprice : Double = 0.0
-    var chartheight : Double = 0.0
+
     var chartx: Double = 0.0
     init(pricedate: [String], recentprice : Double) {
         super.init(frame: .zero)
@@ -36,7 +36,7 @@ class ChartMarker: MarkerView {
 //        if (self.pricepercent[self.pricepercent.startIndex] == "-") {
 //            let attributeStr = NSMutableAttributedString(string: text)
 //        }
-        text = "이때 샀다면 지금: \(self.pricepercent)"
+        text = "이때 샀다면 지금\(self.pricepercent)"
         priceDate = pricedatelists[Int(entry.x)]
         pricetext = "\(Int(entry.y))원"
     }
@@ -57,14 +57,14 @@ class ChartMarker: MarkerView {
         {
             offset.x = chartx - point.x - self.bounds.size.width
         }
-        drawText(text: " \(text) " as NSString, rect: CGRect(origin: CGPoint(x: point.x + offset.x, y: chartheight - offset.y), size: self.bounds.size), withAttributes: drawAttributes)
+        drawText(text: " \(text) " as NSString, rect: CGRect(origin: CGPoint(x: point.x + offset.x, y:  0), size: self.bounds.size), withAttributes: drawAttributes)
         self.bounds.size = ("\(pricetext)" as NSString).size(withAttributes: drawAttributes)
         drawAttributes[.font] = UIFont.systemFont(ofSize: 10)
         drawAttributes[.foregroundColor] = UIColor.lightGray
-        drawText(text: "\(priceDate)" as NSString, rect: CGRect(origin: CGPoint(x: point.x + offset.x / 2, y: chartheight ), size: self.bounds.size ), withAttributes: drawAttributes)
+        drawText(text: "\(priceDate)" as NSString, rect: CGRect(origin: CGPoint(x: point.x + offset.x / 2, y:  offset.y), size: self.bounds.size ), withAttributes: drawAttributes)
         drawAttributes[.font] = UIFont.systemFont(ofSize: 12)
         drawAttributes[.foregroundColor] = UIColor.white
-        drawText(text: "\(pricetext)" as NSString, rect: CGRect(origin: CGPoint(x: point.x + offset.x / 2, y: chartheight - offset.y / 2 ), size: self.bounds.size ), withAttributes: drawAttributes)
+        drawText(text: "\(pricetext)" as NSString, rect: CGRect(origin: CGPoint(x: point.x + offset.x / 2, y: offset.y / 2 ), size: self.bounds.size ), withAttributes: drawAttributes)
 
     }
     override func draw(_ rect: CGRect) {

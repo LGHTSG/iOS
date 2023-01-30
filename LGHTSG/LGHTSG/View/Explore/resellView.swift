@@ -130,12 +130,14 @@ extension resellView : UITableViewDataSource , UITableViewDelegate, UIScrollView
             ChartVc.pricePercentText = resellSearchLists[indexPath.row].rateCalDateDiff
             ChartVc.PriceText  = "\(String(resellSearchLists[indexPath.row].price))원"
             ChartVc.idx = resellSearchLists[indexPath.row].idx
+            ChartVc.imageURL = resellSearchLists[indexPath.row].imageUrl
         }else{
             ChartVc.nameText =  resellDataLists[indexPath.row].name
             ChartVc.changeDateText = String(resellDataLists[indexPath.row].rateOfChange)
             ChartVc.pricePercentText = resellDataLists[indexPath.row].rateCalDateDiff
             ChartVc.PriceText  = "\(String(resellDataLists[indexPath.row].price))원"
             ChartVc.idx = resellDataLists[indexPath.row].idx
+            ChartVc.imageURL = resellDataLists[indexPath.row].imageUrl
         }
         self.navigationController?.pushViewController(ChartVc, animated: true)
     }
