@@ -18,7 +18,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     
     //MARK: - SearchBar
     var items = [String]()
-        var samples = ["서울"]
+        var samples = [String]()
         let disposeBag = DisposeBag()
     
     private lazy var searchBar: UISearchBar = {
@@ -38,17 +38,22 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         tableView2.alpha = 1
     }
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        tableView2.alpha = 1
+        return true
+    }
     func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
         tableView2.alpha = 1
 
     }
-    //이 안에 넣자..받아온 값을. 그리고
+
     private func input(){
           self.searchBar.rx.text.orEmpty
-              .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance)   //0.5초 기다림
-              .distinctUntilChanged()   // 같은 아이템을 받지 않는기능
+              .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance)
+              .distinctUntilChanged()
               .subscribe(onNext: { t in
-                  self.items = self.samples.filter{ $0.hasPrefix(t) }
+                  //검색이랑 검색어가 같으면 prefix로 정렬.
+                  self.items = self.samples.filter{ $0.hasSuffix(t) || $0.hasPrefix(t) }
                   self.tableView2.reloadData()
               })
               .disposed(by: disposeBag)
@@ -163,8 +168,8 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         configure()
         setUpLocation()
         setupTableView()
-        reverseget(coords: coord)
-        geocodeget()
+        //reverseget(coords: coord)
+        getEstateList()
         getAreaList()
         input()
     }
@@ -246,6 +251,40 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         
     }
   
+    //MARK: - EstateList
+    var idxList = [Int]()
+    var nameLists = [String]()
+    var rateOfChange = [Double]()
+    var rateCalDateDiff = [String]()
+    var price = [Int]()
+    
+    func getEstateList() {
+        let url = "http://api.lghtsg.site:8090/realestates/1/info"
+        let header: HTTPHeaders = ["Content-Type" : "application/json"]
+        AF.request(url, method: .get, headers: header)
+            .validate(statusCode: 200..<300)
+            .responseData { response in
+                switch response.result {
+                case .success(let res):
+                    let decoder = JSONDecoder()
+                    do {
+                        let data = try decoder.decode(EstateModel.self, from: res)
+                        self.nameLists.append(data.body.name)
+                        self.idxList.append(data.body.idx)
+                        self.rateOfChange.append(data.body.rateOfChange)
+                        self.rateCalDateDiff.append(data.body.rateCalDateDiff)
+                        self.price.append(data.body.price)
+                        
+                        self.tableView1.reloadData()
+                    } catch {
+                        print("erorr in decode")
+                    }
+                case .failure(let err):
+                    print(err.localizedDescription)
+                }
+            }
+        }
+    
     //MARK: -AreaList
     func getAreaList() {
         let url = "http://api.lghtsg.site:8090/realestates/area-relation-list"
@@ -258,6 +297,8 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
                     let decoder = JSONDecoder()
                     do {
                         let data = try decoder.decode(AreaListModel.self, from: res)
+                        self.samples.append(contentsOf: data.body)
+                        self.tableView2.reloadData()
                         
                     } catch {
                         print("erorr in decode")
@@ -271,6 +312,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     
     //MARK: - reverseget
     
+    //지도 좌표값을 받아서 그 좌표값이 가지는 지역명으로 바꿔주는 함수. 바꿔준후 searchbar에 시군구 입력해줌.
     func reverseget(coords : String) {
         var alabel = ""
         let url = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?request=coordsToaddr&coords=\(coord)&sourcecrs=epsg:4326&output=json&orders=legalcode,admcode,roadaddr"
@@ -319,16 +361,13 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     }
 
     //MARK: - geocoding
-        
-    // 텍스트를 입력받아 그 값을 토대로 좌표제공 받아 카메라 이동 및 마커 찍어주면 됨. 이거는 검색창에서 이동하는거임!!! 실시간 검색으로 가즈아!
-    // 한글입력하면 좌표 추출완료. 그러면 tf값을 hello로 일단 옮기자. 그러면 tf값의 도시의 그 좌표값이 나오는데 그걸로 카메라 이동 및 좌표찍기
-    func geocodeget() {
+       
+    //도시이름으로 검색하면 그 지도 좌표값으로 카메라 이동하는 함수
+    func geocodeget(cityName: String) {
         let url = "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query="
-        let hello = "인천광역시 미추홀구 용현동"
-        let encodeAddress = hello.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let encodeAddress = cityName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         var lat : [Character] = []
         var lng : [Character] = []
-        
         let header: HTTPHeaders = [ "X-NCP-APIGW-API-KEY-ID" : "t1d90xy372","X-NCP-APIGW-API-KEY" : "1iHB4AscQ8qLpAlct1s4h098xjv22nuxSzf9IbPu" ]
         
         AF.request(url + encodeAddress, method: .get, headers: header)
@@ -339,13 +378,21 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
                     let decoder = JSONDecoder()
                     do {
                         let data = try decoder.decode(GeocodingModel.self, from: res)
-                        //self.model.append(contentsOf: data.results)
                         lat.append(contentsOf: data.addresses[0].x)
                         let latString = String(lat)
                         lng.append(contentsOf: data.addresses[0].y)
                         let lngString = String(lng)
                         let label1 = latString + " " + lngString
                         print(label1)
+                        let myDouble = (latString as NSString).doubleValue
+                        let myDouble1 = (lngString as NSString).doubleValue
+                        
+                        let coord2 = NMGLatLng(lat: myDouble1, lng: myDouble)
+                        
+                        let cameraUpdate = NMFCameraUpdate(scrollTo: coord2)
+                        cameraUpdate.animation = .easeIn
+                        cameraUpdate.animationDuration = 2
+                        self.mapView.moveCamera(cameraUpdate)
                         
                     } catch {
                         print("erorr in decode")
@@ -355,8 +402,6 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
                 }
             }
     }
-
-   
     
     //MARK: - Location
     var locationManager = CLLocationManager()
@@ -370,16 +415,21 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         //아이폰설정에서의위치서비스가켜진상태라면
         locationManager.startUpdatingLocation()//위치정보받아오기시작
         
-        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: locationManager.location?.coordinate.latitude ?? 0, lng: locationManager.location?.coordinate.longitude ?? 0))
-        
+        let mylat = locationManager.location?.coordinate.latitude ?? 0
+        let mylng = locationManager.location?.coordinate.longitude ?? 0
+        //let changeString: String = String(mylng) + "," + String(mylat)
+        //reverseget(coords: changeString)
+        //print(changeString)
+
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: mylat, lng: mylng))
         cameraUpdate.animation = .easeIn
         cameraUpdate.animation = .fly
-        cameraUpdate.animationDuration = 1
+        cameraUpdate.animationDuration = 2
         mapView.moveCamera(cameraUpdate)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
-        
+
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -387,8 +437,6 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     }
     
     //MARK: - setDropDown
-     
-     
     @objc func didTapPriceBtn(){
         replaceView2.alpha = 1
         segmentCtrl.alpha = 1
@@ -415,10 +463,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
             
         }
         flag = true
-        
     }
-    
-    
     @objc func indexChanged(_ sender: UISegmentedControl){
         switch sender.selectedSegmentIndex{
                 case 0:
@@ -450,12 +495,12 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
             
             return 55
         }else{
-            return 30
+            return 40
         }
-        }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == tableView1{
-            return 3
+            return nameLists.count
         }
         else {
             return items.count
@@ -465,9 +510,9 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == tableView1{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: EstateSaleCell.identifier, for: indexPath) as? EstateSaleCell else { return UITableViewCell() }
-            cell.number.text = "1"
+           // cell.number = self.idxList[indexPath.row]
             cell.number.textColor = .white
-            cell.title.text = "서울특별시 강남구 논현동 아파트"
+            cell.title.text = self.nameLists[indexPath.row]
             cell.title.textColor = .white
             cell.area.text = "22,303,921 원/m"
             cell.area.textColor = .gray
@@ -487,10 +532,15 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     }
     // cell row 선택 시 옵션
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView2.deselectRow(at: indexPath, animated: true)
-        print(self.items[indexPath.row])
-        self.searchBar.searchTextField.text = self.items[indexPath.row]
-        tableView2.alpha = 0
+        if tableView == tableView1{
+        }
+        else{
+            tableView2.deselectRow(at: indexPath, animated: true)
+            print(self.items[indexPath.row])
+            self.searchBar.searchTextField.text = self.items[indexPath.row]
+            geocodeget(cityName: self.searchBar.searchTextField.text!)
+            tableView2.alpha = 0
+        }
     }
     
 }
