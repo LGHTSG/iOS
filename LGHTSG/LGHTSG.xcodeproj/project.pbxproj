@@ -23,9 +23,7 @@
 		0764F26F29866A6500F446CB /* APIToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764F26E29866A6500F446CB /* APIToken.swift */; };
 		0764F2712987853600F446CB /* EstateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764F2702987853600F446CB /* EstateModel.swift */; };
 		0764F2822987E71B00F446CB /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764F2812987E71B00F446CB /* TopViewController.swift */; };
-		0764F285298959C600F446CB /* TopEstateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764F284298959C600F446CB /* TopEstateCell.swift */; };
-		0764F287298959D700F446CB /* TopStockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764F286298959D700F446CB /* TopStockCell.swift */; };
-		0764F289298959F200F446CB /* TopResellCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764F288298959F200F446CB /* TopResellCell.swift */; };
+		0764F285298959C600F446CB /* TopViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764F284298959C600F446CB /* TopViewCell.swift */; };
 		0783C0FA297034FA00EDABA3 /* EstateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783C0F9297034FA00EDABA3 /* EstateController.swift */; };
 		0783C100297664D400EDABA3 /* EstateDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783C0FF297664D400EDABA3 /* EstateDetailController.swift */; };
 		078666BC2980BF9B000ADCBE /* ReverseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078666BB2980BF9B000ADCBE /* ReverseModel.swift */; };
@@ -51,9 +49,7 @@
 		0764F26E29866A6500F446CB /* APIToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIToken.swift; sourceTree = "<group>"; };
 		0764F2702987853600F446CB /* EstateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstateModel.swift; sourceTree = "<group>"; };
 		0764F2812987E71B00F446CB /* TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
-		0764F284298959C600F446CB /* TopEstateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopEstateCell.swift; sourceTree = "<group>"; };
-		0764F286298959D700F446CB /* TopStockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStockCell.swift; sourceTree = "<group>"; };
-		0764F288298959F200F446CB /* TopResellCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopResellCell.swift; sourceTree = "<group>"; };
+		0764F284298959C600F446CB /* TopViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewCell.swift; sourceTree = "<group>"; };
 		0783C0F9297034FA00EDABA3 /* EstateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstateController.swift; sourceTree = "<group>"; };
 		0783C0FF297664D400EDABA3 /* EstateDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstateDetailController.swift; sourceTree = "<group>"; };
 		078666BB2980BF9B000ADCBE /* ReverseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseModel.swift; sourceTree = "<group>"; };
@@ -152,10 +148,10 @@
 		071E0558296BB8510020282F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0764F2832989597600F446CB /* TopViewCell */,
 				07557562296BFCD300B8AF77 /* EstateDetailCell.swift */,
 				0791E9282984B395008BDEAB /* EstateSaleCell.swift */,
 				0764F26A298642EF00F446CB /* SearchItemCell.swift */,
+				0764F284298959C600F446CB /* TopViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -186,16 +182,6 @@
 				0755755E296BFC4B00B8AF77 /* RegisterationController.swift */,
 			);
 			path = Authentication;
-			sourceTree = "<group>";
-		};
-		0764F2832989597600F446CB /* TopViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				0764F284298959C600F446CB /* TopEstateCell.swift */,
-				0764F286298959D700F446CB /* TopStockCell.swift */,
-				0764F288298959F200F446CB /* TopResellCell.swift */,
-			);
-			path = TopViewCell;
 			sourceTree = "<group>";
 		};
 		2404E8AB30A4556E368D96E1 /* Pods */ = {
@@ -338,14 +324,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0783C0FA297034FA00EDABA3 /* EstateController.swift in Sources */,
-				0764F285298959C600F446CB /* TopEstateCell.swift in Sources */,
+				0764F285298959C600F446CB /* TopViewCell.swift in Sources */,
 				0791E9292984B395008BDEAB /* EstateSaleCell.swift in Sources */,
 				071E0545296BB7B50020282F /* ViewController.swift in Sources */,
 				0764F2712987853600F446CB /* EstateModel.swift in Sources */,
 				0783C100297664D400EDABA3 /* EstateDetailController.swift in Sources */,
 				0755755C296BFC3300B8AF77 /* LoginController.swift in Sources */,
 				0764F26B298642EF00F446CB /* SearchItemCell.swift in Sources */,
-				0764F289298959F200F446CB /* TopResellCell.swift in Sources */,
 				07557563296BFCD300B8AF77 /* EstateDetailCell.swift in Sources */,
 				07557561296BFC5900B8AF77 /* MainTabController.swift in Sources */,
 				071E0541296BB7B50020282F /* AppDelegate.swift in Sources */,
@@ -355,7 +340,6 @@
 				078666BC2980BF9B000ADCBE /* ReverseModel.swift in Sources */,
 				078666BE2983844D000ADCBE /* GeocodingModel.swift in Sources */,
 				0764F26D2986653500F446CB /* AreaListModel.swift in Sources */,
-				0764F287298959D700F446CB /* TopStockCell.swift in Sources */,
 				0755755F296BFC4B00B8AF77 /* RegisterationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -525,7 +525,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         
         else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchItemCell.identifier, for: indexPath) as? SearchItemCell else { return UITableViewCell() }
-            cell.hello.text = self.items[indexPath.row]
+            cell.name.text = self.items[indexPath.row]
             return cell
         }
     }

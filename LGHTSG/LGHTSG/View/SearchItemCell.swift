@@ -12,7 +12,7 @@ class SearchItemCell: UITableViewCell {
     
     static let identifier = "SearchItemCell"
     
-    lazy var hello: UILabel = {
+    lazy var name: UILabel = {
         let label = UILabel()
         label.textColor = .white
         return label
@@ -33,10 +33,10 @@ class SearchItemCell: UITableViewCell {
     func cellSetting() {
         self.backgroundColor = UIColor(named: "dropdown")
         
-        [hello]
+        [name]
             .forEach {contentView.addSubview($0)}
         
-        hello.snp.makeConstraints {
+        name.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(10)
             $0.centerY.equalToSuperview()
             
