@@ -52,7 +52,14 @@ extension HomeTableCell {
         nameLabel.text = assetinfo.name
         priceLabel.text = String(assetinfo.price)+"원"
         changeDate.text = assetinfo.rateCalDateDiff
-        pricePercent.text = String(assetinfo.rateOfChange)
+        let stringofratechange = String(assetinfo.rateOfChange)
+        if(stringofratechange[stringofratechange.startIndex] == "-"){
+            pricePercent.text = "\(stringofratechange)%"
+            pricePercent.textColor = .blue
+        }else {
+            pricePercent.text = "+\(stringofratechange)%"
+            pricePercent.textColor = .red
+        }
         let url = URL(string: assetinfo.iconImage)
         iconimage.clipsToBounds = true
         iconimage.kf.setImage(with: url)

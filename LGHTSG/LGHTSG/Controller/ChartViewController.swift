@@ -9,12 +9,14 @@ import Charts
 import Kingfisher
 import SnapKit
 import Foundation
+
 class ChartViewController : UIViewController {
     var stockPriceData = StockPriceModel()
     var EstatePriceData = EstatePriceModel()
     var nameText : String?
     var PriceText : String?
     var idx : Int?
+
     var pricePercentText : String?
     var changeDateText : String?
     var imageURL : String?
@@ -33,7 +35,7 @@ class ChartViewController : UIViewController {
     }()
     private lazy var nameLabel : UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.text = nameText
         return label
     }()
@@ -78,9 +80,8 @@ class ChartViewController : UIViewController {
        let imgview = UIImageView()
         if let imageURL = imageURL{
             let url = URL(string: imageURL)
-            
             imgview.kf.setImage(with: url)
-        } 
+        }
         return imgview
     }()
 
@@ -136,6 +137,7 @@ class ChartViewController : UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setLineChartView()
         configure()
 
@@ -149,7 +151,7 @@ class ChartViewController : UIViewController {
         tableView.separatorStyle = .none
         tableView.snp.makeConstraints{
             $0.top.equalTo(lineImage.snp.bottom)
-            $0.height.equalTo(150)
+            $0.height.equalTo(120)
             $0.leading.equalToSuperview().inset(33)
             $0.trailing.equalToSuperview().inset(33)
             $0.bottom.equalTo(sellButton.snp.top ).offset(-10)
@@ -159,11 +161,19 @@ class ChartViewController : UIViewController {
     @objc func indexChanged(_ sender: UISegmentedControl){
         switch sender.selectedSegmentIndex{
         case 0:
-            print("1주")
+            
+            let daypricedata : [Int] = priceListDatas.suffix(30)
+            let daytimeListDatas : [String] = timeListDatas.suffix(30)
+            self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: daypricedata), xAxis: daytimeListDatas, recentPrice : Double(daypricedata.last!))
+            tableView.reloadData()
         case 1:
-            print("3달")
+            let monthpricedata : [Int] = priceListDatas.suffix(90)
+            let monthtimeListDatas : [String] = timeListDatas.suffix(90)
+            self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: monthpricedata), xAxis: monthtimeListDatas, recentPrice : Double(monthpricedata.last!))
+            tableView.reloadData()
         case 2:
-            print("1년")
+//            let keydate = Calendar(identifier: .gregorian).date(byAdding: , to: <#T##Date#>)
+            print("3년")
         case 3:
             print("5년")
         default:
@@ -202,7 +212,7 @@ extension ChartViewController {
         lineChartdataSet.drawHorizontalHighlightIndicatorEnabled = false
 //        lineChartdataSet.drawVerticalHighlightIndicatorEnabled = false
         lineChartdataSet.highlightColor = .white
-   
+        
         // DataSet을 차트 데이터로 넣기
         let lineChartData = LineChartData(dataSet: lineChartdataSet)
         // 데이터 출력
@@ -219,7 +229,7 @@ extension ChartViewController {
         // 아래 뜨는 어떤항목인지 알려주는 label 제거
         lineChartView.legend.enabled = false
         lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: xAxis)
-        
+   
         let marker = ChartMarker(pricedate: xAxis, recentprice: recentPrice)
         marker.chartView = lineChartView
         marker.chartx = contentView.frame.width - 10
@@ -243,17 +253,20 @@ extension ChartViewController {
         return lineDataEntries
     }
     private func setLineChartView() {
-//        stockPriceData.requestStockPrice(stockIdx: 1, onCompleted: { (pricelists, transctiontime) in
-//            DispatchQueue.main.async {
-//                self.view.addSubview(self.lineChartView)
-//                self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: pricelists), xAxis: transctiontime, recentPrice : Double(pricelists.last!))
-//                self.lineChartView.snp.makeConstraints{
-//                    $0.center.equalToSuperview()
-//                    $0.leading.trailing.equalToSuperview()
-//                    $0.top.bottom.equalToSuperview().inset(140)
-//                }
-//            }
-//        })
+ 
+            stockPriceData.requestResellPrice(resellIdx: self.idx!, onCompleted: { (pricelists, transctiontime) in
+                DispatchQueue.main.async {
+                    self.priceListDatas = pricelists
+                    self.timeListDatas = transctiontime
+                    self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: pricelists), xAxis: transctiontime, recentPrice : Double(pricelists.last!))
+                    
+                    self.chartUI()
+                    self.setupTableView()
+                    
+                }
+            })
+
+        
 //        EstatePriceData.requestStockPrice(EstateIdx: self.idx!, onCompleted: { (pricelists, transctiontime) in
 //            DispatchQueue.main.async {
 //                self.view.addSubview(self.lineChartView)
@@ -264,17 +277,7 @@ extension ChartViewController {
 ////                }
 //            }
 //        })
-        stockPriceData.requestResellPrice(resellIdx: self.idx!, onCompleted: { (pricelists, transctiontime) in
-            DispatchQueue.main.async {
-                self.priceListDatas = pricelists
-                self.timeListDatas = transctiontime
-                self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: pricelists), xAxis: transctiontime, recentPrice : Double(pricelists.last!))
-                
-                self.chartUI()
-                self.setupTableView()
-                
-            }
-        })
+
     }
     
 }
@@ -288,7 +291,7 @@ extension ChartViewController {
             $0.top.equalTo(priceLabel.snp.bottom).offset(20)
 //            $0.width.equalTo(contentView.snp.width)
             $0.leading.trailing.equalTo(contentView ).inset(15)
-            $0.height.equalTo(220)
+            $0.height.equalTo(270)
 //            $0.bottom.equalTo(segmentCtrl.snp.top).inset(8)
         }
    
@@ -299,21 +302,25 @@ extension ChartViewController {
 //            $0.trailing.equalToSuperview().inset(15)
         }
         imageView.snp.makeConstraints{
-            $0.top.equalTo(segmentCtrl.snp.bottom).offset(20)
-            $0.width.height.equalTo(300)
+            $0.top.equalTo(segmentCtrl.snp.bottom).offset(10)
+            
+            if imageURL != nil {
+                $0.width.height.equalTo(300)
+            }else{
+                $0.width.height.equalTo(0)
+            }
             $0.centerX.equalToSuperview()
         }
         revenueLabel.snp.makeConstraints{
             $0.leading.equalToSuperview().inset(33)
-            $0.top.equalTo(imageView.snp.bottom).offset(30)
+            $0.top.equalTo(imageView.snp.bottom).offset(10)
         }
         
         dealLabel.snp.makeConstraints{
-            $0.top.equalTo(revenueLabel.snp.bottom).offset(24)
+            $0.top.equalTo(revenueLabel.snp.bottom).offset(10)
             $0.leading.equalToSuperview().inset(33)
         }
         lineImage.snp.makeConstraints{
-
             $0.leading.equalToSuperview().inset(33)
             $0.trailing.equalToSuperview().inset(33)
             $0.height.equalTo(1)

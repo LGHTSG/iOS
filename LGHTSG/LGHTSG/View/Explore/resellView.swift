@@ -12,12 +12,9 @@ protocol showNavigationDelegate{
     func hideSearchBar()
     func showSearchBar()
 }
-protocol SelectRowItemDelegate {
-    func clickRowItem()
-}
+
 class resellView : UIViewController{
     var delegate : showNavigationDelegate?
-    var selectDelegate : SelectRowItemDelegate?
     let AssetModel = TableCellModel()
     var resellDataLists = [ResellPrice.body]()
     var resellSearchLists = [ResellPrice.body]()
@@ -42,9 +39,7 @@ class resellView : UIViewController{
 ////        let superview = ExploreViewController()
 ////        superview.delegate1 = self
 //    }
-//    convenience init(){
-//        self.init()
-//    }
+
     init(){
         super.init(nibName: nil, bundle: nil)
     }

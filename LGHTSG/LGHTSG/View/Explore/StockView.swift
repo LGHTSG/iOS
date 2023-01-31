@@ -7,7 +7,7 @@
 import UIKit
 import Foundation
 import SnapKit
-class StockView : UIView {
+class StockView : UIViewController {
     var delegate : showNavigationDelegate?
     lazy private var  segment : UISegmentedControl = {
         let control  = UnderlineSegmentedControl(items: ["급상승", "급하락", "거래량", "시가총액"])
@@ -16,16 +16,18 @@ class StockView : UIView {
         AssetModel.requestTableCellModel(segmentIndex: 0){
             data in
             self.stockDataLists = data
+            self.StockaTableView.reloadData()
         }
         return control
     }()
     let AssetModel = TableCellModel()
     var stockDataLists = [asset.body]()
-    var selectDelegate : SelectRowItemDelegate?
-    private var StockaTableView = UITableView()
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-       
+    var stockSearchLists = [asset.body]()
+    init(){
+        super.init(nibName: nil, bundle: nil)
+    }
+    var StockaTableView = UITableView()
+    override func viewDidLoad() {
         setView()
         StockaTableView.dataSource = self
         StockaTableView.delegate = self
@@ -64,12 +66,12 @@ class StockView : UIView {
     func setView(){
         StockaTableView.register(HomeTableCell.self, forCellReuseIdentifier: "HomeTabeCell")
         StockaTableView.separatorStyle = .none
-        self.addSubview(segment)
+        self.view.addSubview(segment)
         segment.snp.makeConstraints{
             $0.leading.top.equalToSuperview()
             $0.height.equalTo(18)
         }
-        self.addSubview(StockaTableView)
+        self.view.addSubview(StockaTableView)
         StockaTableView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(segment.snp.bottom).offset(22)
@@ -79,11 +81,17 @@ class StockView : UIView {
 }
 extension StockView : UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stockDataLists.count
+        if(ExploreViewController.isSearching){
+            return stockSearchLists.count
+        }else{
+            return stockDataLists.count}
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTabeCell", for: indexPath) as? HomeTableCell else {return UITableViewCell()}
-        cell.setup(with: stockDataLists[indexPath.row])
+        if(ExploreViewController.isSearching){
+            cell.setup(with: stockSearchLists[indexPath.row])
+        }
+        else{cell.setup(with: stockDataLists[indexPath.row])}
         cell.countLabel.text = "\(indexPath.row+1)"
         return cell
     }
@@ -96,6 +104,23 @@ extension StockView : UITableViewDataSource, UITableViewDelegate{
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectDelegate?.clickRowItem()
+        let ChartVc = StockChartViewController()
+        if(ExploreViewController.isSearching){
+            ChartVc.nameText =  stockSearchLists[indexPath.row].name
+            ChartVc.changeDateText = String(stockSearchLists[indexPath.row].rateOfChange)
+            ChartVc.pricePercentText = stockSearchLists[indexPath.row].rateCalDateDiff
+            ChartVc.PriceText  = "\(String(stockSearchLists[indexPath.row].price))원"
+            ChartVc.idx = stockSearchLists[indexPath.row].idx
+
+        }else{
+            ChartVc.nameText =  stockDataLists[indexPath.row].name
+            ChartVc.changeDateText = String(stockDataLists[indexPath.row].rateOfChange)
+            ChartVc.pricePercentText = stockDataLists[indexPath.row].rateCalDateDiff
+            ChartVc.PriceText  = "\(String(stockDataLists[indexPath.row].price))원"
+            ChartVc.idx = stockDataLists[indexPath.row].idx
+          
+        }
+      
+        self.navigationController?.pushViewController(ChartVc, animated: true)
     }
 }

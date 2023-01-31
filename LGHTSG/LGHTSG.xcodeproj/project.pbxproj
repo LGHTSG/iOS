@@ -28,6 +28,7 @@
 		F047B2DA297154C400810AB4 /* UnderlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F047B2D9297154C400810AB4 /* UnderlineView.swift */; };
 		F047B2DC2971B5AC00810AB4 /* HomeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F047B2DB2971B5AC00810AB4 /* HomeTableCell.swift */; };
 		F047B2DE2972E06100810AB4 /* AssetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F047B2DD2972E06100810AB4 /* AssetModel.swift */; };
+		F049AEEB2988AD3500BBC8AA /* StockChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F049AEEA2988AD3500BBC8AA /* StockChartViewController.swift */; };
 		F04A11F3297D00860074C0ED /* realEstates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A11F2297D00860074C0ED /* realEstates.swift */; };
 		F04A11F5297D01600074C0ED /* EstatePriceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A11F4297D01600074C0ED /* EstatePriceModel.swift */; };
 		F04A11F7297D1DA10074C0ED /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04A11F6297D1DA10074C0ED /* ChartViewController.swift */; };
@@ -62,6 +63,7 @@
 		F047B2D9297154C400810AB4 /* UnderlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineView.swift; sourceTree = "<group>"; };
 		F047B2DB2971B5AC00810AB4 /* HomeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableCell.swift; sourceTree = "<group>"; };
 		F047B2DD2972E06100810AB4 /* AssetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AssetModel.swift; path = LGHTSG/View/Home/AssetModel.swift; sourceTree = SOURCE_ROOT; };
+		F049AEEA2988AD3500BBC8AA /* StockChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockChartViewController.swift; sourceTree = "<group>"; };
 		F04A11F2297D00860074C0ED /* realEstates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = realEstates.swift; sourceTree = "<group>"; };
 		F04A11F4297D01600074C0ED /* EstatePriceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EstatePriceModel.swift; path = LGHTSG/Model/EstatePriceModel.swift; sourceTree = SOURCE_ROOT; };
 		F04A11F6297D1DA10074C0ED /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				07557560296BFC5900B8AF77 /* MainTabController.swift */,
 				F0C7CBAE296EF260007C8BCE /* HomeViewController.swift */,
 				F0C7CBB0296EF269007C8BCE /* ExploreViewController.swift */,
+				F049AEEA2988AD3500BBC8AA /* StockChartViewController.swift */,
 				F04A11F6297D1DA10074C0ED /* ChartViewController.swift */,
 			);
 			path = Controller;
@@ -319,6 +322,7 @@
 				071E0541296BB7B50020282F /* AppDelegate.swift in Sources */,
 				F037E0602983936700C42A42 /* EstateDetailCell.swift in Sources */,
 				F04A1207297EC46C0074C0ED /* resellView.swift in Sources */,
+				F049AEEB2988AD3500BBC8AA /* StockChartViewController.swift in Sources */,
 				F0C7CBAF296EF260007C8BCE /* HomeViewController.swift in Sources */,
 				071E0543296BB7B50020282F /* SceneDelegate.swift in Sources */,
 				F047B2D62970912600810AB4 /* UnderlineSegmentedControl.swift in Sources */,
