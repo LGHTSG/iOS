@@ -81,7 +81,6 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     }()
       
     //MARK: - DropDown
-
     
     private lazy var lineImage2: UIImageView = {
         let image = UIImageView(image: UIImage(named: "Line"))
@@ -258,8 +257,9 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     var rateCalDateDiff = [String]()
     var price = [Int]()
     
+    //파라미터로 시군구 스트링으로 받아서 업데이트.
     func getEstateList() {
-        let url = "http://api.lghtsg.site:8090/realestates/1/info"
+        let url = "http://api.lghtsg.site:8090/realestates?area=대전광역시+유성구+노은동"
         let header: HTTPHeaders = ["Content-Type" : "application/json"]
         AF.request(url, method: .get, headers: header)
             .validate(statusCode: 200..<300)
@@ -522,13 +522,12 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
             cell.period.textColor = .gray
             return cell
         }
+        
         else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchItemCell.identifier, for: indexPath) as? SearchItemCell else { return UITableViewCell() }
             cell.hello.text = self.items[indexPath.row]
-            
             return cell
         }
-        
     }
     // cell row 선택 시 옵션
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
