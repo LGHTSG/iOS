@@ -10,7 +10,7 @@ import Foundation
 class MainTabController: UITabBarController {
     var changepercent : String = "-7.2%"
     override func viewDidLoad() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .black
         super.viewDidLoad()
 //        SetNavigationBar()
 //        swipeGestureNavigationBar()

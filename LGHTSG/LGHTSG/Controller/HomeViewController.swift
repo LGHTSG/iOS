@@ -110,6 +110,7 @@ private extension HomeViewController{
         tableview.rowHeight = 56
         tableview.dataSource = self
         tableview.separatorStyle = .none
+        
         tableview.snp.makeConstraints{
             $0.top.equalTo(underline1.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(33)

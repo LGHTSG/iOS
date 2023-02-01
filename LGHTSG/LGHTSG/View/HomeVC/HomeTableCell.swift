@@ -10,14 +10,17 @@ import UIKit
 import SnapKit
 import Kingfisher
 class HomeTableCell : UITableViewCell {
+    
     var countLabel : UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.textColor = .white
         return label
     }()
     private lazy var nameLabel : UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.textColor = .white
         return label
     }()
     private lazy var priceLabel : UILabel = {
@@ -49,6 +52,7 @@ extension HomeTableCell {
         [countLabel, nameLabel, priceLabel, pricePercent, changeDate, iconimage].forEach{
             addSubview($0)
         }
+        
         nameLabel.text = assetinfo.name
         priceLabel.text = String(assetinfo.price)+"원"
         changeDate.text = assetinfo.rateCalDateDiff
