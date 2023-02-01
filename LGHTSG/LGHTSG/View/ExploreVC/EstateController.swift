@@ -221,11 +221,9 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         configure()
         setUpLocation()
         setupTableView()
-        //reverseget(coords: coord)
         getEstateList(name: Areaname)
         getAreaList()
         input()
-        //chart
         setLineChartView(Areaname: Areaname)
     }
    
@@ -236,7 +234,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         view.backgroundColor = .black
         view.addSubview(mapView)
       
-        [lineChartView, priceButton, saleButton,lineImage2,segmentCtrl,tableView1,searchBar,tableView2]
+        [priceButton, saleButton,lineImage2,segmentCtrl,lineChartView,tableView1,searchBar,tableView2]
           .forEach {view.addSubview($0)}
         
         
@@ -260,7 +258,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
             $0.bottom.equalTo(segmentCtrl.snp.top).offset(-5)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
-
+            
         }
         
         saleButton.snp.makeConstraints{
@@ -309,9 +307,9 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         
     }
   
+  
     //MARK: - EstateList
     var nameLists = [String]()
-    var priceLists = [String]()
     var rateOfChange = [Double]()
     var rateCalDateDiff = [String]()
     var price = [Int]()
@@ -329,18 +327,17 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
                 case .success(let res):
                     do {
                         
-                        print("sucess")
-                        self.nameLists.append(res.body[0].name)
-                        /*self.nameLists.append(data.abody[0].name)
-                        print(self.nameLists)
-                        self.rateOfChange.append(data.abody[0].rateOfChange)
-                        self.rateCalDateDiff.append(data.abody[0].rateCalDateDiff)
-                        self.price.append(data.abody[0].price)
-                        
+                        for index in 0..<res.body.count {
+                            self.nameLists.append(res.body[index].name)
+                            self.rateCalDateDiff.append(res.body[index].rateCalDateDiff)
+                            self.rateOfChange.append(res.body[index].rateOfChange)
+                            self.price.append(res.body[index].price)
+                        }
+
                         self.tableView1.reloadData()
-                       */
+                       
                     } catch {
-                        print("erorr in decoda")
+                        print("erorr in decode")
                     }
                 case .failure(let err):
                     print(err.localizedDescription)
@@ -391,6 +388,11 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
                 case .success(let res):
                     let decoder = JSONDecoder()
                     do {
+                        self.price.removeAll()
+                        self.rateOfChange.removeAll()
+                        self.rateCalDateDiff.removeAll()
+                        self.nameLists.removeAll()
+                        self.tableView1.reloadData()
                         let data = try decoder.decode(ReverseModel.self, from: res)
                         //self.model.append(contentsOf: data.results)
                         si.append(contentsOf: data.results[0].region.area1.name)
@@ -401,7 +403,8 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
                         let dongString = String(dong)
                         alabel = siString + " " + guString + " " + dongString
                         self.searchBar.searchTextField.text = alabel
-                        print(alabel)
+                        self.getEstateList(name: alabel)
+                        self.setLineChartView(Areaname : alabel)
                         
                     } catch {
                         print("erorr in decode")
@@ -573,15 +576,22 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == tableView1{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: EstateSaleCell.identifier, for: indexPath) as? EstateSaleCell else { return UITableViewCell() }
-            cell.number.text = "1"
+            cell.number.text = String(indexPath.row + 1)
             cell.number.textColor = .white
             cell.title.text = self.nameLists[indexPath.row]
             cell.title.textColor = .white
-            cell.area.text = "22,303,921 원/m"
+            cell.area.text = "\(self.price[indexPath.row])원/m"
             cell.area.textColor = .gray
-            cell.price.text = "+ 3.0%"
-            cell.price.textColor = .red
-            cell.period.text = "3달 전 대비"
+            cell.pow.text = "2"
+            cell.pow.textColor = .gray
+            cell.price.text = "\(self.rateOfChange[indexPath.row])%"
+            if self.rateOfChange[indexPath.row] > 0 {
+                cell.price.textColor = .systemRed
+            }else{
+                cell.price.textColor = .systemBlue
+            }
+                
+            cell.period.text = self.rateCalDateDiff[indexPath.row]
             cell.period.textColor = .gray
             return cell
         }

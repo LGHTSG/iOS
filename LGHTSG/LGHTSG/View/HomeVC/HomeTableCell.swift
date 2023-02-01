@@ -73,6 +73,7 @@ extension HomeTableCell {
         }
         let url = URL(string: assetinfo.iconImage)
         iconimage.clipsToBounds = true
+        iconimage.layer.cornerRadius = 22
         iconimage.kf.setImage(with: url)
         countLabel.snp.makeConstraints{
             $0.leading.equalToSuperview()

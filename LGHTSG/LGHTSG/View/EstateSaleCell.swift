@@ -27,6 +27,13 @@ class EstateSaleCell: UITableViewCell {
         return label
     }()
     
+    lazy var pow: UILabel = {
+        let label = UILabel()
+        label.font = label.font.withSize(10)
+        return label
+    }()
+    
+    
     lazy var price: UILabel = {
         let label = UILabel()
         return label
@@ -51,7 +58,7 @@ class EstateSaleCell: UITableViewCell {
     func cellSetting() {
         self.backgroundColor = .black
         
-        [number, title, area, price, period]
+        [number, title, area, price, period, pow]
             .forEach {contentView.addSubview($0)}
         
         number.snp.makeConstraints {
@@ -61,22 +68,27 @@ class EstateSaleCell: UITableViewCell {
         }
 
         title.snp.makeConstraints {
-            $0.leading.equalTo(number.snp.leading).offset(20)
+            $0.leading.equalTo(number.snp.trailing).offset(20)
             $0.top.equalToSuperview().inset(5)
 
         }
         area.snp.makeConstraints {
-            $0.leading.equalTo(number.snp.leading).offset(20)
+            $0.leading.equalTo(number.snp.trailing).offset(20)
             $0.top.equalTo(title.snp.bottom).offset(5)
 
         }
+        pow.snp.makeConstraints{
+            $0.leading.equalTo(area.snp.trailing).offset(2)
+            $0.top.equalTo(title.snp.bottom).offset(3)
+        }
+     
         price.snp.makeConstraints {
-            $0.leading.equalTo(area.snp.trailing).offset(8)
+            $0.leading.equalTo(pow.snp.trailing).offset(10)
             $0.top.equalTo(title.snp.bottom).offset(5)
 
         }
         period.snp.makeConstraints {
-            $0.leading.equalTo(price.snp.trailing).offset(8)
+            $0.leading.equalTo(price.snp.trailing).offset(10)
             $0.top.equalTo(title.snp.bottom).offset(5)
 
         }
