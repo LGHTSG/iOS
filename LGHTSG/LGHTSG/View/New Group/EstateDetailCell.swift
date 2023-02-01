@@ -2,28 +2,29 @@
 //  EstateDetailCell.swift
 //  LGHTSG
 //
-//  Created by HA on 2023/01/09.
+//  Created by SunHo Lee on 2023/01/27.
 //
 
 import UIKit
-
-
 class EstateDetailCell: UITableViewCell {
     
     static let identifier = "EstateDetailCell"
     
     lazy var date: UILabel = {
         let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .medium)
         return label
     }()
     
     lazy var price: UILabel = {
         let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .medium)
         return label
     }()
     
     lazy var buysell: UILabel = {
         let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .medium)
         return label
     }()
     
@@ -51,7 +52,7 @@ class EstateDetailCell: UITableViewCell {
 
         }
         price.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(60)
+            $0.leading.equalTo(date.snp.trailing ).offset(69)
             $0.centerY.equalToSuperview()
 
         }

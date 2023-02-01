@@ -233,8 +233,8 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
           .forEach {view.addSubview($0)}
         
         topView1.snp.makeConstraints{
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(150)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-580)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.height.equalTo(40)
             $0.leading.equalToSuperview().inset(25)
             $0.trailing.equalToSuperview().inset(25)
         }
@@ -265,7 +265,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         tableView1.snp.makeConstraints{
             $0.top.equalTo(topView1.snp.bottom).offset(5)
-            $0.bottom.equalTo(topView1.snp.bottom).offset(120)
+            $0.height.equalTo(110)
             $0.leading.equalToSuperview().inset(25)
             $0.trailing.equalToSuperview().inset(25)
         }

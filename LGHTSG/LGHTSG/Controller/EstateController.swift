@@ -210,25 +210,27 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
             $0.leading.equalTo(priceButton.snp.trailing).offset(5)
             $0.trailing.equalToSuperview().inset(170)
             $0.top.equalTo(mapView.snp.bottom).offset(24)
+            $0.height.equalTo(30)
         }
         
         priceButton.snp.makeConstraints{
             $0.leading.equalToSuperview().inset(15)
             $0.trailing.equalToSuperview().inset(275)
             $0.top.equalTo(mapView.snp.bottom).offset(24)
-            
+            $0.height.equalTo(30)
+
         }
         
         mapView.snp.makeConstraints{
             $0.top.equalTo(searchBar.snp.bottom).offset(16)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-375)
+            $0.bottom.equalTo(view.snp.centerY).offset(20)
             $0.leading.equalToSuperview().inset(15)
             $0.trailing.equalToSuperview().inset(15)
        
         }
         
         searchBar.snp.makeConstraints{
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(86)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.leading.equalToSuperview().inset(8)
             $0.trailing.equalToSuperview().inset(8)
             $0.height.equalTo(38)
@@ -236,7 +238,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
      
         segmentCtrl.snp.makeConstraints{
             $0.top.equalTo(replaceView2.snp.bottom).offset(8)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-91)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-81)
             $0.leading.equalToSuperview().inset(15)
             $0.trailing.equalToSuperview().inset(15)
 

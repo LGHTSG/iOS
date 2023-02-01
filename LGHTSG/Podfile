@@ -11,4 +11,5 @@ target 'LGHTSG' do
   pod 'Charts'
   pod 'RxSwift', '6.5.0'
   pod 'RxCocoa'
+  pod 'Kingfisher', '~> 6.0'
 end
