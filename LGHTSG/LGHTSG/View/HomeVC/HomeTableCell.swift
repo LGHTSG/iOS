@@ -10,17 +10,13 @@ import UIKit
 import SnapKit
 import Kingfisher
 class HomeTableCell : UITableViewCell {
-    
     var countLabel : UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .bold)
         label.textColor = .white
-    var countLabel : UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.font = .systemFont(ofSize: 16, weight: .bold)
         return label
     }()
+
     private lazy var nameLabel : UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .semibold)

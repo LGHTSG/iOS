@@ -15,7 +15,7 @@ import RxSwift
 import RxCocoa
 
 class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDelegate, NMFMapViewTouchDelegate, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate{
-    
+    var estateModel = EstatePriceModel()
     //MARK: - SearchBar
     var items = [String]()
         var samples = [String]()
@@ -30,8 +30,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         search.searchTextField.leftView?.tintColor = .white
          return search
     }()
-    
-    
+    var Areaname = "대전광역시+유성구+계산동"
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         tableView2.alpha = 1
     }
@@ -65,20 +64,75 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         let map = NMFMapView()
         return map
      }()
-     
-    private lazy var replaceView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        
-        return view
+    //MARK: - Chart
+    var pricelists = [Int]()
+    var timeLists = [String]()
+    lazy var lineChartView : LineChartView = {
+        let chartView = LineChartView()
+        return chartView
     }()
+    func setLineData(lineChartView: LineChartView, lineChartDataEntries: [ChartDataEntry], xAxis : [String], recentPrice : Double) {
+        // Entry들을 이용해 Data Set 만들기(그런데 우리는 각 포인트를 나타내줄 필요가 없어서 지워줌
+        let lineChartdataSet = LineChartDataSet(entries: lineChartDataEntries, label: "가격")
+        lineChartdataSet.drawValuesEnabled = false
+        lineChartdataSet.drawCirclesEnabled = false
+        lineChartdataSet.colors = [.blue]
+        //선택했을때 라인 지워주기
+        lineChartdataSet.drawHorizontalHighlightIndicatorEnabled = false
+        lineChartdataSet.highlightColor = .white
+   
+        // DataSet을 차트 데이터로 넣기
+        let lineChartData = LineChartData(dataSet: lineChartdataSet)
+        // 데이터 출력
+        lineChartView.data = lineChartData
+        // 선제거
+        lineChartView.leftAxis.drawGridLinesEnabled = false
+        lineChartView.rightAxis.drawGridLinesEnabled = false
+        lineChartView.leftAxis.enabled = false // 왼쪽 label 값 지워주기
+        lineChartView.rightAxis.enabled = false // right
+        lineChartView.xAxis.enabled = false // 위쪽 label
+        lineChartView.xAxis.drawGridLinesEnabled = false
+        lineChartView.xAxis.drawAxisLineEnabled = false
+        lineChartView.doubleTapToZoomEnabled = false
+        // 아래 뜨는 어떤항목인지 알려주는 label 제거
+        lineChartView.legend.enabled = false
+        lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: xAxis)
+        
+        let marker = ChartMarker(pricedate: xAxis, recentprice: recentPrice)
+
+        marker.chartView = lineChartView
+        marker.chartx = view.frame.width - 10
+        lineChartView.marker = marker
+        lineChartView.drawMarkers = true
+        // 데이터 소수점 제거
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        lineChartView.data?.setValueFormatter(DefaultValueFormatter(formatter:formatter))
+    }
+    // entry 만들기
+    func entryData(yvalues: [Int]) -> [ChartDataEntry] {
+        // entry 담을 array
+        var lineDataEntries: [ChartDataEntry] = []
+        // 담기
+        for i in 0 ..< yvalues.count {
+            let lineDataEntry = ChartDataEntry(x: Double(i), y: Double(yvalues[i]))
+            lineDataEntries.append(lineDataEntry)
+        }
+        // 반환
+        return lineDataEntries
+    }
+    private func setLineChartView(Areaname : String) {
+        estateModel.requestStockPrice(EstateName: Areaname, onCompleted: { (pricelists, transctiontime) in
+            DispatchQueue.main.async {
+                self.view.addSubview(self.lineChartView)
+                let sortedtimeLists = transctiontime.sorted{$0.compare($1, options: .numeric) == .orderedAscending}
+                self.pricelists = pricelists
+                self.timeLists = sortedtimeLists
+                self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: pricelists), xAxis: sortedtimeLists, recentPrice : Double(pricelists.last!))
+            }})}
     
-    private lazy var replaceView2: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        
-        return view
-    }()
+
+
       
     //MARK: - DropDown
     
@@ -168,9 +222,11 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         setUpLocation()
         setupTableView()
         //reverseget(coords: coord)
-        getEstateList()
+        getEstateList(name: Areaname)
         getAreaList()
         input()
+        //chart
+        setLineChartView(Areaname: Areaname)
     }
    
    
@@ -180,7 +236,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         view.backgroundColor = .black
         view.addSubview(mapView)
       
-        [priceButton, saleButton,lineImage2,segmentCtrl,replaceView2,tableView1,searchBar,tableView2]
+        [lineChartView, priceButton, saleButton,lineImage2,segmentCtrl,tableView1,searchBar,tableView2]
           .forEach {view.addSubview($0)}
         
         
@@ -199,12 +255,12 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
             $0.trailing.equalToSuperview()
         }
         
-        replaceView2.snp.makeConstraints{
+        lineChartView.snp.makeConstraints{
             $0.top.equalTo(lineImage2.snp.bottom).offset(5)
             $0.bottom.equalTo(segmentCtrl.snp.top).offset(-5)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
-            
+
         }
         
         saleButton.snp.makeConstraints{
@@ -261,8 +317,8 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     var price = [Int]()
     
     //파라미터로 시군구 스트링으로 받아서 업데이트.
-    func getEstateList() {
-        let urlSTR = "http://api.lghtsg.site:8090/realestates?area=대전광역시+유성구+계산동"
+    func getEstateList(name : String) {
+        let urlSTR = "http://api.lghtsg.site:8090/realestates?area=\(name)"
         let encodedStr = urlSTR.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let url = URL(string: encodedStr)!
         let header: HTTPHeaders = ["Content-Type" : "application/json"]
@@ -272,8 +328,8 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
                 switch response.result {
                 case .success(let res):
                     do {
-
-                        print(res)
+                        
+                        print("sucess")
                         self.nameLists.append(res.body[0].name)
                         /*self.nameLists.append(data.abody[0].name)
                         print(self.nameLists)
@@ -445,7 +501,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     
     //MARK: - setDropDown
     @objc func didTapPriceBtn(){
-        replaceView2.alpha = 1
+        lineChartView.alpha = 1
         segmentCtrl.alpha = 1
         tableView1.alpha = 0
         if flag == true {
@@ -459,7 +515,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     }
     
     @objc func didTapSaleBtn(){
-        replaceView2.alpha = 0
+        lineChartView.alpha = 0
         segmentCtrl.alpha = 0
         tableView1.alpha = 1
         if flag == false {

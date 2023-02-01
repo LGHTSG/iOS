@@ -10,10 +10,11 @@ import Alamofire
 class EstatePriceModel {
     var PriceLists :  [Int] = []
     var transactionTimeLists : [String] = []
-    func requestStockPrice(EstateIdx : Int, onCompleted : @escaping([Int],[String]) -> Void){
-        let urlString = "http://api.lghtsg.site:8090/realestates/\(EstateIdx)/prices"
-        guard let url = URL(string: urlString) else {return print("erorr")}
-        AF.request(url).responseDecodable(of: realEstates.self) { [weak self]response in
+    func requestStockPrice(EstateName : String, onCompleted : @escaping([Int],[String]) -> Void){
+            let urlString = "http://api.lghtsg.site:8090/realestates/prices?area=\(EstateName)"
+        let encodedStr = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let url = URL(string: encodedStr)!
+        AF.request(url).responseDecodable(of: realEstates.self) { [weak self] response in
             switch response.result {
             case let .success(data):
                 guard let self = self else {return}

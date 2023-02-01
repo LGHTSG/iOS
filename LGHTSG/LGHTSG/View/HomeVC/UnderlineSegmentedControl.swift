@@ -16,9 +16,6 @@ class UnderlineSegmentedControl: UISegmentedControl {
     self.removeBackgroundAndDivider()
       self.selectedSegmentIndex = 0
     self.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: .semibold)], for: .normal)
-      self.setTitleTextAttributes(
-        [
-            NSAttributedString.Key.foregroundColor: UIColor.tintColor,
       self.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white, .font : UIFont.systemFont(ofSize: 16, weight: .semibold)], for: .normal)
       self.setTitleTextAttributes(
         [

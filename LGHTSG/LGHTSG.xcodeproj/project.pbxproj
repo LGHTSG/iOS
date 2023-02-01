@@ -202,6 +202,7 @@
 				078401CF298A49DB00CDE061 /* HomeVC */,
 				078401C8298A49CB00CDE061 /* ExploreVC */,
 				0791E9282984B395008BDEAB /* EstateSaleCell.swift */,
+				078401CA298A49D500CDE061 /* EstateDetailCell.swift */,
 				0764F26A298642EF00F446CB /* SearchItemCell.swift */,
 				078401A6298A481A00CDE061 /* EstateSaleCell.swift */,
 				0764F284298959C600F446CB /* TopViewCell.swift */,
@@ -222,12 +223,10 @@
 				0755755A296BFC2100B8AF77 /* Authentication */,
 				078401B1298A484800CDE061 /* ChartsModel.swift */,
 				078401B4298A484800CDE061 /* ChartViewController.swift */,
-				078401E8298A4C2500CDE061 /* TopViewController.swift */,
 				078401B5298A484800CDE061 /* ExploreViewController.swift */,
 				078401B3298A484800CDE061 /* HomeViewController.swift */,
 				078401AE298A484800CDE061 /* MainTabController.swift */,
 				078401B0298A484800CDE061 /* StockChartViewController.swift */,
-				075BBA2F298A78FC00710F44 /* EstateController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -244,7 +243,8 @@
 		078401C8298A49CB00CDE061 /* ExploreVC */ = {
 			isa = PBXGroup;
 			children = (
-				078401CA298A49D500CDE061 /* EstateDetailCell.swift */,
+				078401E8298A4C2500CDE061 /* TopViewController.swift */,
+				075BBA2F298A78FC00710F44 /* EstateController.swift */,
 				078401CB298A49D500CDE061 /* resellView.swift */,
 				078401C9298A49D500CDE061 /* StockView.swift */,
 			);

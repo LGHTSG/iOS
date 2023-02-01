@@ -107,7 +107,8 @@ extension resellView : UITableViewDataSource , UITableViewDelegate, UIScrollView
             cell.setup(with: resellSearchLists[indexPath.row])
         }else{
             cell.setup(with: resellDataLists[indexPath.row])}
-        cell.countLabel.text = "\(indexPath.row+1)"      return cell
+        cell.countLabel.text = "\(indexPath.row+1)"
+        return cell
         
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
