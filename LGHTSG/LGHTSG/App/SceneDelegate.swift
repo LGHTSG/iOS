@@ -17,6 +17,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 window = UIWindow(windowScene: windowscene)
                 window?.backgroundColor = .systemBackground
                 window?.rootViewController = ViewController()
+<<<<<<< Updated upstream
+=======
+      //  window?.rootViewController = UINavigationController(rootViewController: MainTabController())
+
+>>>>>>> Stashed changes
                 window?.tintColor = .label
                 window?.makeKeyAndVisible()
     }

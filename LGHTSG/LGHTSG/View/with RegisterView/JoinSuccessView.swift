@@ -1,9 +1,16 @@
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 //
 //  JoinSuccessView.swift
 //  LGHTSG
 //
 //
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 import Foundation
 import UIKit
 import Alamofire

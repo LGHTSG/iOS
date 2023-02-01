@@ -201,7 +201,11 @@ class RegisterView : UIView {
         label.titleLabel?.font = UIFont(name: "NanumSquareB", size: 15.0)
         label.titleLabel?.textColor = .white
         label.titleLabel?.textAlignment = .center
+<<<<<<< Updated upstream
         label.addTarget(self, action: #selector(joinBtnClicked2), for: .touchUpInside)
+=======
+        //label.addTarget(self, action: #selector(joinBtnClicked2), for: .touchUpInside)
+>>>>>>> Stashed changes
         return label
     }()
     
@@ -236,6 +240,10 @@ class RegisterView : UIView {
             codeTextField2.isUserInteractionEnabled = false
             codeConfirmheight2.isActive = true
             emailSuccess = "1"
+<<<<<<< Updated upstream
+=======
+            UserDefaults.standard.set(true, forKey: "ConfirmSuccess")
+>>>>>>> Stashed changes
         }
         else {
             codeConfirmheight2.isActive = false
@@ -250,6 +258,10 @@ class RegisterView : UIView {
     func isSamePassword2(_ first: UITextField, _ second: UITextField) -> Bool {
         if (first.text == second.text){
             samePw = "1"
+<<<<<<< Updated upstream
+=======
+            UserDefaults.standard.set(true, forKey: "samePw")
+>>>>>>> Stashed changes
             return true
         }
         return false
@@ -266,6 +278,10 @@ class RegisterView : UIView {
                if hasPassword.count > 7  && predicate.evaluate(with: hasPassword){
                    print("패스워드 유효")
                    validPw = "1"
+<<<<<<< Updated upstream
+=======
+                   UserDefaults.standard.set(true, forKey: "validPw")
+>>>>>>> Stashed changes
                    return true
                }
            }
@@ -333,7 +349,11 @@ class RegisterView : UIView {
 
     }
     
+<<<<<<< Updated upstream
     
+=======
+    /*
+>>>>>>> Stashed changes
     let joinAccess = JoinApiModel()
     var userIndex : Int!
     
@@ -370,6 +390,10 @@ class RegisterView : UIView {
             print("비밀번호 과정을 통과하지못해 회원가입 불가능")
         }
     }
+<<<<<<< Updated upstream
+=======
+     */
+>>>>>>> Stashed changes
     
     
     override init(frame: CGRect) {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class RegisterationController: UIViewController {
 
@@ -91,7 +92,56 @@ class RegisterationController: UIViewController {
         
         
         // MARK: 화면 전환이나 실행함수
+<<<<<<< Updated upstream
         RegisterView.nextBtn.addTarget(self, action: #selector(nextBtnClicked), for: .touchUpInside)
+=======
+        RegisterView.nextBtn.addTarget(self, action: #selector(joinBtnClicked2), for: .touchUpInside)
+    }
+    
+    
+    
+    let joinAccess = JoinApiModel()
+    var userIndex : Int!
+    
+    @objc func joinBtnClicked2(){
+        
+        let RegisterView = RegisterView()
+        
+        var confirmCheck = UserDefaults.standard.bool(forKey: "ConfirmSuccess") ?? false
+        var samePw = UserDefaults.standard.bool(forKey: "samePw") ?? false
+        var validPw = UserDefaults.standard.bool(forKey: "validPw") ?? false
+
+
+        print(confirmCheck)
+        print(samePw)
+        print(validPw)
+        
+        if confirmCheck == true && samePw == true && validPw == true {
+                print("회원가입 가능!")
+                let userName = RegisterView.nameTextField.text
+                let email = RegisterView.emailTextField3.text
+                let password = RegisterView.passwordTextField3.text
+                let emailCheck = "1"
+                let profileImg = "urlurl"
+                
+                let bodyData : Parameters = [
+                    "userName" : userName,
+                    "email" : email,
+                    "password" : password,
+                    "emailCheck" : emailCheck,
+                    "profileImg" : profileImg
+                ]
+
+                joinAccess.requestJoinDataModel(bodyData: bodyData){
+                    data in
+                    print(data.body)
+                }
+            self.present(RegisterationSuccessController(), animated: true)
+            }
+        else{
+            print("회원가입 불가능")
+        }
+>>>>>>> Stashed changes
     }
 
 
@@ -99,6 +149,10 @@ class RegisterationController: UIViewController {
     @objc func nextBtnClicked(){
         let success = UserDefaults.standard.bool(forKey: "success")
         if success == true {
+<<<<<<< Updated upstream
+=======
+            print("회원가입완료")
+>>>>>>> Stashed changes
             self.present(RegisterationSuccessController(), animated: true)
             UserDefaults.standard.removeObject(forKey: "success")
         }
@@ -160,8 +214,21 @@ extension RegisterationController: UIImagePickerControllerDelegate, UINavigation
             self.profileImageView.layer.cornerRadius = profileImageView.frame.height/2
             self.profileImageView.contentMode = .scaleToFill
             self.profileImageView.clipsToBounds = true
+<<<<<<< Updated upstream
             self.profileImageView.layer.borderColor = UIColor.clear.cgColor // 원형 이미지의 테두리 제거
 
+=======
+            self.profileImageView.layer.borderColor = UIColor.black.cgColor // 원형 이미지의 테두리 제거
+            
+            /*
+                // 고유한 이미지 이름을 위해 타임스템프 값을 활용
+                let timestamp: Int = icuDateToSeconds(getNow())
+                // 사용자이름_타임스템프.jpg 형식으로 파일이름 지정
+                let imageFileName: String = userName + "_" + String(timestamp) + ".jpg"
+                // 이미지가 저장될 경로
+                let imageFilePath: String = imageDirectory.path + imageFileName
+              */
+>>>>>>> Stashed changes
         }
         dismiss(animated: true, completion: nil)
         

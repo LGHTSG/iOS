@@ -24,9 +24,18 @@ class LoginApiModel {
         AF.request(url, method: .post, parameters: bodyData, encoding: JSONEncoding(), headers: header).validate().responseDecodable(of: Login.self){ response in
             switch response.result {
             case .success(let response):
+<<<<<<< Updated upstream
                 onCompleted(response.body)
             case .failure(let error):
                 print(error.localizedDescription)
+=======
+                UserDefaults.standard.set(true, forKey: "loginSuccess")
+                onCompleted(response.body)
+            case .failure(let error):
+                print("error")
+                UserDefaults.standard.set(false, forKey: "loginSuccess")
+
+>>>>>>> Stashed changes
             }
         }
         

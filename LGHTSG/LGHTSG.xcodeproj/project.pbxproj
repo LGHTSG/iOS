@@ -19,6 +19,7 @@
 		07557561296BFC5900B8AF77 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07557560296BFC5900B8AF77 /* MainTabController.swift */; };
 		07557563296BFCD300B8AF77 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07557562296BFCD300B8AF77 /* Cell.swift */; };
 		8E910354CAD5238FB38C267D /* Pods_LGHTSG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */; };
+<<<<<<< Updated upstream
 		F51D92FE29803EB300DFC7E4 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51D92FD29803EB300DFC7E4 /* LoginModel.swift */; };
 		F51D930029803EE700DFC7E4 /* emailCheckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51D92FF29803EE700DFC7E4 /* emailCheckModel.swift */; };
 		F51D930229803F3D00DFC7E4 /* NanumSquareR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F51D930129803F3D00DFC7E4 /* NanumSquareR.ttf */; };
@@ -51,6 +52,38 @@
 		F59B5F992985453D007F13CA /* JoinSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59B5F982985453D007F13CA /* JoinSuccessView.swift */; };
 		F59B5F9C29854741007F13CA /* RegisterationSuccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59B5F9B29854741007F13CA /* RegisterationSuccessController.swift */; };
 		F59B5F9E29854B89007F13CA /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59B5F9D29854B89007F13CA /* user.swift */; };
+=======
+		F52989F4298A63FB00C5B85C /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52989F3298A63FB00C5B85C /* login.swift */; };
+		F52989F6298A640600C5B85C /* email.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52989F5298A640600C5B85C /* email.swift */; };
+		F52989F8298A641300C5B85C /* join.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52989F7298A641300C5B85C /* join.swift */; };
+		F52989FA298A641F00C5B85C /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52989F9298A641F00C5B85C /* user.swift */; };
+		F52989FC298A642D00C5B85C /* changePw.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52989FB298A642D00C5B85C /* changePw.swift */; };
+		F52989FF298A645100C5B85C /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52989FE298A645100C5B85C /* RegisterView.swift */; };
+		F5298A01298A646600C5B85C /* JoinSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A00298A646600C5B85C /* JoinSuccessView.swift */; };
+		F5298A04298A64C300C5B85C /* CheckAgreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A03298A64C300C5B85C /* CheckAgreeView.swift */; };
+		F5298A06298A64CA00C5B85C /* CheckPageServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A05298A64CA00C5B85C /* CheckPageServiceView.swift */; };
+		F5298A08298A64D300C5B85C /* CheckPagePrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A07298A64D300C5B85C /* CheckPagePrivacyView.swift */; };
+		F5298A0A298A64DB00C5B85C /* CheckPageMarketingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A09298A64DB00C5B85C /* CheckPageMarketingView.swift */; };
+		F5298A0C298A64FE00C5B85C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A0B298A64FE00C5B85C /* LoginView.swift */; };
+		F5298A0E298A651700C5B85C /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A0D298A651700C5B85C /* StartView.swift */; };
+		F5298A10298A652400C5B85C /* FindPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A0F298A652400C5B85C /* FindPwView.swift */; };
+		F5298A12298A653C00C5B85C /* LoginApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A11298A653C00C5B85C /* LoginApiModel.swift */; };
+		F5298A14298A654B00C5B85C /* LoginApiHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A13298A654B00C5B85C /* LoginApiHeaderModel.swift */; };
+		F5298A16298A655700C5B85C /* emailApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A15298A655700C5B85C /* emailApiModel.swift */; };
+		F5298A18298A656400C5B85C /* JoinApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A17298A656400C5B85C /* JoinApiModel.swift */; };
+		F5298A1A298A657700C5B85C /* ChangePwModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A19298A657700C5B85C /* ChangePwModel.swift */; };
+		F5298A1C298A661000C5B85C /* LoginResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A1B298A661000C5B85C /* LoginResultModel.swift */; };
+		F5298A1E298A666700C5B85C /* FindPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A1D298A666700C5B85C /* FindPasswordController.swift */; };
+		F5298A21298A66A900C5B85C /* CheckAgreeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A20298A66A900C5B85C /* CheckAgreeController.swift */; };
+		F5298A23298A66B700C5B85C /* CheckPageMarketingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A22298A66B700C5B85C /* CheckPageMarketingController.swift */; };
+		F5298A25298A66C000C5B85C /* CheckPageServiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A24298A66C000C5B85C /* CheckPageServiceController.swift */; };
+		F5298A27298A66C800C5B85C /* CheckPagePrivacyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A26298A66C800C5B85C /* CheckPagePrivacyController.swift */; };
+		F5298A29298A66F800C5B85C /* RegisterationSuccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A28298A66F800C5B85C /* RegisterationSuccessController.swift */; };
+		F5298A2F298A6F1600C5B85C /* NanumSquareR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5298A2E298A6F1500C5B85C /* NanumSquareR.ttf */; };
+		F5298A31298A6F1D00C5B85C /* NanumSquareB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5298A30298A6F1D00C5B85C /* NanumSquareB.ttf */; };
+		F5298A34298A723800C5B85C /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A33298A723800C5B85C /* MyPageView.swift */; };
+		F5298A36298A728D00C5B85C /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5298A35298A728D00C5B85C /* MyPageViewController.swift */; };
+>>>>>>> Stashed changes
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +101,7 @@
 		1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LGHTSG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F7EA128F8EC33ED812CADCA /* Pods-LGHTSG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.release.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.release.xcconfig"; sourceTree = "<group>"; };
 		9154F7534146417B8EBDBECC /* Pods-LGHTSG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.debug.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.debug.xcconfig"; sourceTree = "<group>"; };
+<<<<<<< Updated upstream
 		F51D92FD29803EB300DFC7E4 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		F51D92FF29803EE700DFC7E4 /* emailCheckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckModel.swift; sourceTree = "<group>"; };
 		F51D930129803F3D00DFC7E4 /* NanumSquareR.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = NanumSquareR.ttf; path = ../../../../../Downloads/NaverNanumSquare/NanumFontSetup_TTF_SQUARE/NanumSquareR.ttf; sourceTree = "<group>"; };
@@ -100,6 +134,38 @@
 		F59B5F982985453D007F13CA /* JoinSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinSuccessView.swift; sourceTree = "<group>"; };
 		F59B5F9B29854741007F13CA /* RegisterationSuccessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationSuccessController.swift; sourceTree = "<group>"; };
 		F59B5F9D29854B89007F13CA /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
+=======
+		F52989F3298A63FB00C5B85C /* login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.swift; sourceTree = "<group>"; };
+		F52989F5298A640600C5B85C /* email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = email.swift; sourceTree = "<group>"; };
+		F52989F7298A641300C5B85C /* join.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = join.swift; sourceTree = "<group>"; };
+		F52989F9298A641F00C5B85C /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
+		F52989FB298A642D00C5B85C /* changePw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = changePw.swift; sourceTree = "<group>"; };
+		F52989FE298A645100C5B85C /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		F5298A00298A646600C5B85C /* JoinSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinSuccessView.swift; sourceTree = "<group>"; };
+		F5298A03298A64C300C5B85C /* CheckAgreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAgreeView.swift; sourceTree = "<group>"; };
+		F5298A05298A64CA00C5B85C /* CheckPageServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPageServiceView.swift; sourceTree = "<group>"; };
+		F5298A07298A64D300C5B85C /* CheckPagePrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPagePrivacyView.swift; sourceTree = "<group>"; };
+		F5298A09298A64DB00C5B85C /* CheckPageMarketingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPageMarketingView.swift; sourceTree = "<group>"; };
+		F5298A0B298A64FE00C5B85C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		F5298A0D298A651700C5B85C /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		F5298A0F298A652400C5B85C /* FindPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwView.swift; sourceTree = "<group>"; };
+		F5298A11298A653C00C5B85C /* LoginApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginApiModel.swift; sourceTree = "<group>"; };
+		F5298A13298A654B00C5B85C /* LoginApiHeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginApiHeaderModel.swift; sourceTree = "<group>"; };
+		F5298A15298A655700C5B85C /* emailApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailApiModel.swift; sourceTree = "<group>"; };
+		F5298A17298A656400C5B85C /* JoinApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinApiModel.swift; sourceTree = "<group>"; };
+		F5298A19298A657700C5B85C /* ChangePwModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePwModel.swift; sourceTree = "<group>"; };
+		F5298A1B298A661000C5B85C /* LoginResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResultModel.swift; sourceTree = "<group>"; };
+		F5298A1D298A666700C5B85C /* FindPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordController.swift; sourceTree = "<group>"; };
+		F5298A20298A66A900C5B85C /* CheckAgreeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAgreeController.swift; sourceTree = "<group>"; };
+		F5298A22298A66B700C5B85C /* CheckPageMarketingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPageMarketingController.swift; sourceTree = "<group>"; };
+		F5298A24298A66C000C5B85C /* CheckPageServiceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPageServiceController.swift; sourceTree = "<group>"; };
+		F5298A26298A66C800C5B85C /* CheckPagePrivacyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPagePrivacyController.swift; sourceTree = "<group>"; };
+		F5298A28298A66F800C5B85C /* RegisterationSuccessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationSuccessController.swift; sourceTree = "<group>"; };
+		F5298A2E298A6F1500C5B85C /* NanumSquareR.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = NanumSquareR.ttf; path = ../../../../../Downloads/NaverNanumSquare/NanumFontSetup_TTF_SQUARE/NanumSquareR.ttf; sourceTree = "<group>"; };
+		F5298A30298A6F1D00C5B85C /* NanumSquareB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = NanumSquareB.ttf; path = ../../../../../Downloads/NaverNanumSquare/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf; sourceTree = "<group>"; };
+		F5298A33298A723800C5B85C /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		F5298A35298A728D00C5B85C /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +220,7 @@
 		071E0554296BB8210020282F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< Updated upstream
 				F51D92FF29803EE700DFC7E4 /* emailCheckModel.swift */,
 				F51D92FD29803EB300DFC7E4 /* LoginModel.swift */,
 				F5828A582982C15A00C870B3 /* LoginResultModel.swift */,
@@ -162,6 +229,18 @@
 				F59B5F942984F98A007F13CA /* join.swift */,
 				F59B5F9D29854B89007F13CA /* user.swift */,
 				F526375829894532001CCCBE /* changePw.swift */,
+=======
+				078401D1298A49E200CDE061 /* asset.swift */,
+				078401BE298A486300CDE061 /* realEstates.swift */,
+				078401C0298A486300CDE061 /* ResellPrice.swift */,
+				078401BF298A486300CDE061 /* StockPrice.swift */,
+				078666BB2980BF9B000ADCBE /* ReverseModel.swift */,
+				078666BD2983844D000ADCBE /* GeocodingModel.swift */,
+				0764F26C2986653500F446CB /* AreaListModel.swift */,
+				0764F2702987853600F446CB /* EstateModel.swift */,
+				F5298A1B298A661000C5B85C /* LoginResultModel.swift */,
+				F5298A32298A713000C5B85C /* login&join&changepw */,
+>>>>>>> Stashed changes
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -178,11 +257,23 @@
 		071E0556296BB8380020282F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< Updated upstream
 				F5828A4829821B9900C870B3 /* LoginApiModel.swift */,
 				F5828A4A2982B5F100C870B3 /* LoginApiHeaderModel.swift */,
 				F5828A5C2983B34500C870B3 /* emailApiModel.swift */,
 				F59B5F962984F9B5007F13CA /* JoinApiModel.swift */,
 				F526375A298945D2001CCCBE /* ChangePwApiModel.swift */,
+=======
+				F5298A11298A653C00C5B85C /* LoginApiModel.swift */,
+				F5298A13298A654B00C5B85C /* LoginApiHeaderModel.swift */,
+				078401E4298A4B2C00CDE061 /* StockPriceModel.swift */,
+				078401E5298A4B2D00CDE061 /* TableCellModel.swift */,
+				078401D5298A49E300CDE061 /* AssetModel.swift */,
+				078401C1298A486300CDE061 /* EstatePriceModel.swift */,
+				F5298A15298A655700C5B85C /* emailApiModel.swift */,
+				F5298A17298A656400C5B85C /* JoinApiModel.swift */,
+				F5298A19298A657700C5B85C /* ChangePwModel.swift */,
+>>>>>>> Stashed changes
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -197,12 +288,27 @@
 		071E0558296BB8510020282F /* View */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< Updated upstream
 				F59B5F9A2985454C007F13CA /* with RegisterView */,
 				07557562296BFCD300B8AF77 /* Cell.swift */,
 				F51D930529803FBA00DFC7E4 /* LoginView.swift */,
 				F588D50E2980FDDF00D4E588 /* StartView.swift */,
 				F588D5102981096A00D4E588 /* FindPwView.swift */,
 				F5828A542982BCCB00C870B3 /* MyPageView.swift */,
+=======
+				F5298A02298A64B500C5B85C /* CheckView */,
+				F52989FD298A643E00C5B85C /* with RegisterView */,
+				078401CF298A49DB00CDE061 /* New Group1 */,
+				078401C8298A49CB00CDE061 /* New Group */,
+				0791E9282984B395008BDEAB /* EstateSaleCell.swift */,
+				0764F26A298642EF00F446CB /* SearchItemCell.swift */,
+				078401A6298A481A00CDE061 /* EstateSaleCell.swift */,
+				0764F284298959C600F446CB /* TopViewCell.swift */,
+				F5298A0B298A64FE00C5B85C /* LoginView.swift */,
+				F5298A0D298A651700C5B85C /* StartView.swift */,
+				F5298A0F298A652400C5B85C /* FindPwView.swift */,
+				F5298A33298A723800C5B85C /* MyPageView.swift */,
+>>>>>>> Stashed changes
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -210,8 +316,13 @@
 		071E0559296BB86E0020282F /* Font */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< Updated upstream
 				F51D930129803F3D00DFC7E4 /* NanumSquareR.ttf */,
 				F51D930329803F4500DFC7E4 /* NanumSquareB.ttf */,
+=======
+				F5298A2E298A6F1500C5B85C /* NanumSquareR.ttf */,
+				F5298A30298A6F1D00C5B85C /* NanumSquareB.ttf */,
+>>>>>>> Stashed changes
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -219,6 +330,7 @@
 		071E055A296BB88B0020282F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F5298A1F298A669C00C5B85C /* CheckController */,
 				0755755A296BFC2100B8AF77 /* Authentication */,
 				07557560296BFC5900B8AF77 /* MainTabController.swift */,
 				F5828A522982BC7500C870B3 /* MyPageController.swift */,
@@ -234,7 +346,13 @@
 			children = (
 				0755755B296BFC3300B8AF77 /* LoginController.swift */,
 				0755755E296BFC4B00B8AF77 /* RegisterationController.swift */,
+<<<<<<< Updated upstream
 				F59B5F9B29854741007F13CA /* RegisterationSuccessController.swift */,
+=======
+				F5298A28298A66F800C5B85C /* RegisterationSuccessController.swift */,
+				F5298A1D298A666700C5B85C /* FindPasswordController.swift */,
+				F5298A35298A728D00C5B85C /* MyPageViewController.swift */,
+>>>>>>> Stashed changes
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -256,6 +374,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+<<<<<<< Updated upstream
 		F5828A4C2982BBA700C870B3 /* CheckView */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,10 +403,54 @@
 				F588D514298122A100D4E588 /* RegisterView.swift */,
 				F59B5F982985453D007F13CA /* JoinSuccessView.swift */,
 				F5828A4C2982BBA700C870B3 /* CheckView */,
+=======
+		F52989FD298A643E00C5B85C /* with RegisterView */ = {
+			isa = PBXGroup;
+			children = (
+				F52989FE298A645100C5B85C /* RegisterView.swift */,
+				F5298A00298A646600C5B85C /* JoinSuccessView.swift */,
+>>>>>>> Stashed changes
 			);
 			path = "with RegisterView";
 			sourceTree = "<group>";
 		};
+<<<<<<< Updated upstream
+=======
+		F5298A02298A64B500C5B85C /* CheckView */ = {
+			isa = PBXGroup;
+			children = (
+				F5298A03298A64C300C5B85C /* CheckAgreeView.swift */,
+				F5298A05298A64CA00C5B85C /* CheckPageServiceView.swift */,
+				F5298A07298A64D300C5B85C /* CheckPagePrivacyView.swift */,
+				F5298A09298A64DB00C5B85C /* CheckPageMarketingView.swift */,
+			);
+			path = CheckView;
+			sourceTree = "<group>";
+		};
+		F5298A1F298A669C00C5B85C /* CheckController */ = {
+			isa = PBXGroup;
+			children = (
+				F5298A20298A66A900C5B85C /* CheckAgreeController.swift */,
+				F5298A22298A66B700C5B85C /* CheckPageMarketingController.swift */,
+				F5298A24298A66C000C5B85C /* CheckPageServiceController.swift */,
+				F5298A26298A66C800C5B85C /* CheckPagePrivacyController.swift */,
+			);
+			path = CheckController;
+			sourceTree = "<group>";
+		};
+		F5298A32298A713000C5B85C /* login&join&changepw */ = {
+			isa = PBXGroup;
+			children = (
+				F52989F3298A63FB00C5B85C /* login.swift */,
+				F52989F5298A640600C5B85C /* email.swift */,
+				F52989F7298A641300C5B85C /* join.swift */,
+				F52989FB298A642D00C5B85C /* changePw.swift */,
+				F52989F9298A641F00C5B85C /* user.swift */,
+			);
+			path = "login&join&changepw";
+			sourceTree = "<group>";
+		};
+>>>>>>> Stashed changes
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -356,9 +519,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< Updated upstream
 				071E054D296BB7B70020282F /* LaunchScreen.storyboard in Resources */,
 				F51D930229803F3D00DFC7E4 /* NanumSquareR.ttf in Resources */,
 				F51D930429803F4500DFC7E4 /* NanumSquareB.ttf in Resources */,
+=======
+				078401C7298A496B00CDE061 /* LaunchScreen.storyboard in Resources */,
+				F5298A2F298A6F1600C5B85C /* NanumSquareR.ttf in Resources */,
+				F5298A31298A6F1D00C5B85C /* NanumSquareB.ttf in Resources */,
+>>>>>>> Stashed changes
 				071E054A296BB7B70020282F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +581,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< Updated upstream
 				071E0545296BB7B50020282F /* ViewController.swift in Sources */,
 				F51D930029803EE700DFC7E4 /* emailCheckModel.swift in Sources */,
 				0755755C296BFC3300B8AF77 /* LoginController.swift in Sources */,
@@ -436,6 +606,46 @@
 				F59B5F9C29854741007F13CA /* RegisterationSuccessController.swift in Sources */,
 				F5828A552982BCCB00C870B3 /* MyPageView.swift in Sources */,
 				F588D51D2981605D00D4E588 /* CheckPagePrivacyView.swift in Sources */,
+=======
+				078401DB298A49E300CDE061 /* asset.swift in Sources */,
+				0783C0FA297034FA00EDABA3 /* EstateController.swift in Sources */,
+				078401DA298A49E300CDE061 /* ChartMarker.swift in Sources */,
+				0764F285298959C600F446CB /* TopViewCell.swift in Sources */,
+				F5298A1A298A657700C5B85C /* ChangePwModel.swift in Sources */,
+				F5298A12298A653C00C5B85C /* LoginApiModel.swift in Sources */,
+				078401C2298A486300CDE061 /* realEstates.swift in Sources */,
+				078401B8298A484800CDE061 /* StockChartViewController.swift in Sources */,
+				078401DF298A49E300CDE061 /* AssetModel.swift in Sources */,
+				078401DE298A49E300CDE061 /* UnderlineSegmentedControl.swift in Sources */,
+				078401B7298A484800CDE061 /* EstateController.swift in Sources */,
+				078401BC298A484800CDE061 /* ChartViewController.swift in Sources */,
+				F52989FC298A642D00C5B85C /* changePw.swift in Sources */,
+				0791E9292984B395008BDEAB /* EstateSaleCell.swift in Sources */,
+				078401C5298A486300CDE061 /* EstatePriceModel.swift in Sources */,
+				F5298A36298A728D00C5B85C /* MyPageViewController.swift in Sources */,
+				078401BB298A484800CDE061 /* HomeViewController.swift in Sources */,
+				071E0545296BB7B50020282F /* ViewController.swift in Sources */,
+				F5298A34298A723800C5B85C /* MyPageView.swift in Sources */,
+				0764F2712987853600F446CB /* EstateModel.swift in Sources */,
+				078401CE298A49D500CDE061 /* resellView.swift in Sources */,
+				0755755C296BFC3300B8AF77 /* LoginController.swift in Sources */,
+				078401DD298A49E300CDE061 /* StockDateSegmentControl.swift in Sources */,
+				078401BD298A484800CDE061 /* ExploreViewController.swift in Sources */,
+				F5298A25298A66C000C5B85C /* CheckPageServiceController.swift in Sources */,
+				078401CC298A49D500CDE061 /* StockView.swift in Sources */,
+				F5298A1E298A666700C5B85C /* FindPasswordController.swift in Sources */,
+				078401E3298A49E300CDE061 /* UnderlineView.swift in Sources */,
+				078401E1298A49E300CDE061 /* HomeTableCell.swift in Sources */,
+				0764F26B298642EF00F446CB /* SearchItemCell.swift in Sources */,
+				F5298A08298A64D300C5B85C /* CheckPagePrivacyView.swift in Sources */,
+				F5298A0A298A64DB00C5B85C /* CheckPageMarketingView.swift in Sources */,
+				F5298A18298A656400C5B85C /* JoinApiModel.swift in Sources */,
+				F5298A1C298A661000C5B85C /* LoginResultModel.swift in Sources */,
+				F5298A04298A64C300C5B85C /* CheckAgreeView.swift in Sources */,
+				F5298A10298A652400C5B85C /* FindPwView.swift in Sources */,
+				078401E7298A4B2D00CDE061 /* TableCellModel.swift in Sources */,
+				078401E9298A4C2600CDE061 /* TopViewController.swift in Sources */,
+>>>>>>> Stashed changes
 				071E0541296BB7B50020282F /* AppDelegate.swift in Sources */,
 				F51D930629803FBA00DFC7E4 /* LoginView.swift in Sources */,
 				F59B5F9E29854B89007F13CA /* user.swift in Sources */,
@@ -444,8 +654,37 @@
 				F5828A572982BDA600C870B3 /* FindPasswordController.swift in Sources */,
 				F588D51929814A5400D4E588 /* CheckAgreeController.swift in Sources */,
 				071E0543296BB7B50020282F /* SceneDelegate.swift in Sources */,
+<<<<<<< Updated upstream
 				F5828A5D2983B34500C870B3 /* emailApiModel.swift in Sources */,
 				F588D5232981615A00D4E588 /* CheckPagePrivacyController.swift in Sources */,
+=======
+				F5298A16298A655700C5B85C /* emailApiModel.swift in Sources */,
+				F5298A0E298A651700C5B85C /* StartView.swift in Sources */,
+				0764F26F29866A6500F446CB /* APIToken.swift in Sources */,
+				078401C4298A486300CDE061 /* ResellPrice.swift in Sources */,
+				078401AA298A481A00CDE061 /* EstateSaleCell.swift in Sources */,
+				F5298A23298A66B700C5B85C /* CheckPageMarketingController.swift in Sources */,
+				078401B9298A484800CDE061 /* ChartsModel.swift in Sources */,
+				F52989F4298A63FB00C5B85C /* login.swift in Sources */,
+				F5298A29298A66F800C5B85C /* RegisterationSuccessController.swift in Sources */,
+				078401E6298A4B2D00CDE061 /* StockPriceModel.swift in Sources */,
+				F5298A01298A646600C5B85C /* JoinSuccessView.swift in Sources */,
+				F5298A27298A66C800C5B85C /* CheckPagePrivacyController.swift in Sources */,
+				078401CD298A49D500CDE061 /* EstateDetailCell.swift in Sources */,
+				078666BC2980BF9B000ADCBE /* ReverseModel.swift in Sources */,
+				F52989FF298A645100C5B85C /* RegisterView.swift in Sources */,
+				F5298A14298A654B00C5B85C /* LoginApiHeaderModel.swift in Sources */,
+				F52989FA298A641F00C5B85C /* user.swift in Sources */,
+				F5298A21298A66A900C5B85C /* CheckAgreeController.swift in Sources */,
+				F52989F8298A641300C5B85C /* join.swift in Sources */,
+				F5298A0C298A64FE00C5B85C /* LoginView.swift in Sources */,
+				078401B6298A484800CDE061 /* MainTabController.swift in Sources */,
+				078401C3298A486300CDE061 /* StockPrice.swift in Sources */,
+				078666BE2983844D000ADCBE /* GeocodingModel.swift in Sources */,
+				F5298A06298A64CA00C5B85C /* CheckPageServiceView.swift in Sources */,
+				0764F26D2986653500F446CB /* AreaListModel.swift in Sources */,
+				F52989F6298A640600C5B85C /* email.swift in Sources */,
+>>>>>>> Stashed changes
 				0755755F296BFC4B00B8AF77 /* RegisterationController.swift in Sources */,
 				F5828A532982BC7500C870B3 /* MyPageController.swift in Sources */,
 				F5828A4B2982B5F100C870B3 /* LoginApiHeaderModel.swift in Sources */,
@@ -630,7 +869,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Ha.LGHTSG;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kry.LGHTSG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

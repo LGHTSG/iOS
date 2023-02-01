@@ -10,7 +10,11 @@ import UIKit
 import SnapKit
 import Alamofire
 
+<<<<<<< Updated upstream
 class LoginView: UIView {
+=======
+class LoginView: UIViewController {
+>>>>>>> Stashed changes
     
     let titleImageView2: UIImageView = {
         let image = UIImageView()
@@ -119,6 +123,17 @@ class LoginView: UIView {
         return label
     }()
     
+<<<<<<< Updated upstream
+=======
+    let loginWrongLabel: UILabel = {
+        let label = UILabel()
+        label.text = "없는 아이디거나 비밀번호가 틀렸습니다."
+        label.font = UIFont(name: "NanumSquareR", size: 12.0)
+        label.textColor = .systemRed
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+>>>>>>> Stashed changes
     
     
     let login = LoginApiModel()
@@ -142,6 +157,7 @@ class LoginView: UIView {
             data in
             self.jwt = data.jwt
             print(data)
+<<<<<<< Updated upstream
             print(data.jwt)
         }
         
@@ -151,11 +167,36 @@ class LoginView: UIView {
             print(data)
         }
         
+=======
+        }
+        
+        /*
+        loginMsgCode.requestLoginDataModel(bodyData: bodyData){
+            data in
+            print(data)
+        }
+        */
+        
+        var loginSuccess = UserDefaults.standard.bool(forKey: "loginSuccess")
+        loginSuccess = UserDefaults.standard.bool(forKey: "loginSuccess")
+        print(loginSuccess)
+        
+        
+        if jwt == "" {
+            print("로그인안됨")
+            loginWrongheight.isActive = false
+        }
+        else {
+            loginWrongheight.isActive = true
+        }
+
+>>>>>>> Stashed changes
         //UserDefaults.standard.set(emailTextField.text, forKey: "id")
         //UserDefaults.standard.set(passwordTextField.text, forKey: "pw")
         
 
     }
+<<<<<<< Updated upstream
         
         
     
@@ -175,6 +216,35 @@ class LoginView: UIView {
         addSubview(joinBtn2)
         addSubview(middleLabel2)
         addSubview(findPwBtn2)
+=======
+    
+    
+    // MARK: 로그인 관련 동적라벨
+    var loginWrongheight: NSLayoutConstraint!
+    
+
+    
+    
+
+    override func viewDidLoad() {
+        
+        loginWrongheight = loginWrongLabel.heightAnchor.constraint(equalToConstant: 0)
+        loginWrongheight.isActive = true
+        
+        view.addSubview(titleImageView2)
+        
+        view.addSubview(emailImageView)
+        view.addSubview(emailTextField)
+        
+        view.addSubview(pwImageView)
+        view.addSubview(passwordTextField)
+        view.addSubview(loginWrongLabel)
+        
+        view.addSubview(loginBtn2)
+        view.addSubview(joinBtn2)
+        view.addSubview(middleLabel2)
+        view.addSubview(findPwBtn2)
+>>>>>>> Stashed changes
 
         
         //view.addSubview(pwChangeBtn)
@@ -184,8 +254,13 @@ class LoginView: UIView {
         //view.addSubview(errorEmailLabel)
         //view.addSubview(errorPwLabel)
         
+<<<<<<< Updated upstream
         addSubview(privacyPolicyLabel)
         addSubview(memberInquiryLabel)
+=======
+        view.addSubview(privacyPolicyLabel)
+        view.addSubview(memberInquiryLabel)
+>>>>>>> Stashed changes
         
         
         // MARK: 맨 위 이미지 위치
@@ -222,10 +297,23 @@ class LoginView: UIView {
             $0.right.equalToSuperview().offset(-30)
         }
         
+<<<<<<< Updated upstream
         
         // MARK: 로그인 버튼
         self.loginBtn2.snp.makeConstraints {
             $0.top.equalTo(pwImageView.snp.bottom).offset(20)
+=======
+        self.loginWrongLabel.snp.makeConstraints{
+            $0.top.equalTo(pwImageView.snp.bottom).offset(5)
+            $0.left.equalToSuperview().offset(30)
+            $0.right.equalToSuperview().offset(-30)
+        }
+        
+        
+        // MARK: 로그인 버튼
+        self.loginBtn2.snp.makeConstraints {
+            $0.top.equalTo(pwImageView.snp.bottom).offset(40)
+>>>>>>> Stashed changes
             $0.left.equalToSuperview().offset(30)
             $0.right.equalToSuperview().offset(-30)
         }
