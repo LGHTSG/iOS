@@ -19,6 +19,38 @@
 		07557561296BFC5900B8AF77 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07557560296BFC5900B8AF77 /* MainTabController.swift */; };
 		07557563296BFCD300B8AF77 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07557562296BFCD300B8AF77 /* Cell.swift */; };
 		8E910354CAD5238FB38C267D /* Pods_LGHTSG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */; };
+		F51D92FE29803EB300DFC7E4 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51D92FD29803EB300DFC7E4 /* LoginModel.swift */; };
+		F51D930029803EE700DFC7E4 /* emailCheckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51D92FF29803EE700DFC7E4 /* emailCheckModel.swift */; };
+		F51D930229803F3D00DFC7E4 /* NanumSquareR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F51D930129803F3D00DFC7E4 /* NanumSquareR.ttf */; };
+		F51D930429803F4500DFC7E4 /* NanumSquareB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F51D930329803F4500DFC7E4 /* NanumSquareB.ttf */; };
+		F51D930629803FBA00DFC7E4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51D930529803FBA00DFC7E4 /* LoginView.swift */; };
+		F51D9308298042E500DFC7E4 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51D9307298042E500DFC7E4 /* Login.swift */; };
+		F526375929894532001CCCBE /* changePw.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526375829894532001CCCBE /* changePw.swift */; };
+		F526375B298945D2001CCCBE /* ChangePwApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526375A298945D2001CCCBE /* ChangePwApiModel.swift */; };
+		F5828A4929821B9900C870B3 /* LoginApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5828A4829821B9900C870B3 /* LoginApiModel.swift */; };
+		F5828A4B2982B5F100C870B3 /* LoginApiHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5828A4A2982B5F100C870B3 /* LoginApiHeaderModel.swift */; };
+		F5828A532982BC7500C870B3 /* MyPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5828A522982BC7500C870B3 /* MyPageController.swift */; };
+		F5828A552982BCCB00C870B3 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5828A542982BCCB00C870B3 /* MyPageView.swift */; };
+		F5828A572982BDA600C870B3 /* FindPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5828A562982BDA600C870B3 /* FindPasswordController.swift */; };
+		F5828A592982C15A00C870B3 /* LoginResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5828A582982C15A00C870B3 /* LoginResultModel.swift */; };
+		F5828A5B2983B2D300C870B3 /* email.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5828A5A2983B2D300C870B3 /* email.swift */; };
+		F5828A5D2983B34500C870B3 /* emailApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5828A5C2983B34500C870B3 /* emailApiModel.swift */; };
+		F588D50F2980FDDF00D4E588 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588D50E2980FDDF00D4E588 /* StartView.swift */; };
+		F588D5112981096A00D4E588 /* FindPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588D5102981096A00D4E588 /* FindPwView.swift */; };
+		F588D515298122A100D4E588 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588D514298122A100D4E588 /* RegisterView.swift */; };
+		F588D517298149AE00D4E588 /* CheckAgreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588D516298149AD00D4E588 /* CheckAgreeView.swift */; };
+		F588D51929814A5400D4E588 /* CheckAgreeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588D51829814A5400D4E588 /* CheckAgreeController.swift */; };
+		F588D51B2981604500D4E588 /* CheckPageServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588D51A2981604500D4E588 /* CheckPageServiceView.swift */; };
+		F588D51D2981605D00D4E588 /* CheckPagePrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588D51C2981605D00D4E588 /* CheckPagePrivacyView.swift */; };
+		F588D51F2981607400D4E588 /* CheckPageMarketingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588D51E2981607400D4E588 /* CheckPageMarketingView.swift */; };
+		F588D5212981614100D4E588 /* CheckPageServiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588D5202981614100D4E588 /* CheckPageServiceController.swift */; };
+		F588D5232981615A00D4E588 /* CheckPagePrivacyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588D5222981615A00D4E588 /* CheckPagePrivacyController.swift */; };
+		F588D5252981616D00D4E588 /* CheckPageMarketingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588D5242981616D00D4E588 /* CheckPageMarketingController.swift */; };
+		F59B5F952984F98A007F13CA /* join.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59B5F942984F98A007F13CA /* join.swift */; };
+		F59B5F972984F9B5007F13CA /* JoinApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59B5F962984F9B5007F13CA /* JoinApiModel.swift */; };
+		F59B5F992985453D007F13CA /* JoinSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59B5F982985453D007F13CA /* JoinSuccessView.swift */; };
+		F59B5F9C29854741007F13CA /* RegisterationSuccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59B5F9B29854741007F13CA /* RegisterationSuccessController.swift */; };
+		F59B5F9E29854B89007F13CA /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59B5F9D29854B89007F13CA /* user.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +68,38 @@
 		1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LGHTSG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F7EA128F8EC33ED812CADCA /* Pods-LGHTSG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.release.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.release.xcconfig"; sourceTree = "<group>"; };
 		9154F7534146417B8EBDBECC /* Pods-LGHTSG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.debug.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.debug.xcconfig"; sourceTree = "<group>"; };
+		F51D92FD29803EB300DFC7E4 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		F51D92FF29803EE700DFC7E4 /* emailCheckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckModel.swift; sourceTree = "<group>"; };
+		F51D930129803F3D00DFC7E4 /* NanumSquareR.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = NanumSquareR.ttf; path = ../../../../../Downloads/NaverNanumSquare/NanumFontSetup_TTF_SQUARE/NanumSquareR.ttf; sourceTree = "<group>"; };
+		F51D930329803F4500DFC7E4 /* NanumSquareB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = NanumSquareB.ttf; path = ../../../../../Downloads/NaverNanumSquare/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf; sourceTree = "<group>"; };
+		F51D930529803FBA00DFC7E4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		F51D9307298042E500DFC7E4 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		F526375829894532001CCCBE /* changePw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = changePw.swift; sourceTree = "<group>"; };
+		F526375A298945D2001CCCBE /* ChangePwApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePwApiModel.swift; sourceTree = "<group>"; };
+		F5828A4829821B9900C870B3 /* LoginApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginApiModel.swift; sourceTree = "<group>"; };
+		F5828A4A2982B5F100C870B3 /* LoginApiHeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginApiHeaderModel.swift; sourceTree = "<group>"; };
+		F5828A522982BC7500C870B3 /* MyPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageController.swift; sourceTree = "<group>"; };
+		F5828A542982BCCB00C870B3 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		F5828A562982BDA600C870B3 /* FindPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordController.swift; sourceTree = "<group>"; };
+		F5828A582982C15A00C870B3 /* LoginResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResultModel.swift; sourceTree = "<group>"; };
+		F5828A5A2983B2D300C870B3 /* email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = email.swift; sourceTree = "<group>"; };
+		F5828A5C2983B34500C870B3 /* emailApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailApiModel.swift; sourceTree = "<group>"; };
+		F588D50E2980FDDF00D4E588 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		F588D5102981096A00D4E588 /* FindPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwView.swift; sourceTree = "<group>"; };
+		F588D514298122A100D4E588 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		F588D516298149AD00D4E588 /* CheckAgreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAgreeView.swift; sourceTree = "<group>"; };
+		F588D51829814A5400D4E588 /* CheckAgreeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAgreeController.swift; sourceTree = "<group>"; };
+		F588D51A2981604500D4E588 /* CheckPageServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPageServiceView.swift; sourceTree = "<group>"; };
+		F588D51C2981605D00D4E588 /* CheckPagePrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPagePrivacyView.swift; sourceTree = "<group>"; };
+		F588D51E2981607400D4E588 /* CheckPageMarketingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPageMarketingView.swift; sourceTree = "<group>"; };
+		F588D5202981614100D4E588 /* CheckPageServiceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPageServiceController.swift; sourceTree = "<group>"; };
+		F588D5222981615A00D4E588 /* CheckPagePrivacyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPagePrivacyController.swift; sourceTree = "<group>"; };
+		F588D5242981616D00D4E588 /* CheckPageMarketingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPageMarketingController.swift; sourceTree = "<group>"; };
+		F59B5F942984F98A007F13CA /* join.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = join.swift; sourceTree = "<group>"; };
+		F59B5F962984F9B5007F13CA /* JoinApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinApiModel.swift; sourceTree = "<group>"; };
+		F59B5F982985453D007F13CA /* JoinSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinSuccessView.swift; sourceTree = "<group>"; };
+		F59B5F9B29854741007F13CA /* RegisterationSuccessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationSuccessController.swift; sourceTree = "<group>"; };
+		F59B5F9D29854B89007F13CA /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +143,6 @@
 				071E055A296BB88B0020282F /* Controller */,
 				071E0557296BB83F0020282F /* Network */,
 				071E0555296BB82F0020282F /* App */,
-				071E0544296BB7B50020282F /* ViewController.swift */,
 				071E0549296BB7B70020282F /* Assets.xcassets */,
 				071E054B296BB7B70020282F /* LaunchScreen.storyboard */,
 				071E054E296BB7B70020282F /* Info.plist */,
@@ -91,6 +154,14 @@
 		071E0554296BB8210020282F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F51D92FF29803EE700DFC7E4 /* emailCheckModel.swift */,
+				F51D92FD29803EB300DFC7E4 /* LoginModel.swift */,
+				F5828A582982C15A00C870B3 /* LoginResultModel.swift */,
+				F51D9307298042E500DFC7E4 /* Login.swift */,
+				F5828A5A2983B2D300C870B3 /* email.swift */,
+				F59B5F942984F98A007F13CA /* join.swift */,
+				F59B5F9D29854B89007F13CA /* user.swift */,
+				F526375829894532001CCCBE /* changePw.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -107,6 +178,11 @@
 		071E0556296BB8380020282F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				F5828A4829821B9900C870B3 /* LoginApiModel.swift */,
+				F5828A4A2982B5F100C870B3 /* LoginApiHeaderModel.swift */,
+				F5828A5C2983B34500C870B3 /* emailApiModel.swift */,
+				F59B5F962984F9B5007F13CA /* JoinApiModel.swift */,
+				F526375A298945D2001CCCBE /* ChangePwApiModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -121,7 +197,12 @@
 		071E0558296BB8510020282F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F59B5F9A2985454C007F13CA /* with RegisterView */,
 				07557562296BFCD300B8AF77 /* Cell.swift */,
+				F51D930529803FBA00DFC7E4 /* LoginView.swift */,
+				F588D50E2980FDDF00D4E588 /* StartView.swift */,
+				F588D5102981096A00D4E588 /* FindPwView.swift */,
+				F5828A542982BCCB00C870B3 /* MyPageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -129,6 +210,8 @@
 		071E0559296BB86E0020282F /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				F51D930129803F3D00DFC7E4 /* NanumSquareR.ttf */,
+				F51D930329803F4500DFC7E4 /* NanumSquareB.ttf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -138,6 +221,10 @@
 			children = (
 				0755755A296BFC2100B8AF77 /* Authentication */,
 				07557560296BFC5900B8AF77 /* MainTabController.swift */,
+				F5828A522982BC7500C870B3 /* MyPageController.swift */,
+				071E0544296BB7B50020282F /* ViewController.swift */,
+				F5828A562982BDA600C870B3 /* FindPasswordController.swift */,
+				F5828A4D2982BBBE00C870B3 /* CheckController */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -147,6 +234,7 @@
 			children = (
 				0755755B296BFC3300B8AF77 /* LoginController.swift */,
 				0755755E296BFC4B00B8AF77 /* RegisterationController.swift */,
+				F59B5F9B29854741007F13CA /* RegisterationSuccessController.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -166,6 +254,38 @@
 				1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F5828A4C2982BBA700C870B3 /* CheckView */ = {
+			isa = PBXGroup;
+			children = (
+				F588D516298149AD00D4E588 /* CheckAgreeView.swift */,
+				F588D51A2981604500D4E588 /* CheckPageServiceView.swift */,
+				F588D51C2981605D00D4E588 /* CheckPagePrivacyView.swift */,
+				F588D51E2981607400D4E588 /* CheckPageMarketingView.swift */,
+			);
+			path = CheckView;
+			sourceTree = "<group>";
+		};
+		F5828A4D2982BBBE00C870B3 /* CheckController */ = {
+			isa = PBXGroup;
+			children = (
+				F588D51829814A5400D4E588 /* CheckAgreeController.swift */,
+				F588D5202981614100D4E588 /* CheckPageServiceController.swift */,
+				F588D5222981615A00D4E588 /* CheckPagePrivacyController.swift */,
+				F588D5242981616D00D4E588 /* CheckPageMarketingController.swift */,
+			);
+			path = CheckController;
+			sourceTree = "<group>";
+		};
+		F59B5F9A2985454C007F13CA /* with RegisterView */ = {
+			isa = PBXGroup;
+			children = (
+				F588D514298122A100D4E588 /* RegisterView.swift */,
+				F59B5F982985453D007F13CA /* JoinSuccessView.swift */,
+				F5828A4C2982BBA700C870B3 /* CheckView */,
+			);
+			path = "with RegisterView";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,6 +357,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				071E054D296BB7B70020282F /* LaunchScreen.storyboard in Resources */,
+				F51D930229803F3D00DFC7E4 /* NanumSquareR.ttf in Resources */,
+				F51D930429803F4500DFC7E4 /* NanumSquareB.ttf in Resources */,
 				071E054A296BB7B70020282F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,12 +413,42 @@
 			buildActionMask = 2147483647;
 			files = (
 				071E0545296BB7B50020282F /* ViewController.swift in Sources */,
+				F51D930029803EE700DFC7E4 /* emailCheckModel.swift in Sources */,
 				0755755C296BFC3300B8AF77 /* LoginController.swift in Sources */,
 				07557563296BFCD300B8AF77 /* Cell.swift in Sources */,
+				F588D5212981614100D4E588 /* CheckPageServiceController.swift in Sources */,
+				F588D51B2981604500D4E588 /* CheckPageServiceView.swift in Sources */,
+				F526375929894532001CCCBE /* changePw.swift in Sources */,
+				F5828A592982C15A00C870B3 /* LoginResultModel.swift in Sources */,
+				F588D5252981616D00D4E588 /* CheckPageMarketingController.swift in Sources */,
+				F59B5F972984F9B5007F13CA /* JoinApiModel.swift in Sources */,
 				07557561296BFC5900B8AF77 /* MainTabController.swift in Sources */,
+				F59B5F952984F98A007F13CA /* join.swift in Sources */,
+				F588D50F2980FDDF00D4E588 /* StartView.swift in Sources */,
+				F59B5F992985453D007F13CA /* JoinSuccessView.swift in Sources */,
+				F588D5112981096A00D4E588 /* FindPwView.swift in Sources */,
+				F5828A4929821B9900C870B3 /* LoginApiModel.swift in Sources */,
+				F51D92FE29803EB300DFC7E4 /* LoginModel.swift in Sources */,
+				F588D517298149AE00D4E588 /* CheckAgreeView.swift in Sources */,
+				F588D51F2981607400D4E588 /* CheckPageMarketingView.swift in Sources */,
+				F5828A5B2983B2D300C870B3 /* email.swift in Sources */,
+				F51D9308298042E500DFC7E4 /* Login.swift in Sources */,
+				F59B5F9C29854741007F13CA /* RegisterationSuccessController.swift in Sources */,
+				F5828A552982BCCB00C870B3 /* MyPageView.swift in Sources */,
+				F588D51D2981605D00D4E588 /* CheckPagePrivacyView.swift in Sources */,
 				071E0541296BB7B50020282F /* AppDelegate.swift in Sources */,
+				F51D930629803FBA00DFC7E4 /* LoginView.swift in Sources */,
+				F59B5F9E29854B89007F13CA /* user.swift in Sources */,
+				F526375B298945D2001CCCBE /* ChangePwApiModel.swift in Sources */,
+				F588D515298122A100D4E588 /* RegisterView.swift in Sources */,
+				F5828A572982BDA600C870B3 /* FindPasswordController.swift in Sources */,
+				F588D51929814A5400D4E588 /* CheckAgreeController.swift in Sources */,
 				071E0543296BB7B50020282F /* SceneDelegate.swift in Sources */,
+				F5828A5D2983B34500C870B3 /* emailApiModel.swift in Sources */,
+				F588D5232981615A00D4E588 /* CheckPagePrivacyController.swift in Sources */,
 				0755755F296BFC4B00B8AF77 /* RegisterationController.swift in Sources */,
+				F5828A532982BC7500C870B3 /* MyPageController.swift in Sources */,
+				F5828A4B2982B5F100C870B3 /* LoginApiHeaderModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,7 +588,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2V279GTPCN;
+				DEVELOPMENT_TEAM = 9KQS6UJ9YX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LGHTSG/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -465,7 +617,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2V279GTPCN;
+				DEVELOPMENT_TEAM = 9KQS6UJ9YX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LGHTSG/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
