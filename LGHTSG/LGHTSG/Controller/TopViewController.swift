@@ -65,11 +65,8 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         let image = UIImage(systemName: "chevron.right")!
         imageView.image = image
         imageView.tintColor = .white
-                imageView.setContentHuggingPriority(.required, for: .horizontal)
-                imageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-                imageView.snp.makeConstraints { (make) in
-                    make.width.equalTo(40)
-                }
+        imageView.setContentHuggingPriority(.required, for: .horizontal)
+        imageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return imageView
     }()
     
@@ -80,9 +77,6 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         imageView.tintColor = .white
                 imageView.setContentHuggingPriority(.required, for: .horizontal)
                 imageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-                imageView.snp.makeConstraints { (make) in
-                    make.width.equalTo(40)
-                }
         return imageView
     }()
     
@@ -91,11 +85,8 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         let image = UIImage(systemName: "chevron.right")!
         imageView.image = image
         imageView.tintColor = .white
-                imageView.setContentHuggingPriority(.required, for: .horizontal)
-                imageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-                imageView.snp.makeConstraints { (make) in
-                    make.width.equalTo(40)
-                }
+        imageView.setContentHuggingPriority(.required, for: .horizontal)
+        imageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return imageView
     }()
 
@@ -182,8 +173,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     //cell 높이조절
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 55
-    }
+            return 44    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return 2
     }
@@ -246,19 +236,17 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         chevron1.snp.makeConstraints{
             $0.trailing.equalTo(topView1.snp.trailing).offset(-4)
-            $0.leading.equalTo(topView1.snp.trailing).offset(9)
+
             $0.top.equalTo(topView1.snp.top).offset(5)
 
         }
         chevron2.snp.makeConstraints{
             $0.trailing.equalTo(topView2.snp.trailing).offset(-4)
-            $0.leading.equalTo(topView2.snp.trailing).offset(9)
             $0.top.equalTo(topView2.snp.top).offset(5)
 
         }
         chevron3.snp.makeConstraints{
             $0.trailing.equalTo(topView3.snp.trailing).offset(-4)
-            $0.leading.equalTo(topView3.snp.trailing).offset(9)
             $0.top.equalTo(topView3.snp.top).offset(5)
 
         }

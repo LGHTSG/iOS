@@ -12,11 +12,13 @@ import Kingfisher
 class HomeTableCell : UITableViewCell {
     var countLabel : UILabel = {
         let label = UILabel()
+        label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .bold)
         return label
     }()
     private lazy var nameLabel : UILabel = {
         let label = UILabel()
+        label.textColor = .white
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
@@ -46,6 +48,7 @@ class HomeTableCell : UITableViewCell {
 }
 extension HomeTableCell {
     func setup(with assetinfo : asset.body){
+        self.backgroundColor = .black
         [countLabel, nameLabel, priceLabel, pricePercent, changeDate, iconimage].forEach{
             addSubview($0)
         }
@@ -93,6 +96,7 @@ extension HomeTableCell {
         }
     }
     func setup(with resellinfo : ResellPrice.body){
+        self.backgroundColor = .black
         [countLabel, nameLabel, priceLabel, pricePercent, changeDate, iconimage].forEach{
             addSubview($0)
         }

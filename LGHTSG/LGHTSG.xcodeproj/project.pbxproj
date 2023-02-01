@@ -198,8 +198,8 @@
 		071E0558296BB8510020282F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				078401CF298A49DB00CDE061 /* New Group1 */,
-				078401C8298A49CB00CDE061 /* New Group */,
+				078401CF298A49DB00CDE061 /* HomeVC */,
+				078401C8298A49CB00CDE061 /* ExploreVC */,
 				0791E9282984B395008BDEAB /* EstateSaleCell.swift */,
 				0764F26A298642EF00F446CB /* SearchItemCell.swift */,
 				078401A6298A481A00CDE061 /* EstateSaleCell.swift */,
@@ -241,17 +241,17 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		078401C8298A49CB00CDE061 /* New Group */ = {
+		078401C8298A49CB00CDE061 /* ExploreVC */ = {
 			isa = PBXGroup;
 			children = (
 				078401CA298A49D500CDE061 /* EstateDetailCell.swift */,
 				078401CB298A49D500CDE061 /* resellView.swift */,
 				078401C9298A49D500CDE061 /* StockView.swift */,
 			);
-			path = "New Group";
+			path = ExploreVC;
 			sourceTree = "<group>";
 		};
-		078401CF298A49DB00CDE061 /* New Group1 */ = {
+		078401CF298A49DB00CDE061 /* HomeVC */ = {
 			isa = PBXGroup;
 			children = (
 				078401D0298A49E200CDE061 /* ChartMarker.swift */,
@@ -260,7 +260,7 @@
 				078401D4298A49E300CDE061 /* UnderlineSegmentedControl.swift */,
 				078401D9298A49E300CDE061 /* UnderlineView.swift */,
 			);
-			path = "New Group1";
+			path = HomeVC;
 			sourceTree = "<group>";
 		};
 		2404E8AB30A4556E368D96E1 /* Pods */ = {
@@ -569,7 +569,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2V279GTPCN;
+				DEVELOPMENT_TEAM = NG2NLR2Z86;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LGHTSG/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보 제공을 허용합니까?";
@@ -583,7 +583,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Ha.LGHTSG;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunho.LGHTSG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -599,7 +599,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2V279GTPCN;
+				DEVELOPMENT_TEAM = NG2NLR2Z86;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LGHTSG/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보 제공을 허용합니까?";
@@ -613,7 +613,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Ha.LGHTSG;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunho.LGHTSG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -179,7 +179,9 @@ extension ExploreViewController : showNavigationDelegate{
     func SetNavigationBar(){
         ExploreViewController.isSearching = false
         navigationItem.titleView = nil
+        navigationController?.navigationBar.tintColor  = .white
         let searchBtn = UIBarButtonItem(image: UIImage(systemName : "magnifyingglass"), style: .plain, target: self, action: #selector(showsearchbar))
+        searchBtn.tintColor = .white
         navigationItem.leftBarButtonItem = searchBtn
         var config = UIButton.Configuration.plain()
         var attributeString = AttributedString("-93")

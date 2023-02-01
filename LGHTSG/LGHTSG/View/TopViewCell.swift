@@ -9,7 +9,7 @@ import UIKit
 
 class TopViewCell: UITableViewCell {
     private enum Constant {
-      static let thumbnailSize = 100.0
+        static let thumbnailSize = 70.0
       static let thumbnailCGSize = CGSize(width: Constant.thumbnailSize, height: Constant.thumbnailSize)
       static let borderWidth = 2.0
       static let spacing = 4.0
@@ -25,24 +25,28 @@ class TopViewCell: UITableViewCell {
     lazy var title: UILabel = {
         let label = UILabel()
         label.textColor = .white
+        label.font = .systemFont(ofSize: 14.0, weight: .semibold)
         return label
     }()
     
     lazy var price: UILabel = {
         let label = UILabel()
         label.textColor = .gray
+        label.font = .systemFont(ofSize: 14.0, weight: .medium)
         return label
     }()
     
     lazy var percentage: UILabel = {
         let label = UILabel()
         label.textColor = .red
+        label.font = .systemFont(ofSize: 12.0, weight: .medium)
         return label
     }()
     
     lazy var period: UILabel = {
         let label = UILabel()
         label.textColor = .gray
+        label.font = .systemFont(ofSize: 12.0, weight: .medium)
         return label
     }()
     
