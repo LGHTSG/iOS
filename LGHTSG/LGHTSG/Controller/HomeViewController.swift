@@ -112,6 +112,7 @@ private extension HomeViewController{
         tableview.dataSource = self
         tableview.backgroundColor = .black
         tableview.separatorStyle = .none
+        
         tableview.snp.makeConstraints{
             $0.top.equalTo(underline1.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(33)

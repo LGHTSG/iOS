@@ -8,12 +8,12 @@
 import Foundation
 
 // MARK: - EstateModel
-struct EstateModel: Codable {
+struct EstateModel: Decodable {
     let body: Body
 }
 
 // MARK: - Body
-struct Body: Codable {
+struct Body: Decodable {
     let idx: Int
     let name: String
     let rateOfChange: Double

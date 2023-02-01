@@ -10,6 +10,11 @@ import UIKit
 import SnapKit
 import Kingfisher
 class HomeTableCell : UITableViewCell {
+    
+    var countLabel : UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.textColor = .white
     var countLabel : UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -18,6 +23,8 @@ class HomeTableCell : UITableViewCell {
     }()
     private lazy var nameLabel : UILabel = {
         let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.textColor = .white
         label.textColor = .white
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
@@ -48,10 +55,15 @@ class HomeTableCell : UITableViewCell {
 }
 extension HomeTableCell {
     func setup(with assetinfo : asset.body){
+    
+        [countLabel, nameLabel, priceLabel, pricePercent, changeDate, iconimage].forEach{
+            addSubview($0)
+        }
         self.backgroundColor = .black
         [countLabel, nameLabel, priceLabel, pricePercent, changeDate, iconimage].forEach{
             addSubview($0)
         }
+
         nameLabel.text = assetinfo.name
         priceLabel.text = String(assetinfo.price)+"원"
         changeDate.text = assetinfo.rateCalDateDiff
@@ -96,8 +108,10 @@ extension HomeTableCell {
         }
     }
     func setup(with resellinfo : ResellPrice.body){
+
         self.backgroundColor = .black
-        [countLabel, nameLabel, priceLabel, pricePercent, changeDate, iconimage].forEach{
+
+      [countLabel, nameLabel, priceLabel, pricePercent, changeDate, iconimage].forEach{
             addSubview($0)
         }
         nameLabel.text = resellinfo.name

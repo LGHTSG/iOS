@@ -20,6 +20,7 @@ class EstateDetailCell: UITableViewCell {
     lazy var price: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .medium)
+
         label.textColor = .white
         return label
     }()
@@ -27,6 +28,7 @@ class EstateDetailCell: UITableViewCell {
     lazy var buysell: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .medium)
+
         label.textColor = .white
         return label
     }()

@@ -119,7 +119,8 @@ class StockChartViewController : UIViewController {
         //MARK: - TableView
         private lazy var tableView: UITableView = {
             let table = UITableView()
-            table.backgroundColor = .clear
+            table.backgroundColor = .black
+            
             return table
             
         }()

@@ -83,7 +83,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     //MARK: - DropDown
     
     private lazy var lineImage2: UIImageView = {
-        let image = UIImageView(image: UIImage(named: "Line"))
+        let image = UIImageView(image: UIImage(named: "Line2"))
         return image
     }()
     
@@ -183,40 +183,41 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         [priceButton, saleButton,lineImage2,segmentCtrl,replaceView2,tableView1,searchBar,tableView2]
           .forEach {view.addSubview($0)}
         
+        
         tableView2.snp.makeConstraints{
-            $0.top.equalTo(searchBar.snp.bottom).offset(0)
-            $0.bottom.equalTo(mapView.snp.bottom).offset(0)
-            $0.leading.equalToSuperview().inset(15)
-            $0.trailing.equalToSuperview().inset(15)
+            $0.top.equalTo(searchBar.snp.bottom)
+            $0.bottom.equalTo(mapView.snp.bottom)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
         }
         
-        
+        //매물 버튼
         tableView1.snp.makeConstraints{
-            $0.top.equalTo(lineImage2.snp.bottom).offset(14)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-91)
-            $0.leading.equalToSuperview().inset(15)
-            $0.trailing.equalToSuperview().inset(15)
+            $0.top.equalTo(lineImage2.snp.bottom).offset(10)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
         }
         
         replaceView2.snp.makeConstraints{
-            $0.top.equalTo(lineImage2.snp.bottom).offset(14)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-127)
-            $0.leading.equalToSuperview().inset(15)
-            $0.trailing.equalToSuperview().inset(15)
+            $0.top.equalTo(lineImage2.snp.bottom).offset(5)
+            $0.bottom.equalTo(segmentCtrl.snp.top).offset(-5)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
             
         }
         
         saleButton.snp.makeConstraints{
             $0.leading.equalTo(priceButton.snp.trailing).offset(5)
-            $0.trailing.equalToSuperview().inset(170)
-            $0.top.equalTo(mapView.snp.bottom).offset(24)
+            $0.top.equalTo(mapView.snp.bottom).offset(15)
+            $0.width.equalTo(100)
             $0.height.equalTo(30)
         }
         
         priceButton.snp.makeConstraints{
-            $0.leading.equalToSuperview().inset(15)
-            $0.trailing.equalToSuperview().inset(275)
-            $0.top.equalTo(mapView.snp.bottom).offset(24)
+            $0.leading.equalToSuperview()
+            $0.top.equalTo(mapView.snp.bottom).offset(15)
+            $0.width.equalTo(100)
             $0.height.equalTo(30)
 
         }
@@ -224,62 +225,66 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         mapView.snp.makeConstraints{
             $0.top.equalTo(searchBar.snp.bottom).offset(16)
             $0.bottom.equalTo(view.snp.centerY).offset(20)
-            $0.leading.equalToSuperview().inset(15)
-            $0.trailing.equalToSuperview().inset(15)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
        
         }
         
         searchBar.snp.makeConstraints{
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            $0.leading.equalToSuperview().inset(8)
-            $0.trailing.equalToSuperview().inset(8)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(-15)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
             $0.height.equalTo(38)
         }
      
         segmentCtrl.snp.makeConstraints{
-            $0.top.equalTo(replaceView2.snp.bottom).offset(8)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-81)
-            $0.leading.equalToSuperview().inset(15)
-            $0.trailing.equalToSuperview().inset(15)
+            $0.height.equalTo(28)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
 
         }
         
         lineImage2.snp.makeConstraints{
-            $0.leading.equalToSuperview().inset(15)
-            $0.trailing.equalToSuperview().inset(15)
-            $0.top.equalTo(mapView.snp.bottom).offset(56)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.top.equalTo(priceButton.snp.bottom).offset(-2)
         }
         
     }
   
     //MARK: - EstateList
-    var idxList = [Int]()
     var nameLists = [String]()
+    var priceLists = [String]()
     var rateOfChange = [Double]()
     var rateCalDateDiff = [String]()
     var price = [Int]()
     
     //파라미터로 시군구 스트링으로 받아서 업데이트.
     func getEstateList() {
-        let url = "http://api.lghtsg.site:8090/realestates?area=대전광역시+유성구+노은동"
+        let urlSTR = "http://api.lghtsg.site:8090/realestates?area=대전광역시+유성구+계산동"
+        let encodedStr = urlSTR.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let url = URL(string: encodedStr)!
         let header: HTTPHeaders = ["Content-Type" : "application/json"]
         AF.request(url, method: .get, headers: header)
             .validate(statusCode: 200..<300)
-            .responseData { response in
+            .responseDecodable(of : EstatePriceDetailModel.self) { response in
                 switch response.result {
                 case .success(let res):
-                    let decoder = JSONDecoder()
                     do {
-                        let data = try decoder.decode(EstateModel.self, from: res)
-                        self.nameLists.append(data.body.name)
-                        self.idxList.append(data.body.idx)
-                        self.rateOfChange.append(data.body.rateOfChange)
-                        self.rateCalDateDiff.append(data.body.rateCalDateDiff)
-                        self.price.append(data.body.price)
+
+                        print(res)
+                        self.nameLists.append(res.body[0].name)
+                        /*self.nameLists.append(data.abody[0].name)
+                        print(self.nameLists)
+                        self.rateOfChange.append(data.abody[0].rateOfChange)
+                        self.rateCalDateDiff.append(data.abody[0].rateCalDateDiff)
+                        self.price.append(data.abody[0].price)
                         
                         self.tableView1.reloadData()
+                       */
                     } catch {
-                        print("erorr in decode")
+                        print("erorr in decoda")
                     }
                 case .failure(let err):
                     print(err.localizedDescription)
@@ -512,7 +517,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == tableView1{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: EstateSaleCell.identifier, for: indexPath) as? EstateSaleCell else { return UITableViewCell() }
-           // cell.number = self.idxList[indexPath.row]
+            cell.number.text = "1"
             cell.number.textColor = .white
             cell.title.text = self.nameLists[indexPath.row]
             cell.title.textColor = .white

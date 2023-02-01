@@ -67,6 +67,7 @@ class StockView : UIViewController {
     func setView(){
         StockaTableView.register(HomeTableCell.self, forCellReuseIdentifier: "HomeTabeCell")
         StockaTableView.separatorStyle = .none
+
         StockaTableView.backgroundColor = .black
         self.view.addSubview(segment)
         segment.snp.makeConstraints{
@@ -95,8 +96,8 @@ extension StockView : UITableViewDataSource, UITableViewDelegate{
         }
         else{cell.setup(with: stockDataLists[indexPath.row])}
         cell.countLabel.text = "\(indexPath.row+1)"
+
         cell.backgroundColor = .black
-        
         return cell
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -25,7 +25,7 @@ class ChartViewController : UIViewController {
     let contentView = UIView()
     private let contentScrollView : UIScrollView = {
         let scrollview = UIScrollView()
-        scrollview.backgroundColor = .systemBackground
+        scrollview.backgroundColor = .black
         scrollview.translatesAutoresizingMaskIntoConstraints = false
         return scrollview
     }()
