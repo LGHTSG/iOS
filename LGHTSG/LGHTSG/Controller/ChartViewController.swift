@@ -253,7 +253,6 @@ extension ChartViewController {
         return lineDataEntries
     }
     private func setLineChartView() {
- 
             stockPriceData.requestResellPrice(resellIdx: self.idx!, onCompleted: { (pricelists, transctiontime) in
                 DispatchQueue.main.async {
                     self.priceListDatas = pricelists
@@ -266,6 +265,7 @@ extension ChartViewController {
                 }
             })
 
+        }
         
 //        EstatePriceData.requestStockPrice(EstateIdx: self.idx!, onCompleted: { (pricelists, transctiontime) in
 //            DispatchQueue.main.async {
@@ -279,8 +279,6 @@ extension ChartViewController {
 //        })
 
     }
-    
-}
 
 
 extension ChartViewController {
@@ -299,11 +297,9 @@ extension ChartViewController {
             $0.top.equalTo(lineChartView.snp.bottom)
             $0.leading.equalTo(contentView.snp.leading).offset(15)
             $0.trailing.equalTo(contentView.snp.trailing).offset(-15)
-//            $0.trailing.equalToSuperview().inset(15)
         }
         imageView.snp.makeConstraints{
             $0.top.equalTo(segmentCtrl.snp.bottom).offset(10)
-            
             if imageURL != nil {
                 $0.width.height.equalTo(300)
             }else{
@@ -342,8 +338,6 @@ extension ChartViewController {
         contentView.snp.makeConstraints{
             $0.top.leading.trailing.bottom.equalTo(contentScrollView.contentLayoutGuide)
             $0.width.equalTo(contentScrollView.frameLayoutGuide)
-//            $0.width.equalToSuperview()
-//            $0.centerX.top.bottom.equalToSuperview()
         }
         
         nameLabel.snp.makeConstraints{
@@ -365,10 +359,7 @@ extension ChartViewController {
         }
         
         sellButton.snp.makeConstraints{
-//            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
             $0.bottom.equalToSuperview().offset(-10)
-//            $0.leading.equalToSuperview().inset(33)
-//            $0.trailing.equalToSuperview().inset(33)
             $0.height.equalTo(48)
             $0.width.equalToSuperview().inset(20)
             $0.centerX.equalToSuperview()

@@ -107,20 +107,18 @@ extension StockView : UITableViewDataSource, UITableViewDelegate{
         let ChartVc = StockChartViewController()
         if(ExploreViewController.isSearching){
             ChartVc.nameText =  stockSearchLists[indexPath.row].name
-            ChartVc.changeDateText = String(stockSearchLists[indexPath.row].rateOfChange)
-            ChartVc.pricePercentText = stockSearchLists[indexPath.row].rateCalDateDiff
-            ChartVc.PriceText  = "\(String(stockSearchLists[indexPath.row].price))원"
+            ChartVc.changeDateText = ((stockSearchLists[indexPath.row].rateCalDateDiff))
+            ChartVc.pricePercentText = "\(stockSearchLists[indexPath.row].rateOfChange)%"
             ChartVc.idx = stockSearchLists[indexPath.row].idx
 
         }else{
             ChartVc.nameText =  stockDataLists[indexPath.row].name
-            ChartVc.changeDateText = String(stockDataLists[indexPath.row].rateOfChange)
-            ChartVc.pricePercentText = stockDataLists[indexPath.row].rateCalDateDiff
-            ChartVc.PriceText  = "\(String(stockDataLists[indexPath.row].price))원"
+            ChartVc.changeDateText = (stockDataLists[indexPath.row].rateCalDateDiff)
+            ChartVc.pricePercentText = "\(stockDataLists[indexPath.row].rateOfChange)%"
             ChartVc.idx = stockDataLists[indexPath.row].idx
           
         }
-      
+
         self.navigationController?.pushViewController(ChartVc, animated: true)
     }
 }

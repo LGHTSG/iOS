@@ -134,6 +134,7 @@ extension resellView : UITableViewDataSource , UITableViewDelegate, UIScrollView
             ChartVc.idx = resellDataLists[indexPath.row].idx
             ChartVc.imageURL = resellDataLists[indexPath.row].imageUrl
         }
+
         self.navigationController?.pushViewController(ChartVc, animated: true)
     }
 }

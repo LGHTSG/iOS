@@ -110,9 +110,12 @@ extension HomeTableCell {
         
         let url = URL(string: resellinfo.imageUrl)
         // kf 이미지 둥그렇게
-        let processor = RoundCornerImageProcessor(cornerRadius: 500)
+
+        iconimage.clipsToBounds = true
+        iconimage.layer.cornerRadius = 20   
+        iconimage.backgroundColor = .white
+        iconimage.kf.setImage(with: url )
         
-        iconimage.kf.setImage(with: url , options: [.processor(processor)])
         countLabel.snp.makeConstraints{
             $0.leading.equalToSuperview()
             $0.top.equalToSuperview()
