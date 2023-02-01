@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Alamofire
 
 
 
@@ -126,6 +127,44 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         setupTableView()
         configure()
     }
+    
+    //MARK: - network
+    
+    var idxList = [Int]()
+    var nameLists = [String]()
+    var rateOfChange = [Double]()
+    var rateCalDateDiff = [String]()
+    var price = [Int]()
+    
+    func getAreaList() {
+        let url = "http://api.lghtsg.site:8090/realestates/area-relation-list"
+        let header: HTTPHeaders = ["Content-Type" : "application/json"]
+        AF.request(url, method: .get, headers: header)
+            .validate(statusCode: 200..<300)
+            .responseData { response in
+                switch response.result {
+                case .success(let res):
+                    let decoder = JSONDecoder()
+                    do {
+                        let data = try decoder.decode(EstateModel.self, from: res)
+                        self.nameLists.append(data.body.name)
+                        self.idxList.append(data.body.idx)
+                        self.rateOfChange.append(data.body.rateOfChange)
+                        self.rateCalDateDiff.append(data.body.rateCalDateDiff)
+                        self.price.append(data.body.price)
+                        self.tableView1.reloadData()
+                        self.tableView2.reloadData()
+                        self.tableView3.reloadData()
+
+                        
+                    } catch {
+                        print("erorr in decode")
+                    }
+                case .failure(let err):
+                    print(err.localizedDescription)
+                }
+            }
+        }
     
     //MARK: - TableView
     

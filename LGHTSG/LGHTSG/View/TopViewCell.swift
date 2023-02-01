@@ -8,7 +8,12 @@
 import UIKit
 
 class TopViewCell: UITableViewCell {
-    
+    private enum Constant {
+      static let thumbnailSize = 100.0
+      static let thumbnailCGSize = CGSize(width: Constant.thumbnailSize, height: Constant.thumbnailSize)
+      static let borderWidth = 2.0
+      static let spacing = 4.0
+    }
     static let identifier = "TopViewCell"
     
     lazy var number: UILabel = {
@@ -43,11 +48,17 @@ class TopViewCell: UITableViewCell {
     
     lazy var iconImage: UIImageView = {
         let imageView = UIImageView()
-
-        imageView.tintColor = .white
-        imageView.layer.cornerRadius = 30
+        //imageview.image = UIImage(named: "dog")
+        imageView.layer.cornerRadius = (Constant.thumbnailSize - Constant.spacing * 2) / 2.0
         imageView.clipsToBounds = true
-        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        /*
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100)) //이미지뷰 만들기
+        imageView.layer.cornerRadius = myView.frame.width / 2 //프레임을 원으로 만들기
+        let imageView = UIImage(named: "bruceLee.gif") //이미지 객체 생성
+        imageView.image = imageView //이미지를 이미지뷰에 넣기
+        imageView.contentMode = UIViewContentMode.ScaleAspectFill //이미지 비율 바로잡기
+        imageView.clipsToBounds = true //이미지를 뷰 프레임에 맞게 clip하기*/
         return imageView
        
     }()
