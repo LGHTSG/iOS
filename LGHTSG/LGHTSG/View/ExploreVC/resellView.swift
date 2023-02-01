@@ -46,6 +46,8 @@ class resellView : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
+        view.backgroundColor = .black
+
         resellTableView.dataSource = self
         resellTableView.delegate = self
         segment.addTarget(self, action: #selector(clickSegment), for: .valueChanged)
@@ -78,6 +80,8 @@ class resellView : UIViewController{
     func setView() {
         resellTableView.register(HomeTableCell.self, forCellReuseIdentifier: "HomeTabeCell")
         resellTableView.separatorStyle = .none
+
+        resellTableView.backgroundColor = .black
         self.view.addSubview(segment)
         segment.snp.makeConstraints{
             $0.leading.top.equalToSuperview()
@@ -103,8 +107,7 @@ extension resellView : UITableViewDataSource , UITableViewDelegate, UIScrollView
             cell.setup(with: resellSearchLists[indexPath.row])
         }else{
             cell.setup(with: resellDataLists[indexPath.row])}
-        cell.countLabel.text = "\(indexPath.row+1)"
-        return cell
+        cell.countLabel.text = "\(indexPath.row+1)"      return cell
         
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

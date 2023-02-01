@@ -28,6 +28,7 @@ class StockChartViewController : UIViewController {
         private lazy var nameLabel : UILabel = {
             let label = UILabel()
             label.font = .systemFont(ofSize: 17, weight: .semibold)
+            label.textColor  = UIColor.white
             label.text = nameText
             return label
         }()
@@ -76,7 +77,6 @@ class StockChartViewController : UIViewController {
 
         private var lineImage = UnderlineView()
         
-        
         //MARK: - SegmentControl
         private lazy var segmentCtrl: UISegmentedControl = {
             let items = ["1일","월", "1년", "5년"]
@@ -85,6 +85,7 @@ class StockChartViewController : UIViewController {
             seg.layer.cornerRadius = 0.7
             seg.backgroundColor = UIColor(named: "dropdown")
             seg.tintColor = .lightGray
+            seg.selectedSegmentTintColor = UIColor(named: "dropdown")
             seg.setTitleTextAttributes(
               [
                   NSAttributedString.Key.foregroundColor: UIColor.white,
@@ -127,7 +128,7 @@ class StockChartViewController : UIViewController {
         //MARK: - LifeCycle
         override func viewDidLoad() {
             super.viewDidLoad()
-            
+
             configure()
             setLineChartView()
  
@@ -390,7 +391,7 @@ class StockChartViewController : UIViewController {
     extension StockChartViewController {
         //MARK: - Configure
         private func configure(){
-            lineImage.backgroundColor = .label
+            lineImage.backgroundColor = .white
             [nameLabel, priceLabel, pricePercent,changeDate, sellButton, tableView, lineImage,dealLabel, revenueLabel, segmentCtrl,lineChartView]
                 .forEach {view.addSubview($0)}
             nameLabel.snp.makeConstraints{
@@ -430,7 +431,6 @@ class StockChartViewController : UIViewController {
                 $0.leading.equalToSuperview().inset(33)
             }
             lineImage.snp.makeConstraints{
-
                 $0.leading.equalToSuperview().inset(33)
                 $0.trailing.equalToSuperview().inset(33)
                 $0.height.equalTo(1)

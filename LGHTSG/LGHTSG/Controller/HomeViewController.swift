@@ -47,6 +47,7 @@ private extension HomeViewController{
     private func SetNavigationBar(){
         navigationItem.titleView = nil
         let searchBtn = UIBarButtonItem(image: UIImage(systemName : "magnifyingglass"), style: .plain, target: self, action: #selector(showsearchbar))
+        searchBtn.tintColor = .white
         navigationItem.leftBarButtonItem = searchBtn
         var config = UIButton.Configuration.plain()
         var attributeString = AttributedString(changepercent)
@@ -109,6 +110,7 @@ private extension HomeViewController{
         tableview.delegate = self
         tableview.rowHeight = 56
         tableview.dataSource = self
+        tableview.backgroundColor = .black
         tableview.separatorStyle = .none
         
         tableview.snp.makeConstraints{
@@ -124,7 +126,7 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource {
 //        cell?.setup(with: assetList[indexPath.row])
         cell?.setuppp()
         cell?.countLabel.text = "\(indexPath.row+1)"
-        
+        cell?.backgroundColor = .black
         return cell ?? UITableViewCell()
     }
     

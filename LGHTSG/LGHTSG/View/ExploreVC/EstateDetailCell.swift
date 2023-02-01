@@ -13,24 +13,31 @@ class EstateDetailCell: UITableViewCell {
     lazy var date: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.textColor = .white
         return label
     }()
     
     lazy var price: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .medium)
+
+        label.textColor = .white
         return label
     }()
     
     lazy var buysell: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .medium)
+
+        label.textColor = .white
         return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6))
+        self.backgroundColor = .black
+        
         self.cellSetting()
         
     }
