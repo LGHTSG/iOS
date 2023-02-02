@@ -16,13 +16,20 @@ class ChartViewController : UIViewController {
     var nameText : String?
     var PriceText : String?
     var idx : Int?
-
     var pricePercentText : String?
     var changeDateText : String?
     var imageURL : String?
     var priceListDatas = [Int]()
     var timeListDatas = [String]()
     let contentView = UIView()
+    let todayDate = Date()
+    var temppriceListDatas = [Int]()
+    var temptimeListDatas = [String]()
+    var dateFormatter : DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YY/MM/dd"
+        return dateFormatter
+    }()
     private let contentScrollView : UIScrollView = {
         let scrollview = UIScrollView()
         scrollview.backgroundColor = .black
@@ -35,27 +42,28 @@ class ChartViewController : UIViewController {
     }()
     private lazy var nameLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "NanumSquareB", size: 16.0)
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.text = nameText
+        label.textColor = .white
         return label
     }()
     private lazy var priceLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "NanumSquareB", size: 14.0)
+        label.font = .systemFont(ofSize: 14, weight: .medium)
         label.textColor = UIColor.systemGray
         label.text = PriceText
         return label
     }()
     private lazy var pricePercent : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "NanumSquareB", size: 12.0)
+        label.font = .systemFont(ofSize: 12, weight: .medium)
         label.textColor = UIColor.red
         label.text = pricePercentText
         return label
     }()
     private lazy var changeDate : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "NanumSquareB", size: 12.0)
+        label.font = .systemFont(ofSize: 12, weight : .medium)
         label.textColor = UIColor.systemGray
         label.text = changeDateText
         return label
@@ -64,7 +72,7 @@ class ChartViewController : UIViewController {
     private lazy var dealLabel: UILabel = {
         let label = UILabel()
         label.text = "거래 이력"
-        label.font = UIFont(name: "NanumSquareB", size: 12.0)
+        label.font = UIFont.systemFont(ofSize: 12, weight: .light)
         label.textColor = .white
         return label
     }()
@@ -73,7 +81,7 @@ class ChartViewController : UIViewController {
         let label = UILabel()
         label.text = "구매 시점에 비해 얼마 올랐어요"
         label.textColor = .white
-        label.font = UIFont(name: "NanumSquareB", size: 12.0)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         return label
     }()
     private lazy var imageView : UIImageView = {
@@ -96,17 +104,18 @@ class ChartViewController : UIViewController {
         seg.layer.cornerRadius = 0.7
         seg.backgroundColor = UIColor(named: "dropdown")
         seg.tintColor = .lightGray
+        seg.selectedSegmentTintColor = UIColor(named: "dropdown")
         seg.setTitleTextAttributes(
           [
               NSAttributedString.Key.foregroundColor: UIColor.white,
-            .font: UIFont(name: "NanumSquareB", size: 14)
+            .font: UIFont.systemFont(ofSize: 14, weight: .semibold)
           ],
           for: .selected
         )
         seg.setTitleTextAttributes(
           [
               NSAttributedString.Key.foregroundColor: UIColor.systemGray,
-            .font: UIFont(name: "NanumSquareB", size: 14)
+            .font: UIFont.systemFont(ofSize: 14, weight: .semibold)
           ],
           for: .normal
         )
@@ -117,7 +126,6 @@ class ChartViewController : UIViewController {
     //MARK: - Button
     private lazy var sellButton: UIButton = {
         let btn = UIButton()
-        btn.titleLabel?.font = UIFont(name: "NanumSquareEB", size: 15)
         btn.setTitle("판매", for: .normal)
         btn.setTitleColor(.blue, for: .normal)
         btn.backgroundColor = .white
@@ -138,7 +146,6 @@ class ChartViewController : UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setLineChartView()
         configure()
 
@@ -146,6 +153,7 @@ class ChartViewController : UIViewController {
     //MARK: - TableViewSetting
     func setupTableView(){
         contentView.addSubview(tableView)
+        contentView.backgroundColor = .black
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(EstateDetailCell.self, forCellReuseIdentifier: EstateDetailCell.identifier)
@@ -162,18 +170,60 @@ class ChartViewController : UIViewController {
     @objc func indexChanged(_ sender: UISegmentedControl){
         switch sender.selectedSegmentIndex{
         case 0:
-            
-            let daypricedata : [Int] = priceListDatas.suffix(30)
-            let daytimeListDatas : [String] = timeListDatas.suffix(30)
-            self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: daypricedata), xAxis: daytimeListDatas, recentPrice : Double(daypricedata.last!))
-            tableView.reloadData()
+            let monthagoday = Calendar.current.date(byAdding: .day, value: -7, to: todayDate)!
+            let monthagodate = dateFormatter.string(from: monthagoday)
+            // 만약 첫 거래가 7일 최근인경우
+            if(timeListDatas[0] > monthagodate ) {
+//                for i in 0...timeListDatas.count {
+//
+//                }
+                self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: priceListDatas), xAxis: timeListDatas, recentPrice : Double(priceListDatas.last!))
+                tableView.reloadData()
+            }
+            else{
+                var estimateDate : String?
+                for k in timeListDatas.reversed() {
+                    if k <= monthagodate{
+                        estimateDate = k
+                        break
+                    }
+                }
+                let firstindex = timeListDatas.firstIndex(of: estimateDate!)!
+                temptimeListDatas = Array(timeListDatas.dropFirst(firstindex))
+                temppriceListDatas = Array(priceListDatas.dropFirst(firstindex))
+                self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
+                tableView.reloadData()
+            }
         case 1:
-            let monthpricedata : [Int] = priceListDatas.suffix(90)
-            let monthtimeListDatas : [String] = timeListDatas.suffix(90)
-            self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: monthpricedata), xAxis: monthtimeListDatas, recentPrice : Double(monthpricedata.last!))
-            tableView.reloadData()
+            let monthagoday = Calendar.current.date(byAdding: .day, value: -30, to: todayDate)!
+            let monthagodate = dateFormatter.string(from: monthagoday)
+            // 만약 첫 거래가 한달보다 최근인경우
+            if(timeListDatas[0] > monthagodate ) {
+//                for i in 0...timeListDatas.count {
+//
+//                }
+                self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: priceListDatas), xAxis: timeListDatas, recentPrice : Double(priceListDatas.last!))
+                tableView.reloadData()
+            }
+            else{
+                var estimateDate : String?
+                for k in timeListDatas.reversed() {
+                    if k <= monthagodate{
+                        estimateDate = k
+                        break
+                    }
+                }
+                let firstindex = timeListDatas.firstIndex(of: estimateDate!)!
+                temptimeListDatas = Array(timeListDatas.dropFirst(firstindex))
+                temppriceListDatas = Array(priceListDatas.dropFirst(firstindex))
+                self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
+                tableView.reloadData()
+                
+            }
+
         case 2:
 //            let keydate = Calendar(identifier: .gregorian).date(byAdding: , to: <#T##Date#>)
+            
             print("3년")
         case 3:
             print("5년")
@@ -188,19 +238,14 @@ extension ChartViewController : UITableViewDelegate, UITableViewDataSource {
             return 30
         }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return timeListDatas.count    }
+        return temppriceListDatas.count    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: EstateDetailCell.identifier, for: indexPath) as? EstateDetailCell else { return UITableViewCell() }
         
-        cell.date.font = UIFont(name: "NanumSquareB", size: 13)
-        cell.price.font = UIFont(name: "NanumSquareB", size: 13)
-        cell.buysell.font = UIFont(name: "NanumSquareB", size: 13)
-
-        
-        cell.date.text = timeListDatas[indexPath.row]
+        cell.date.text = temptimeListDatas[indexPath.row]
         cell.date.textColor = .white
-        cell.price.text = "\(priceListDatas[indexPath.row])원"
+        cell.price.text = "\(temppriceListDatas[indexPath.row])원"
         cell.price.textColor = .white
         cell.buysell.text = "hello"
         cell.buysell.textColor = .white
@@ -267,23 +312,9 @@ extension ChartViewController {
                     
                     self.chartUI()
                     self.setupTableView()
-                    
                 }
             })
-
         }
-        
-//        EstatePriceData.requestStockPrice(EstateIdx: self.idx!, onCompleted: { (pricelists, transctiontime) in
-//            DispatchQueue.main.async {
-//                self.view.addSubview(self.lineChartView)
-//                self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: pricelists), xAxis: transctiontime, recentPrice : Double(pricelists.last!))
-////                self.lineChartView.snp.makeConstraints{
-////                    $0.leading.trailing.equalToSuperview()
-////                    $0.top.bottom.equalToSuperview().inset(140)
-////                }
-//            }
-//        })
-
     }
 
 
@@ -293,10 +324,9 @@ extension ChartViewController {
         [lineChartView, imageView,lineImage,dealLabel, revenueLabel, segmentCtrl].forEach{contentView.addSubview($0)}
         lineChartView.snp.makeConstraints{
             $0.top.equalTo(priceLabel.snp.bottom).offset(20)
-//            $0.width.equalTo(contentView.snp.width)
             $0.leading.trailing.equalTo(contentView ).inset(15)
             $0.height.equalTo(270)
-//            $0.bottom.equalTo(segmentCtrl.snp.top).inset(8)
+
         }
    
         segmentCtrl.snp.makeConstraints{
