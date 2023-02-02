@@ -42,6 +42,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     private lazy var topLabel1: UILabel = {
         let label = UILabel()
         label.text = "#강남구 집값 Top 10"
+        label.font = UIFont(name: "NanumSquareEB", size: 20.0)
         label.textColor = .white
         return label
     }()
@@ -49,6 +50,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     private lazy var topLabel2: UILabel = {
         let label = UILabel()
         label.text = "#23년 새롭게 바귄 시총 순위"
+        label.font = UIFont(name: "NanumSquareEB", size: 20.0)
         label.textColor = .white
         return label
     }()
@@ -56,6 +58,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     private lazy var topLabel3: UILabel = {
         let label = UILabel()
         label.text = "#어제 급등한 리셀"
+        label.font = UIFont(name: "NanumSquareEB", size: 20.0)
         label.textColor = .white
         return label
     }()
@@ -181,6 +184,11 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == tableView1{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TopViewCell.identifier, for: indexPath) as? TopViewCell else { return UITableViewCell() }
+            cell.number.font = UIFont(name: "NanumSquareB", size: 15.0)
+            cell.title.font = UIFont(name: "NanumSquareEB", size: 15.0)
+            cell.price.font = UIFont(name: "NanumSquareB", size: 12.0)
+            cell.percentage.font = UIFont(name: "NanumSquareB", size: 12.0)
+            cell.period.font = UIFont(name: "NanumSquareB", size: 12.0)
             
             cell.number.text = "1"
             cell.title.text = "서울시"
@@ -194,6 +202,13 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         else if tableView == tableView2{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TopViewCell.identifier, for: indexPath) as? TopViewCell else { return UITableViewCell() }
+            
+            cell.number.font = UIFont(name: "NanumSquareB", size: 15.0)
+            cell.title.font = UIFont(name: "NanumSquareEB", size: 15.0)
+            cell.price.font = UIFont(name: "NanumSquareB", size: 12.0)
+            cell.percentage.font = UIFont(name: "NanumSquareB", size: 12.0)
+            cell.period.font = UIFont(name: "NanumSquareB", size: 12.0)
+            
             cell.number.text = "1"
             cell.title.text = "서울시"
             cell.price.text = "22,303,921 원/m"
@@ -204,6 +219,13 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             return cell
             }else{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TopViewCell.identifier, for: indexPath) as? TopViewCell else { return UITableViewCell() }
+                
+                cell.number.font = UIFont(name: "NanumSquareB", size: 15.0)
+                cell.title.font = UIFont(name: "NanumSquareEB", size: 15.0)
+                cell.price.font = UIFont(name: "NanumSquareB", size: 12.0)
+                cell.percentage.font = UIFont(name: "NanumSquareB", size: 12.0)
+                cell.period.font = UIFont(name: "NanumSquareB", size: 12.0)
+                
                 cell.number.text = "1"
                 cell.title.text = "서울시"
                 cell.price.text = "22,303,921 원/m"

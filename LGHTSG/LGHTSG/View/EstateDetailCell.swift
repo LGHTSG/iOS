@@ -12,23 +12,21 @@ class EstateDetailCell: UITableViewCell {
     
     lazy var date: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = UIFont(name: "NanumSquareR", size: 14.0)
         label.textColor = .white
         return label
     }()
     
     lazy var price: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
-
+        label.font = UIFont(name: "NanumSquareR", size: 14.0)
         label.textColor = .white
         return label
     }()
     
     lazy var buysell: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
-
+        label.font = UIFont(name: "NanumSquareR", size: 14.0)
         label.textColor = .white
         return label
     }()

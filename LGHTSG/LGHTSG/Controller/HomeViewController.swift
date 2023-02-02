@@ -51,7 +51,7 @@ private extension HomeViewController{
         navigationItem.leftBarButtonItem = searchBtn
         var config = UIButton.Configuration.plain()
         var attributeString = AttributedString(changepercent)
-        attributeString.font = .systemFont(ofSize: 12, weight: .medium)
+        attributeString.font = UIFont(name: "NanumSquareB", size: 12)
         attributeString.foregroundColor = UIColor.systemBlue
         config.attributedTitle = attributeString
         config.titleAlignment = .leading
@@ -59,8 +59,15 @@ private extension HomeViewController{
         config.imagePadding = 8
         config.imagePlacement = .trailing
         let realbtn = UIButton(configuration: config)
+        realbtn.addTarget(self, action: #selector(mypageClicked), for: .touchUpInside)
         let profileBtn = UIBarButtonItem(customView:realbtn )
         navigationItem.rightBarButtonItem = profileBtn
+    }
+    
+    @objc func mypageClicked(){
+        let vc = MyPageViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
     }
 
     @objc func showsearchbar(){
@@ -68,6 +75,7 @@ private extension HomeViewController{
     }
     func layoutSearchBar(){
         let searchbar = UISearchBar()
+        searchbar.searchTextField.font = UIFont(name: "NanumSquareB" , size: 15)
         searchbar.placeholder = "검색어를 입력해주세요"
         searchbar.searchTextField.backgroundColor = .clear
         navigationItem.leftBarButtonItem = .none

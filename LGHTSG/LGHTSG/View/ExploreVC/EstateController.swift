@@ -23,6 +23,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     
     private lazy var searchBar: UISearchBar = {
         let search = UISearchBar()
+        search.searchTextField.font = UIFont(name: "NanumSquareB", size: 15)
         search.tintColor = .white
         search.barTintColor = .black
         search.searchTextField.textColor = .white
@@ -147,6 +148,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     
     private lazy var priceButton: UIButton = {
         let btn = UIButton()
+        btn.titleLabel?.font = UIFont(name: "NanumSquareEB", size: 15)
         btn.setTitle("가격", for: .normal)
         btn.layer.cornerRadius = 10
         btn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -159,6 +161,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     
     private lazy var saleButton: UIButton = {
         let btn = UIButton()
+        btn.titleLabel?.font = UIFont(name: "NanumSquareEB", size: 15)
         btn.setTitle("매물", for: .normal)
         btn.layer.cornerRadius = 10
         btn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -576,6 +579,15 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == tableView1{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: EstateSaleCell.identifier, for: indexPath) as? EstateSaleCell else { return UITableViewCell() }
+            
+            cell.number.font = UIFont(name: "NanumSquareB", size: 13)
+            cell.title.font = UIFont(name: "NanumSquareB", size: 13)
+            cell.area.font = UIFont(name: "NanumSquareB", size: 13)
+            cell.pow.font = UIFont(name: "NanumSquareB", size: 13)
+            cell.price.font = UIFont(name: "NanumSquareB", size: 13)
+            cell.period.font = UIFont(name: "NanumSquareB", size: 13)
+
+            
             cell.number.text = String(indexPath.row + 1)
             cell.number.textColor = .white
             cell.title.text = self.nameLists[indexPath.row]
@@ -598,6 +610,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         
         else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchItemCell.identifier, for: indexPath) as? SearchItemCell else { return UITableViewCell() }
+            cell.name.font = UIFont(name: "NanumSquareB", size: 13)
             cell.name.text = self.items[indexPath.row]
             return cell
         }

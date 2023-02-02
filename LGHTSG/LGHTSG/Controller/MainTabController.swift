@@ -26,6 +26,8 @@ class MainTabController: UITabBarController {
         tabBar.standardAppearance = tabbarApperance
         
         let HomeVC = UINavigationController(rootViewController: HomeViewController())
+        
+        
         HomeVC.tabBarItem.title = "Home"
         HomeVC.tabBarItem.image = UIImage(named: "home2")
         HomeVC.tabBarItem.selectedImage = UIImage(named: "home")

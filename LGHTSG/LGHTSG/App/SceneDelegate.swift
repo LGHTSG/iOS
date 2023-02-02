@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowscene = (scene as? UIWindowScene) else { return }
                 window = UIWindow(windowScene: windowscene)
                 window?.backgroundColor = .systemBackground
-                window?.rootViewController = MainTabController()
+                window?.rootViewController = ViewController()
             //window?.rootViewController = UINavigationController(rootViewController: MainTabController())
 
                 window?.tintColor = .label

@@ -185,7 +185,7 @@ extension ExploreViewController : showNavigationDelegate{
         navigationItem.leftBarButtonItem = searchBtn
         var config = UIButton.Configuration.plain()
         var attributeString = AttributedString("-93")
-        attributeString.font = .systemFont(ofSize: 12, weight: .medium)
+        attributeString.font =  UIFont(name: "NanumSquareB", size: 12)
         attributeString.foregroundColor = UIColor.systemBlue
         config.attributedTitle = attributeString
         config.titleAlignment = .leading
@@ -194,9 +194,16 @@ extension ExploreViewController : showNavigationDelegate{
         config.imagePlacement = .trailing
         let realbtn = UIButton(configuration: config)
         let profileBtn = UIBarButtonItem(customView:realbtn )
+        realbtn.addTarget(self, action: #selector(mypageClicked), for: .touchUpInside)
         navigationItem.rightBarButtonItem = profileBtn
     }
 
+    @objc func mypageClicked(){
+        let vc = MyPageViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
+    }
+    
     @objc func showsearchbar(){
         layoutSearchBar()
     }

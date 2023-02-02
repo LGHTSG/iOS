@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07096561298B8E7000942281 /* NanumSquareB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0709655E298B8E7000942281 /* NanumSquareB.ttf */; };
+		07096562298B8E7000942281 /* NanumSquareEB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0709655F298B8E7000942281 /* NanumSquareEB.ttf */; };
+		07096563298B8E7000942281 /* NanumSquareR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07096560298B8E7000942281 /* NanumSquareR.ttf */; };
 		07120DF3296EDF6E00ABF98F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 07120DF2296EDF6E00ABF98F /* Alamofire */; };
 		07120DF6296EDF7A00ABF98F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 07120DF5296EDF7A00ABF98F /* SnapKit */; };
 		071E0541296BB7B50020282F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071E0540296BB7B50020282F /* AppDelegate.swift */; };
@@ -50,9 +53,40 @@
 		078666BC2980BF9B000ADCBE /* ReverseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078666BB2980BF9B000ADCBE /* ReverseModel.swift */; };
 		078666BE2983844D000ADCBE /* GeocodingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078666BD2983844D000ADCBE /* GeocodingModel.swift */; };
 		8E910354CAD5238FB38C267D /* Pods_LGHTSG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */; };
+		F5DAEC00298AD1FA0098A11A /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEBFF298AD1FA0098A11A /* login.swift */; };
+		F5DAEC02298AD2050098A11A /* email.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC01298AD2050098A11A /* email.swift */; };
+		F5DAEC04298AD20E0098A11A /* join.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC03298AD20E0098A11A /* join.swift */; };
+		F5DAEC06298AD2180098A11A /* changePw.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC05298AD2180098A11A /* changePw.swift */; };
+		F5DAEC08298AD22A0098A11A /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC07298AD22A0098A11A /* user.swift */; };
+		F5DAEC0A298AD23D0098A11A /* LoginResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC09298AD23D0098A11A /* LoginResultModel.swift */; };
+		F5DAEC0F298AD2850098A11A /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC0E298AD2850098A11A /* RegisterView.swift */; };
+		F5DAEC11298AD2910098A11A /* JoinSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC10298AD2910098A11A /* JoinSuccessView.swift */; };
+		F5DAEC14298AD2A30098A11A /* CheckAgreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC13298AD2A30098A11A /* CheckAgreeView.swift */; };
+		F5DAEC16298AD2AC0098A11A /* CheckPageServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC15298AD2AC0098A11A /* CheckPageServiceView.swift */; };
+		F5DAEC18298AD2B60098A11A /* CheckPagePrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC17298AD2B60098A11A /* CheckPagePrivacyView.swift */; };
+		F5DAEC1A298AD2C40098A11A /* CheckPageMarketingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC19298AD2C40098A11A /* CheckPageMarketingView.swift */; };
+		F5DAEC1C298AD2F70098A11A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC1B298AD2F70098A11A /* LoginView.swift */; };
+		F5DAEC1E298AD3080098A11A /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC1D298AD3080098A11A /* StartView.swift */; };
+		F5DAEC20298AD31E0098A11A /* FindPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC1F298AD31E0098A11A /* FindPwView.swift */; };
+		F5DAEC22298AD3320098A11A /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC21298AD3320098A11A /* MyPageView.swift */; };
+		F5DAEC25298AD3620098A11A /* LoginApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC24298AD3620098A11A /* LoginApiModel.swift */; };
+		F5DAEC27298AD36A0098A11A /* LoginApiHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC26298AD36A0098A11A /* LoginApiHeaderModel.swift */; };
+		F5DAEC2A298AD39C0098A11A /* emailApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC29298AD39C0098A11A /* emailApiModel.swift */; };
+		F5DAEC2C298AD3A40098A11A /* JoinApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC2B298AD3A40098A11A /* JoinApiModel.swift */; };
+		F5DAEC2E298AD3AC0098A11A /* ChangePwModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC2D298AD3AC0098A11A /* ChangePwModel.swift */; };
+		F5DAEC30298AD3FA0098A11A /* RegisterationSuccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC2F298AD3FA0098A11A /* RegisterationSuccessController.swift */; };
+		F5DAEC32298AD40C0098A11A /* FindPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC31298AD40C0098A11A /* FindPasswordController.swift */; };
+		F5DAEC34298AD41F0098A11A /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC33298AD41F0098A11A /* MyPageViewController.swift */; };
+		F5DAEC37298AD4570098A11A /* CheckAgreeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC36298AD4570098A11A /* CheckAgreeController.swift */; };
+		F5DAEC39298AD4620098A11A /* CheckPageMarketingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC38298AD4620098A11A /* CheckPageMarketingController.swift */; };
+		F5DAEC3B298AD46B0098A11A /* CheckPageServiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC3A298AD46B0098A11A /* CheckPageServiceController.swift */; };
+		F5DAEC3D298AD47A0098A11A /* CheckPagePrivacyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC3C298AD47A0098A11A /* CheckPagePrivacyController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0709655E298B8E7000942281 /* NanumSquareB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareB.ttf; sourceTree = "<group>"; };
+		0709655F298B8E7000942281 /* NanumSquareEB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareEB.ttf; sourceTree = "<group>"; };
+		07096560298B8E7000942281 /* NanumSquareR.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareR.ttf; sourceTree = "<group>"; };
 		071E053D296BB7B50020282F /* LGHTSG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LGHTSG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		071E0540296BB7B50020282F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		071E0542296BB7B50020282F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +132,34 @@
 		1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LGHTSG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F7EA128F8EC33ED812CADCA /* Pods-LGHTSG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.release.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.release.xcconfig"; sourceTree = "<group>"; };
 		9154F7534146417B8EBDBECC /* Pods-LGHTSG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.debug.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.debug.xcconfig"; sourceTree = "<group>"; };
+		F5DAEBFF298AD1FA0098A11A /* login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.swift; sourceTree = "<group>"; };
+		F5DAEC01298AD2050098A11A /* email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = email.swift; sourceTree = "<group>"; };
+		F5DAEC03298AD20E0098A11A /* join.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = join.swift; sourceTree = "<group>"; };
+		F5DAEC05298AD2180098A11A /* changePw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = changePw.swift; sourceTree = "<group>"; };
+		F5DAEC07298AD22A0098A11A /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
+		F5DAEC09298AD23D0098A11A /* LoginResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResultModel.swift; sourceTree = "<group>"; };
+		F5DAEC0E298AD2850098A11A /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		F5DAEC10298AD2910098A11A /* JoinSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinSuccessView.swift; sourceTree = "<group>"; };
+		F5DAEC13298AD2A30098A11A /* CheckAgreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAgreeView.swift; sourceTree = "<group>"; };
+		F5DAEC15298AD2AC0098A11A /* CheckPageServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPageServiceView.swift; sourceTree = "<group>"; };
+		F5DAEC17298AD2B60098A11A /* CheckPagePrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPagePrivacyView.swift; sourceTree = "<group>"; };
+		F5DAEC19298AD2C40098A11A /* CheckPageMarketingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPageMarketingView.swift; sourceTree = "<group>"; };
+		F5DAEC1B298AD2F70098A11A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		F5DAEC1D298AD3080098A11A /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		F5DAEC1F298AD31E0098A11A /* FindPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwView.swift; sourceTree = "<group>"; };
+		F5DAEC21298AD3320098A11A /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		F5DAEC24298AD3620098A11A /* LoginApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginApiModel.swift; sourceTree = "<group>"; };
+		F5DAEC26298AD36A0098A11A /* LoginApiHeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginApiHeaderModel.swift; sourceTree = "<group>"; };
+		F5DAEC29298AD39C0098A11A /* emailApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailApiModel.swift; sourceTree = "<group>"; };
+		F5DAEC2B298AD3A40098A11A /* JoinApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinApiModel.swift; sourceTree = "<group>"; };
+		F5DAEC2D298AD3AC0098A11A /* ChangePwModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePwModel.swift; sourceTree = "<group>"; };
+		F5DAEC2F298AD3FA0098A11A /* RegisterationSuccessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationSuccessController.swift; sourceTree = "<group>"; };
+		F5DAEC31298AD40C0098A11A /* FindPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordController.swift; sourceTree = "<group>"; };
+		F5DAEC33298AD41F0098A11A /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		F5DAEC36298AD4570098A11A /* CheckAgreeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAgreeController.swift; sourceTree = "<group>"; };
+		F5DAEC38298AD4620098A11A /* CheckPageMarketingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPageMarketingController.swift; sourceTree = "<group>"; };
+		F5DAEC3A298AD46B0098A11A /* CheckPageServiceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPageServiceController.swift; sourceTree = "<group>"; };
+		F5DAEC3C298AD47A0098A11A /* CheckPagePrivacyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPagePrivacyController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +215,7 @@
 		071E0554296BB8210020282F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F5DAEBFE298AD1CC0098A11A /* krystal */,
 				078401D1298A49E200CDE061 /* asset.swift */,
 				078401BE298A486300CDE061 /* realEstates.swift */,
 				078401C0298A486300CDE061 /* ResellPrice.swift */,
@@ -179,6 +242,8 @@
 		071E0556296BB8380020282F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				F5DAEC28298AD38C0098A11A /* joinVM */,
+				F5DAEC23298AD34C0098A11A /* loginVM */,
 				078401E4298A4B2C00CDE061 /* StockPriceModel.swift */,
 				078401E5298A4B2D00CDE061 /* TableCellModel.swift */,
 				078401D5298A49E300CDE061 /* AssetModel.swift */,
@@ -197,12 +262,17 @@
 		071E0558296BB8510020282F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F5DAEC0D298AD26F0098A11A /* JoinVC */,
 				078401CF298A49DB00CDE061 /* HomeVC */,
 				078401C8298A49CB00CDE061 /* ExploreVC */,
 				078401CA298A49D500CDE061 /* EstateDetailCell.swift */,
 				075BBA39298ACF1D00710F44 /* EstateSaleCell.swift */,
 				0764F26A298642EF00F446CB /* SearchItemCell.swift */,
 				0764F284298959C600F446CB /* TopViewCell.swift */,
+				F5DAEC1B298AD2F70098A11A /* LoginView.swift */,
+				F5DAEC1D298AD3080098A11A /* StartView.swift */,
+				F5DAEC1F298AD31E0098A11A /* FindPwView.swift */,
+				F5DAEC21298AD3320098A11A /* MyPageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -210,6 +280,9 @@
 		071E0559296BB86E0020282F /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				0709655E298B8E7000942281 /* NanumSquareB.ttf */,
+				0709655F298B8E7000942281 /* NanumSquareEB.ttf */,
+				07096560298B8E7000942281 /* NanumSquareR.ttf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -217,6 +290,7 @@
 		071E055A296BB88B0020282F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F5DAEC35298AD4410098A11A /* CheckController */,
 				0755755A296BFC2100B8AF77 /* Authentication */,
 				078401B1298A484800CDE061 /* ChartsModel.swift */,
 				078401B4298A484800CDE061 /* ChartViewController.swift */,
@@ -233,6 +307,9 @@
 			children = (
 				0755755B296BFC3300B8AF77 /* LoginController.swift */,
 				0755755E296BFC4B00B8AF77 /* RegisterationController.swift */,
+				F5DAEC2F298AD3FA0098A11A /* RegisterationSuccessController.swift */,
+				F5DAEC31298AD40C0098A11A /* FindPasswordController.swift */,
+				F5DAEC33298AD41F0098A11A /* MyPageViewController.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -275,6 +352,70 @@
 				1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F5DAEBFE298AD1CC0098A11A /* krystal */ = {
+			isa = PBXGroup;
+			children = (
+				F5DAEBFF298AD1FA0098A11A /* login.swift */,
+				F5DAEC01298AD2050098A11A /* email.swift */,
+				F5DAEC03298AD20E0098A11A /* join.swift */,
+				F5DAEC05298AD2180098A11A /* changePw.swift */,
+				F5DAEC07298AD22A0098A11A /* user.swift */,
+				F5DAEC09298AD23D0098A11A /* LoginResultModel.swift */,
+			);
+			path = krystal;
+			sourceTree = "<group>";
+		};
+		F5DAEC0D298AD26F0098A11A /* JoinVC */ = {
+			isa = PBXGroup;
+			children = (
+				F5DAEC12298AD2980098A11A /* CheckVc */,
+				F5DAEC0E298AD2850098A11A /* RegisterView.swift */,
+				F5DAEC10298AD2910098A11A /* JoinSuccessView.swift */,
+			);
+			path = JoinVC;
+			sourceTree = "<group>";
+		};
+		F5DAEC12298AD2980098A11A /* CheckVc */ = {
+			isa = PBXGroup;
+			children = (
+				F5DAEC13298AD2A30098A11A /* CheckAgreeView.swift */,
+				F5DAEC15298AD2AC0098A11A /* CheckPageServiceView.swift */,
+				F5DAEC17298AD2B60098A11A /* CheckPagePrivacyView.swift */,
+				F5DAEC19298AD2C40098A11A /* CheckPageMarketingView.swift */,
+			);
+			path = CheckVc;
+			sourceTree = "<group>";
+		};
+		F5DAEC23298AD34C0098A11A /* loginVM */ = {
+			isa = PBXGroup;
+			children = (
+				F5DAEC24298AD3620098A11A /* LoginApiModel.swift */,
+				F5DAEC26298AD36A0098A11A /* LoginApiHeaderModel.swift */,
+			);
+			path = loginVM;
+			sourceTree = "<group>";
+		};
+		F5DAEC28298AD38C0098A11A /* joinVM */ = {
+			isa = PBXGroup;
+			children = (
+				F5DAEC29298AD39C0098A11A /* emailApiModel.swift */,
+				F5DAEC2B298AD3A40098A11A /* JoinApiModel.swift */,
+				F5DAEC2D298AD3AC0098A11A /* ChangePwModel.swift */,
+			);
+			path = joinVM;
+			sourceTree = "<group>";
+		};
+		F5DAEC35298AD4410098A11A /* CheckController */ = {
+			isa = PBXGroup;
+			children = (
+				F5DAEC36298AD4570098A11A /* CheckAgreeController.swift */,
+				F5DAEC38298AD4620098A11A /* CheckPageMarketingController.swift */,
+				F5DAEC3A298AD46B0098A11A /* CheckPageServiceController.swift */,
+				F5DAEC3C298AD47A0098A11A /* CheckPagePrivacyController.swift */,
+			);
+			path = CheckController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,7 +486,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07096562298B8E7000942281 /* NanumSquareEB.ttf in Resources */,
 				078401C7298A496B00CDE061 /* LaunchScreen.storyboard in Resources */,
+				07096563298B8E7000942281 /* NanumSquareR.ttf in Resources */,
+				07096561298B8E7000942281 /* NanumSquareB.ttf in Resources */,
 				071E054A296BB7B70020282F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,39 +545,67 @@
 			files = (
 				078401DB298A49E300CDE061 /* asset.swift in Sources */,
 				078401DA298A49E300CDE061 /* ChartMarker.swift in Sources */,
+				F5DAEC32298AD40C0098A11A /* FindPasswordController.swift in Sources */,
 				0764F285298959C600F446CB /* TopViewCell.swift in Sources */,
+				F5DAEC25298AD3620098A11A /* LoginApiModel.swift in Sources */,
 				078401C2298A486300CDE061 /* realEstates.swift in Sources */,
 				078401B8298A484800CDE061 /* StockChartViewController.swift in Sources */,
 				078401DF298A49E300CDE061 /* AssetModel.swift in Sources */,
 				078401DE298A49E300CDE061 /* UnderlineSegmentedControl.swift in Sources */,
 				078401BC298A484800CDE061 /* ChartViewController.swift in Sources */,
+				F5DAEC27298AD36A0098A11A /* LoginApiHeaderModel.swift in Sources */,
+				F5DAEC2C298AD3A40098A11A /* JoinApiModel.swift in Sources */,
 				078401C5298A486300CDE061 /* EstatePriceModel.swift in Sources */,
 				075BBA34298A79F500710F44 /* EstatePriceDetailModel.swift in Sources */,
+				F5DAEC3D298AD47A0098A11A /* CheckPagePrivacyController.swift in Sources */,
 				078401BB298A484800CDE061 /* HomeViewController.swift in Sources */,
+				F5DAEC37298AD4570098A11A /* CheckAgreeController.swift in Sources */,
 				071E0545296BB7B50020282F /* ViewController.swift in Sources */,
 				0764F2712987853600F446CB /* EstateModel.swift in Sources */,
+				F5DAEC34298AD41F0098A11A /* MyPageViewController.swift in Sources */,
+				F5DAEC30298AD3FA0098A11A /* RegisterationSuccessController.swift in Sources */,
 				078401CE298A49D500CDE061 /* resellView.swift in Sources */,
 				0755755C296BFC3300B8AF77 /* LoginController.swift in Sources */,
+				F5DAEC39298AD4620098A11A /* CheckPageMarketingController.swift in Sources */,
+				F5DAEC04298AD20E0098A11A /* join.swift in Sources */,
 				078401DD298A49E300CDE061 /* StockDateSegmentControl.swift in Sources */,
+				F5DAEC00298AD1FA0098A11A /* login.swift in Sources */,
+				F5DAEC06298AD2180098A11A /* changePw.swift in Sources */,
 				078401BD298A484800CDE061 /* ExploreViewController.swift in Sources */,
+				F5DAEC3B298AD46B0098A11A /* CheckPageServiceController.swift in Sources */,
 				078401CC298A49D500CDE061 /* StockView.swift in Sources */,
 				078401E3298A49E300CDE061 /* UnderlineView.swift in Sources */,
 				078401E1298A49E300CDE061 /* HomeTableCell.swift in Sources */,
+				F5DAEC2A298AD39C0098A11A /* emailApiModel.swift in Sources */,
+				F5DAEC22298AD3320098A11A /* MyPageView.swift in Sources */,
 				0764F26B298642EF00F446CB /* SearchItemCell.swift in Sources */,
+				F5DAEC18298AD2B60098A11A /* CheckPagePrivacyView.swift in Sources */,
+				F5DAEC1A298AD2C40098A11A /* CheckPageMarketingView.swift in Sources */,
+				F5DAEC14298AD2A30098A11A /* CheckAgreeView.swift in Sources */,
+				F5DAEC20298AD31E0098A11A /* FindPwView.swift in Sources */,
+				F5DAEC1C298AD2F70098A11A /* LoginView.swift in Sources */,
 				075BBA3A298ACF1D00710F44 /* EstateSaleCell.swift in Sources */,
 				075BBA30298A78FC00710F44 /* EstateController.swift in Sources */,
+				F5DAEC0A298AD23D0098A11A /* LoginResultModel.swift in Sources */,
+				F5DAEC1E298AD3080098A11A /* StartView.swift in Sources */,
 				078401E7298A4B2D00CDE061 /* TableCellModel.swift in Sources */,
 				078401E9298A4C2600CDE061 /* TopViewController.swift in Sources */,
 				071E0541296BB7B50020282F /* AppDelegate.swift in Sources */,
 				071E0543296BB7B50020282F /* SceneDelegate.swift in Sources */,
 				0764F26F29866A6500F446CB /* APIToken.swift in Sources */,
 				078401C4298A486300CDE061 /* ResellPrice.swift in Sources */,
+				F5DAEC02298AD2050098A11A /* email.swift in Sources */,
+				F5DAEC11298AD2910098A11A /* JoinSuccessView.swift in Sources */,
 				078401B9298A484800CDE061 /* ChartsModel.swift in Sources */,
 				078401E6298A4B2D00CDE061 /* StockPriceModel.swift in Sources */,
+				F5DAEC0F298AD2850098A11A /* RegisterView.swift in Sources */,
+				F5DAEC2E298AD3AC0098A11A /* ChangePwModel.swift in Sources */,
+				F5DAEC08298AD22A0098A11A /* user.swift in Sources */,
 				078401CD298A49D500CDE061 /* EstateDetailCell.swift in Sources */,
 				078666BC2980BF9B000ADCBE /* ReverseModel.swift in Sources */,
 				078401B6298A484800CDE061 /* MainTabController.swift in Sources */,
 				078401C3298A486300CDE061 /* StockPrice.swift in Sources */,
+				F5DAEC16298AD2AC0098A11A /* CheckPageServiceView.swift in Sources */,
 				078666BE2983844D000ADCBE /* GeocodingModel.swift in Sources */,
 				0764F26D2986653500F446CB /* AreaListModel.swift in Sources */,
 				0755755F296BFC4B00B8AF77 /* RegisterationController.swift in Sources */,
@@ -565,7 +737,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NG2NLR2Z86;
+				DEVELOPMENT_TEAM = 9KQS6UJ9YX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LGHTSG/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보 제공을 허용합니까?";
@@ -579,7 +751,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sunho.LGHTSG;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kry.LGHTSG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -595,7 +767,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NG2NLR2Z86;
+				DEVELOPMENT_TEAM = 9KQS6UJ9YX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LGHTSG/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보 제공을 허용합니까?";
@@ -609,7 +781,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sunho.LGHTSG;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kry.LGHTSG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

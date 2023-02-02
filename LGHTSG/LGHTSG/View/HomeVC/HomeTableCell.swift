@@ -12,34 +12,32 @@ import Kingfisher
 class HomeTableCell : UITableViewCell {
     var countLabel : UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.font = UIFont(name: "NanumSquareB", size: 16.0)
         label.textColor = .white
         return label
     }()
 
     private lazy var nameLabel : UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.font = UIFont(name: "NanumSquareB", size: 14.0)
         label.textColor = .white
-        label.textColor = .white
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
     private lazy var priceLabel : UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = UIFont(name: "NanumSquareB", size: 14.0)
         label.textColor = UIColor.systemGray
         return label
     }()
     private lazy var pricePercent : UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.font = UIFont(name: "NanumSquareB", size: 12.0)
         label.textColor = UIColor.red
         return label
     }()
     private lazy var changeDate : UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight : .medium)
+        label.font = UIFont(name: "NanumSquareB", size: 12.0)
         label.textColor = UIColor.systemGray
         return label
     }()
@@ -59,6 +57,13 @@ extension HomeTableCell {
         [countLabel, nameLabel, priceLabel, pricePercent, changeDate, iconimage].forEach{
             addSubview($0)
         }
+        
+        nameLabel.font = UIFont(name: "NanumSquareB", size: 13)
+        priceLabel.font = UIFont(name: "NanumSquareB", size: 13)
+        changeDate.font = UIFont(name: "NanumSquareB", size: 13)
+        pricePercent.font = UIFont(name: "NanumSquareB", size: 13)
+
+        
 
         nameLabel.text = assetinfo.name
         priceLabel.text = String(assetinfo.price)+"원"
@@ -111,6 +116,15 @@ extension HomeTableCell {
       [countLabel, nameLabel, priceLabel, pricePercent, changeDate, iconimage].forEach{
             addSubview($0)
         }
+        
+        
+        
+        nameLabel.font = UIFont(name: "NanumSquareB", size: 13)
+        priceLabel.font = UIFont(name: "NanumSquareB", size: 13)
+        changeDate.font = UIFont(name: "NanumSquareB", size: 13)
+        pricePercent.font = UIFont(name: "NanumSquareB", size: 13)
+        
+        
         nameLabel.text = resellinfo.name
         priceLabel.text = String(resellinfo.price)+"원"
         changeDate.text = resellinfo.rateCalDateDiff

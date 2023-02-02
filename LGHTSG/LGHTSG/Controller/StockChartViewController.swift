@@ -367,6 +367,10 @@ class StockChartViewController : UIViewController {
                     self.view.addSubview(self.lineChartView)
                     let sortedtimeLists = transctiontime.sorted{$0.compare($1, options: .numeric) == .orderedAscending}
                     self.priceListDatas = pricelists
+                    
+                    self.priceLabel.font = UIFont(name: "NanumSquareB", size: 13)
+                    
+                    
                     self.priceLabel.text = "\(self.priceListDatas.last!)원"
                     self.timeListDatas = sortedtimeLists
                     self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: pricelists), xAxis: sortedtimeLists, recentPrice : Double(pricelists.last!))

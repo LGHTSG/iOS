@@ -25,28 +25,28 @@ class TopViewCell: UITableViewCell {
     lazy var title: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = .systemFont(ofSize: 14.0, weight: .semibold)
+        label.font = UIFont(name: "NanumSquareB", size: 14.0)
         return label
     }()
     
     lazy var price: UILabel = {
         let label = UILabel()
         label.textColor = .gray
-        label.font = .systemFont(ofSize: 14.0, weight: .medium)
+        label.font = UIFont(name: "NanumSquareB", size: 14.0)
         return label
     }()
     
     lazy var percentage: UILabel = {
         let label = UILabel()
         label.textColor = .red
-        label.font = .systemFont(ofSize: 12.0, weight: .medium)
+        label.font = UIFont(name: "NanumSquareR", size: 12.0)
         return label
     }()
     
     lazy var period: UILabel = {
         let label = UILabel()
         label.textColor = .gray
-        label.font = .systemFont(ofSize: 12.0, weight: .medium)
+        label.font = UIFont(name: "NanumSquareR", size: 12.0)
         return label
     }()
     

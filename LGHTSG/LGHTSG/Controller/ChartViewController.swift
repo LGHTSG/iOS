@@ -35,27 +35,27 @@ class ChartViewController : UIViewController {
     }()
     private lazy var nameLabel : UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = UIFont(name: "NanumSquareB", size: 16.0)
         label.text = nameText
         return label
     }()
     private lazy var priceLabel : UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = UIFont(name: "NanumSquareB", size: 14.0)
         label.textColor = UIColor.systemGray
         label.text = PriceText
         return label
     }()
     private lazy var pricePercent : UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.font = UIFont(name: "NanumSquareB", size: 12.0)
         label.textColor = UIColor.red
         label.text = pricePercentText
         return label
     }()
     private lazy var changeDate : UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight : .medium)
+        label.font = UIFont(name: "NanumSquareB", size: 12.0)
         label.textColor = UIColor.systemGray
         label.text = changeDateText
         return label
@@ -64,7 +64,7 @@ class ChartViewController : UIViewController {
     private lazy var dealLabel: UILabel = {
         let label = UILabel()
         label.text = "거래 이력"
-        label.font = UIFont.systemFont(ofSize: 12, weight: .light)
+        label.font = UIFont(name: "NanumSquareB", size: 12.0)
         label.textColor = .white
         return label
     }()
@@ -73,7 +73,7 @@ class ChartViewController : UIViewController {
         let label = UILabel()
         label.text = "구매 시점에 비해 얼마 올랐어요"
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.font = UIFont(name: "NanumSquareB", size: 12.0)
         return label
     }()
     private lazy var imageView : UIImageView = {
@@ -99,14 +99,14 @@ class ChartViewController : UIViewController {
         seg.setTitleTextAttributes(
           [
               NSAttributedString.Key.foregroundColor: UIColor.white,
-            .font: UIFont.systemFont(ofSize: 14, weight: .semibold)
+            .font: UIFont(name: "NanumSquareB", size: 14)
           ],
           for: .selected
         )
         seg.setTitleTextAttributes(
           [
               NSAttributedString.Key.foregroundColor: UIColor.systemGray,
-            .font: UIFont.systemFont(ofSize: 14, weight: .semibold)
+            .font: UIFont(name: "NanumSquareB", size: 14)
           ],
           for: .normal
         )
@@ -117,6 +117,7 @@ class ChartViewController : UIViewController {
     //MARK: - Button
     private lazy var sellButton: UIButton = {
         let btn = UIButton()
+        btn.titleLabel?.font = UIFont(name: "NanumSquareEB", size: 15)
         btn.setTitle("판매", for: .normal)
         btn.setTitleColor(.blue, for: .normal)
         btn.backgroundColor = .white
@@ -191,6 +192,11 @@ extension ChartViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: EstateDetailCell.identifier, for: indexPath) as? EstateDetailCell else { return UITableViewCell() }
+        
+        cell.date.font = UIFont(name: "NanumSquareB", size: 13)
+        cell.price.font = UIFont(name: "NanumSquareB", size: 13)
+        cell.buysell.font = UIFont(name: "NanumSquareB", size: 13)
+
         
         cell.date.text = timeListDatas[indexPath.row]
         cell.date.textColor = .white
