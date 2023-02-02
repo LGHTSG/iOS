@@ -151,7 +151,7 @@ class LoginController: UIViewController {
         login.requestLoginDataModel(bodyData: bodyData){
             data in
             self.jwt = data.jwt
-            print(data)
+            UserDefaults.standard.set(data.jwt,forKey: "savedToken")
             let vc = MainTabController()
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true)

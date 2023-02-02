@@ -222,9 +222,31 @@ class ChartViewController : UIViewController {
             }
 
         case 2:
-//            let keydate = Calendar(identifier: .gregorian).date(byAdding: , to: <#T##Date#>)
-            
-            print("3년")
+            let yearagoday = Calendar.current.date(byAdding: .day, value: -30, to: todayDate)!
+            let yearagodate = dateFormatter.string(from: yearagoday)
+            // 만약 첫 거래가1년보다 최근인경우
+            if(timeListDatas[0] > yearagodate ) {
+//                for i in 0...timeListDatas.count {
+//
+//                }
+                self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: priceListDatas), xAxis: timeListDatas, recentPrice : Double(priceListDatas.last!))
+                tableView.reloadData()
+            }
+            else{
+                var estimateDate : String?
+                for k in timeListDatas.reversed() {
+                    if k <= yearagodate{
+                        estimateDate = k
+                        break
+                    }
+                }
+                let firstindex = timeListDatas.firstIndex(of: estimateDate!)!
+                temptimeListDatas = Array(timeListDatas.dropFirst(firstindex))
+                temppriceListDatas = Array(priceListDatas.dropFirst(firstindex))
+                self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
+                tableView.reloadData()
+                
+            }
         case 3:
             print("5년")
         default:
