@@ -13,7 +13,7 @@ class StockChartViewController : UIViewController {
         var stockPriceData = StockPriceModel()
         var EstatePriceData = EstatePriceModel()
         var nameText : String?
-
+        private var mytoken = UserDefaults.standard.string(forKey: "savedToken")
         var idx : Int?
         var pricePercentText : String?
         var changeDateText : String?
@@ -21,8 +21,15 @@ class StockChartViewController : UIViewController {
         var timeListDatas = [String]()
         var temppriceListDatas = [Int]()
         var temptimeListDatas = [String]()
+        private var markerPrice : Int?
+        private var markerDate : String?
+        private var sellMode = false
+
+
+
         lazy var lineChartView : LineChartView = {
             let chartView = LineChartView()
+//            chartView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(bringMarkdata)))
             return chartView
         }()
         private lazy var nameLabel : UILabel = {
@@ -107,15 +114,66 @@ class StockChartViewController : UIViewController {
         //MARK: - Button
         private lazy var sellButton: UIButton = {
             let btn = UIButton()
-            btn.setTitle("판매", for: .normal)
-            btn.setTitleColor(.blue, for: .normal)
-            btn.backgroundColor = .white
-            btn.layer.cornerRadius = 5
+            var config = UIButton.Configuration.filled()
+            config.attributedTitle = "원하시는 구매시점을 클릭해주세요"
+            btn.configuration = config
+            btn.layer.cornerRadius = 10
+            btn.backgroundColor = .blue
+            btn.tintColor = .blue
             btn.layer.borderWidth = 1
+            btn.addTarget(self, action: #selector(sellbtnclicked), for: .touchUpInside)
             return btn
             
         }()
-        
+        //MARK: - MarkerDatachange
+    @objc func markerchange(_ notification : Notification){
+        if let getValue = notification.userInfo as? [String : Int]{
+            for (date, price ) in getValue {
+                self.markerPrice = price
+                self.markerDate = date
+            }
+            //            let chartmarker = ChartMarker()
+            //            markerPrice = chartmarker.price
+            //            markerDate = chartmarker.priceDate
+            let myassetModel = AssetModel()
+            myassetModel.requestMyAsset(token: mytoken!) {
+                data in
+                for i in 0..<data.count{
+                    if data[i].transactionTime == self.markerDate && data[i].sellCheck == 0 {
+                        //이 데이터를 가지고 있는 것이므로 판매 버튼이 나와야함.
+                        self.sellMode = true
+                        var config = UIButton.Configuration.plain()
+                        config.titleAlignment = .center
+                        var titleAttribute = AttributeContainer()
+                        titleAttribute.font = .systemFont(ofSize: 10, weight: .medium)
+                        config.attributedTitle = AttributedString(self.markerDate!, attributes: titleAttribute)
+                        config.titlePadding = 3.0
+                        var subtitleAttribute = AttributeContainer()
+                        subtitleAttribute.font = .systemFont(ofSize: 15, weight: .bold)
+                        config.attributedSubtitle = AttributedString("판매", attributes: subtitleAttribute)
+                        self.sellButton.configuration = config
+                        self.sellButton.backgroundColor = .white
+                    }
+                    else{ self.sellMode  = false}
+                }
+                if(self.sellMode == false){
+                    var config = UIButton.Configuration.filled()
+                    config.titleAlignment = .center
+                    var titleAttribute = AttributeContainer()
+                    titleAttribute.font = .systemFont(ofSize: 10, weight: .medium)
+                    titleAttribute.foregroundColor = .white
+                    config.attributedTitle = AttributedString(self.markerDate!, attributes: titleAttribute)
+                    config.titlePadding = 3.0
+                    var subtitleAttribute = AttributeContainer()
+                    subtitleAttribute.font = .systemFont(ofSize: 15, weight: .bold)
+                    subtitleAttribute.backgroundColor  = .white
+                    config.attributedSubtitle = AttributedString("구매", attributes: subtitleAttribute)
+                    self.sellButton.configuration = config
+                    self.sellButton.backgroundColor = .blue
+                }
+            }
+        }
+    }
         //MARK: - TableView
         private lazy var tableView: UITableView = {
             let table = UITableView()
@@ -128,10 +186,10 @@ class StockChartViewController : UIViewController {
         //MARK: - LifeCycle
         override func viewDidLoad() {
             super.viewDidLoad()
-
             configure()
             setLineChartView()
- 
+            NotificationCenter.default.addObserver(self, selector: #selector(markerchange(_:)), name: Notification.Name("markerdata"), object: nil)
+
         }
         //MARK: - TableViewSetting
         func setupTableView(){
@@ -288,6 +346,10 @@ class StockChartViewController : UIViewController {
                 break
             }
         }
+    //MARK: - btnclickevent
+    @objc func sellbtnclicked(){
+        print(markerDate, markerPrice)
+    }
     }
     extension StockChartViewController : UITableViewDelegate, UITableViewDataSource {
         //cell 높이조절

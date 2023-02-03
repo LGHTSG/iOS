@@ -13,29 +13,43 @@ final class HomeViewController : UIViewController{
     var tableview = UITableView()
     var underline1 = UnderlineView()
     var underline2 = UnderlineView()
-    var assetList = [asset]()
+    var myAssetData = [myasset.myBody]()
+    var SellAssetData = [myasset.myBody]()
     var assetmodel = AssetModel()
+    private var mytoken = UserDefaults.standard.string(forKey: "savedToken")
     override func viewDidLoad(){
         super.viewDidLoad()
         SetNavigationBar()
         setTobTabbar()
         segmentControl.addTarget(self, action: #selector(clicksegment), for: .valueChanged)
-
-        setTable()
-//        assetmodel.delegate = self
-//        assetmodel.getAsset()
+        getmyAssetData()
     }
     // 나의 자산, 판매한 자산
     @objc func clicksegment(_ sender : UISegmentedControl){
         if sender.selectedSegmentIndex == 0{
             underline1.backgroundColor = .white
             underline2.backgroundColor = .darkGray
+            tableview.reloadData()
         }else{
             underline1.backgroundColor = .darkGray
             underline2.backgroundColor = .white
+            tableview.reloadData()
         }
     }
-
+    private func getmyAssetData(){
+        assetmodel.requestMyAsset(token: mytoken!) {
+            data in
+            for i in 0..<data.count{
+                if(data[i].sellCheck == 1){
+                    self.SellAssetData.append(data[i])
+                }
+                else if (data[i].sellCheck == 0){
+                    self.myAssetData.append(data[i])
+                }
+            }
+            self.setTable()
+        }
+    }
 
 }
 private extension HomeViewController{
@@ -131,24 +145,30 @@ private extension HomeViewController{
 extension HomeViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableview.dequeueReusableCell(withIdentifier: "HomeTableCell", for: indexPath) as? HomeTableCell
-//        cell?.setup(with: assetList[indexPath.row])
-        cell?.setuppp()
+        let selectedIndex = self.segmentControl.selectedSegmentIndex
+        switch selectedIndex{
+        case 0:
+            cell?.setup(home: myAssetData[indexPath.row])
+        case 1:
+            cell?.setup(home: SellAssetData[indexPath.row])
+        default:
+            return UITableViewCell()
+        }
         cell?.countLabel.text = "\(indexPath.row+1)"
         cell?.backgroundColor = .black
         return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let selectedIndex = self.segmentControl.selectedSegmentIndex
-//        switch selectedIndex{
-//        case 0:
-//            return assetList.count
-//        case 1:
-//            return assetList.count
-//        default:
-//            return 0
-//        }
-        20
+        let selectedIndex = self.segmentControl.selectedSegmentIndex
+        switch selectedIndex{
+        case 0:
+            return myAssetData.count
+        case 1:
+            return SellAssetData.count
+        default:
+            return 0
+        }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -162,10 +182,3 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource {
         }
     }
 }
-//extension HomeViewController : AssetModelProtocol{
-//    // MARK : assetmodel protocol function
-//    func assetRetrived(assets : [asset]){
-//        self.assetList = assets
-//        tableview.reloadData()
-//    }
-//}

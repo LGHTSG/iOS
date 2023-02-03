@@ -174,15 +174,20 @@ extension HomeTableCell {
             $0.top.equalTo(pricePercent.snp.top)
         }
     }
-    func setuppp(){
+    func setup(home : myasset.myBody){
         [countLabel, nameLabel, priceLabel, pricePercent, changeDate, iconimage].forEach{
             addSubview($0)
         }
-        nameLabel.text = "서울특별시 강남구 논현동 동현아파트"
-        priceLabel.text = "22,303,921원/m2"
-        changeDate.text = "3달전 대비"
-        pricePercent.text = "+3.0%"
-        iconimage.image = UIImage(systemName: "star")
+        nameLabel.text = home.assetName
+        priceLabel.text = String(home.price)
+        changeDate.text = home.rateCalDateDiff
+        pricePercent.text = String(home.rateOfChange)
+        let url = URL(string: home.iconImage)
+        // kf 이미지 둥그렇
+        iconimage.clipsToBounds = true
+        iconimage.layer.cornerRadius = 20
+        iconimage.backgroundColor = .white
+        iconimage.kf.setImage(with: url )
         countLabel.snp.makeConstraints{
             $0.leading.equalToSuperview()
             $0.top.equalToSuperview()
@@ -191,6 +196,7 @@ extension HomeTableCell {
         iconimage.snp.makeConstraints{
             $0.leading.equalToSuperview().offset(23.66)
             $0.top.equalToSuperview()
+            $0.height.width.equalTo(44)
             $0.bottom.equalToSuperview().offset(-12)
         }
         nameLabel.snp.makeConstraints{

@@ -13,6 +13,7 @@ import Foundation
 class ChartViewController : UIViewController {
     var stockPriceData = StockPriceModel()
     var EstatePriceData = EstatePriceModel()
+    private var mytoken = UserDefaults.standard.string(forKey: "savedToken")
     var nameText : String?
     var PriceText : String?
     var idx : Int?
@@ -25,6 +26,8 @@ class ChartViewController : UIViewController {
     let todayDate = Date()
     var temppriceListDatas = [Int]()
     var temptimeListDatas = [String]()
+    var markertime : String?
+    var markerprice : Int?
     var dateFormatter : DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YY/MM/dd"
@@ -131,6 +134,7 @@ class ChartViewController : UIViewController {
         btn.backgroundColor = .white
         btn.layer.cornerRadius = 5
         btn.layer.borderWidth = 1
+        btn.addTarget(self, action: #selector(btnclicked), for: .touchUpInside)
         return btn
         
     }()
@@ -166,6 +170,13 @@ class ChartViewController : UIViewController {
             $0.bottom.equalTo(sellButton.snp.top ).offset(-10)
             
         }
+    }
+    @objc func btnclicked(){
+        let chartmarkerprice = UserDefaults.standard.string(forKey: "markerprice")
+        let chartmarkertime = UserDefaults.standard.string(forKey: "markerdate")
+        print(chartmarkertime)
+        print(chartmarkerprice)
+        print(idx)
     }
     @objc func indexChanged(_ sender: UISegmentedControl){
         switch sender.selectedSegmentIndex{

@@ -19,7 +19,7 @@ class StockPriceModel {
                 guard let self = self else {return}
                 data.body.forEach{
                     self.PriceLists.append($0.price)
-                    self.transactionTimeLists.append(String($0.transactionTime.prefix(10)))
+                    self.transactionTimeLists.append(String($0.transactionTime))
                 }
                 onCompleted(self.PriceLists , self.transactionTimeLists)
                 
