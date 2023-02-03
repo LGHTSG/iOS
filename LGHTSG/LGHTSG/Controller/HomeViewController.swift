@@ -24,6 +24,10 @@ final class HomeViewController : UIViewController{
         segmentControl.addTarget(self, action: #selector(clicksegment), for: .valueChanged)
         getmyAssetData()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        getmyAssetData()
+    }
     // 나의 자산, 판매한 자산
     @objc func clicksegment(_ sender : UISegmentedControl){
         if sender.selectedSegmentIndex == 0{
@@ -39,14 +43,18 @@ final class HomeViewController : UIViewController{
     private func getmyAssetData(){
         assetmodel.requestMyAsset(token: mytoken!) {
             data in
+            var tempselldata = [myasset.myBody]()
+            var tempmyassetdata = [myasset.myBody]()
             for i in 0..<data.count{
                 if(data[i].sellCheck == 1){
-                    self.SellAssetData.append(data[i])
+                    tempselldata.append(data[i])
                 }
                 else if (data[i].sellCheck == 0){
-                    self.myAssetData.append(data[i])
+                    tempmyassetdata.append(data[i])
                 }
             }
+            self.SellAssetData = tempselldata
+            self.myAssetData = tempmyassetdata
             self.setTable()
         }
     }

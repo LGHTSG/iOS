@@ -132,9 +132,6 @@ class StockChartViewController : UIViewController {
                 self.markerPrice = price
                 self.markerDate = date
             }
-            //            let chartmarker = ChartMarker()
-            //            markerPrice = chartmarker.price
-            //            markerDate = chartmarker.priceDate
             let myassetModel = AssetModel()
             myassetModel.requestMyAsset(token: mytoken!) {
                 data in
@@ -348,6 +345,17 @@ class StockChartViewController : UIViewController {
         }
     //MARK: - btnclickevent
     @objc func sellbtnclicked(){
+        let trademodel = StocktradeModel()
+        if(sellMode == true){
+            trademodel.requestSellstock(assetIdx: self.idx!, category: "stock", price: self.markerPrice!, transactionTime: self.markerDate!, token: mytoken!){
+                data in print(data)
+            }
+        }else{
+            trademodel.requestBuystock(assetIdx: self.idx!, category: "stock", price: self.markerPrice!, transactionTime: self.markerDate!, token: mytoken!)  {
+                data in
+                print(data)
+            }
+        }
         print(markerDate, markerPrice)
     }
     }

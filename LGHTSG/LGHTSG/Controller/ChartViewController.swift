@@ -172,11 +172,11 @@ class ChartViewController : UIViewController {
         }
     }
     @objc func btnclicked(){
-        let chartmarkerprice = UserDefaults.standard.string(forKey: "markerprice")
-        let chartmarkertime = UserDefaults.standard.string(forKey: "markerdate")
-        print(chartmarkertime)
-        print(chartmarkerprice)
-        print(idx)
+            let chartmarkerprice = UserDefaults.standard.string(forKey: "markerprice")
+            let chartmarkertime = UserDefaults.standard.string(forKey: "markerdate")
+            print(chartmarkertime)
+            print(chartmarkerprice)
+            print(idx)
     }
     @objc func indexChanged(_ sender: UISegmentedControl){
         switch sender.selectedSegmentIndex{

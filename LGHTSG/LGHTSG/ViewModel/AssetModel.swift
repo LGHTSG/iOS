@@ -12,7 +12,6 @@ class AssetModel {
         let urlString = "http://api.lghtsg.site:8090/users/my-asset"
         guard let url = URL(string: urlString) else {return print("erorr")}
         let headers : HTTPHeaders = ["x-access-token" : token]
-        let tempheaders : HTTPHeaders = ["x-access-token" : "eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWR4IjoxLCJpYXQiOjE2NzM5NjU2NDcsImV4cCI6MTY3NTQzNjg3Nn0.cp4KNnwZK7dBAWuTEOhTT5xaN__onP-Y2e8ppZJNHnw"]
         AF.request(url, headers : headers).responseDecodable(of: myasset.self){ response in
             switch response.result {
             case .success(let res):
