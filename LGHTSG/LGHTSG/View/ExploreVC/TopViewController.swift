@@ -15,28 +15,29 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     //MARK: - TopTitle
     
     //topview 1,2,3 addTarget 하기, 이미지view 원
-    private lazy var topView1: UIView = {
-        let view = UIView()
-        view.backgroundColor = .black
-        view.addSubview(topLabel1)
-        view.addSubview(chevron1)
-        return view
+    private lazy var topViewButton1: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = .black
+        btn.addSubview(topLabel1)
+        btn.addSubview(chevron1)
+        
+        return btn
     }()
     
-    private lazy var topView2: UIView = {
-        let view = UIView()
-        view.backgroundColor = .black
-        view.addSubview(topLabel2)
-        view.addSubview(chevron2)
-        return view
+    private lazy var topViewButton2: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = .black
+        btn.addSubview(topLabel2)
+        btn.addSubview(chevron2)
+        return btn
     }()
     
-    private lazy var topView3: UIView = {
-        let view = UIView()
-        view.backgroundColor = .black
-        view.addSubview(topLabel3)
-        view.addSubview(chevron3)
-        return view
+    private lazy var topViewButton3: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = .black
+        btn.addSubview(topLabel3)
+        btn.addSubview(chevron3)
+        return btn
     }()
     
     private lazy var topLabel1: UILabel = {
@@ -96,6 +97,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     //MARK: - tableView
     
+    
     private lazy var tableView1: UITableView = {
         let table = UITableView()
         table.backgroundColor = .clear
@@ -118,11 +120,12 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
-        configure()
         getAreaList()
         getStockList()
         getResellList()
+        configure()
+        setupTableView()
+
     }
     
     //MARK: - EstateApi
@@ -184,7 +187,8 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                             self.sprice.append(res.body[index].price)
                         }
                         self.tableView2.reloadData()
-                       
+                        self.tableView3.reloadData() //왜지..?
+
                     } catch {
                         print("erorr in decode")
                     }
@@ -216,7 +220,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                             self.rprice.append(res.body[index].price)
                         }
                         self.tableView3.reloadData()
-                       
+
                     } catch {
                         print("erorr in decode")
                     }
@@ -241,13 +245,12 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     //cell 높이조절
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       return 45
+            return 45
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return nameLists.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TopViewCell.identifier, for: indexPath) as? TopViewCell else { return UITableViewCell() }
         
         cell.number.font = UIFont(name: "NanumSquareB", size: 15.0)
@@ -256,10 +259,11 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.percentage.font = UIFont(name: "NanumSquareB", size: 12.0)
         cell.period.font = UIFont(name: "NanumSquareB", size: 12.0)
         
+        
         if tableView == tableView1{
             cell.number.text = String(indexPath.row + 1)
             cell.title.text = self.nameLists[indexPath.row]
-            cell.price.text = "\(self.price[indexPath.row])원/m"
+            cell.price.text = "\(self.price[indexPath.row])원/m^2"
             cell.percentage.text = "\(self.rateOfChange[indexPath.row])%"
             if self.rateOfChange[indexPath.row] > 0 {
                 cell.percentage.textColor = .systemRed
@@ -268,9 +272,9 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             }
             cell.period.text = self.rateCalDateDiff[indexPath.row]
             cell.selectionStyle = .none
-
             return cell
-        }else if tableView == tableView2{
+        }
+        else if tableView == tableView2{
            
             cell.number.text = String(indexPath.row + 1)
             cell.title.text = self.snameLists[indexPath.row]
@@ -283,9 +287,11 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             }
             cell.period.text = self.srateCalDateDiff[indexPath.row]
             cell.selectionStyle = .none
-
             return cell
-        }else{
+            
+        }
+        else if tableView == tableView3{
+            print("hello")
             cell.number.text = String(indexPath.row + 1)
             cell.title.text = self.rnameLists[indexPath.row]
             cell.price.text = "\(self.rprice[indexPath.row])원"
@@ -299,16 +305,18 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             cell.selectionStyle = .none
             return cell
         }
+        else { return UITableViewCell() }
+
     }
     //MARK: - Configure
     
     func configure(){
         view.backgroundColor = .black
         
-        [topView1, topView2, topView3, topLabel1, topLabel2, topLabel3, tableView1, tableView2, tableView3, chevron1, chevron2, chevron3]
+        [topViewButton1, topViewButton2, topViewButton3, topLabel1, topLabel2, topLabel3, tableView1, tableView2, tableView3, chevron1, chevron2, chevron3]
           .forEach {view.addSubview($0)}
         
-        topView1.snp.makeConstraints{
+        topViewButton1.snp.makeConstraints{
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.height.equalTo(40)
             $0.leading.equalToSuperview()
@@ -316,35 +324,35 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         }
         
         topLabel1.snp.makeConstraints{
-            $0.leading.equalTo(topView1.snp.leading).offset(1)
-            $0.top.equalTo(topView1.snp.top).offset(5)
+            $0.leading.equalTo(topViewButton1.snp.leading).offset(1)
+            $0.top.equalTo(topViewButton1.snp.top).offset(5)
         }
         
         chevron1.snp.makeConstraints{
-            $0.trailing.equalTo(topView1.snp.trailing).offset(-4)
+            $0.trailing.equalTo(topViewButton1.snp.trailing).offset(-4)
 
-            $0.top.equalTo(topView1.snp.top).offset(5)
+            $0.top.equalTo(topViewButton1.snp.top).offset(5)
 
         }
         chevron2.snp.makeConstraints{
-            $0.trailing.equalTo(topView2.snp.trailing).offset(-4)
-            $0.top.equalTo(topView2.snp.top).offset(5)
+            $0.trailing.equalTo(topViewButton2.snp.trailing).offset(-4)
+            $0.top.equalTo(topViewButton2.snp.top).offset(5)
 
         }
         chevron3.snp.makeConstraints{
-            $0.trailing.equalTo(topView3.snp.trailing).offset(-4)
-            $0.top.equalTo(topView3.snp.top).offset(5)
+            $0.trailing.equalTo(topViewButton3.snp.trailing).offset(-4)
+            $0.top.equalTo(topViewButton3.snp.top).offset(5)
 
         }
         
         tableView1.snp.makeConstraints{
-            $0.top.equalTo(topView1.snp.bottom).offset(5)
+            $0.top.equalTo(topViewButton1.snp.bottom).offset(5)
             $0.height.equalTo(110)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
         
-        topView2.snp.makeConstraints{
+        topViewButton2.snp.makeConstraints{
             $0.top.equalTo(tableView1.snp.bottom).offset(30)
             $0.bottom.equalTo(tableView1.snp.bottom).offset(60)
             $0.leading.equalToSuperview()
@@ -352,18 +360,18 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         }
         
         topLabel2.snp.makeConstraints{
-            $0.leading.equalTo(topView2.snp.leading).offset(1)
-            $0.top.equalTo(topView2.snp.top).offset(5)
+            $0.leading.equalTo(topViewButton2.snp.leading).offset(1)
+            $0.top.equalTo(topViewButton2.snp.top).offset(5)
         }
         
         tableView2.snp.makeConstraints{
-            $0.top.equalTo(topView2.snp.bottom).offset(10)
-            $0.bottom.equalTo(topView2.snp.bottom).offset(120)
+            $0.top.equalTo(topViewButton2.snp.bottom).offset(10)
+            $0.bottom.equalTo(topViewButton2.snp.bottom).offset(120)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
 
-        topView3.snp.makeConstraints{
+        topViewButton3.snp.makeConstraints{
             $0.top.equalTo(tableView2.snp.bottom).offset(30)
             $0.bottom.equalTo(tableView2.snp.bottom).offset(60)
             $0.leading.equalToSuperview()
@@ -371,13 +379,13 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         }
         
         topLabel3.snp.makeConstraints{
-            $0.leading.equalTo(topView2.snp.leading).offset(1)
-            $0.top.equalTo(topView3.snp.top).offset(5)
+            $0.leading.equalTo(topViewButton2.snp.leading).offset(1)
+            $0.top.equalTo(topViewButton3.snp.top).offset(5)
         }
         
         tableView3.snp.makeConstraints{
-            $0.top.equalTo(topView3.snp.bottom).offset(10)
-            $0.bottom.equalTo(topView3.snp.bottom).offset(90)
+            $0.top.equalTo(topViewButton3.snp.bottom).offset(10)
+            $0.bottom.equalTo(topViewButton3.snp.bottom).offset(120)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
