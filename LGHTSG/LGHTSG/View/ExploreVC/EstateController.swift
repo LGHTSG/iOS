@@ -416,7 +416,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
                     print(err.localizedDescription)
                 }
             }
-    }
+        }
     
     let marker = NMFMarker()
     var coord = ""

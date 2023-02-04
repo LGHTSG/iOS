@@ -9,7 +9,7 @@ import UIKit
 
 class TopViewCell: UITableViewCell {
     private enum Constant {
-        static let thumbnailSize = 70.0
+    static let thumbnailSize = 70.0
       static let thumbnailCGSize = CGSize(width: Constant.thumbnailSize, height: Constant.thumbnailSize)
       static let borderWidth = 2.0
       static let spacing = 4.0
