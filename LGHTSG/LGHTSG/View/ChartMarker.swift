@@ -38,9 +38,6 @@ class ChartMarker: MarkerView {
         }
         priceDate = pricedatelists[Int(entry.x)]
         price = Int(entry.y)
-
-//        UserDefaults.standard.set(price, forKey: "markerprice")
-//        UserDefaults.standard.set(priceDate, forKey: "markerdate")
         pricetext = "\(price!)원"
     }
     

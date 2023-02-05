@@ -57,12 +57,12 @@ class EstateDetailCell: UITableViewCell {
 
         }
         price.snp.makeConstraints {
-            $0.leading.equalTo(date.snp.trailing ).offset(69)
+            $0.leading.equalTo(date.snp.trailing ).offset(50)
             $0.centerY.equalToSuperview()
 
         }
         buysell.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(30)
+            $0.trailing.equalToSuperview().inset(20)
             $0.centerY.equalToSuperview()
 
         }
