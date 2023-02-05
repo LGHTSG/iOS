@@ -21,6 +21,7 @@ final class HomeViewController : UIViewController{
         super.viewDidLoad()
         SetNavigationBar()
         setTobTabbar()
+        setTable()
         segmentControl.addTarget(self, action: #selector(clicksegment), for: .valueChanged)
         getmyAssetData()
     }
@@ -55,7 +56,7 @@ final class HomeViewController : UIViewController{
             }
             self.SellAssetData = tempselldata
             self.myAssetData = tempmyassetdata
-            self.setTable()
+            self.tableview.reloadData()
         }
     }
 
