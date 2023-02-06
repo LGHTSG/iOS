@@ -29,6 +29,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         let vc = TopViewDetailController()
         vc.label.text = "#강남구 집값 Top 10"
         vc.label.font = UIFont(name: "NanumSquareEB", size: 20.0)
+        
         self.navigationController?.pushViewController(vc, animated: true)
         
         print("1")
@@ -171,7 +172,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                 switch response.result {
                 case .success(let res):
                     do {
-                        for index in 0..<10 {
+                        for index in 0..<2 {
                             self.nameLists.append(res.body[index].name)
                             self.rateCalDateDiff.append(res.body[index].rateCalDateDiff)
                             self.rateOfChange.append(res.body[index].rateOfChange)
@@ -179,7 +180,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                             self.iconList.append(res.body[index].iconImage)
                         }
                         self.tableView1.reloadData()
-                       
+                        self.tableView2.reloadData()
                     } catch {
                         print("erorr in decode")
                     }
@@ -207,7 +208,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                 switch response.result {
                 case .success(let res):
                     do {
-                        for index in 0..<10 {
+                        for index in 0..<2 {
                             self.snameLists.append(res.body[index].name)
                             self.srateCalDateDiff.append(res.body[index].rateCalDateDiff)
                             self.srateOfChange.append(res.body[index].rateOfChange)
@@ -242,7 +243,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                 switch response.result {
                 case .success(let res):
                     do {
-                        for index in 0..<10 {
+                        for index in 0..<2 {
                             self.rnameLists.append(res.body[index].name)
                             self.rrateCalDateDiff.append(res.body[index].rateCalDateDiff)
                             self.rrateOfChange.append(res.body[index].rateOfChange)
