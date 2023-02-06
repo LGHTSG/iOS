@@ -18,7 +18,7 @@ struct rBody: Codable {
     let rateOfChange: Double
     let rateCalDateDiff: String
     let price: Int
-    //let imageURL: String
+    let imageURL: String
 
 
 }

@@ -35,8 +35,6 @@ final class HomeViewController : UIViewController{
             underline2.backgroundColor = .white
         }
     }
-
-
 }
 private extension HomeViewController{
 

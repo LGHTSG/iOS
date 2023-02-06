@@ -50,6 +50,8 @@ class TopViewCell: UITableViewCell {
         return label
     }()
     
+    var iconImage = UIImageView()
+/*
     lazy var iconImage: UIImageView = {
         let imageView = UIImageView()
         //imageview.image = UIImage(named: "dog")
@@ -65,7 +67,7 @@ class TopViewCell: UITableViewCell {
         imageView.clipsToBounds = true //이미지를 뷰 프레임에 맞게 clip하기*/
         return imageView
        
-    }()
+    }()*/
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -83,11 +85,18 @@ class TopViewCell: UITableViewCell {
         
         [number, title, price, percentage, period, iconImage]
             .forEach {contentView.addSubview($0)}
-        
+       
+        iconImage.clipsToBounds = true
+        iconImage.layer.cornerRadius = 16.5
         iconImage.snp.makeConstraints{
-            $0.leading.equalTo(number.snp.trailing).offset(9)
+           /* $0.leading.equalTo(number.snp.trailing).offset(9)
             $0.trailing.equalTo(number.snp.trailing).offset(53)
             $0.centerY.equalToSuperview()
+       */
+            $0.leading.equalToSuperview().offset(25)
+            $0.top.equalToSuperview().inset(5)
+            $0.height.width.equalTo(33)
+            
         }
         
         number.snp.makeConstraints {

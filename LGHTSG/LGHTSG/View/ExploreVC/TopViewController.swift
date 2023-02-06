@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 import Alamofire
-
+import Kingfisher
 
 
 class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
@@ -20,26 +20,51 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         btn.backgroundColor = .black
         btn.addSubview(topLabel1)
         btn.addSubview(chevron1)
-        
+        btn.addTarget(self, action: #selector(didTaptopViewButton1), for: .touchUpInside)
+
         return btn
     }()
-    
+
+    @objc func didTaptopViewButton1() {
+        let vc = TopViewDetailController()
+        vc.label.text = "#강남구 집값 Top 10"
+        vc.label.font = UIFont(name: "NanumSquareEB", size: 20.0)
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+        print("1")
+
+    }
     private lazy var topViewButton2: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .black
         btn.addSubview(topLabel2)
         btn.addSubview(chevron2)
+        btn.addTarget(self, action: #selector(didTaptopViewButton2), for: .touchUpInside)
         return btn
     }()
-    
+    @objc func didTaptopViewButton2() {
+        let vc = TopViewDetailController()
+        vc.label.text = "#최근 가장 HOT한 주식"
+        vc.label.font = UIFont(name: "NanumSquareEB", size: 20.0)
+          self.navigationController?.pushViewController(vc, animated: true)
+        print("2")
+
+    }
     private lazy var topViewButton3: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .black
         btn.addSubview(topLabel3)
         btn.addSubview(chevron3)
+        btn.addTarget(self, action: #selector(didTaptopViewButton3), for: .touchUpInside)
         return btn
     }()
-    
+    @objc func didTaptopViewButton3() {
+        let vc = TopViewDetailController()
+        vc.label.text = "#어제 급등한 리셀"
+        vc.label.font = UIFont(name: "NanumSquareEB", size: 20.0)
+          self.navigationController?.pushViewController(vc, animated: true)
+       print("3")
+    }
     private lazy var topLabel1: UILabel = {
         let label = UILabel()
         label.text = "#강남구 집값 Top 10"
@@ -134,7 +159,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     var rateOfChange = [Double]()
     var rateCalDateDiff = [String]()
     var price = [Int]()
-    
+    var iconList = [String]()
     func getAreaList() {
         let urlSTR = "http://api.lghtsg.site:8090/realestates?order=descending&sort=price&area=서울특별시+강남구"
         let encodedStr = urlSTR.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -146,11 +171,12 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                 switch response.result {
                 case .success(let res):
                     do {
-                        for index in 0..<2 {
+                        for index in 0..<10 {
                             self.nameLists.append(res.body[index].name)
                             self.rateCalDateDiff.append(res.body[index].rateCalDateDiff)
                             self.rateOfChange.append(res.body[index].rateOfChange)
                             self.price.append(res.body[index].price)
+                            self.iconList.append(res.body[index].iconImage)
                         }
                         self.tableView1.reloadData()
                        
@@ -168,7 +194,8 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     var srateOfChange = [Double]()
     var srateCalDateDiff = [String]()
     var sprice = [Int]()
-    
+    var siconList = [String]()
+
     func getStockList() {
         let urlSTR = "http://api.lghtsg.site:8090/stocks?sort=trading-volume&order=descending"
         let encodedStr = urlSTR.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -180,11 +207,12 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                 switch response.result {
                 case .success(let res):
                     do {
-                        for index in 0..<2 {
+                        for index in 0..<10 {
                             self.snameLists.append(res.body[index].name)
                             self.srateCalDateDiff.append(res.body[index].rateCalDateDiff)
                             self.srateOfChange.append(res.body[index].rateOfChange)
                             self.sprice.append(res.body[index].price)
+                            self.siconList.append(res.body[index].iconImage)
                         }
                         self.tableView2.reloadData()
                         self.tableView3.reloadData() //왜지..?
@@ -203,7 +231,8 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     var rrateOfChange = [Double]()
     var rrateCalDateDiff = [String]()
     var rprice = [Int]()
-    
+    var riconList = [String]()
+
     func getResellList() {
         let url = "http://api.lghtsg.site:8090/resells?order=descending&sort=fluctuation"
         let header: HTTPHeaders = ["Content-Type" : "application/json"]
@@ -213,12 +242,15 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                 switch response.result {
                 case .success(let res):
                     do {
-                        for index in 0..<2 {
+                        for index in 0..<10 {
                             self.rnameLists.append(res.body[index].name)
                             self.rrateCalDateDiff.append(res.body[index].rateCalDateDiff)
                             self.rrateOfChange.append(res.body[index].rateOfChange)
                             self.rprice.append(res.body[index].price)
+                          //  self.riconList.append(res.body[index].imageURL)
                         }
+                        
+                        self.tableView2.reloadData()
                         self.tableView3.reloadData()
 
                     } catch {
@@ -259,11 +291,15 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.percentage.font = UIFont(name: "NanumSquareB", size: 12.0)
         cell.period.font = UIFont(name: "NanumSquareB", size: 12.0)
         
-        
+        let url = URL(string: iconList[indexPath.row])
+        let surl = URL(string: siconList[indexPath.row])
+        //let rurl = URL(string: riconList[indexPath.row])
+
         if tableView == tableView1{
             cell.number.text = String(indexPath.row + 1)
+            cell.iconImage.kf.setImage(with: url)
             cell.title.text = self.nameLists[indexPath.row]
-            cell.price.text = "\(self.price[indexPath.row])원/m^2"
+            cell.price.text = "\(self.price[indexPath.row])원/m"
             cell.percentage.text = "\(self.rateOfChange[indexPath.row])%"
             if self.rateOfChange[indexPath.row] > 0 {
                 cell.percentage.textColor = .systemRed
@@ -277,6 +313,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         else if tableView == tableView2{
            
             cell.number.text = String(indexPath.row + 1)
+            cell.iconImage.kf.setImage(with: surl)
             cell.title.text = self.snameLists[indexPath.row]
             cell.price.text = "\(self.sprice[indexPath.row])원"
             cell.percentage.text = "\(self.srateOfChange[indexPath.row])%"
@@ -291,8 +328,8 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             
         }
         else if tableView == tableView3{
-            print("hello")
             cell.number.text = String(indexPath.row + 1)
+            //cell.iconImage.kf.setImage(with: rurl)
             cell.title.text = self.rnameLists[indexPath.row]
             cell.price.text = "\(self.rprice[indexPath.row])원"
             cell.percentage.text = "\(self.rrateOfChange[indexPath.row])%"
