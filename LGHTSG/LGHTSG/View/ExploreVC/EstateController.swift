@@ -14,7 +14,7 @@ import CoreLocation
 import RxSwift
 import RxCocoa
 
-class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDelegate, NMFMapViewTouchDelegate, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate{
+class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDelegate, NMFMapViewTouchDelegate, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, UIGestureRecognizerDelegate{
     var estateModel = EstatePriceModel()
     //MARK: - SearchBar
     var items = [String]()
@@ -228,6 +228,10 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         getAreaList()
         input()
         setLineChartView(Areaname: Areaname)
+        // MARK: 키보드 올라갔을 때 화면 터치해서 내려가게함
+               let tapGesture = UITapGestureRecognizer(target: self.view, action: #selector(self.view.endEditing(_:)))
+               tapGesture.delegate = self
+               self.view.addGestureRecognizer(tapGesture)
     }
    
    
