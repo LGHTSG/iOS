@@ -16,8 +16,8 @@ protocol showNavigationDelegate{
 class resellView : UIViewController{
     var delegate : showNavigationDelegate?
     let AssetModel = TableCellModel()
-    var resellDataLists = [ResellPrice.body]()
-    var resellSearchLists = [ResellPrice.body]()
+    var resellDataLists = [resellData.body]()
+    var resellSearchLists = [resellData.body]()
     lazy private var segment : UISegmentedControl = {
         let control  = UnderlineSegmentedControl(items: ["급상승", "급하락", "거래량"])
         control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.darkGray, .font : UIFont.systemFont(ofSize: 16, weight: .semibold)], for: .normal)
@@ -108,6 +108,8 @@ extension resellView : UITableViewDataSource , UITableViewDelegate, UIScrollView
         }else{
             cell.setup(with: resellDataLists[indexPath.row])}
         cell.countLabel.text = "\(indexPath.row+1)"
+        cell.selectionStyle = .none
+
         return cell
         
     }
@@ -120,27 +122,26 @@ extension resellView : UITableViewDataSource , UITableViewDelegate, UIScrollView
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let ChartVc = ChartViewController()
+        let ChartVc = ReSellChartViewController()
         
        
         if(ExploreViewController.isSearching){
 
             ChartVc.nameText =  resellSearchLists[indexPath.row].name
-            ChartVc.changeDateText = String(resellSearchLists[indexPath.row].rateOfChange)
-            ChartVc.pricePercentText = resellSearchLists[indexPath.row].rateCalDateDiff
+            ChartVc.changeDateText = resellSearchLists[indexPath.row].rateCalDateDiff
+            ChartVc.pricePercentText = "\(resellSearchLists[indexPath.row].rateOfChange)%"
             ChartVc.PriceText  = "\(String(resellSearchLists[indexPath.row].price))원"
             ChartVc.idx = resellSearchLists[indexPath.row].idx
             ChartVc.imageURL = resellSearchLists[indexPath.row].imageUrl
             
         }else{
             ChartVc.nameText =  resellDataLists[indexPath.row].name
-            ChartVc.changeDateText = String(resellDataLists[indexPath.row].rateOfChange)
-            ChartVc.pricePercentText = resellDataLists[indexPath.row].rateCalDateDiff
+            ChartVc.changeDateText = resellDataLists[indexPath.row].rateCalDateDiff
+            ChartVc.pricePercentText =  "\(resellDataLists[indexPath.row].rateOfChange)%"
             ChartVc.PriceText  = "\(String(resellDataLists[indexPath.row].price))원"
             ChartVc.idx = resellDataLists[indexPath.row].idx
             ChartVc.imageURL = resellDataLists[indexPath.row].imageUrl
         }
-
         self.navigationController?.pushViewController(ChartVc, animated: true)
     }
 }

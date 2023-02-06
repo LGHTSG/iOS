@@ -13,7 +13,7 @@ class RegisterationSuccessController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .black
         let JoinSuccessView = JoinSuccessView()
-        
+        JoinSuccessView.successBtn.addTarget(self, action: #selector(MoveHomeTab), for: .touchUpInside)
         view.addSubview(JoinSuccessView)
         JoinSuccessView.translatesAutoresizingMaskIntoConstraints = false
         JoinSuccessView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -23,5 +23,9 @@ class RegisterationSuccessController: UIViewController {
 
     }
 
-
+    @objc func MoveHomeTab(){
+        let vc = MainTabController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
+    }
 }

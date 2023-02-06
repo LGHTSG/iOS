@@ -49,9 +49,10 @@ class JoinSuccessView : UIView {
         label.titleLabel?.font = UIFont(name: "NanumSquareB", size: 16.0)
         label.titleLabel?.textColor = .white
         label.titleLabel?.textAlignment = .center
+
         return label
     }()
-    
+
     override init(frame: CGRect) {
         
         super.init(frame: frame)

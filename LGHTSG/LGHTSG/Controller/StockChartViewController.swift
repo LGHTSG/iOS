@@ -13,7 +13,7 @@ class StockChartViewController : UIViewController {
         var stockPriceData = StockPriceModel()
         var EstatePriceData = EstatePriceModel()
         var nameText : String?
-
+        private var mytoken = UserDefaults.standard.string(forKey: "savedToken")
         var idx : Int?
         var pricePercentText : String?
         var changeDateText : String?
@@ -21,6 +21,16 @@ class StockChartViewController : UIViewController {
         var timeListDatas = [String]()
         var temppriceListDatas = [Int]()
         var temptimeListDatas = [String]()
+        var tradeListData = [TradeHistroy.HistoryBody]()
+        private var markerPrice : Int?
+        private var markerDate : String?
+        private var sellMode : Bool?
+        private let todayDate = Date()
+        var dateFormatter : DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter
+    }()
         lazy var lineChartView : LineChartView = {
             let chartView = LineChartView()
             return chartView
@@ -68,7 +78,6 @@ class StockChartViewController : UIViewController {
         
         private lazy var revenueLabel: UILabel = {
             let label = UILabel()
-            label.text = "구매 시점에 비해 얼마 올랐어요"
             label.textColor = .white
             label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
             return label
@@ -107,15 +116,61 @@ class StockChartViewController : UIViewController {
         //MARK: - Button
         private lazy var sellButton: UIButton = {
             let btn = UIButton()
-            btn.setTitle("판매", for: .normal)
-            btn.setTitleColor(.blue, for: .normal)
-            btn.backgroundColor = .white
-            btn.layer.cornerRadius = 5
+            var config = UIButton.Configuration.filled()
+            config.attributedTitle = "원하시는 구매시점을 클릭해주세요"
+            btn.configuration = config
+            btn.layer.cornerRadius = 10
+            btn.backgroundColor = .blue
+            btn.tintColor = .blue
             btn.layer.borderWidth = 1
+            btn.addTarget(self, action: #selector(sellbtnclicked), for: .touchUpInside)
             return btn
             
         }()
-        
+        //MARK: - ButtonCustom
+    private func setSellButton(){
+        if(sellMode == true){
+            var config = UIButton.Configuration.plain()
+            config.titleAlignment = .center
+            if let markerDate = self.markerDate {
+                var titleAttribute = AttributeContainer()
+                titleAttribute.font = .systemFont(ofSize: 10, weight: .medium)
+                config.attributedTitle = AttributedString(markerDate, attributes: titleAttribute)
+                config.titlePadding = 3.0
+            }
+            var subtitleAttribute = AttributeContainer()
+            subtitleAttribute.font = .systemFont(ofSize: 15, weight: .bold)
+            config.attributedSubtitle = AttributedString("판매", attributes: subtitleAttribute)
+            self.sellButton.configuration = config
+            self.sellButton.backgroundColor = .white
+        }
+        else{
+            var config = UIButton.Configuration.filled()
+            config.titleAlignment = .center
+            if let markerDate = self.markerDate {
+                var titleAttribute = AttributeContainer()
+                titleAttribute.font = .systemFont(ofSize: 10, weight: .medium)
+                config.attributedTitle = AttributedString(markerDate, attributes: titleAttribute)
+                config.titlePadding = 3.0
+            }
+            var subtitleAttribute = AttributeContainer()
+            subtitleAttribute.font = .systemFont(ofSize: 15, weight: .bold)
+            subtitleAttribute.backgroundColor  = .white
+            config.attributedSubtitle = AttributedString("구매", attributes: subtitleAttribute)
+            self.sellButton.configuration = config
+            self.sellButton.backgroundColor = .blue
+        }
+    }
+        //MARK: - MarkerDatachange
+    @objc func markerchange(_ notification : Notification){
+        if let getValue = notification.userInfo as? [String : Int]{
+            for (date, price ) in getValue {
+                self.markerPrice = price
+                self.markerDate = date
+            }
+            setSellButton()
+        }
+    }
         //MARK: - TableView
         private lazy var tableView: UITableView = {
             let table = UITableView()
@@ -128,10 +183,34 @@ class StockChartViewController : UIViewController {
         //MARK: - LifeCycle
         override func viewDidLoad() {
             super.viewDidLoad()
-
-            configure()
+            
             setLineChartView()
- 
+            NotificationCenter.default.addObserver(self, selector: #selector(markerchange(_:)), name: Notification.Name("markerdata"), object: nil)
+            
+
+        }
+        //MARK: - GETTradeLists
+        private func getTradeLists(){
+            let stockModel = StocktradeModel()
+            stockModel.reqeustTradeHistory(assetIdx: self.idx!, catgegory: "stock", token: self.mytoken!){
+                data in
+                if(data.header.resultCode == 4205){
+                    self.sellMode = false
+                    
+                }
+                else if(data.header.resultCode == 1000){
+                    self.tradeListData = data.body!
+                    //현재 가지고 있는 경우
+                    if(data.body!.last?.sellCheck == 0){
+                        self.revenueLabel.text = "구매시점에 비해서 \(String(format: "%.2f", Double(( self.priceListDatas.last! - data.body!.last!.price )) / Double(data.body!.last!.price) * 100))% "
+                        self.sellMode = true
+                    }else{
+                        self.sellMode = false
+                    }
+                    self.setSellButton()
+                    self.tableView.reloadData()
+                }
+            }
         }
         //MARK: - TableViewSetting
         func setupTableView(){
@@ -173,26 +252,44 @@ class StockChartViewController : UIViewController {
                 }
                 tableView.reloadData()
             case 2:
-                changeDate.text = "1년 전 대비"
-                temppriceListDatas = []
-                temptimeListDatas = []
-                guard let recentTimestring = timeListDatas.last else{ return}
-                // 만약 주식이 상장된지 1년이 안되었다면? 기준을 245개로 잡음
-                if(timeListDatas.count < 243){
-//                    temppriceListDatas = []
-//                    temptimeListDatas = []
-//                    for (index, element ) in timeListDatas.enumerated(){
-//                        if index % 5 == 0 {
-//                            temptimeListDatas.append(element)
-//                        }
-//                    }
-//                    for (index, element ) in priceListDatas.enumerated(){
-//                        if index % 5 == 0 {
-//                            temppriceListDatas.append(element)
-//                        }
-//                    }
-                    temppriceListDatas = priceListDatas
-                    temptimeListDatas = timeListDatas
+                changeDate.text = "일년 대비"
+                let yearagoday = Calendar.current.date(byAdding: .day, value: -365, to: todayDate)!
+                let yearagodate = dateFormatter.string(from: yearagoday)
+                // 만약 첫 거래가1년보다 최근인경우
+                let firstTradeDate = timeListDatas[0]
+                let fistDate = dateFormatter.date(from: firstTradeDate[0..<10])!
+                if(fistDate > yearagoday ) {
+                    
+                    let firstTradePrice = priceListDatas[0]
+                    var tempTradeDate = [String]()
+                    var tempTradePrice = [Int ]()
+                    var plusweek = yearagoday
+                    
+                    while(true){
+                        plusweek = Calendar.current.date(byAdding: .day, value: 7, to: plusweek)!
+                        if(plusweek < fistDate) {
+                            tempTradeDate.append(dateFormatter.string(from: plusweek))
+                            tempTradePrice.append(firstTradePrice)
+                        }
+                        else{break}
+                    }
+                    timeListDatas.insert(contentsOf: tempTradeDate, at: 0)
+                    priceListDatas.insert(contentsOf: tempTradePrice, at: 0)
+                    self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: priceListDatas), xAxis: timeListDatas, recentPrice : Double(priceListDatas.last!))
+                    tableView.reloadData()
+                }
+                else{
+                    var estimateDate : String?
+                    for k in timeListDatas {
+                        if k >= yearagodate{
+                            estimateDate = k
+                            break
+                        }
+                    }
+                    let firstindex = timeListDatas.firstIndex(of: estimateDate!)!
+                    temptimeListDatas = Array(timeListDatas.dropFirst(firstindex))
+                    temppriceListDatas = Array(priceListDatas.dropFirst(firstindex))
+                    self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
                     pricePercent.text =  "\(String(format: "%.2f", Double((temppriceListDatas.last! - temppriceListDatas[0])) / Double(temppriceListDatas[0]) * 100))%"
                     if(pricePercent.text?.prefix(1) == "-"){
                         pricePercent.textColor = UIColor.blue
@@ -200,94 +297,109 @@ class StockChartViewController : UIViewController {
                     else{
                         pricePercent.textColor = UIColor.red
                     }
+                    tableView.reloadData()
+                }
+            case 3:
+                changeDate.text = "5년 대비"
+                let yearagoday = Calendar.current.date(byAdding: .day, value: -1825, to: todayDate)!
+                let yearagodate = dateFormatter.string(from: yearagoday)
+                // 만약 첫 거래가5년보다 최근인경우
+                let firstTradeDate = timeListDatas[0]
+                let fistDate = dateFormatter.date(from: firstTradeDate[0..<10])!
+                if(fistDate > yearagoday ) {
+                    let firstTradePrice = priceListDatas[0]
+                    var tempTradeDate = [String]()
+                    var tempTradePrice = [Int ]()
+                    var plusweek = yearagoday
+                    while(true){
+                        plusweek = Calendar.current.date(byAdding: .day, value: 30, to: plusweek)!
+                        if(plusweek < fistDate) {
+                            tempTradeDate.append(dateFormatter.string(from: plusweek))
+                            tempTradePrice.append(firstTradePrice)
+                        }
+                        else{break}
+                    }
+                    timeListDatas.insert(contentsOf: tempTradeDate, at: 0)
+                    priceListDatas.insert(contentsOf: tempTradePrice, at: 0)
+                    
                     self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: priceListDatas), xAxis: timeListDatas, recentPrice : Double(priceListDatas.last!))
+                    pricePercent.text =  "\(String(format: "%.2f", Double((temppriceListDatas.last! - temppriceListDatas[0])) / Double(temppriceListDatas[0]) * 100))%"
+                    if(pricePercent.text?.prefix(1) == "-"){
+                        pricePercent.textColor = UIColor.blue
+                    }
+                    else{
+                        pricePercent.textColor = UIColor.red
+                    }
                     tableView.reloadData()
                 }
                 else{
-                    let recenttimedata  = Array(recentTimestring)
-                    let changeyear = Int(String(recenttimedata[3]))! - 1
-                    let changeyearString = recentTimestring.prefix(3) + "\(changeyear)" + recentTimestring.dropFirst(4)
-                    // 정확히 1년전데이터가 있는경우 ex) 2023-1-31 > 2022-1-31
-                    if let firstindex = timeListDatas.firstIndex(of: String(changeyearString)) {
-                        let temptimeList = Array(timeListDatas.dropFirst(firstindex))
-                        for (index, element ) in temptimeList.enumerated(){
-                            if index % 5 == 0 {
-                                temptimeListDatas.append(element)
-                            }
+                    var estimateDate : String?
+                    for k in timeListDatas {
+                        if k >= yearagodate{
+                            estimateDate = k
+                            break
                         }
-                        let temppriceList = Array(priceListDatas.dropFirst(firstindex))
-                        for (index, element ) in temppriceList.enumerated(){
-                            if index % 5 == 0 {
-                                temppriceListDatas.append(element)
-                            }
-                        }
-                        pricePercent.text =  "\(String(format: "%.2f", Double((temppriceListDatas.last! - temppriceListDatas[0])) / Double(temppriceListDatas[0]) * 100))%"
-                        if(pricePercent.text?.prefix(1) == "-"){
-                            pricePercent.textColor = UIColor.blue
-                        }
-                        else{
-                            pricePercent.textColor = UIColor.red
-                        }
-                        self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
-                        tableView.reloadData()
                     }
-                    // 그런데 1년이상이지만 날짜상 그날이 휴장일일때를 대비해서 그냥 244개만 데이터 뽑기.
+                    let firstindex = timeListDatas.firstIndex(of: estimateDate!)!
+                    temptimeListDatas = Array(timeListDatas.dropFirst(firstindex))
+                    temppriceListDatas = Array(priceListDatas.dropFirst(firstindex))
+                    self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
+                    pricePercent.text =  "\(String(format: "%.2f", Double((temppriceListDatas.last! - temppriceListDatas[0])) / Double(temppriceListDatas[0]) * 100))%"
+                    if(pricePercent.text?.prefix(1) == "-"){
+                        pricePercent.textColor = UIColor.blue
+                    }
                     else{
-                       let beforePriceData = priceListDatas.suffix(244)
-                        let beforeTimeData = timeListDatas.suffix(244)
-                        for (index, element ) in beforeTimeData.enumerated(){
-                            if index % 5 == 0 {
-                                temptimeListDatas.append(element)
-                            }
-                        }
-                        for (index, element ) in beforePriceData.enumerated(){
-                            if index % 5 == 0 {
-                                temppriceListDatas.append(element)
-                            }
-                        }
-                        if(!temptimeListDatas.contains( recentTimestring)){
-                            temptimeListDatas.append(recentTimestring)
-                            temppriceListDatas.append(priceListDatas.last!)
-                        }
-                        self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
-                        pricePercent.text =  "\(String(format: "%.2f", Double((temppriceListDatas.last! - temppriceListDatas[0])) / Double(temppriceListDatas[0]) * 100))%"
-                        if(pricePercent.text?.prefix(1) == "-"){
-                            pricePercent.textColor = UIColor.blue
-                        }
-                        else{
-                            pricePercent.textColor = UIColor.red
-                        }
-                        tableView.reloadData()
-                    }}
-   
-
-            case 3:
-                changeDate.text = "5년전 대비"
-                temppriceListDatas = []
-                temptimeListDatas = []
-                for (index, element ) in timeListDatas.enumerated(){
-                    if index % 5 == 0 {
-                        temptimeListDatas.append(element)
+                        pricePercent.textColor = UIColor.red
                     }
+                    tableView.reloadData()
                 }
-                for (index, element ) in priceListDatas.enumerated(){
-                    if index % 5 == 0 {
-                        temppriceListDatas.append(element)
-                    }
-                }
-                pricePercent.text =  "\(String(format: "%.2f", Double((temppriceListDatas.last! - temppriceListDatas[0])) / Double(temppriceListDatas[0]) * 100))%"
-                if(pricePercent.text?.prefix(1) == "-"){
-                    pricePercent.textColor = UIColor.blue
-                }
-                else{
-                    pricePercent.textColor = UIColor.red
-                }
-                self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
-                tableView.reloadData()
             default:
                 break
             }
         }
+    //MARK: - btnclickevent
+    @objc func sellbtnclicked(){
+        let trademodel = StocktradeModel()
+        if(sellMode == true){
+            trademodel.requestSellstock(assetIdx: self.idx!, category: "stock", price: self.markerPrice!, transactionTime: self.markerDate!, token: mytoken!){
+                data in
+                if(data.header.resultCode == 4009){
+                    let alertv = UIAlertController(title: "Error", message: "판매하려는 시기 이후에 구매하였습니다.", preferredStyle: UIAlertController.Style.alert)
+                    alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.present(alertv, animated: true)
+                }
+                else if (data.header.resultCode == 4006){
+                    let alertv = UIAlertController(title: "Error", message: "이미 판매를 한 상품입니다.", preferredStyle: UIAlertController.Style.alert)
+                    alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.present(alertv, animated: true)
+                }
+                else{
+                    let alertv = UIAlertController(title: "판매완료", message: "판매가 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
+                    alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.present(alertv, animated: true){
+                        self.getTradeLists()
+                        self.tableView.reloadData()
+                    }
+                }}
+        }else{
+            //구매하기
+            trademodel.requestBuystock(assetIdx: self.idx!, category: "stock", price: self.markerPrice!, transactionTime: self.markerDate!, token: mytoken!)  {
+                data in
+                if(data.header.resultCode == 4005){
+                    let alertv = UIAlertController(title: "Error", message: "이미 구매를 한 상품입니다.", preferredStyle: UIAlertController.Style.alert)
+                    alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.present(alertv, animated: true)
+                }
+                else if(data.header.resultCode == 1000){
+                    let alertv = UIAlertController(title: "구매완료 ", message: "구매가 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
+                    alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.present(alertv, animated: true)
+                    self.getTradeLists()
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
     }
     extension StockChartViewController : UITableViewDelegate, UITableViewDataSource {
         //cell 높이조절
@@ -295,16 +407,22 @@ class StockChartViewController : UIViewController {
                 return 30
             }
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return temptimeListDatas.count    }
+            return tradeListData.count    }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: EstateDetailCell.identifier, for: indexPath) as? EstateDetailCell else { return UITableViewCell() }
-            
-            cell.date.text = temptimeListDatas[indexPath.row]
+            cell.selectionStyle = .none
+
+            cell.date.text = tradeListData[indexPath.row].transactionTime
             cell.date.textColor = .white
-            cell.price.text = "\(temppriceListDatas[indexPath.row])원"
+            cell.price.text = "\(tradeListData[indexPath.row].price)원"
             cell.price.textColor = .white
-            cell.buysell.text = "hello"
+            if(tradeListData[indexPath.row].sellCheck == 0 ){
+                cell.buysell.text = "구매"
+            }
+            else if(tradeListData[indexPath.row].sellCheck == 1){
+                cell.buysell.text = "판매"
+            }
             cell.buysell.textColor = .white
             return cell
         }
@@ -367,26 +485,17 @@ class StockChartViewController : UIViewController {
                     self.view.addSubview(self.lineChartView)
                     let sortedtimeLists = transctiontime.sorted{$0.compare($1, options: .numeric) == .orderedAscending}
                     self.priceListDatas = pricelists
-                    
                     self.priceLabel.font = UIFont(name: "NanumSquareB", size: 13)
-                    
-                    
                     self.priceLabel.text = "\(self.priceListDatas.last!)원"
                     self.timeListDatas = sortedtimeLists
                     self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: pricelists), xAxis: sortedtimeLists, recentPrice : Double(pricelists.last!))
                     self.setupTableView()
+                    self.getTradeLists()
+                    
+                    self.configure()
                 }
             })
-    //        EstatePriceData.requestStockPrice(EstateIdx: self.idx!, onCompleted: { (pricelists, transctiontime) in
-    //            DispatchQueue.main.async {
-    //                self.view.addSubview(self.lineChartView)
-    //                self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: pricelists), xAxis: transctiontime, recentPrice : Double(pricelists.last!))
-    ////                self.lineChartView.snp.makeConstraints{
-    ////                    $0.leading.trailing.equalToSuperview()
-    ////                    $0.top.bottom.equalToSuperview().inset(140)
-    ////                }
-    //            }
-    //        })    
+
         }
         
     }
@@ -457,3 +566,16 @@ class StockChartViewController : UIViewController {
         }
     }
 
+extension String {
+    subscript (bounds: CountableClosedRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: bounds.lowerBound)
+        let end = index(startIndex, offsetBy: bounds.upperBound)
+        return String(self[start...end])
+    }
+
+    subscript (bounds: CountableRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: bounds.lowerBound)
+        let end = index(startIndex, offsetBy: bounds.upperBound)
+        return String(self[start..<end])
+    }
+}

@@ -96,6 +96,7 @@ extension StockView : UITableViewDataSource, UITableViewDelegate{
         }
         else{cell.setup(with: stockDataLists[indexPath.row])}
         cell.countLabel.text = "\(indexPath.row+1)"
+        cell.selectionStyle = .none
 
         cell.backgroundColor = .black
         return cell

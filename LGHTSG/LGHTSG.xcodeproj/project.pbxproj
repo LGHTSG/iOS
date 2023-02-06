@@ -56,6 +56,7 @@
 		0798E527298E3407004E3221 /* ResellFluctuationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798E526298E3407004E3221 /* ResellFluctuationModel.swift */; };
 		0798E529298E94DF004E3221 /* TopViewDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798E528298E94DF004E3221 /* TopViewDetailController.swift */; };
 		8E910354CAD5238FB38C267D /* Pods_LGHTSG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */; };
+		F0E4F818298C14E8008B8A48 /* myasset.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E4F817298C14E8008B8A48 /* myasset.swift */; };
 		F5DAEC00298AD1FA0098A11A /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEBFF298AD1FA0098A11A /* login.swift */; };
 		F5DAEC02298AD2050098A11A /* email.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC01298AD2050098A11A /* email.swift */; };
 		F5DAEC04298AD20E0098A11A /* join.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC03298AD20E0098A11A /* join.swift */; };
@@ -138,6 +139,7 @@
 		1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LGHTSG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F7EA128F8EC33ED812CADCA /* Pods-LGHTSG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.release.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.release.xcconfig"; sourceTree = "<group>"; };
 		9154F7534146417B8EBDBECC /* Pods-LGHTSG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.debug.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.debug.xcconfig"; sourceTree = "<group>"; };
+		F0E4F817298C14E8008B8A48 /* myasset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myasset.swift; sourceTree = "<group>"; };
 		F5DAEBFF298AD1FA0098A11A /* login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.swift; sourceTree = "<group>"; };
 		F5DAEC01298AD2050098A11A /* email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = email.swift; sourceTree = "<group>"; };
 		F5DAEC03298AD20E0098A11A /* join.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = join.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 			children = (
 				F5DAEBFE298AD1CC0098A11A /* krystal */,
 				078401D1298A49E200CDE061 /* asset.swift */,
+				F0E4F817298C14E8008B8A48 /* myasset.swift */,
 				078401BE298A486300CDE061 /* realEstates.swift */,
 				078401C0298A486300CDE061 /* ResellPrice.swift */,
 				078401BF298A486300CDE061 /* StockPrice.swift */,
@@ -278,6 +281,7 @@
 				0764F26A298642EF00F446CB /* SearchItemCell.swift */,
 				0764F284298959C600F446CB /* TopViewCell.swift */,
 				F5DAEC1B298AD2F70098A11A /* LoginView.swift */,
+				078401D0298A49E200CDE061 /* ChartMarker.swift */,
 				F5DAEC1D298AD3080098A11A /* StartView.swift */,
 				F5DAEC1F298AD31E0098A11A /* FindPwView.swift */,
 				F5DAEC21298AD3320098A11A /* MyPageView.swift */,
@@ -337,7 +341,6 @@
 		078401CF298A49DB00CDE061 /* HomeVC */ = {
 			isa = PBXGroup;
 			children = (
-				078401D0298A49E200CDE061 /* ChartMarker.swift */,
 				078401D7298A49E300CDE061 /* HomeTableCell.swift */,
 				078401D3298A49E200CDE061 /* StockDateSegmentControl.swift */,
 				078401D4298A49E300CDE061 /* UnderlineSegmentedControl.swift */,
@@ -604,6 +607,7 @@
 				071E0541296BB7B50020282F /* AppDelegate.swift in Sources */,
 				071E0543296BB7B50020282F /* SceneDelegate.swift in Sources */,
 				0764F26F29866A6500F446CB /* APIToken.swift in Sources */,
+				F0E4F818298C14E8008B8A48 /* myasset.swift in Sources */,
 				078401C4298A486300CDE061 /* ResellPrice.swift in Sources */,
 				F5DAEC02298AD2050098A11A /* email.swift in Sources */,
 				F5DAEC11298AD2910098A11A /* JoinSuccessView.swift in Sources */,

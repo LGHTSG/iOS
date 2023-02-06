@@ -201,7 +201,7 @@ class RegisterView : UIView {
         label.titleLabel?.font = UIFont(name: "NanumSquareB", size: 15.0)
         label.titleLabel?.textColor = .white
         label.titleLabel?.textAlignment = .center
-        //label.addTarget(self, action: #selector(joinBtnClicked2), for: .touchUpInside)
+//        label.addTarget(self, action: #selector(joinBtnClicked2), for: .touchUpInside)
         return label
     }()
     
@@ -336,44 +336,44 @@ class RegisterView : UIView {
 
     }
     
-    /*
-    let joinAccess = JoinApiModel()
-    var userIndex : Int!
-    
-    @objc func joinBtnClicked2(){
-        
-        if validPw == "1" && samePw == "1"{
-            if emailSuccess == "1" {
-                print("회원가입 가능!")
-                guard let userName = nameTextField.text else {return}
-                guard let email = emailTextField3.text else {return}
-                guard let password = passwordTextField3.text else {return}
-                let emailCheck = "1"
-                let profileImg = "urlurl"
-                
-                let bodyData : Parameters = [
-                    "userName" : userName,
-                    "email" : email,
-                    "password" : password,
-                    "emailCheck" : emailCheck,
-                    "profileImg" : profileImg
-                ]
 
-                joinAccess.requestJoinDataModel(bodyData: bodyData){
-                    data in
-                    print(data.body)
-                }
-                UserDefaults.standard.set(true, forKey: "joinSuccess")
-            }
-            else {
-                print("인증번호 비완료")
-            }
-        }
-        else{
-            print("비밀번호 과정을 통과하지못해 회원가입 불가능")
-        }
-    }
-     */
+//    let joinAccess = JoinApiModel()
+//    var userIndex : Int!
+//
+//    @objc func joinBtnClicked2(){
+//
+//        if validPw == "1" && samePw == "1"{
+//            if emailSuccess == "1" {
+//                print("회원가입 가능!")
+//                guard let userName = nameTextField.text else {return}
+//                guard let email = emailTextField3.text else {return}
+//                guard let password = passwordTextField3.text else {return}
+//                let emailCheck = "1"
+//                let profileImg = "urlurl"
+//
+//                let bodyData : Parameters = [
+//                    "userName" : userName,
+//                    "email" : email,
+//                    "password" : password,
+//                    "emailCheck" : emailCheck,
+//                    "profileImg" : profileImg
+//                ]
+//
+//                joinAccess.requestJoinDataModel(bodyData: bodyData){
+//                    data in
+//                    print(data.body)
+//                }
+//                UserDefaults.standard.set(true, forKey: "joinSuccess")
+//            }
+//            else {
+//                print("인증번호 비완료")
+//            }
+//        }
+//        else{
+//            print("비밀번호 과정을 통과하지못해 회원가입 불가능")
+//        }
+//    }
+
     
     
     override init(frame: CGRect) {

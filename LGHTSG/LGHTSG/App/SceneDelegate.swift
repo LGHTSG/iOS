@@ -18,8 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 window?.backgroundColor = .systemBackground
                 window?.rootViewController = MainTabController()
             //window?.rootViewController = UINavigationController(rootViewController: MainTabController())
-
-                window?.tintColor = .label
+        window?.backgroundColor = .black
+        
                 window?.makeKeyAndVisible()
     }
 

@@ -1,9 +1,3 @@
-//
-//  BalloonMarker.swift
-//  LGHTSG
-//
-//  Created by SunHo Lee on 2023/01/18.
-//
 
 
 
@@ -16,16 +10,17 @@ class ChartMarker: MarkerView {
     var pricedatelists = [String]()
     var priceDate = ""
     var pricetext = ""
+    var price : Int?
     var pricepercent : String  = ""
     var recentprice : Double = 0.0
-
+    
     var chartx: Double = 0.0
     init(pricedate: [String], recentprice : Double) {
         super.init(frame: .zero)
         self.pricedatelists = pricedate
         self.recentprice = recentprice
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -37,8 +32,13 @@ class ChartMarker: MarkerView {
 //            let attributeStr = NSMutableAttributedString(string: text)
 //        }
         text = "이때 샀다면 지금\(self.pricepercent)"
+        if(priceDate != pricedatelists[Int(entry.x)]){
+            let data = [pricedatelists[Int(entry.x)] : Int(entry.y)]
+            NotificationCenter.default.post(name: Notification.Name("markerdata"), object: nil, userInfo: data)
+        }
         priceDate = pricedatelists[Int(entry.x)]
-        pricetext = "\(Int(entry.y))원"
+        price = Int(entry.y)
+        pricetext = "\(price!)원"
     }
     
     override func draw(context: CGContext, point: CGPoint) {
@@ -65,6 +65,8 @@ class ChartMarker: MarkerView {
         drawAttributes[.font] = UIFont.systemFont(ofSize: 12)
         drawAttributes[.foregroundColor] = UIColor.white
         drawText(text: "\(pricetext)" as NSString, rect: CGRect(origin: CGPoint(x: point.x + offset.x / 2, y: offset.y / 2 ), size: self.bounds.size ), withAttributes: drawAttributes)
+//        let data = [priceDate : price!]
+//        NotificationCenter.default.post(name: Notification.Name("markerdata"), object: nil, userInfo: data)
 
     }
     override func draw(_ rect: CGRect) {
