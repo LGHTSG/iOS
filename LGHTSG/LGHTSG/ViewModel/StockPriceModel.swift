@@ -19,7 +19,7 @@ class StockPriceModel {
                 guard let self = self else {return}
                 data.body.forEach{
                     self.PriceLists.append($0.price)
-                    self.transactionTimeLists.append(String($0.transactionTime))
+                    self.transactionTimeLists.append(String($0.datetime))
                 }
                 onCompleted(self.PriceLists , self.transactionTimeLists)
                 
@@ -32,7 +32,7 @@ class StockPriceModel {
     func requestResellPrice(resellIdx : Int, onCompleted : @escaping([Int],[String]) -> Void){
         let urlString = "http://api.lghtsg.site:8090/resells/\(resellIdx)/prices"
         guard let url = URL(string: urlString) else {return print("erorr")}
-        AF.request(url).responseDecodable(of: StockPrice.self) { [weak self]response in
+        AF.request(url).responseDecodable(of: ResellPrice.self) { [weak self]response in
             switch response.result {
             case let .success(data):
                 guard let self = self else {return}

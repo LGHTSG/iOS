@@ -25,7 +25,12 @@ class StockChartViewController : UIViewController {
         private var markerPrice : Int?
         private var markerDate : String?
         private var sellMode : Bool?
-
+        private let todayDate = Date()
+        var dateFormatter : DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter
+    }()
         lazy var lineChartView : LineChartView = {
             let chartView = LineChartView()
             return chartView
@@ -123,7 +128,7 @@ class StockChartViewController : UIViewController {
             
         }()
         //MARK: - ButtonCustom
-    func setSellButton(){
+    private func setSellButton(){
         if(sellMode == true){
             var config = UIButton.Configuration.plain()
             config.titleAlignment = .center
@@ -193,7 +198,7 @@ class StockChartViewController : UIViewController {
                     self.sellMode = false
                     
                 }
-                else{
+                else if(data.header.resultCode == 1000){
                     self.tradeListData = data.body!
                     //현재 가지고 있는 경우
                     if(data.body!.last?.sellCheck == 0){
@@ -247,26 +252,44 @@ class StockChartViewController : UIViewController {
                 }
                 tableView.reloadData()
             case 2:
-                changeDate.text = "1년 전 대비"
-                temppriceListDatas = []
-                temptimeListDatas = []
-                guard let recentTimestring = timeListDatas.last else{ return}
-                // 만약 주식이 상장된지 1년이 안되었다면? 기준을 245개로 잡음
-                if(timeListDatas.count < 243){
-//                    temppriceListDatas = []
-//                    temptimeListDatas = []
-//                    for (index, element ) in timeListDatas.enumerated(){
-//                        if index % 5 == 0 {
-//                            temptimeListDatas.append(element)
-//                        }
-//                    }
-//                    for (index, element ) in priceListDatas.enumerated(){
-//                        if index % 5 == 0 {
-//                            temppriceListDatas.append(element)
-//                        }
-//                    }
-                    temppriceListDatas = priceListDatas
-                    temptimeListDatas = timeListDatas
+                changeDate.text = "일년 대비"
+                let yearagoday = Calendar.current.date(byAdding: .day, value: -365, to: todayDate)!
+                let yearagodate = dateFormatter.string(from: yearagoday)
+                // 만약 첫 거래가1년보다 최근인경우
+                let firstTradeDate = timeListDatas[0]
+                let fistDate = dateFormatter.date(from: firstTradeDate[0..<10])!
+                if(fistDate > yearagoday ) {
+                    
+                    let firstTradePrice = priceListDatas[0]
+                    var tempTradeDate = [String]()
+                    var tempTradePrice = [Int ]()
+                    var plusweek = yearagoday
+                    
+                    while(true){
+                        plusweek = Calendar.current.date(byAdding: .day, value: 7, to: plusweek)!
+                        if(plusweek < fistDate) {
+                            tempTradeDate.append(dateFormatter.string(from: plusweek))
+                            tempTradePrice.append(firstTradePrice)
+                        }
+                        else{break}
+                    }
+                    timeListDatas.insert(contentsOf: tempTradeDate, at: 0)
+                    priceListDatas.insert(contentsOf: tempTradePrice, at: 0)
+                    self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: priceListDatas), xAxis: timeListDatas, recentPrice : Double(priceListDatas.last!))
+                    tableView.reloadData()
+                }
+                else{
+                    var estimateDate : String?
+                    for k in timeListDatas {
+                        if k >= yearagodate{
+                            estimateDate = k
+                            break
+                        }
+                    }
+                    let firstindex = timeListDatas.firstIndex(of: estimateDate!)!
+                    temptimeListDatas = Array(timeListDatas.dropFirst(firstindex))
+                    temppriceListDatas = Array(priceListDatas.dropFirst(firstindex))
+                    self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
                     pricePercent.text =  "\(String(format: "%.2f", Double((temppriceListDatas.last! - temppriceListDatas[0])) / Double(temppriceListDatas[0]) * 100))%"
                     if(pricePercent.text?.prefix(1) == "-"){
                         pricePercent.textColor = UIColor.blue
@@ -274,90 +297,62 @@ class StockChartViewController : UIViewController {
                     else{
                         pricePercent.textColor = UIColor.red
                     }
+                    tableView.reloadData()
+                }
+            case 3:
+                changeDate.text = "5년 대비"
+                let yearagoday = Calendar.current.date(byAdding: .day, value: -1825, to: todayDate)!
+                let yearagodate = dateFormatter.string(from: yearagoday)
+                // 만약 첫 거래가5년보다 최근인경우
+                let firstTradeDate = timeListDatas[0]
+                let fistDate = dateFormatter.date(from: firstTradeDate[0..<10])!
+                if(fistDate > yearagoday ) {
+                    let firstTradePrice = priceListDatas[0]
+                    var tempTradeDate = [String]()
+                    var tempTradePrice = [Int ]()
+                    var plusweek = yearagoday
+                    while(true){
+                        plusweek = Calendar.current.date(byAdding: .day, value: 30, to: plusweek)!
+                        if(plusweek < fistDate) {
+                            tempTradeDate.append(dateFormatter.string(from: plusweek))
+                            tempTradePrice.append(firstTradePrice)
+                        }
+                        else{break}
+                    }
+                    timeListDatas.insert(contentsOf: tempTradeDate, at: 0)
+                    priceListDatas.insert(contentsOf: tempTradePrice, at: 0)
+                    
                     self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: priceListDatas), xAxis: timeListDatas, recentPrice : Double(priceListDatas.last!))
+                    pricePercent.text =  "\(String(format: "%.2f", Double((temppriceListDatas.last! - temppriceListDatas[0])) / Double(temppriceListDatas[0]) * 100))%"
+                    if(pricePercent.text?.prefix(1) == "-"){
+                        pricePercent.textColor = UIColor.blue
+                    }
+                    else{
+                        pricePercent.textColor = UIColor.red
+                    }
                     tableView.reloadData()
                 }
                 else{
-                    let recenttimedata  = Array(recentTimestring)
-                    let changeyear = Int(String(recenttimedata[3]))! - 1
-                    let changeyearString = recentTimestring.prefix(3) + "\(changeyear)" + recentTimestring.dropFirst(4)
-                    // 정확히 1년전데이터가 있는경우 ex) 2023-1-31 > 2022-1-31
-                    if let firstindex = timeListDatas.firstIndex(of: String(changeyearString)) {
-                        let temptimeList = Array(timeListDatas.dropFirst(firstindex))
-                        for (index, element ) in temptimeList.enumerated(){
-                            if index % 5 == 0 {
-                                temptimeListDatas.append(element)
-                            }
+                    var estimateDate : String?
+                    for k in timeListDatas {
+                        if k >= yearagodate{
+                            estimateDate = k
+                            break
                         }
-                        let temppriceList = Array(priceListDatas.dropFirst(firstindex))
-                        for (index, element ) in temppriceList.enumerated(){
-                            if index % 5 == 0 {
-                                temppriceListDatas.append(element)
-                            }
-                        }
-                        pricePercent.text =  "\(String(format: "%.2f", Double((temppriceListDatas.last! - temppriceListDatas[0])) / Double(temppriceListDatas[0]) * 100))%"
-                        if(pricePercent.text?.prefix(1) == "-"){
-                            pricePercent.textColor = UIColor.blue
-                        }
-                        else{
-                            pricePercent.textColor = UIColor.red
-                        }
-                        self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
-                        tableView.reloadData()
                     }
-                    // 그런데 1년이상이지만 날짜상 그날이 휴장일일때를 대비해서 그냥 244개만 데이터 뽑기.
+                    let firstindex = timeListDatas.firstIndex(of: estimateDate!)!
+                    temptimeListDatas = Array(timeListDatas.dropFirst(firstindex))
+                    temppriceListDatas = Array(priceListDatas.dropFirst(firstindex))
+                    self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
+                    pricePercent.text =  "\(String(format: "%.2f", Double((temppriceListDatas.last! - temppriceListDatas[0])) / Double(temppriceListDatas[0]) * 100))%"
+                    if(pricePercent.text?.prefix(1) == "-"){
+                        pricePercent.textColor = UIColor.blue
+                    }
                     else{
-                       let beforePriceData = priceListDatas.suffix(244)
-                        let beforeTimeData = timeListDatas.suffix(244)
-                        for (index, element ) in beforeTimeData.enumerated(){
-                            if index % 5 == 0 {
-                                temptimeListDatas.append(element)
-                            }
-                        }
-                        for (index, element ) in beforePriceData.enumerated(){
-                            if index % 5 == 0 {
-                                temppriceListDatas.append(element)
-                            }
-                        }
-                        if(!temptimeListDatas.contains( recentTimestring)){
-                            temptimeListDatas.append(recentTimestring)
-                            temppriceListDatas.append(priceListDatas.last!)
-                        }
-                        self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
-                        pricePercent.text =  "\(String(format: "%.2f", Double((temppriceListDatas.last! - temppriceListDatas[0])) / Double(temppriceListDatas[0]) * 100))%"
-                        if(pricePercent.text?.prefix(1) == "-"){
-                            pricePercent.textColor = UIColor.blue
-                        }
-                        else{
-                            pricePercent.textColor = UIColor.red
-                        }
-                        tableView.reloadData()
-                    }}
-   
-
-            case 3:
-                changeDate.text = "5년전 대비"
-                temppriceListDatas = []
-                temptimeListDatas = []
-                for (index, element ) in timeListDatas.enumerated(){
-                    if index % 5 == 0 {
-                        temptimeListDatas.append(element)
+                        pricePercent.textColor = UIColor.red
                     }
+                    tableView.reloadData()
                 }
-                for (index, element ) in priceListDatas.enumerated(){
-                    if index % 5 == 0 {
-                        temppriceListDatas.append(element)
-                    }
-                }
-                pricePercent.text =  "\(String(format: "%.2f", Double((temppriceListDatas.last! - temppriceListDatas[0])) / Double(temppriceListDatas[0]) * 100))%"
-                if(pricePercent.text?.prefix(1) == "-"){
-                    pricePercent.textColor = UIColor.blue
-                }
-                else{
-                    pricePercent.textColor = UIColor.red
-                }
-                self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
-                tableView.reloadData()
             default:
                 break
             }
@@ -570,3 +565,16 @@ class StockChartViewController : UIViewController {
         }
     }
 
+extension String {
+    subscript (bounds: CountableClosedRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: bounds.lowerBound)
+        let end = index(startIndex, offsetBy: bounds.upperBound)
+        return String(self[start...end])
+    }
+
+    subscript (bounds: CountableRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: bounds.lowerBound)
+        let end = index(startIndex, offsetBy: bounds.upperBound)
+        return String(self[start..<end])
+    }
+}

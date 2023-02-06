@@ -15,7 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         NMFAuthManager.shared().clientId = "t1d90xy372"
-
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = .black
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+//            let tabBarApperance = UITabBarAppearance()
+//            tabBarApperance.configureWithOpaqueBackground()
+//            tabBarApperance.backgroundColor = UIColor.black
+//            UITabBar.appearance().scrollEdgeAppearance = tabBarApperance
+//            UITabBar.appearance().standardAppearance = tabBarApperance
+        }
         return true
     }
 

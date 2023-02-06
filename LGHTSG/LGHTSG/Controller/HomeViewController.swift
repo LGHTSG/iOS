@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 final class HomeViewController : UIViewController{
     private var segmentControl = UnderlineSegmentedControl(items: ["나의 자산", "판매한 자산"])
-    var changepercent : String = "-7.2%"
+    var changepercent : String?
+    
     var tableview = UITableView()
     var underline1 = UnderlineView()
     var underline2 = UnderlineView()
@@ -19,7 +20,13 @@ final class HomeViewController : UIViewController{
     private var mytoken = UserDefaults.standard.string(forKey: "savedToken")
     override func viewDidLoad(){
         super.viewDidLoad()
-        SetNavigationBar()
+        let userRoemodel = UserRoeModel()
+        userRoemodel.getUserROE(token: mytoken!){
+            data in
+            self.changepercent = String(format:"%.2f",data.rate)+"%"
+            self.SetNavigationBar()
+        }
+        
         setTobTabbar()
         setTable()
         segmentControl.addTarget(self, action: #selector(clicksegment), for: .valueChanged)
@@ -28,6 +35,12 @@ final class HomeViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         getmyAssetData()
+        let userRoemodel = UserRoeModel()
+        userRoemodel.getUserROE(token: mytoken!){
+            data in
+            self.changepercent = String(format:"%.2f",data.rate)+"%"
+            self.SetNavigationBar()
+        }
     }
     // 나의 자산, 판매한 자산
     @objc func clicksegment(_ sender : UISegmentedControl){
@@ -73,7 +86,8 @@ private extension HomeViewController{
         searchBtn.tintColor = .white
         navigationItem.leftBarButtonItem = searchBtn
         var config = UIButton.Configuration.plain()
-        var attributeString = AttributedString(changepercent)
+    
+        var attributeString = AttributedString(changepercent!)
         attributeString.font = UIFont(name: "NanumSquareB", size: 12)
         attributeString.foregroundColor = UIColor.systemBlue
         config.attributedTitle = attributeString
@@ -180,7 +194,82 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource {
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let selectedIndex = self.segmentControl.selectedSegmentIndex
+        switch selectedIndex{
+        case 0:
+            if(myAssetData[indexPath.row].category == "resell"){
+                let ChartVc = ReSellChartViewController()
+                ChartVc.nameText =  myAssetData[indexPath.row].assetName
+                ChartVc.changeDateText = myAssetData[indexPath.row].rateCalDateDiff
+                ChartVc.pricePercentText = "\(myAssetData[indexPath.row].rateOfChange)%"
+                ChartVc.PriceText  = "\(String(myAssetData[indexPath.row].price))원"
+                ChartVc.idx = myAssetData[indexPath.row].assetIdx
+                ChartVc.imageURL = myAssetData[indexPath.row].iconImage
+                self.navigationController?.pushViewController(ChartVc, animated: true)
+            }
+            else if (myAssetData[indexPath.row].category == "stock"){
+                let StockVC = StockChartViewController()
+                StockVC.nameText =  myAssetData[indexPath.row].assetName
+                StockVC.changeDateText = myAssetData[indexPath.row].rateCalDateDiff
+                StockVC.pricePercentText = "\(myAssetData[indexPath.row].rateOfChange)%"
+//                StockVC.  = "\(String(myAssetData[indexPath.row].price))원"
+                StockVC.idx = myAssetData[indexPath.row].assetIdx
+                self.navigationController?.pushViewController(StockVC, animated: true)
+            }
+        case 1:
+            if(SellAssetData[indexPath.row].category == "resell"){
+                let ChartVc = ReSellChartViewController()
+                ChartVc.nameText =  SellAssetData[indexPath.row].assetName
+                ChartVc.changeDateText = SellAssetData[indexPath.row].rateCalDateDiff
+                ChartVc.pricePercentText = "\(SellAssetData[indexPath.row].rateOfChange)%"
+                ChartVc.PriceText  = "\(String(SellAssetData[indexPath.row].price))원"
+                ChartVc.idx = SellAssetData[indexPath.row].assetIdx
+                ChartVc.imageURL = SellAssetData[indexPath.row].iconImage
+                self.navigationController?.pushViewController(ChartVc, animated: true)
+            }
+            else if (SellAssetData[indexPath.row].category == "stock"){
+                let StockVC = StockChartViewController()
+                StockVC.nameText =  SellAssetData[indexPath.row].assetName
+                StockVC.changeDateText = SellAssetData[indexPath.row].rateCalDateDiff
+                StockVC.pricePercentText = "\(SellAssetData[indexPath.row].rateOfChange)%"
+//                StockVC.  = "\(String(myAssetData[indexPath.row].price))원"
+                StockVC.idx = SellAssetData[indexPath.row].assetIdx
+                self.navigationController?.pushViewController(StockVC, animated: true)
+            }
+        default: print("error")
+        }
+    }
+    // tableview cell 삭제 내 자산 삭제
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+//            tableView.beginUpdates()
+            let AssetModel = AssetModel()
+//            switch( self.segmentControl.selectedSegmentIndex){
+//            case 0:
+            AssetModel.deleteMyAsset(token: self.mytoken!, transactionIdx: myAssetData[indexPath.row].assetIdx, category: myAssetData[indexPath.row].category){
+                data in
+                //요청에 성공한 경우
+                if(data.header.resultCode == 1000){
+                    let alertv = UIAlertController(title: "삭제완료", message: "삭제가 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
+                    alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.present(alertv, animated: true){
+//                        tableView.deleteRows(at: [indexPath], with: .fade)
+                        self.getmyAssetData()
+//                        tableView.endUpdates()
+                    }
+                }
+                else{
+                    let alertv = UIAlertController(title: "ERROR", message: "삭제 실패", preferredStyle: UIAlertController.Style.alert)
+                    alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.present(alertv,animated: true)
+                }
+            }
+//            case 1:
+//            default:
+        }
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if self.tableview.contentOffset.y < 0 {

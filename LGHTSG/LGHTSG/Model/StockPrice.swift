@@ -10,10 +10,6 @@ struct StockPrice : Decodable {
     let body : [StockBody]
     struct StockBody : Decodable {
         let price : Int
-        let transactionTime : String
+        let datetime : String
     }
 }
-//struct StockHeader : Decodable{
-//    let resultMsg : String
-//    let resultCode : String
-//}

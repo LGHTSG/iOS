@@ -22,4 +22,21 @@ class AssetModel {
             }
         }
     }
+    func deleteMyAsset(token : String, transactionIdx : Int, category : String, onCompleted : @escaping(TradeDateError) -> Void){
+        let urlString = "http://api.lghtsg.site:8090/users/my-asset/delete-list"
+        guard let url = URL(string: urlString) else {return}
+        let headers : HTTPHeaders = ["x-access-token" : token]
+        let body : Parameters = [
+            "transactionIdx" : transactionIdx,
+            "category" : category
+        ]
+        AF.request(url, method: .patch, parameters: body,  encoding: JSONEncoding.default, headers: headers ).responseDecodable(of: TradeDateError.self){
+            response in
+            switch response.result{
+            case let .success(data):
+                onCompleted(data)
+            case let .failure(err):
+                print(err)
+            }
+        }}
 }

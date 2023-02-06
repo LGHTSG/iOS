@@ -109,7 +109,7 @@ extension HomeTableCell {
             $0.top.equalTo(pricePercent.snp.top)
         }
     }
-    func setup(with resellinfo : ResellPrice.body){
+    func setup(with resellinfo : resellData.body){
 
         self.backgroundColor = .black
 
@@ -179,13 +179,21 @@ extension HomeTableCell {
             addSubview($0)
         }
         nameLabel.text = home.assetName
-        priceLabel.text = String(home.price)
+        priceLabel.text = String(home.price)+"원"
         changeDate.text = home.rateCalDateDiff
         pricePercent.text = String(home.rateOfChange)
         let url = URL(string: home.iconImage)
+        let stringofratechange = String(home.rateOfChange)
+        if(stringofratechange[stringofratechange.startIndex] == "-"){
+            pricePercent.text = "\(stringofratechange)%"
+            pricePercent.textColor = .blue
+        }else {
+            pricePercent.text = "+\(stringofratechange)%"
+            pricePercent.textColor = .red
+        }
         // kf 이미지 둥그렇
         iconimage.clipsToBounds = true
-        iconimage.layer.cornerRadius = 20
+        iconimage.layer.cornerRadius = 22
         iconimage.backgroundColor = .white
         iconimage.kf.setImage(with: url )
         countLabel.snp.makeConstraints{

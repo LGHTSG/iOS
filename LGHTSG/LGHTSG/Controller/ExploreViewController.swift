@@ -17,20 +17,22 @@ class ExploreViewController : UIViewController {
     let underline2 = UnderlineView()
     let underline3 = UnderlineView()
     let underline4 = UnderlineView()
+    private var changepercent : String?
     var resellVC = resellView()
     static var isSearching = false
     let stockView = StockView()
     let TopView = TopViewController()
     let EstateVC = EstateController()
-//    private lazy var reSellView : resellView = {
-//        let view = resellView(coder: NSCoder)
-//        return view
-//    }()
+    private var mytoken = UserDefaults.standard.string(forKey: "savedToken")
     override func viewDidLoad() {
         super.viewDidLoad()
-//        reSellView.delegate = self
+        let userRoemodel = UserRoeModel()
+        userRoemodel.getUserROE(token: mytoken!){
+            data in
+            self.changepercent = String(format:"%.2f",data.rate)+"%"
+            self.SetNavigationBar()
+        }
         stockView.delegate = self
-        SetNavigationBar()
         setTobTabbar()
         self.addChild(TopView)
         self.view.addSubview(TopView.view)
@@ -40,6 +42,15 @@ class ExploreViewController : UIViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
 
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        let userRoemodel = UserRoeModel()
+        userRoemodel.getUserROE(token: mytoken!){
+            data in
+            self.changepercent = String(format:"%.2f",data.rate)+"%"
+            self.SetNavigationBar()
+        }
     }
     func setTobTabbar(){
         view.addSubview(segmentControl)
@@ -161,10 +172,6 @@ class ExploreViewController : UIViewController {
                 $0.top.equalTo(underline4.snp.bottom).offset(32)
                 $0.bottom.equalTo(view.safeAreaLayoutGuide)
             }
-            
-            
-            
-//            reSellView.alpha = 1
         default: break
         }
     }
@@ -184,7 +191,7 @@ extension ExploreViewController : showNavigationDelegate{
         searchBtn.tintColor = .white
         navigationItem.leftBarButtonItem = searchBtn
         var config = UIButton.Configuration.plain()
-        var attributeString = AttributedString("-93")
+        var attributeString = AttributedString(changepercent!)
         attributeString.font =  UIFont(name: "NanumSquareB", size: 12)
         attributeString.foregroundColor = UIColor.systemBlue
         config.attributedTitle = attributeString
@@ -196,6 +203,9 @@ extension ExploreViewController : showNavigationDelegate{
         let profileBtn = UIBarButtonItem(customView:realbtn )
         realbtn.addTarget(self, action: #selector(mypageClicked), for: .touchUpInside)
         navigationItem.rightBarButtonItem = profileBtn
+        let navigationAppearance = UINavigationBarAppearance()
+        navigationAppearance.backgroundColor = .black
+        self.navigationController?.navigationBar.scrollEdgeAppearance = navigationAppearance
     }
 
     @objc func mypageClicked(){
