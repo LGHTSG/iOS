@@ -52,6 +52,9 @@
 		078401E9298A4C2600CDE061 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078401E8298A4C2500CDE061 /* TopViewController.swift */; };
 		078666BC2980BF9B000ADCBE /* ReverseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078666BB2980BF9B000ADCBE /* ReverseModel.swift */; };
 		078666BE2983844D000ADCBE /* GeocodingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078666BD2983844D000ADCBE /* GeocodingModel.swift */; };
+		0798E525298E2ED4004E3221 /* StockVolumeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798E524298E2ED4004E3221 /* StockVolumeModel.swift */; };
+		0798E527298E3407004E3221 /* ResellFluctuationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798E526298E3407004E3221 /* ResellFluctuationModel.swift */; };
+		0798E529298E94DF004E3221 /* TopViewDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798E528298E94DF004E3221 /* TopViewDetailController.swift */; };
 		8E910354CAD5238FB38C267D /* Pods_LGHTSG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */; };
 		F0E4F818298C14E8008B8A48 /* myasset.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E4F817298C14E8008B8A48 /* myasset.swift */; };
 		F5DAEC00298AD1FA0098A11A /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEBFF298AD1FA0098A11A /* login.swift */; };
@@ -130,6 +133,9 @@
 		078401E8298A4C2500CDE061 /* TopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
 		078666BB2980BF9B000ADCBE /* ReverseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseModel.swift; sourceTree = "<group>"; };
 		078666BD2983844D000ADCBE /* GeocodingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingModel.swift; sourceTree = "<group>"; };
+		0798E524298E2ED4004E3221 /* StockVolumeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockVolumeModel.swift; sourceTree = "<group>"; };
+		0798E526298E3407004E3221 /* ResellFluctuationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResellFluctuationModel.swift; sourceTree = "<group>"; };
+		0798E528298E94DF004E3221 /* TopViewDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewDetailController.swift; sourceTree = "<group>"; };
 		1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LGHTSG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F7EA128F8EC33ED812CADCA /* Pods-LGHTSG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.release.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.release.xcconfig"; sourceTree = "<group>"; };
 		9154F7534146417B8EBDBECC /* Pods-LGHTSG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.debug.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.debug.xcconfig"; sourceTree = "<group>"; };
@@ -228,6 +234,8 @@
 				0764F26C2986653500F446CB /* AreaListModel.swift */,
 				0764F2702987853600F446CB /* EstateModel.swift */,
 				075BBA33298A79F500710F44 /* EstatePriceDetailModel.swift */,
+				0798E524298E2ED4004E3221 /* StockVolumeModel.swift */,
+				0798E526298E3407004E3221 /* ResellFluctuationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -321,6 +329,7 @@
 		078401C8298A49CB00CDE061 /* ExploreVC */ = {
 			isa = PBXGroup;
 			children = (
+				0798E528298E94DF004E3221 /* TopViewDetailController.swift */,
 				078401E8298A4C2500CDE061 /* TopViewController.swift */,
 				075BBA2F298A78FC00710F44 /* EstateController.swift */,
 				078401CB298A49D500CDE061 /* resellView.swift */,
@@ -559,7 +568,9 @@
 				F5DAEC27298AD36A0098A11A /* LoginApiHeaderModel.swift in Sources */,
 				F5DAEC2C298AD3A40098A11A /* JoinApiModel.swift in Sources */,
 				078401C5298A486300CDE061 /* EstatePriceModel.swift in Sources */,
+				0798E527298E3407004E3221 /* ResellFluctuationModel.swift in Sources */,
 				075BBA34298A79F500710F44 /* EstatePriceDetailModel.swift in Sources */,
+				0798E529298E94DF004E3221 /* TopViewDetailController.swift in Sources */,
 				F5DAEC3D298AD47A0098A11A /* CheckPagePrivacyController.swift in Sources */,
 				078401BB298A484800CDE061 /* HomeViewController.swift in Sources */,
 				F5DAEC37298AD4570098A11A /* CheckAgreeController.swift in Sources */,
@@ -602,6 +613,7 @@
 				F5DAEC11298AD2910098A11A /* JoinSuccessView.swift in Sources */,
 				078401B9298A484800CDE061 /* ChartsModel.swift in Sources */,
 				078401E6298A4B2D00CDE061 /* StockPriceModel.swift in Sources */,
+				0798E525298E2ED4004E3221 /* StockVolumeModel.swift in Sources */,
 				F5DAEC0F298AD2850098A11A /* RegisterView.swift in Sources */,
 				F5DAEC2E298AD3AC0098A11A /* ChangePwModel.swift in Sources */,
 				F5DAEC08298AD22A0098A11A /* user.swift in Sources */,

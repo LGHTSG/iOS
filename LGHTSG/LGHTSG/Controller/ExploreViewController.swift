@@ -222,6 +222,8 @@ extension ExploreViewController : showNavigationDelegate{
         searchbar.delegate = self
         searchbar.placeholder = "검색어를 입력해주세요"
         searchbar.searchTextField.backgroundColor = .clear
+        searchbar.searchTextField.textColor = .white
+        searchbar.tintColor = .white
         navigationItem.leftBarButtonItem = .none
         navigationItem.rightBarButtonItem = .none
         self.navigationItem.titleView = searchbar
