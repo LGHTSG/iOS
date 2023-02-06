@@ -481,6 +481,8 @@ extension ReSellChartViewController : UITableViewDelegate, UITableViewDataSource
         cell.date.textColor = .white
         cell.price.text = "\(tradeListData[indexPath.row].price)원"
         cell.price.textColor = .white
+        cell.selectionStyle = .none
+
         if(tradeListData[indexPath.row].sellCheck == 0 ){
             cell.buysell.text = "구매"
         }

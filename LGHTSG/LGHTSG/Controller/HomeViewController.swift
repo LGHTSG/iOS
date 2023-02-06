@@ -168,6 +168,8 @@ private extension HomeViewController{
 extension HomeViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableview.dequeueReusableCell(withIdentifier: "HomeTableCell", for: indexPath) as? HomeTableCell
+        cell.selectionStyle = .none
+
         let selectedIndex = self.segmentControl.selectedSegmentIndex
         switch selectedIndex{
         case 0:

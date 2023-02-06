@@ -189,7 +189,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             cell.price.font = UIFont(name: "NanumSquareB", size: 12.0)
             cell.percentage.font = UIFont(name: "NanumSquareB", size: 12.0)
             cell.period.font = UIFont(name: "NanumSquareB", size: 12.0)
-            
+            cell.selectionStyle = .none
             cell.number.text = "1"
             cell.title.text = "서울시"
             cell.price.text = "22,303,921 원/m"

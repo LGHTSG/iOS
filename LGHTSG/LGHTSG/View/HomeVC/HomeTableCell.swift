@@ -49,7 +49,6 @@ class HomeTableCell : UITableViewCell {
 }
 extension HomeTableCell {
     func setup(with assetinfo : asset.body){
-    
         [countLabel, nameLabel, priceLabel, pricePercent, changeDate, iconimage].forEach{
             addSubview($0)
         }
@@ -86,7 +85,7 @@ extension HomeTableCell {
             $0.bottom.equalToSuperview().offset(-12)
         }
         iconimage.snp.makeConstraints{
-            $0.leading.equalToSuperview().offset(23.66)
+            $0.leading.equalToSuperview().offset(30)
             $0.top.equalToSuperview()
             $0.height.width.equalTo(44)
             $0.bottom.equalToSuperview().offset(-12)
@@ -100,13 +99,14 @@ extension HomeTableCell {
             $0.leading.equalTo(nameLabel.snp.leading)
             $0.top.equalTo(nameLabel.snp.bottom).offset(5)
         }
-        pricePercent.snp.makeConstraints{
-            $0.leading.equalTo(priceLabel.snp.trailing).offset(8)
+
+        changeDate.snp.makeConstraints{
+            $0.trailing.equalToSuperview().inset(40)
             $0.top.equalTo(priceLabel.snp.top)
         }
-        changeDate.snp.makeConstraints{
-            $0.leading.equalTo(pricePercent.snp.trailing).offset(9)
-            $0.top.equalTo(pricePercent.snp.top)
+        pricePercent.snp.makeConstraints{
+            $0.leading.equalTo(priceLabel.snp.trailing).offset(15)
+            $0.top.equalTo(priceLabel.snp.top)
         }
     }
     func setup(with resellinfo : resellData.body){
@@ -151,7 +151,7 @@ extension HomeTableCell {
             $0.bottom.equalToSuperview().offset(-12)
         }
         iconimage.snp.makeConstraints{
-            $0.leading.equalToSuperview().offset(23.66)
+            $0.leading.equalToSuperview().offset(30)
             $0.top.equalToSuperview()
             $0.height.width.equalTo(44)
             $0.bottom.equalToSuperview().offset(-12)
@@ -165,13 +165,14 @@ extension HomeTableCell {
             $0.leading.equalTo(nameLabel.snp.leading)
             $0.top.equalTo(nameLabel.snp.bottom).offset(5)
         }
-        pricePercent.snp.makeConstraints{
-            $0.leading.equalTo(priceLabel.snp.trailing).offset(8)
+
+        changeDate.snp.makeConstraints{
+            $0.trailing.equalToSuperview().inset(40)
             $0.top.equalTo(priceLabel.snp.top)
         }
-        changeDate.snp.makeConstraints{
-            $0.leading.equalTo(pricePercent.snp.trailing).offset(9)
-            $0.top.equalTo(pricePercent.snp.top)
+        pricePercent.snp.makeConstraints{
+            $0.trailing.equalTo(changeDate.snp.leading).offset(-15)
+            $0.top.equalTo(priceLabel.snp.top)
         }
     }
     func setup(home : myasset.myBody){
@@ -202,7 +203,7 @@ extension HomeTableCell {
             $0.bottom.equalToSuperview().offset(-12)
         }
         iconimage.snp.makeConstraints{
-            $0.leading.equalToSuperview().offset(23.66)
+            $0.leading.equalToSuperview().offset(30)
             $0.top.equalToSuperview()
             $0.height.width.equalTo(44)
             $0.bottom.equalToSuperview().offset(-12)
@@ -210,19 +211,19 @@ extension HomeTableCell {
         nameLabel.snp.makeConstraints{
             $0.leading.equalTo(iconimage.snp.trailing).offset(16.34)
             $0.top.equalToSuperview()
-            
         }
         priceLabel.snp.makeConstraints{
             $0.leading.equalTo(nameLabel.snp.leading)
             $0.top.equalTo(nameLabel.snp.bottom).offset(5)
         }
-        pricePercent.snp.makeConstraints{
-            $0.leading.equalTo(priceLabel.snp.trailing).offset(8)
-            $0.top.equalTo(priceLabel.snp.top)
-        }
+
         changeDate.snp.makeConstraints{
-            $0.leading.equalTo(pricePercent.snp.trailing).offset(9)
+            $0.trailing.equalToSuperview().inset(40)
             $0.top.equalTo(pricePercent.snp.top)
+        }
+        pricePercent.snp.makeConstraints{
+            $0.trailing.equalTo(changeDate.snp.leading).offset(-15)
+            $0.top.equalTo(priceLabel.snp.top)
         }
     }
 }

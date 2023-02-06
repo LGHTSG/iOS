@@ -411,7 +411,8 @@ class StockChartViewController : UIViewController {
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: EstateDetailCell.identifier, for: indexPath) as? EstateDetailCell else { return UITableViewCell() }
-            
+            cell.selectionStyle = .none
+
             cell.date.text = tradeListData[indexPath.row].transactionTime
             cell.date.textColor = .white
             cell.price.text = "\(tradeListData[indexPath.row].price)원"

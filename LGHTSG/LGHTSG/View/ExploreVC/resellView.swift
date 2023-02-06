@@ -108,6 +108,8 @@ extension resellView : UITableViewDataSource , UITableViewDelegate, UIScrollView
         }else{
             cell.setup(with: resellDataLists[indexPath.row])}
         cell.countLabel.text = "\(indexPath.row+1)"
+        cell.selectionStyle = .none
+
         return cell
         
     }
