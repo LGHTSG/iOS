@@ -28,9 +28,7 @@
 		0764F285298959C600F446CB /* TopViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764F284298959C600F446CB /* TopViewCell.swift */; };
 		078401B6298A484800CDE061 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078401AE298A484800CDE061 /* MainTabController.swift */; };
 		078401B8298A484800CDE061 /* StockChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078401B0298A484800CDE061 /* StockChartViewController.swift */; };
-		078401B9298A484800CDE061 /* ChartsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078401B1298A484800CDE061 /* ChartsModel.swift */; };
 		078401BB298A484800CDE061 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078401B3298A484800CDE061 /* HomeViewController.swift */; };
-		078401BC298A484800CDE061 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078401B4298A484800CDE061 /* ChartViewController.swift */; };
 		078401BD298A484800CDE061 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078401B5298A484800CDE061 /* ExploreViewController.swift */; };
 		078401C2298A486300CDE061 /* realEstates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078401BE298A486300CDE061 /* realEstates.swift */; };
 		078401C3298A486300CDE061 /* StockPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078401BF298A486300CDE061 /* StockPrice.swift */; };
@@ -57,6 +55,16 @@
 		0798E529298E94DF004E3221 /* TopViewDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798E528298E94DF004E3221 /* TopViewDetailController.swift */; };
 		8E910354CAD5238FB38C267D /* Pods_LGHTSG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */; };
 		F0E4F818298C14E8008B8A48 /* myasset.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E4F817298C14E8008B8A48 /* myasset.swift */; };
+		F0F6B15229912F8300F8835D /* ReSellChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B15129912F8300F8835D /* ReSellChartViewController.swift */; };
+		F0F6B1542991307400F8835D /* resellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B1532991307400F8835D /* resellData.swift */; };
+		F0F6B1562991308C00F8835D /* TradeDateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B1552991308C00F8835D /* TradeDateError.swift */; };
+		F0F6B1582991309400F8835D /* TradeHistroy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B1572991309400F8835D /* TradeHistroy.swift */; };
+		F0F6B15A2991309D00F8835D /* usersROE.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B1592991309D00F8835D /* usersROE.swift */; };
+		F0F6B15C299130FB00F8835D /* StocktradeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B15B299130FB00F8835D /* StocktradeModel.swift */; };
+		F0F6B15E2991310000F8835D /* UserRoeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B15D2991310000F8835D /* UserRoeModel.swift */; };
+		F0F6B166299139D900F8835D /* AccountSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B164299139D900F8835D /* AccountSettingViewController.swift */; };
+		F0F6B167299139D900F8835D /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B165299139D900F8835D /* MyPageViewController.swift */; };
+		F0F6B16A29913ADB00F8835D /* UserApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B16929913ADB00F8835D /* UserApiModel.swift */; };
 		F5DAEC00298AD1FA0098A11A /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEBFF298AD1FA0098A11A /* login.swift */; };
 		F5DAEC02298AD2050098A11A /* email.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC01298AD2050098A11A /* email.swift */; };
 		F5DAEC04298AD20E0098A11A /* join.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC03298AD20E0098A11A /* join.swift */; };
@@ -80,7 +88,6 @@
 		F5DAEC2E298AD3AC0098A11A /* ChangePwModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC2D298AD3AC0098A11A /* ChangePwModel.swift */; };
 		F5DAEC30298AD3FA0098A11A /* RegisterationSuccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC2F298AD3FA0098A11A /* RegisterationSuccessController.swift */; };
 		F5DAEC32298AD40C0098A11A /* FindPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC31298AD40C0098A11A /* FindPasswordController.swift */; };
-		F5DAEC34298AD41F0098A11A /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC33298AD41F0098A11A /* MyPageViewController.swift */; };
 		F5DAEC37298AD4570098A11A /* CheckAgreeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC36298AD4570098A11A /* CheckAgreeController.swift */; };
 		F5DAEC39298AD4620098A11A /* CheckPageMarketingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC38298AD4620098A11A /* CheckPageMarketingController.swift */; };
 		F5DAEC3B298AD46B0098A11A /* CheckPageServiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC3A298AD46B0098A11A /* CheckPageServiceController.swift */; };
@@ -109,9 +116,7 @@
 		0764F284298959C600F446CB /* TopViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewCell.swift; sourceTree = "<group>"; };
 		078401AE298A484800CDE061 /* MainTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		078401B0298A484800CDE061 /* StockChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockChartViewController.swift; sourceTree = "<group>"; };
-		078401B1298A484800CDE061 /* ChartsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartsModel.swift; sourceTree = "<group>"; };
 		078401B3298A484800CDE061 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		078401B4298A484800CDE061 /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		078401B5298A484800CDE061 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		078401BE298A486300CDE061 /* realEstates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = realEstates.swift; sourceTree = "<group>"; };
 		078401BF298A486300CDE061 /* StockPrice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockPrice.swift; sourceTree = "<group>"; };
@@ -140,6 +145,16 @@
 		6F7EA128F8EC33ED812CADCA /* Pods-LGHTSG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.release.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.release.xcconfig"; sourceTree = "<group>"; };
 		9154F7534146417B8EBDBECC /* Pods-LGHTSG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.debug.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.debug.xcconfig"; sourceTree = "<group>"; };
 		F0E4F817298C14E8008B8A48 /* myasset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myasset.swift; sourceTree = "<group>"; };
+		F0F6B15129912F8300F8835D /* ReSellChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReSellChartViewController.swift; sourceTree = "<group>"; };
+		F0F6B1532991307400F8835D /* resellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = resellData.swift; sourceTree = "<group>"; };
+		F0F6B1552991308C00F8835D /* TradeDateError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeDateError.swift; sourceTree = "<group>"; };
+		F0F6B1572991309400F8835D /* TradeHistroy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeHistroy.swift; sourceTree = "<group>"; };
+		F0F6B1592991309D00F8835D /* usersROE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = usersROE.swift; sourceTree = "<group>"; };
+		F0F6B15B299130FB00F8835D /* StocktradeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StocktradeModel.swift; sourceTree = "<group>"; };
+		F0F6B15D2991310000F8835D /* UserRoeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRoeModel.swift; sourceTree = "<group>"; };
+		F0F6B164299139D900F8835D /* AccountSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSettingViewController.swift; sourceTree = "<group>"; };
+		F0F6B165299139D900F8835D /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		F0F6B16929913ADB00F8835D /* UserApiModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserApiModel.swift; sourceTree = "<group>"; };
 		F5DAEBFF298AD1FA0098A11A /* login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.swift; sourceTree = "<group>"; };
 		F5DAEC01298AD2050098A11A /* email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = email.swift; sourceTree = "<group>"; };
 		F5DAEC03298AD20E0098A11A /* join.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = join.swift; sourceTree = "<group>"; };
@@ -163,7 +178,6 @@
 		F5DAEC2D298AD3AC0098A11A /* ChangePwModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePwModel.swift; sourceTree = "<group>"; };
 		F5DAEC2F298AD3FA0098A11A /* RegisterationSuccessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationSuccessController.swift; sourceTree = "<group>"; };
 		F5DAEC31298AD40C0098A11A /* FindPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordController.swift; sourceTree = "<group>"; };
-		F5DAEC33298AD41F0098A11A /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		F5DAEC36298AD4570098A11A /* CheckAgreeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAgreeController.swift; sourceTree = "<group>"; };
 		F5DAEC38298AD4620098A11A /* CheckPageMarketingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPageMarketingController.swift; sourceTree = "<group>"; };
 		F5DAEC3A298AD46B0098A11A /* CheckPageServiceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPageServiceController.swift; sourceTree = "<group>"; };
@@ -228,11 +242,15 @@
 				F0E4F817298C14E8008B8A48 /* myasset.swift */,
 				078401BE298A486300CDE061 /* realEstates.swift */,
 				078401C0298A486300CDE061 /* ResellPrice.swift */,
+				F0F6B1532991307400F8835D /* resellData.swift */,
 				078401BF298A486300CDE061 /* StockPrice.swift */,
 				078666BB2980BF9B000ADCBE /* ReverseModel.swift */,
 				078666BD2983844D000ADCBE /* GeocodingModel.swift */,
 				0764F26C2986653500F446CB /* AreaListModel.swift */,
 				0764F2702987853600F446CB /* EstateModel.swift */,
+				F0F6B1572991309400F8835D /* TradeHistroy.swift */,
+				F0F6B1552991308C00F8835D /* TradeDateError.swift */,
+				F0F6B1592991309D00F8835D /* usersROE.swift */,
 				075BBA33298A79F500710F44 /* EstatePriceDetailModel.swift */,
 				0798E524298E2ED4004E3221 /* StockVolumeModel.swift */,
 				0798E526298E3407004E3221 /* ResellFluctuationModel.swift */,
@@ -253,11 +271,14 @@
 		071E0556296BB8380020282F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				F0F6B16929913ADB00F8835D /* UserApiModel.swift */,
 				F5DAEC28298AD38C0098A11A /* joinVM */,
 				F5DAEC23298AD34C0098A11A /* loginVM */,
 				078401E4298A4B2C00CDE061 /* StockPriceModel.swift */,
 				078401E5298A4B2D00CDE061 /* TableCellModel.swift */,
 				078401D5298A49E300CDE061 /* AssetModel.swift */,
+				F0F6B15B299130FB00F8835D /* StocktradeModel.swift */,
+				F0F6B15D2991310000F8835D /* UserRoeModel.swift */,
 				078401C1298A486300CDE061 /* EstatePriceModel.swift */,
 			);
 			path = ViewModel;
@@ -302,10 +323,10 @@
 		071E055A296BB88B0020282F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F0F6B168299139E500F8835D /* New Group */,
 				F5DAEC35298AD4410098A11A /* CheckController */,
 				0755755A296BFC2100B8AF77 /* Authentication */,
-				078401B1298A484800CDE061 /* ChartsModel.swift */,
-				078401B4298A484800CDE061 /* ChartViewController.swift */,
+				F0F6B15129912F8300F8835D /* ReSellChartViewController.swift */,
 				078401B5298A484800CDE061 /* ExploreViewController.swift */,
 				078401B3298A484800CDE061 /* HomeViewController.swift */,
 				078401AE298A484800CDE061 /* MainTabController.swift */,
@@ -321,7 +342,6 @@
 				0755755E296BFC4B00B8AF77 /* RegisterationController.swift */,
 				F5DAEC2F298AD3FA0098A11A /* RegisterationSuccessController.swift */,
 				F5DAEC31298AD40C0098A11A /* FindPasswordController.swift */,
-				F5DAEC33298AD41F0098A11A /* MyPageViewController.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -364,6 +384,15 @@
 				1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F0F6B168299139E500F8835D /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				F0F6B164299139D900F8835D /* AccountSettingViewController.swift */,
+				F0F6B165299139D900F8835D /* MyPageViewController.swift */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		F5DAEBFE298AD1CC0098A11A /* krystal */ = {
@@ -558,13 +587,15 @@
 				078401DB298A49E300CDE061 /* asset.swift in Sources */,
 				078401DA298A49E300CDE061 /* ChartMarker.swift in Sources */,
 				F5DAEC32298AD40C0098A11A /* FindPasswordController.swift in Sources */,
+				F0F6B166299139D900F8835D /* AccountSettingViewController.swift in Sources */,
 				0764F285298959C600F446CB /* TopViewCell.swift in Sources */,
 				F5DAEC25298AD3620098A11A /* LoginApiModel.swift in Sources */,
 				078401C2298A486300CDE061 /* realEstates.swift in Sources */,
 				078401B8298A484800CDE061 /* StockChartViewController.swift in Sources */,
 				078401DF298A49E300CDE061 /* AssetModel.swift in Sources */,
 				078401DE298A49E300CDE061 /* UnderlineSegmentedControl.swift in Sources */,
-				078401BC298A484800CDE061 /* ChartViewController.swift in Sources */,
+				F0F6B15C299130FB00F8835D /* StocktradeModel.swift in Sources */,
+				F0F6B15229912F8300F8835D /* ReSellChartViewController.swift in Sources */,
 				F5DAEC27298AD36A0098A11A /* LoginApiHeaderModel.swift in Sources */,
 				F5DAEC2C298AD3A40098A11A /* JoinApiModel.swift in Sources */,
 				078401C5298A486300CDE061 /* EstatePriceModel.swift in Sources */,
@@ -576,7 +607,6 @@
 				F5DAEC37298AD4570098A11A /* CheckAgreeController.swift in Sources */,
 				071E0545296BB7B50020282F /* ViewController.swift in Sources */,
 				0764F2712987853600F446CB /* EstateModel.swift in Sources */,
-				F5DAEC34298AD41F0098A11A /* MyPageViewController.swift in Sources */,
 				F5DAEC30298AD3FA0098A11A /* RegisterationSuccessController.swift in Sources */,
 				078401CE298A49D500CDE061 /* resellView.swift in Sources */,
 				0755755C296BFC3300B8AF77 /* LoginController.swift in Sources */,
@@ -587,12 +617,14 @@
 				F5DAEC06298AD2180098A11A /* changePw.swift in Sources */,
 				078401BD298A484800CDE061 /* ExploreViewController.swift in Sources */,
 				F5DAEC3B298AD46B0098A11A /* CheckPageServiceController.swift in Sources */,
+				F0F6B1542991307400F8835D /* resellData.swift in Sources */,
 				078401CC298A49D500CDE061 /* StockView.swift in Sources */,
 				078401E3298A49E300CDE061 /* UnderlineView.swift in Sources */,
 				078401E1298A49E300CDE061 /* HomeTableCell.swift in Sources */,
 				F5DAEC2A298AD39C0098A11A /* emailApiModel.swift in Sources */,
 				F5DAEC22298AD3320098A11A /* MyPageView.swift in Sources */,
 				0764F26B298642EF00F446CB /* SearchItemCell.swift in Sources */,
+				F0F6B1562991308C00F8835D /* TradeDateError.swift in Sources */,
 				F5DAEC18298AD2B60098A11A /* CheckPagePrivacyView.swift in Sources */,
 				F5DAEC1A298AD2C40098A11A /* CheckPageMarketingView.swift in Sources */,
 				F5DAEC14298AD2A30098A11A /* CheckAgreeView.swift in Sources */,
@@ -606,24 +638,28 @@
 				078401E9298A4C2600CDE061 /* TopViewController.swift in Sources */,
 				071E0541296BB7B50020282F /* AppDelegate.swift in Sources */,
 				071E0543296BB7B50020282F /* SceneDelegate.swift in Sources */,
+				F0F6B16A29913ADB00F8835D /* UserApiModel.swift in Sources */,
 				0764F26F29866A6500F446CB /* APIToken.swift in Sources */,
 				F0E4F818298C14E8008B8A48 /* myasset.swift in Sources */,
 				078401C4298A486300CDE061 /* ResellPrice.swift in Sources */,
 				F5DAEC02298AD2050098A11A /* email.swift in Sources */,
+				F0F6B15E2991310000F8835D /* UserRoeModel.swift in Sources */,
 				F5DAEC11298AD2910098A11A /* JoinSuccessView.swift in Sources */,
-				078401B9298A484800CDE061 /* ChartsModel.swift in Sources */,
 				078401E6298A4B2D00CDE061 /* StockPriceModel.swift in Sources */,
 				0798E525298E2ED4004E3221 /* StockVolumeModel.swift in Sources */,
 				F5DAEC0F298AD2850098A11A /* RegisterView.swift in Sources */,
 				F5DAEC2E298AD3AC0098A11A /* ChangePwModel.swift in Sources */,
 				F5DAEC08298AD22A0098A11A /* user.swift in Sources */,
+				F0F6B1582991309400F8835D /* TradeHistroy.swift in Sources */,
 				078401CD298A49D500CDE061 /* EstateDetailCell.swift in Sources */,
 				078666BC2980BF9B000ADCBE /* ReverseModel.swift in Sources */,
 				078401B6298A484800CDE061 /* MainTabController.swift in Sources */,
 				078401C3298A486300CDE061 /* StockPrice.swift in Sources */,
 				F5DAEC16298AD2AC0098A11A /* CheckPageServiceView.swift in Sources */,
+				F0F6B167299139D900F8835D /* MyPageViewController.swift in Sources */,
 				078666BE2983844D000ADCBE /* GeocodingModel.swift in Sources */,
 				0764F26D2986653500F446CB /* AreaListModel.swift in Sources */,
+				F0F6B15A2991309D00F8835D /* usersROE.swift in Sources */,
 				0755755F296BFC4B00B8AF77 /* RegisterationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

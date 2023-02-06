@@ -152,11 +152,14 @@ class LoginController: UIViewController {
             data in
             self.jwt = data.jwt
             UserDefaults.standard.set(data.jwt,forKey: "savedToken")
+
             let vc = MainTabController()
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true)
         }
         
+        var jwt : String? = UserDefaults.standard.string(forKey: "savedToken")
+        print("토큰은 \(jwt)")
         var loginSuccess = UserDefaults.standard.bool(forKey: "loginSuccess")
         loginSuccess = UserDefaults.standard.bool(forKey: "loginSuccess")
         print(loginSuccess)

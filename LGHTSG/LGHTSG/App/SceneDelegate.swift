@@ -16,10 +16,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowscene = (scene as? UIWindowScene) else { return }
                 window = UIWindow(windowScene: windowscene)
                 window?.backgroundColor = .systemBackground
-                window?.rootViewController = MainTabController()
+                
+//        var jwt : String = UserDefaults.standard.string(forKey: "savedToken") ?? ""
+//                if jwt != "" {
+//                    print(jwt)
+//                    window?.rootViewController = MainTabController()
+//                    }
+//                else{
+                    window?.rootViewController = ViewController()
+//                }
             //window?.rootViewController = UINavigationController(rootViewController: MainTabController())
-        window?.backgroundColor = .black
-        
+
+                window?.tintColor = .label
                 window?.makeKeyAndVisible()
     }
 

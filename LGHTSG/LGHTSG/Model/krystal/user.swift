@@ -10,13 +10,9 @@ import Foundation
 
 struct user : Decodable {
     let body : body
-    let header : header
-    
-    struct header : Decodable {
-        let resultCode : Int
-    }
-    
+
     struct body : Decodable {
-        let userIdx : Int
+        let email : String
+        let name : String
     }
 }
