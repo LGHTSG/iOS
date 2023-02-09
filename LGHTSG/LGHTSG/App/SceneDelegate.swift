@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //                    window?.rootViewController = MainTabController()
 //                    }
 //                else{
-                    window?.rootViewController = ViewController()
+                    window?.rootViewController = MainTabController()
 //                }
             //window?.rootViewController = UINavigationController(rootViewController: MainTabController())
 

@@ -53,6 +53,7 @@
 		0798E525298E2ED4004E3221 /* StockVolumeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798E524298E2ED4004E3221 /* StockVolumeModel.swift */; };
 		0798E527298E3407004E3221 /* ResellFluctuationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798E526298E3407004E3221 /* ResellFluctuationModel.swift */; };
 		0798E529298E94DF004E3221 /* TopViewDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798E528298E94DF004E3221 /* TopViewDetailController.swift */; };
+		07F0D8882993D6D400D3C186 /* TopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F0D8872993D6D300D3C186 /* TopViewModel.swift */; };
 		8E910354CAD5238FB38C267D /* Pods_LGHTSG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */; };
 		F0E4F818298C14E8008B8A48 /* myasset.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E4F817298C14E8008B8A48 /* myasset.swift */; };
 		F0F6B15229912F8300F8835D /* ReSellChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B15129912F8300F8835D /* ReSellChartViewController.swift */; };
@@ -141,6 +142,7 @@
 		0798E524298E2ED4004E3221 /* StockVolumeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockVolumeModel.swift; sourceTree = "<group>"; };
 		0798E526298E3407004E3221 /* ResellFluctuationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResellFluctuationModel.swift; sourceTree = "<group>"; };
 		0798E528298E94DF004E3221 /* TopViewDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewDetailController.swift; sourceTree = "<group>"; };
+		07F0D8872993D6D300D3C186 /* TopViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopViewModel.swift; sourceTree = "<group>"; };
 		1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LGHTSG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F7EA128F8EC33ED812CADCA /* Pods-LGHTSG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.release.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.release.xcconfig"; sourceTree = "<group>"; };
 		9154F7534146417B8EBDBECC /* Pods-LGHTSG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.debug.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.debug.xcconfig"; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				F0F6B15B299130FB00F8835D /* StocktradeModel.swift */,
 				F0F6B15D2991310000F8835D /* UserRoeModel.swift */,
 				078401C1298A486300CDE061 /* EstatePriceModel.swift */,
+				07F0D8872993D6D300D3C186 /* TopViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -594,6 +597,7 @@
 				078401B8298A484800CDE061 /* StockChartViewController.swift in Sources */,
 				078401DF298A49E300CDE061 /* AssetModel.swift in Sources */,
 				078401DE298A49E300CDE061 /* UnderlineSegmentedControl.swift in Sources */,
+				07F0D8882993D6D400D3C186 /* TopViewModel.swift in Sources */,
 				F0F6B15C299130FB00F8835D /* StocktradeModel.swift in Sources */,
 				F0F6B15229912F8300F8835D /* ReSellChartViewController.swift in Sources */,
 				F5DAEC27298AD36A0098A11A /* LoginApiHeaderModel.swift in Sources */,

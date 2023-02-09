@@ -8,14 +8,12 @@
 import UIKit
 import SnapKit
 import Alamofire
+import Kingfisher
 
 class TopViewDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    
-    
     //MARK: - Properties
     lazy var label: UILabel = {
         let label = UILabel()
-        label.text = "hellllloo"
         label.textColor = .white
         return label
     }()
@@ -27,123 +25,21 @@ class TopViewDetailController: UIViewController, UITableViewDelegate, UITableVie
     }()
 
     //MARK: - EstateApi
-    
-    var nameLists = [String]()
-    var rateOfChange = [Double]()
-    var rateCalDateDiff = [String]()
-    var price = [Int]()
-    var iconList = [String]()
-    func getAreaList() {
-        let urlSTR = "http://api.lghtsg.site:8090/realestates?order=descending&sort=price&area=서울특별시+강남구"
-        let encodedStr = urlSTR.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        let url = URL(string: encodedStr)!
-        let header: HTTPHeaders = ["Content-Type" : "application/json"]
-        AF.request(url, method: .get, headers: header)
-            .validate(statusCode: 200..<300)
-            .responseDecodable(of : EstatePriceDetailModel.self) { response in
-                switch response.result {
-                case .success(let res):
-                    do {
-                        for index in 0..<10 {
-                            self.nameLists.append(res.body[index].name)
-                            self.rateCalDateDiff.append(res.body[index].rateCalDateDiff)
-                            self.rateOfChange.append(res.body[index].rateOfChange)
-                            self.price.append(res.body[index].price)
-                            self.iconList.append(res.body[index].iconImage)
-                        }
-                        self.tableView.reloadData()
-                       
-                    } catch {
-                        print("erorr in decode")
-                    }
-                case .failure(let err):
-                    print(err.localizedDescription)
-                }
-            }
-        }
-    
+    var estateDataLists = [EstatePriceDetailModel.EstateBody]()
     //MARK: - Stockapi
-    var snameLists = [String]()
-    var srateOfChange = [Double]()
-    var srateCalDateDiff = [String]()
-    var sprice = [Int]()
-    var siconList = [String]()
-
-    func getStockList() {
-        let urlSTR = "http://api.lghtsg.site:8090/stocks?sort=trading-volume&order=descending"
-        let encodedStr = urlSTR.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        let url = URL(string: encodedStr)!
-        let header: HTTPHeaders = ["Content-Type" : "application/json"]
-        AF.request(url, method: .get, headers: header)
-            .validate(statusCode: 200..<300)
-            .responseDecodable(of : StockVolumeModel.self) { response in
-                switch response.result {
-                case .success(let res):
-                    do {
-                        for index in 0..<10 {
-                            self.snameLists.append(res.body[index].name)
-                            self.srateCalDateDiff.append(res.body[index].rateCalDateDiff)
-                            self.srateOfChange.append(res.body[index].rateOfChange)
-                            self.sprice.append(res.body[index].price)
-                            self.siconList.append(res.body[index].iconImage)
-                        }
-                        self.tableView.reloadData()
-
-                    } catch {
-                        print("erorr in decode")
-                    }
-                case .failure(let err):
-                    print(err.localizedDescription)
-                }
-            }
-        }
-    
+    var stockDataLists = [asset.body]()
     //MARK: - Resellapi
-    var rnameLists = [String]()
-    var rrateOfChange = [Double]()
-    var rrateCalDateDiff = [String]()
-    var rprice = [Int]()
-    var riconList = [String]()
+    var resellDataLists = [resellData.body]()
 
-    func getResellList() {
-        let url = "http://api.lghtsg.site:8090/resells?order=descending&sort=fluctuation"
-        let header: HTTPHeaders = ["Content-Type" : "application/json"]
-        AF.request(url, method: .get, headers: header)
-            .validate(statusCode: 200..<300)
-            .responseDecodable(of : ResellFluctuationModel.self) { response in
-                switch response.result {
-                case .success(let res):
-                    do {
-                        for index in 0..<10 {
-                            self.rnameLists.append(res.body[index].name)
-                            self.rrateCalDateDiff.append(res.body[index].rateCalDateDiff)
-                            self.rrateOfChange.append(res.body[index].rateOfChange)
-                            self.rprice.append(res.body[index].price)
-                          //  self.riconList.append(res.body[index].imageURL)
-                        }
-                        
-                        self.tableView.reloadData()
-
-                    } catch {
-                        print("erorr in decode")
-                    }
-                case .failure(let err):
-                    print(err.localizedDescription)
-                }
-            }
-        }
     
     //MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        getAreaList()
-        getStockList()
-        getResellList()
+        tableView.register(TopViewCell.self, forCellReuseIdentifier: TopViewCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(TopViewCell.self, forCellReuseIdentifier: TopViewCell.identifier)
     }
   
     //MARK: - Configure
@@ -172,10 +68,24 @@ class TopViewDetailController: UIViewController, UITableViewDelegate, UITableVie
                 return 55
         }
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return nameLists.count
+            return 10
 
         }
         
+    // 클릭했을때
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if label.text! == "#강남구 집값 Top 10"{}
+        else if label.text! == "#최근 가장 HOT한 주식" {
+            let stockChartVC = StockChartViewController()
+            stockChartVC.nameText =  stockDataLists[indexPath.row].name
+            stockChartVC.changeDateText = stockDataLists[indexPath.row].rateCalDateDiff
+            stockChartVC.pricePercentText = "\(resellDataLists[indexPath.row].rateOfChange)%"
+            stockChartVC.idx = resellDataLists[indexPath.row].idx
+            self.navigationController?.pushViewController(stockChartVC, animated: true)
+        }
+        else if label.text! == "#어제 급등한 리셀"{}
+        
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TopViewCell.identifier, for: indexPath) as? TopViewCell else { return UITableViewCell() }
         cell.number.font = UIFont(name: "NanumSquareB", size: 15.0)
@@ -183,53 +93,48 @@ class TopViewDetailController: UIViewController, UITableViewDelegate, UITableVie
         cell.price.font = UIFont(name: "NanumSquareB", size: 12.0)
         cell.percentage.font = UIFont(name: "NanumSquareB", size: 12.0)
         cell.period.font = UIFont(name: "NanumSquareB", size: 12.0)
-        
-        let url = URL(string: iconList[indexPath.row])
-        let surl = URL(string: siconList[indexPath.row])
-        //let rurl = URL(string: riconList[indexPath.row])
-        
         if label.text! == "#강남구 집값 Top 10"{
             cell.number.text = String(indexPath.row + 1)
-            cell.iconImage.kf.setImage(with: url)
-            cell.title.text = self.nameLists[indexPath.row]
-            cell.price.text = "\(self.price[indexPath.row])원/m"
-            cell.percentage.text = "\(self.rateOfChange[indexPath.row])%"
-            if self.rateOfChange[indexPath.row] > 0 {
+            cell.iconImage.kf.setImage(with:  URL(string: estateDataLists[indexPath.row].iconImage))
+            cell.title.text = self.estateDataLists[indexPath.row].name
+            cell.price.text = "\(self.estateDataLists[indexPath.row].price)원/m"
+            cell.percentage.text = "\(self.estateDataLists[indexPath.row].rateOfChange)%"
+            if estateDataLists[indexPath.row].rateOfChange > 0 {
                 cell.percentage.textColor = .systemRed
             }else{
                 cell.percentage.textColor = .systemBlue
             }
-            cell.period.text = self.rateCalDateDiff[indexPath.row]
+            cell.period.text = estateDataLists[indexPath.row].rateCalDateDiff
             cell.selectionStyle = .none
             return cell
             
         }else if label.text! == "#최근 가장 HOT한 주식" {
             cell.number.text = String(indexPath.row + 1)
-            cell.iconImage.kf.setImage(with: surl)
-            cell.title.text = self.snameLists[indexPath.row]
-            cell.price.text = "\(self.sprice[indexPath.row])원"
-            cell.percentage.text = "\(self.srateOfChange[indexPath.row])%"
-            if self.srateOfChange[indexPath.row] > 0 {
+            cell.iconImage.kf.setImage(with:  URL(string: stockDataLists[indexPath.row].iconImage))
+            cell.title.text = self.stockDataLists[indexPath.row].name
+            cell.price.text = "\(self.stockDataLists[indexPath.row].price)원"
+            cell.percentage.text = "\(self.stockDataLists[indexPath.row].rateOfChange)%"
+            if stockDataLists[indexPath.row].rateOfChange > 0 {
                 cell.percentage.textColor = .systemRed
             }else{
                 cell.percentage.textColor = .systemBlue
             }
-            cell.period.text = self.srateCalDateDiff[indexPath.row]
+            cell.period.text = stockDataLists[indexPath.row].rateCalDateDiff
             cell.selectionStyle = .none
             return cell
             
         }else if label.text! == "#어제 급등한 리셀"{
             cell.number.text = String(indexPath.row + 1)
-            //cell.iconImage.kf.setImage(with: rurl)
-            cell.title.text = self.rnameLists[indexPath.row]
-            cell.price.text = "\(self.rprice[indexPath.row])원"
-            cell.percentage.text = "\(self.rrateOfChange[indexPath.row])%"
-            if self.rrateOfChange[indexPath.row] > 0 {
+            cell.iconImage.kf.setImage(with:  URL(string: resellDataLists[indexPath.row].imageUrl))
+            cell.title.text = self.resellDataLists[indexPath.row].name
+            cell.price.text = "\(self.resellDataLists[indexPath.row].price)원/m"
+            cell.percentage.text = "\(self.resellDataLists[indexPath.row].rateOfChange)%"
+            if resellDataLists[indexPath.row].rateOfChange > 0 {
                 cell.percentage.textColor = .systemRed
             }else{
                 cell.percentage.textColor = .systemBlue
             }
-            cell.period.text = self.rrateCalDateDiff[indexPath.row]
+            cell.period.text = resellDataLists[indexPath.row].rateCalDateDiff
             cell.selectionStyle = .none
             return cell
         }else{
