@@ -28,6 +28,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         search.barTintColor = .black
         search.searchTextField.textColor = .white
         search.searchTextField.backgroundColor = UIColor(named: "dropdown")
+        search.setClearButton(color: .white)
         search.searchTextField.leftView?.tintColor = .white
          return search
     }()
@@ -216,7 +217,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     }()
     
     //MARK: - Lifecycle
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.touchDelegate = self
@@ -228,17 +229,17 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         getAreaList()
         input()
         setLineChartView(Areaname: Areaname)
-        // MARK: 키보드 올라갔을 때 화면 터치해서 내려가게함
-               let tapGesture = UITapGestureRecognizer(target: self.view, action: #selector(self.view.endEditing(_:)))
-               tapGesture.delegate = self
-               self.view.addGestureRecognizer(tapGesture)
+        view.backgroundColor = .black
+
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            view.endEditing(true)
+        }
    
    
     //MARK: - Configure
     
     private func configure (){
-        view.backgroundColor = .black
         view.addSubview(mapView)
       
         [priceButton, saleButton,lineImage2,segmentCtrl,lineChartView,tableView1,searchBar,tableView2]
@@ -430,7 +431,6 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         marker.position = NMGLatLng(lat: latlng.lat, lng: latlng.lng)
         marker.isHideCollidedMarkers = true
         marker.mapView = mapView
-        
     }
 
     //MARK: - geocoding
@@ -624,12 +624,58 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         if tableView == tableView1{
         }
         else{
+            
             tableView2.deselectRow(at: indexPath, animated: true)
             print(self.items[indexPath.row])
             self.searchBar.searchTextField.text = self.items[indexPath.row]
             geocodeget(cityName: self.searchBar.searchTextField.text!)
             tableView2.alpha = 0
+            
         }
     }
     
+}
+extension UISearchBar {
+
+    func getTextField() -> UITextField? { return value(forKey: "searchField") as? UITextField }
+
+    func setClearButton(color: UIColor) {
+        getTextField()?.setClearButton(color: color)
+    }
+}
+
+extension UITextField {
+
+    private class ClearButtonImage {
+        static private var _image: UIImage?
+        static private var semaphore = DispatchSemaphore(value: 1)
+        static func getImage(closure: @escaping (UIImage?)->()) {
+            DispatchQueue.global(qos: .userInteractive).async {
+                semaphore.wait()
+                DispatchQueue.main.async {
+                    if let image = _image { closure(image); semaphore.signal(); return }
+                    guard let window = UIApplication.shared.windows.first else { semaphore.signal(); return }
+                    let searchBar = UISearchBar(frame: CGRect(x: 0, y: -200, width: UIScreen.main.bounds.width, height: 44))
+                    window.rootViewController?.view.addSubview(searchBar)
+                    searchBar.text = "txt"
+                    searchBar.layoutIfNeeded()
+                    _image = searchBar.getTextField()?.getClearButton()?.image(for: .normal)
+                    closure(_image)
+                    searchBar.removeFromSuperview()
+                    semaphore.signal()
+                }
+            }
+        }
+    }
+
+    func setClearButton(color: UIColor) {
+        ClearButtonImage.getImage { [weak self] image in
+            guard   let image = image,
+                    let button = self?.getClearButton() else { return }
+            button.imageView?.tintColor = color
+            button.setImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
+        }
+    }
+
+    func getClearButton() -> UIButton? { return value(forKey: "clearButton") as? UIButton }
 }

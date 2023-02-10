@@ -20,11 +20,11 @@ class RegisterationSuccessController: UIViewController {
         JoinSuccessView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         JoinSuccessView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         JoinSuccessView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-
     }
 
+    
     @objc func MoveHomeTab(){
-        let vc = MainTabController()
+        let vc = LoginController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }

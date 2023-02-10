@@ -7,6 +7,9 @@
 
 import UIKit
 
+
+// MARK: 로그아웃할때 토큰지우는거 없앰
+
 class MyPageViewController: UIViewController {
 
     
@@ -22,6 +25,7 @@ class MyPageViewController: UIViewController {
         MyPageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         MyPageView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         MyPageView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
         
         
         // MARK: 네비게이션 컨트롤러
@@ -52,7 +56,8 @@ class MyPageViewController: UIViewController {
     }
     
     @objc func logoutBtnClicked(){
-        UserDefaults.standard.set(nil,forKey: "savedToken")
+        var jwt : String = UserDefaults.standard.string(forKey: "savedToken") ?? ""
+        print("토큰은 \(jwt)")
         let vc = LoginController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)

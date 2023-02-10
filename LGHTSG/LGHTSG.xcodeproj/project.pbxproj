@@ -51,8 +51,10 @@
 		078666BC2980BF9B000ADCBE /* ReverseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078666BB2980BF9B000ADCBE /* ReverseModel.swift */; };
 		078666BE2983844D000ADCBE /* GeocodingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078666BD2983844D000ADCBE /* GeocodingModel.swift */; };
 		0798E525298E2ED4004E3221 /* StockVolumeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798E524298E2ED4004E3221 /* StockVolumeModel.swift */; };
-		0798E527298E3407004E3221 /* ResellFluctuationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798E526298E3407004E3221 /* ResellFluctuationModel.swift */; };
 		0798E529298E94DF004E3221 /* TopViewDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798E528298E94DF004E3221 /* TopViewDetailController.swift */; };
+		07F0D8882993D6D400D3C186 /* TopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F0D8872993D6D300D3C186 /* TopViewModel.swift */; };
+		07F0D88A2995F05100D3C186 /* EstateChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F0D8892995F05100D3C186 /* EstateChartViewController.swift */; };
+		07F0D88C2995F3AA00D3C186 /* PasswordApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F0D88B2995F3A900D3C186 /* PasswordApiModel.swift */; };
 		8E910354CAD5238FB38C267D /* Pods_LGHTSG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */; };
 		F0E4F818298C14E8008B8A48 /* myasset.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E4F817298C14E8008B8A48 /* myasset.swift */; };
 		F0F6B15229912F8300F8835D /* ReSellChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B15129912F8300F8835D /* ReSellChartViewController.swift */; };
@@ -139,8 +141,10 @@
 		078666BB2980BF9B000ADCBE /* ReverseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseModel.swift; sourceTree = "<group>"; };
 		078666BD2983844D000ADCBE /* GeocodingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingModel.swift; sourceTree = "<group>"; };
 		0798E524298E2ED4004E3221 /* StockVolumeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockVolumeModel.swift; sourceTree = "<group>"; };
-		0798E526298E3407004E3221 /* ResellFluctuationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResellFluctuationModel.swift; sourceTree = "<group>"; };
 		0798E528298E94DF004E3221 /* TopViewDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewDetailController.swift; sourceTree = "<group>"; };
+		07F0D8872993D6D300D3C186 /* TopViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopViewModel.swift; sourceTree = "<group>"; };
+		07F0D8892995F05100D3C186 /* EstateChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstateChartViewController.swift; sourceTree = "<group>"; };
+		07F0D88B2995F3A900D3C186 /* PasswordApiModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordApiModel.swift; sourceTree = "<group>"; };
 		1A81FE00F91FA41642246A20 /* Pods_LGHTSG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LGHTSG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F7EA128F8EC33ED812CADCA /* Pods-LGHTSG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.release.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.release.xcconfig"; sourceTree = "<group>"; };
 		9154F7534146417B8EBDBECC /* Pods-LGHTSG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGHTSG.debug.xcconfig"; path = "Target Support Files/Pods-LGHTSG/Pods-LGHTSG.debug.xcconfig"; sourceTree = "<group>"; };
@@ -253,7 +257,6 @@
 				F0F6B1592991309D00F8835D /* usersROE.swift */,
 				075BBA33298A79F500710F44 /* EstatePriceDetailModel.swift */,
 				0798E524298E2ED4004E3221 /* StockVolumeModel.swift */,
-				0798E526298E3407004E3221 /* ResellFluctuationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 		071E0556296BB8380020282F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				07F0D88B2995F3A900D3C186 /* PasswordApiModel.swift */,
 				F0F6B16929913ADB00F8835D /* UserApiModel.swift */,
 				F5DAEC28298AD38C0098A11A /* joinVM */,
 				F5DAEC23298AD34C0098A11A /* loginVM */,
@@ -280,6 +284,7 @@
 				F0F6B15B299130FB00F8835D /* StocktradeModel.swift */,
 				F0F6B15D2991310000F8835D /* UserRoeModel.swift */,
 				078401C1298A486300CDE061 /* EstatePriceModel.swift */,
+				07F0D8872993D6D300D3C186 /* TopViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -327,6 +332,7 @@
 				F5DAEC35298AD4410098A11A /* CheckController */,
 				0755755A296BFC2100B8AF77 /* Authentication */,
 				F0F6B15129912F8300F8835D /* ReSellChartViewController.swift */,
+				07F0D8892995F05100D3C186 /* EstateChartViewController.swift */,
 				078401B5298A484800CDE061 /* ExploreViewController.swift */,
 				078401B3298A484800CDE061 /* HomeViewController.swift */,
 				078401AE298A484800CDE061 /* MainTabController.swift */,
@@ -594,12 +600,12 @@
 				078401B8298A484800CDE061 /* StockChartViewController.swift in Sources */,
 				078401DF298A49E300CDE061 /* AssetModel.swift in Sources */,
 				078401DE298A49E300CDE061 /* UnderlineSegmentedControl.swift in Sources */,
+				07F0D8882993D6D400D3C186 /* TopViewModel.swift in Sources */,
 				F0F6B15C299130FB00F8835D /* StocktradeModel.swift in Sources */,
 				F0F6B15229912F8300F8835D /* ReSellChartViewController.swift in Sources */,
 				F5DAEC27298AD36A0098A11A /* LoginApiHeaderModel.swift in Sources */,
 				F5DAEC2C298AD3A40098A11A /* JoinApiModel.swift in Sources */,
 				078401C5298A486300CDE061 /* EstatePriceModel.swift in Sources */,
-				0798E527298E3407004E3221 /* ResellFluctuationModel.swift in Sources */,
 				075BBA34298A79F500710F44 /* EstatePriceDetailModel.swift in Sources */,
 				0798E529298E94DF004E3221 /* TopViewDetailController.swift in Sources */,
 				F5DAEC3D298AD47A0098A11A /* CheckPagePrivacyController.swift in Sources */,
@@ -632,6 +638,7 @@
 				F5DAEC1C298AD2F70098A11A /* LoginView.swift in Sources */,
 				075BBA3A298ACF1D00710F44 /* EstateSaleCell.swift in Sources */,
 				075BBA30298A78FC00710F44 /* EstateController.swift in Sources */,
+				07F0D88C2995F3AA00D3C186 /* PasswordApiModel.swift in Sources */,
 				F5DAEC0A298AD23D0098A11A /* LoginResultModel.swift in Sources */,
 				F5DAEC1E298AD3080098A11A /* StartView.swift in Sources */,
 				078401E7298A4B2D00CDE061 /* TableCellModel.swift in Sources */,
@@ -659,6 +666,7 @@
 				F0F6B167299139D900F8835D /* MyPageViewController.swift in Sources */,
 				078666BE2983844D000ADCBE /* GeocodingModel.swift in Sources */,
 				0764F26D2986653500F446CB /* AreaListModel.swift in Sources */,
+				07F0D88A2995F05100D3C186 /* EstateChartViewController.swift in Sources */,
 				F0F6B15A2991309D00F8835D /* usersROE.swift in Sources */,
 				0755755F296BFC4B00B8AF77 /* RegisterationController.swift in Sources */,
 			);

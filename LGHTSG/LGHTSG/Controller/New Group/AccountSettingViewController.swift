@@ -5,10 +5,13 @@
 //  Created by 홍수정 on 2023/02/06.
 //
 
+
+// MARK: 버튼 크기때문에 바꿔야함
+// MARK: 비번바꾸기 해줘야함
 import UIKit
 import Alamofire
 
-class AccountSettingViewController: UIViewController {
+class AccountSettingViewController: UIViewController, UIGestureRecognizerDelegate {
 
     let navigationBar : UINavigationBar = {
         let navigationBar = UINavigationBar()
@@ -139,11 +142,82 @@ class AccountSettingViewController: UIViewController {
     
     let saveBtn: UIButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "not-save-btn"), for: .normal)
+        btn.setBackgroundImage(UIImage(named: "not-save-btn"), for: .normal)
+        btn.addTarget(self, action: #selector(saveBtnClicked), for: .touchUpInside)
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
     
+    var save : Bool = false
+    
+    @objc func saveBtnClicked(){
+        if save == true{
+            
+            //Alert 선언
+            let msg = UIAlertController(title: "", message: "비밀번호를 변경하시겠습니까?", preferredStyle: .alert)
+            
+            //Alert에 부여할 Yes이벤트 선언
+            let YES = UIAlertAction(title: "예", style: .default, handler: { (action) -> Void in
+                self.YesClick()
+            })
+            
+            //Alert에 부여할 No이벤트 선언
+            let NO = UIAlertAction(title: "아니요", style: .cancel) { (action) -> Void in
+                self.NoClick()
+            }
+            
+            //Alert에 이벤트 연결
+            msg.addAction(NO)
+            msg.addAction(YES)
+
+            //Alert 호출
+            self.present(msg, animated: true, completion: nil)
+            
+        }
+        else {
+            print("아직 비밀번호를 바꿀 수 없음.")
+        }
+    }
+    
+    func YesClick()
+    {
+        
+        
+        var jwt : String = UserDefaults.standard.string(forKey: "savedToken") ?? ""
+        
+        let header : HTTPHeaders = [
+            "x-access-token" : jwt]
+        
+        var pastPassword : String = UserDefaults.standard.string(forKey: "pastPassword") ?? ""
+        print(pastPassword)
+        
+        let changePw = PasswordApiModel()
+        guard let password = passwordTextLabel.text else {return}
+        
+        let bodyData : Parameters = [
+            "pastPassword" : pastPassword,
+            "password" : password
+        ]
+                
+        changePw.requestChangeDataModel(header: header, bodyData: bodyData){
+            data in
+            
+            //Alert 선언
+            let msg = UIAlertController(title: "", message: "비밀번호 변경이 완료되었습니다", preferredStyle: .alert)
+            //Alert에 부여할 Yes이벤트 선언
+            let YES = UIAlertAction(title: "확인", style: .default, handler: { (action) in
+            })
+            msg.addAction(YES)
+            self.present(msg, animated: true, completion: nil)
+
+        }
+        
+    }
+    
+    func NoClick()
+    {
+        print("아니요를 눌렀음")
+    }
     
     // MARK: 패스워드 맞는지 확인하는 함수
     func isSamePassword2(_ first: UITextField, _ second: UITextField) -> Bool {
@@ -180,16 +254,18 @@ class AccountSettingViewController: UIViewController {
                 passwordValid.isActive = true
                 isCheck3 = true
                 if isCheck3 == true && isCheck4 == true {
-                    saveBtn.setImage(UIImage(named: "save-btn"), for: .normal)
-                    saveBtn.contentMode = .scaleToFill
+                    saveBtn.setBackgroundImage(UIImage(named: "save-btn"), for: .normal)
+                    save = true
+                    saveBtn.contentMode = .scaleAspectFill
                 }
                 else {
-                    saveBtn.setImage(UIImage(named: "not-save-btn"), for: .normal)
+                    saveBtn.setBackgroundImage(UIImage(named: "not-save-btn"), for: .normal)
                 }
             }
             else{
                 print("유효하지않음")
-                saveBtn.setImage(UIImage(named: "not-save-btn"), for: .normal)
+                save = false
+                saveBtn.setBackgroundImage(UIImage(named: "not-save-btn"), for: .normal)
                 passwordValid.isActive = false
                 isCheck3 = false
                 
@@ -204,16 +280,18 @@ class AccountSettingViewController: UIViewController {
                 isCheck4 = true
                 
                 if isCheck3 == true && isCheck4 == true {
-                    saveBtn.setImage(UIImage(named: "save-btn"), for: .normal)
+                    saveBtn.setBackgroundImage(UIImage(named: "save-btn"), for: .normal)
+                    save = true
                     saveBtn.contentMode = .scaleToFill
                 }
                 else {
-                    saveBtn.setImage(UIImage(named: "not-save-btn"), for: .normal)
+                    saveBtn.setBackgroundImage(UIImage(named: "not-save-btn"), for: .normal)
                 }
             }
             else{
                 print("다름")
-                saveBtn.setImage(UIImage(named: "not-save-btn"), for: .normal)
+                save = false
+                saveBtn.setBackgroundImage(UIImage(named: "not-save-btn"), for: .normal)
                 passwordSame.isActive = false
                 isCheck4 = false
             }
@@ -245,6 +323,12 @@ class AccountSettingViewController: UIViewController {
         view.backgroundColor = .black
         AutoLayout()
         loadData()
+        
+        // MARK: 키보드 올라갔을 때 화면 터치해서 내려가게함
+        let tapGesture = UITapGestureRecognizer(target: self.view, action: #selector(self.view.endEditing(_:)))
+        tapGesture.delegate = self
+        self.view.addGestureRecognizer(tapGesture)
+        
         
         // MARK: 네비게이션 컨트롤러
         self.view.addSubview(navigationBar)
@@ -375,8 +459,9 @@ class AccountSettingViewController: UIViewController {
         // MARK: 저장 버튼
         self.saveBtn.snp.makeConstraints{
             $0.bottom.equalToSuperview().offset(-50)
-            $0.left.equalToSuperview().offset(20)
-            $0.right.equalToSuperview().offset(-20)
+            $0.left.equalToSuperview().offset(40)
+            $0.right.equalToSuperview().offset(-40)
+            $0.height.equalTo(passwordImageView.snp.height)
         }
         
     }

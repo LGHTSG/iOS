@@ -148,8 +148,8 @@ class LoginView: UIViewController {
                 
         login.requestLoginDataModel(bodyData: bodyData){
             data in
-            self.jwt = data.jwt
-            print(data)
+//            self.jwt = data.accessToken
+     //       print(data)
         }
         
         /*
