@@ -17,6 +17,6 @@ struct Login : Decodable {
     
     
     struct body : Decodable {
-        let jwt : String
+        let accessToken : String
     }
 }

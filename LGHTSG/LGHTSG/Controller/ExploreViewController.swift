@@ -26,6 +26,8 @@ class ExploreViewController : UIViewController {
     private var mytoken = UserDefaults.standard.string(forKey: "savedToken")
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .black
+
         let userRoemodel = UserRoeModel()
         userRoemodel.getUserROE(token: mytoken!){
             data in
@@ -43,6 +45,10 @@ class ExploreViewController : UIViewController {
         }
 
     }
+    //keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            view.endEditing(true)
+        }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         let userRoemodel = UserRoeModel()

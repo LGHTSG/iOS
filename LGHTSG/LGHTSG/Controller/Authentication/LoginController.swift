@@ -10,6 +10,7 @@ import SnapKit
 import Alamofire
 
 
+// MARK: 비번 저장
 
 class LoginController: UIViewController {
     
@@ -32,14 +33,22 @@ class LoginController: UIViewController {
     }()
     
     
-    let memberInquiryLabel: UILabel = {
-        let label = UILabel()
-        label.text = "회원 정보 문의 : admin@rghtsg.com"
-        label.textColor = .lightGray
-        label.font = UIFont(name: "NanumSquareR", size: 12.0)
+    let memberInquiryLabel: UIButton = {
+        let label = UIButton()
+        label.setTitle("회원 정보 문의 : admin@rghtsg.com", for: .normal)
+        label.setTitleColor(.lightGray, for: .normal)
+        label.titleLabel?.font = UIFont(name: "NanumSquareR", size: 12.0)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.addTarget(self, action: #selector(memberInquiryLabelClicked), for: .touchUpInside)
         return label
     }()
+    
+    @objc func memberInquiryLabelClicked(){
+        print("클릭")
+        if let url = URL(string: "http://lghtsh.site:8090/qna") {
+                    UIApplication.shared.open(url, options: [:])
+                }
+    }
     
     
     let emailTextField: UITextField = {
@@ -150,19 +159,17 @@ class LoginController: UIViewController {
                 
         login.requestLoginDataModel(bodyData: bodyData){
             data in
-            self.jwt = data.jwt
-            UserDefaults.standard.set(data.jwt,forKey: "savedToken")
-
+            self.jwt = data.accessToken
+            UserDefaults.standard.set(data.accessToken,forKey: "savedToken")
+            UserDefaults.standard.set(password,forKey: "pastPassword")
             let vc = MainTabController()
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true)
         }
         
-        var jwt : String? = UserDefaults.standard.string(forKey: "savedToken")
+        
+        var jwt : String = UserDefaults.standard.string(forKey: "savedToken") ?? ""
         print("토큰은 \(jwt)")
-        var loginSuccess = UserDefaults.standard.bool(forKey: "loginSuccess")
-        loginSuccess = UserDefaults.standard.bool(forKey: "loginSuccess")
-        print(loginSuccess)
         
         
         if jwt == "" {

@@ -235,7 +235,8 @@ class ReSellChartViewController : UIViewController {
         setLineChartView()
         configure()
         NotificationCenter.default.addObserver(self, selector: #selector(markerchange(_:)), name: Notification.Name("markerdata"), object: nil)
-        
+        view.backgroundColor = .black
+
     }
     @objc func markerchange(_ notification : Notification){
         if let getValue = notification.userInfo as? [String : Int]{

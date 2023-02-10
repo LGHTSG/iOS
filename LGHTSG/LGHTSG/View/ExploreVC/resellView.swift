@@ -19,7 +19,7 @@ class resellView : UIViewController{
     var resellDataLists = [resellData.body]()
     var resellSearchLists = [resellData.body]()
     lazy private var segment : UISegmentedControl = {
-        let control  = UnderlineSegmentedControl(items: ["급상승", "급하락", "거래량"])
+        let control  = UnderlineSegmentedControl(items: ["급상승", "급하락"])
         control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.darkGray, .font : UIFont.systemFont(ofSize: 16, weight: .semibold)], for: .normal)
         control.selectedSegmentIndex = 0
         AssetModel.requestResellModel(segmentIndex: 0){
@@ -30,15 +30,7 @@ class resellView : UIViewController{
         return control
     }()
     var resellTableView = UITableView()
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        setView()
-//        resellTableView.dataSource = self
-//        resellTableView.delegate = self
-//        segment.addTarget(self, action: #selector(clickSegment), for: .valueChanged)
-////        let superview = ExploreViewController()
-////        superview.delegate1 = self
-//    }
+
 
     init(){
         super.init(nibName: nil, bundle: nil)
@@ -66,11 +58,7 @@ class resellView : UIViewController{
                 data in
                 self.resellDataLists = data
                 self.resellTableView.reloadData()}
-        case 2:
-            AssetModel.requestResellModel(segmentIndex: 2){
-                data in
-                self.resellDataLists = data
-                self.resellTableView.reloadData()}
+        
         default: break
         }
     }

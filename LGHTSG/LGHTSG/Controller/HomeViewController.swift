@@ -7,10 +7,10 @@
 import SnapKit
 import Foundation
 import UIKit
+
 final class HomeViewController : UIViewController{
     private var segmentControl = UnderlineSegmentedControl(items: ["나의 자산", "판매한 자산"])
-    var changepercent : String?
-    
+    var changepercent = "0%"
     var tableview = UITableView()
     var underline1 = UnderlineView()
     var underline2 = UnderlineView()
@@ -19,6 +19,7 @@ final class HomeViewController : UIViewController{
     var assetmodel = AssetModel()
     private var mytoken = UserDefaults.standard.string(forKey: "savedToken")
     override func viewDidLoad(){
+        view.backgroundColor = .black
         super.viewDidLoad()
         let userRoemodel = UserRoeModel()
         userRoemodel.getUserROE(token: mytoken!){
@@ -32,6 +33,10 @@ final class HomeViewController : UIViewController{
         segmentControl.addTarget(self, action: #selector(clicksegment), for: .valueChanged)
         getmyAssetData()
     }
+    //keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            view.endEditing(true)
+        }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         getmyAssetData()
@@ -87,7 +92,7 @@ private extension HomeViewController{
         navigationItem.leftBarButtonItem = searchBtn
         var config = UIButton.Configuration.plain()
     
-        var attributeString = AttributedString(changepercent!)
+        var attributeString = AttributedString(changepercent)
         attributeString.font = UIFont(name: "NanumSquareB", size: 12)
         attributeString.foregroundColor = UIColor.systemBlue
         config.attributedTitle = attributeString

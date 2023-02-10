@@ -229,6 +229,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         getAreaList()
         input()
         setLineChartView(Areaname: Areaname)
+        view.backgroundColor = .black
 
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -239,7 +240,6 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     //MARK: - Configure
     
     private func configure (){
-        view.backgroundColor = .black
         view.addSubview(mapView)
       
         [priceButton, saleButton,lineImage2,segmentCtrl,lineChartView,tableView1,searchBar,tableView2]

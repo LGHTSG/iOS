@@ -151,6 +151,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         getStockList()
         setupTableView()
         getResellList()
+        view.backgroundColor = .black
         
     }
     

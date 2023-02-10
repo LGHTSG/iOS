@@ -80,13 +80,13 @@ class StartView: UIView {
         addSubview(middleLabel)
         addSubview(findPwBtn)
         
-        addSubview(kakaoLoginline)
-        addSubview(kakaoLoginBtn)
+        //addSubview(kakaoLoginline)
+        //addSubview(kakaoLoginBtn)
 
         
         // MARK: 맨 위 이미지 위치
         self.titleImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(170)
+            $0.top.equalToSuperview().offset(200)
             $0.centerX.equalToSuperview()
         }
 
@@ -94,7 +94,7 @@ class StartView: UIView {
         
         // MARK: 로그인 버튼
         self.loginBtn.snp.makeConstraints {
-            $0.top.equalTo(titleImageView.snp.bottom).offset(80)
+            $0.top.equalTo(titleImageView.snp.bottom).offset(100)
             $0.centerX.equalToSuperview()
             $0.left.equalToSuperview().offset(30)
             $0.right.equalToSuperview().offset(-30)
@@ -118,7 +118,7 @@ class StartView: UIView {
             $0.left.equalTo(middleLabel.snp.right).offset(20)
         }
         
-        
+        /*
         // MARK: 카카오 로그인 버튼 및 라인 위치
         self.kakaoLoginline.snp.makeConstraints{
             $0.top.equalTo(joinBtn.snp.bottom).offset(180)
@@ -132,7 +132,7 @@ class StartView: UIView {
             $0.centerX.equalToSuperview()
             $0.left.equalToSuperview().offset(30)
             $0.right.equalToSuperview().offset(-30)
-        }
+        }*/
         
         
         

@@ -28,6 +28,7 @@ class LoginApiModel {
                 onCompleted(response.body)
             case .failure(let error):
                 print("error")
+                print(response.debugDescription)
                 UserDefaults.standard.set(false, forKey: "loginSuccess")
 
             }

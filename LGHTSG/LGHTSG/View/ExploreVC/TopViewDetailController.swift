@@ -30,10 +30,7 @@ class TopViewDetailController: UIViewController, UITableViewDelegate, UITableVie
     var stockDataLists = [asset.body]()
     //MARK: - Resellapi
     var resellDataLists = [resellData.body]()
-
-    
     //MARK: - LifeCycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
@@ -41,9 +38,7 @@ class TopViewDetailController: UIViewController, UITableViewDelegate, UITableVie
         tableView.delegate = self
         tableView.dataSource = self
     }
-  
     //MARK: - Configure
-    
     func configure(){
         view.backgroundColor = .black
         [label,tableView]
@@ -62,8 +57,6 @@ class TopViewDetailController: UIViewController, UITableViewDelegate, UITableVie
             $0.trailing.equalToSuperview()
         }
     }
-    
-        
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
                 return 55
         }
@@ -74,13 +67,20 @@ class TopViewDetailController: UIViewController, UITableViewDelegate, UITableVie
         
     // 클릭했을때
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if label.text! == "#강남구 집값 Top 10"{}
+        if label.text! == "#강남구 집값 Top 10"{
+            let estateChartVc = EstateChartViewController()
+            estateChartVc.idx = estateDataLists[indexPath.row].idx
+            estateChartVc.nameText = estateDataLists[indexPath.row].name
+            estateChartVc.changeDateText = estateDataLists[indexPath.row].rateCalDateDiff
+            estateChartVc.pricePercentText = "\(estateDataLists[indexPath.row].rateOfChange)%"
+            self.navigationController?.pushViewController(estateChartVc, animated: true)
+        }
         else if label.text! == "#최근 가장 HOT한 주식" {
             let stockChartVC = StockChartViewController()
             stockChartVC.nameText =  stockDataLists[indexPath.row].name
             stockChartVC.changeDateText = stockDataLists[indexPath.row].rateCalDateDiff
-            stockChartVC.pricePercentText = "\(resellDataLists[indexPath.row].rateOfChange)%"
-            stockChartVC.idx = resellDataLists[indexPath.row].idx
+            stockChartVC.pricePercentText = "\(stockDataLists[indexPath.row].rateOfChange)%"
+            stockChartVC.idx = stockDataLists[indexPath.row].idx
             self.navigationController?.pushViewController(stockChartVC, animated: true)
         }
         else if label.text! == "#어제 급등한 리셀"{}
