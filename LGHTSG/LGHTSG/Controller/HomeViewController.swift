@@ -97,7 +97,7 @@ private extension HomeViewController{
         attributeString.foregroundColor = UIColor.systemBlue
         config.attributedTitle = attributeString
         config.titleAlignment = .leading
-        config.image = UIImage(named: "profile_mini")
+        config.image = UIImage(named: "profile-money-mini")
         config.imagePadding = 8
         config.imagePlacement = .trailing
         let realbtn = UIButton(configuration: config)
@@ -176,6 +176,19 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableview.dequeueReusableCell(withIdentifier: "HomeTableCell", for: indexPath) as? HomeTableCell
         cell?.selectionStyle = .none
+        
+        // MARK: 세그먼트 폰트 설정
+        // 선택안된 버튼 폰트
+        segmentControl.setTitleTextAttributes([
+                    NSAttributedString.Key.foregroundColor: UIColor.systemGray,
+                    NSAttributedString.Key.font: UIFont(name: "NanumSquareEB", size: 17)
+                ], for: .normal)
+        
+        // 선택된 버튼 폰트
+        segmentControl.setTitleTextAttributes([
+                    NSAttributedString.Key.foregroundColor: UIColor.white,
+                    NSAttributedString.Key.font: UIFont(name: "NanumSquareEB", size: 17)
+                ], for: .selected)
 
         let selectedIndex = self.segmentControl.selectedSegmentIndex
         switch selectedIndex{
@@ -214,6 +227,7 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource {
                 ChartVc.PriceText  = "\(String(myAssetData[indexPath.row].price))원"
                 ChartVc.idx = myAssetData[indexPath.row].assetIdx
                 ChartVc.imageURL = myAssetData[indexPath.row].iconImage
+                ChartVc.navigationItem.leftBarButtonItem?.tintColor = .white
                 self.navigationController?.pushViewController(ChartVc, animated: true)
             }
             else if (myAssetData[indexPath.row].category == "stock"){
@@ -223,7 +237,18 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource {
                 StockVC.pricePercentText = "\(myAssetData[indexPath.row].rateOfChange)%"
 //                StockVC.  = "\(String(myAssetData[indexPath.row].price))원"
                 StockVC.idx = myAssetData[indexPath.row].assetIdx
+                StockVC.navigationItem.leftBarButtonItem?.tintColor = .white
                 self.navigationController?.pushViewController(StockVC, animated: true)
+            }
+            // 부동산일꺼아냐
+            else{
+                let estateChartVC = EstateChartViewController()
+                estateChartVC.nameText =  myAssetData[indexPath.row].assetName
+                estateChartVC.changeDateText = myAssetData[indexPath.row].rateCalDateDiff
+                estateChartVC.pricePercentText = "\(myAssetData[indexPath.row].rateOfChange)%"
+                estateChartVC.idx = myAssetData[indexPath.row].assetIdx
+                estateChartVC.navigationItem.leftBarButtonItem?.tintColor = .white
+                self.navigationController?.pushViewController(estateChartVC, animated: true)
             }
         case 1:
             if(SellAssetData[indexPath.row].category == "resell"){
@@ -234,6 +259,7 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource {
                 ChartVc.PriceText  = "\(String(SellAssetData[indexPath.row].price))원"
                 ChartVc.idx = SellAssetData[indexPath.row].assetIdx
                 ChartVc.imageURL = SellAssetData[indexPath.row].iconImage
+                ChartVc.navigationItem.leftBarButtonItem?.tintColor = .white
                 self.navigationController?.pushViewController(ChartVc, animated: true)
             }
             else if (SellAssetData[indexPath.row].category == "stock"){
@@ -243,7 +269,17 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource {
                 StockVC.pricePercentText = "\(SellAssetData[indexPath.row].rateOfChange)%"
 //                StockVC.  = "\(String(myAssetData[indexPath.row].price))원"
                 StockVC.idx = SellAssetData[indexPath.row].assetIdx
+                StockVC.navigationItem.leftBarButtonItem?.tintColor = .white
                 self.navigationController?.pushViewController(StockVC, animated: true)
+            }
+            else{
+                let estateChartVC = EstateChartViewController()
+                estateChartVC.nameText =  SellAssetData[indexPath.row].assetName
+                estateChartVC.changeDateText = SellAssetData[indexPath.row].rateCalDateDiff
+                estateChartVC.pricePercentText = "\(SellAssetData[indexPath.row].rateOfChange)%"
+                estateChartVC.idx = SellAssetData[indexPath.row].assetIdx
+                estateChartVC.navigationItem.leftBarButtonItem?.tintColor = .white
+                self.navigationController?.pushViewController(estateChartVC, animated: true)
             }
         default: print("error")
         }
@@ -254,31 +290,50 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-//            tableView.beginUpdates()
+            //            tableView.beginUpdates()
             let AssetModel = AssetModel()
-//            switch( self.segmentControl.selectedSegmentIndex){
-//            case 0:
-            AssetModel.deleteMyAsset(token: self.mytoken!, transactionIdx: myAssetData[indexPath.row].assetIdx, category: myAssetData[indexPath.row].category){
-                data in
-                //요청에 성공한 경우
-                if(data.header.resultCode == 1000){
-                    let alertv = UIAlertController(title: "삭제완료", message: "삭제가 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
-                    alertv.addAction(UIAlertAction(title: "OK", style: .default))
-                    self.present(alertv, animated: true){
-//                        tableView.deleteRows(at: [indexPath], with: .fade)
-                        self.getmyAssetData()
-//                        tableView.endUpdates()
+            switch( self.segmentControl.selectedSegmentIndex){
+            case 0:
+                AssetModel.deleteMyAsset(token: self.mytoken!, transactionIdx: myAssetData[indexPath.row].assetIdx, category: myAssetData[indexPath.row].category){
+                    data in
+                    //요청에 성공한 경우
+                    if(data.header.resultCode == 1000){
+                        let alertv = UIAlertController(title: "삭제완료", message: "삭제가 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
+                        alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(alertv, animated: true){
+                            //                        tableView.deleteRows(at: [indexPath], with: .fade)
+                            self.getmyAssetData()
+                            //                        tableView.endUpdates()
+                        }
+                    }
+                    else{
+                        let alertv = UIAlertController(title: "ERROR", message: "삭제 실패", preferredStyle: UIAlertController.Style.alert)
+                        alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(alertv,animated: true)
                     }
                 }
-                else{
-                    let alertv = UIAlertController(title: "ERROR", message: "삭제 실패", preferredStyle: UIAlertController.Style.alert)
-                    alertv.addAction(UIAlertAction(title: "OK", style: .default))
-                    self.present(alertv,animated: true)
+            case 1:
+                AssetModel.deleteMyAsset(token: mytoken!, transactionIdx: SellAssetData[indexPath.row].assetIdx, category: SellAssetData[indexPath.row].category){
+                    data in
+                    //요청에 성공한 경우
+                    if(data.header.resultCode == 1000){
+                        let alertv = UIAlertController(title: "삭제완료", message: "삭제가 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
+                        alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(alertv, animated: true){
+                            //                        tableView.deleteRows(at: [indexPath], with: .fade)
+                            self.getmyAssetData()
+                            //                        tableView.endUpdates()
+                        }
+                    }
+                    else{
+                        let alertv = UIAlertController(title: "ERROR", message: "삭제 실패", preferredStyle: UIAlertController.Style.alert)
+                        alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(alertv,animated: true)
+                    }
                 }
-            }
-//            case 1:
-//            default:
-        }
+            default:
+                break
+            }}
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if self.tableview.contentOffset.y < 0 {

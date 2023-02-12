@@ -95,13 +95,13 @@ class CheckPagePrivacyView: UIView {
         }
         
         self.nextBtnImageView4.snp.makeConstraints{
-            $0.bottom.equalToSuperview().offset(-10)
+            $0.bottom.equalToSuperview().offset(-50)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
         }
         
         self.nextLabel4.snp.makeConstraints{
-            $0.top.equalTo(nextBtnImageView4).offset(10)
+            $0.top.equalTo(nextBtnImageView4.snp.top).offset(10)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
             

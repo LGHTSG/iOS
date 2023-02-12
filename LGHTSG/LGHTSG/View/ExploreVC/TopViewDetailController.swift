@@ -91,7 +91,7 @@ class TopViewDetailController: UIViewController, UITableViewDelegate, UITableVie
         cell.number.font = UIFont(name: "NanumSquareB", size: 15.0)
         cell.title.font = UIFont(name: "NanumSquareEB", size: 15.0)
         cell.price.font = UIFont(name: "NanumSquareB", size: 12.0)
-        cell.percentage.font = UIFont(name: "NanumSquareB", size: 12.0)
+        cell.percentage.font = UIFont(name: "NanumSquareEB", size: 12.0)
         cell.period.font = UIFont(name: "NanumSquareB", size: 12.0)
         if label.text! == "#강남구 집값 Top 10"{
             cell.number.text = String(indexPath.row + 1)

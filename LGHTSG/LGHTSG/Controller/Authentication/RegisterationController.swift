@@ -19,6 +19,35 @@ class RegisterationController: UIViewController {
         return navigationBar
     }()
     
+    let registerLabel : UILabel = {
+        let label = UILabel()
+        label.text = "똑똑한 투자를 시작해보세요!"
+        label.textColor = .systemBlue
+        label.font = UIFont(name: "NanumSquareEB", size: 20.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
+    let registerLabel2 : UILabel = {
+        let label = UILabel()
+        label.text = ", 저희와 함께"
+        label.textColor = .white
+        label.font = UIFont(name: "NanumSquareEB", size: 20.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let iconImageView : UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "icon")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    
+    
     var profileImageData : String!
     // MARK: imagePicker
     var profileImagePicker = UIImagePickerController()
@@ -72,6 +101,15 @@ class RegisterationController: UIViewController {
         return btn
     }()
     
+    let codeSuccessLabel: UILabel = {
+        let label = UILabel()
+        label.text = "⎷ 이메일 인증이 완료되었습니다."
+        label.font = UIFont(name: "NanumSquareR", size: 12.0)
+        label.textColor = .systemGreen
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     
     // MARK: 인증번호 발송 메세지
     let codeSendLabel2: UILabel = {
@@ -93,7 +131,6 @@ class RegisterationController: UIViewController {
         label.font = UIFont(name: "NanumSquareB", size: 15.0)
         label.borderStyle = .none
         label.enablesReturnKeyAutomatically = true
-        label.keyboardType = .numberPad
         return label
     }()
     
@@ -248,6 +285,8 @@ class RegisterationController: UIViewController {
             codeConfirmheight2.isActive = true
             emailSuccess = "1"
             UserDefaults.standard.set(true, forKey: "ConfirmSuccess")
+            codeConfirmSuccessheight.isActive = false
+            codeConfirmheight2.isActive = true
         }
         else {
             codeConfirmheight2.isActive = false
@@ -327,6 +366,8 @@ class RegisterationController: UIViewController {
     // MARK: 인증번호 관련 동적 변화 라벨
     var sendCodeheight2: NSLayoutConstraint!
     var codeConfirmheight2: NSLayoutConstraint!
+    var codeConfirmSuccessheight: NSLayoutConstraint!
+
     
     // MARK: 비밀번호에 따른 메세지
     var pwheight3: NSLayoutConstraint!
@@ -345,6 +386,9 @@ class RegisterationController: UIViewController {
         
         pwheight4 = pwSameLabel2.heightAnchor.constraint(equalToConstant: 0)
         pwheight4.isActive = true
+        
+        codeConfirmSuccessheight = codeSuccessLabel.heightAnchor.constraint(equalToConstant: 0)
+        codeConfirmSuccessheight.isActive = true
     }
     
     
@@ -455,7 +499,10 @@ class RegisterationController: UIViewController {
         heightSetting2()
         
         view.backgroundColor = .black
-        view.addSubview(profileImageView)
+        view.addSubview(iconImageView)
+        view.addSubview(registerLabel)
+        view.addSubview(registerLabel2)
+        //view.addSubview(profileImageView)
         view.addSubview(nameImageView)
         view.addSubview(nameTextField)
         
@@ -468,6 +515,7 @@ class RegisterationController: UIViewController {
         view.addSubview(codeTextField2)
         view.addSubview(codeConfirmBtn2)
         view.addSubview(codeConfirmLabel2)
+        view.addSubview(codeSuccessLabel)
         
         
         view.addSubview(pwImageView2)
@@ -482,6 +530,24 @@ class RegisterationController: UIViewController {
         view.addSubview(nextBtnImageView)
         view.addSubview(nextBtn)
         
+        
+        // MARK: 이름 설정 위치
+        self.iconImageView.snp.makeConstraints{
+            $0.top.equalToSuperview().offset(130)
+            $0.left.equalToSuperview().offset(20)
+        }
+        
+        self.registerLabel2.snp.makeConstraints{
+            $0.top.equalToSuperview().offset(130)
+            $0.left.equalTo(iconImageView.snp.right).offset(5)
+        }
+        
+        // MARK: 이름 설정 위치
+        self.registerLabel.snp.makeConstraints{
+            $0.top.equalTo(iconImageView.snp.bottom).offset(20)
+            $0.left.equalToSuperview().offset(20)
+            $0.right.equalToSuperview().offset(-20)
+        }
         
         
         // MARK: 이름 설정 위치
@@ -548,6 +614,11 @@ class RegisterationController: UIViewController {
             $0.left.equalTo(codeSendImageView2.snp.left)
         }
         
+        self.codeSuccessLabel.snp.makeConstraints{
+            $0.top.equalTo(codeSendImageView2.snp.bottom).offset(5)
+            $0.left.equalTo(codeSendImageView2.snp.left)
+        }
+        
         
         // MARK: 비밀번호 설정 위치
         self.pwImageView2.snp.makeConstraints{
@@ -586,20 +657,20 @@ class RegisterationController: UIViewController {
         
         // MARK: 다음으로 버튼
         self.nextBtnImageView.snp.makeConstraints{
-            $0.bottom.equalToSuperview().offset(-10)
+            $0.bottom.equalToSuperview().offset(-50)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
         }
         
         self.nextBtn.snp.makeConstraints{
-            $0.top.equalTo(nextBtnImageView).offset(10)
+            $0.top.equalTo(nextBtnImageView.snp.top).offset(10)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
+        }
             
             
             
-            
-            
+            /*
             
             let tap = UITapGestureRecognizer(target: self, action: #selector(changeProfile))
             profileImageView.addGestureRecognizer(tap)
@@ -618,7 +689,7 @@ class RegisterationController: UIViewController {
                 make.width.equalTo(100)
             }
             
-            
+            */
             
             
             // MARK: 키보드 올라갔을 때 화면 터치해서 내려가게함
@@ -654,7 +725,7 @@ class RegisterationController: UIViewController {
             nextBtn.addTarget(self, action: #selector(joinBtnClicked2), for: .touchUpInside)
         }
         
-    }
+    
     
 }
 

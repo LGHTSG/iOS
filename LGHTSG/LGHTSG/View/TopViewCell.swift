@@ -38,15 +38,15 @@ class TopViewCell: UITableViewCell {
     
     lazy var percentage: UILabel = {
         let label = UILabel()
-        label.textColor = .red
-        label.font = UIFont(name: "NanumSquareR", size: 12.0)
+        label.textColor = .systemRed
+        label.font = UIFont(name: "NanumSquareEB", size: 12.0)
         return label
     }()
     
     lazy var period: UILabel = {
         let label = UILabel()
         label.textColor = .gray
-        label.font = UIFont(name: "NanumSquareR", size: 12.0)
+        label.font = UIFont(name: "NanumSquareB", size: 12.0)
         return label
     }()
     
@@ -120,7 +120,7 @@ class TopViewCell: UITableViewCell {
         }
         
         period.snp.makeConstraints {
-            $0.leading.equalTo(percentage.snp.trailing).offset(8)
+            $0.trailing.equalToSuperview().inset(20)
             $0.top.equalTo(title.snp.bottom).offset(5)
         }
     }

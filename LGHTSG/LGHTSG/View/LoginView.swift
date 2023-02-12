@@ -102,7 +102,7 @@ class LoginView: UIViewController {
     
     let findPwBtn2: UIButton = {
         let btn = UIButton()
-        btn.setTitle("비밀번호 찾기", for: .normal)
+        btn.setTitle("비밀번호 변경", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.titleLabel?.font = UIFont(name: "NanumSquareR", size: 12.0)
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -148,16 +148,11 @@ class LoginView: UIViewController {
                 
         login.requestLoginDataModel(bodyData: bodyData){
             data in
-//            self.jwt = data.accessToken
-     //       print(data)
+            
+            self.jwt = data.accessToken
+            UserDefaults.standard.set(email, forKey: "email")
+            UserDefaults.standard.set(password, forKey: "email")
         }
-        
-        /*
-        loginMsgCode.requestLoginDataModel(bodyData: bodyData){
-            data in
-            print(data)
-        }
-        */
         
         var loginSuccess = UserDefaults.standard.bool(forKey: "loginSuccess")
         loginSuccess = UserDefaults.standard.bool(forKey: "loginSuccess")

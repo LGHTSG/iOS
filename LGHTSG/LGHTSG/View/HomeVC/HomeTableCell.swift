@@ -19,7 +19,7 @@ class HomeTableCell : UITableViewCell {
 
     private lazy var nameLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "NanumSquareB", size: 14.0)
+        label.font = UIFont(name: "NanumSquareEB", size: 14.0)
         label.textColor = .white
         return label
     }()
@@ -57,12 +57,6 @@ extension HomeTableCell {
             addSubview($0)
         }
         
-        nameLabel.font = UIFont(name: "NanumSquareB", size: 13)
-        priceLabel.font = UIFont(name: "NanumSquareB", size: 13)
-        changeDate.font = UIFont(name: "NanumSquareB", size: 13)
-        pricePercent.font = UIFont(name: "NanumSquareB", size: 13)
-
-        
 
         nameLabel.text = assetinfo.name
         priceLabel.text = String(assetinfo.price)+"원"
@@ -70,10 +64,10 @@ extension HomeTableCell {
         let stringofratechange = String(assetinfo.rateOfChange)
         if(stringofratechange[stringofratechange.startIndex] == "-"){
             pricePercent.text = "\(stringofratechange)%"
-            pricePercent.textColor = .blue
+            pricePercent.textColor = .systemBlue
         }else {
             pricePercent.text = "+\(stringofratechange)%"
-            pricePercent.textColor = .red
+            pricePercent.textColor = .systemRed
         }
         let url = URL(string: assetinfo.iconImage)
         iconimage.clipsToBounds = true
@@ -105,7 +99,7 @@ extension HomeTableCell {
             $0.top.equalTo(priceLabel.snp.top)
         }
         pricePercent.snp.makeConstraints{
-            $0.leading.equalTo(priceLabel.snp.trailing).offset(15)
+            $0.leading.equalTo(priceLabel.snp.trailing).offset(8)
             $0.top.equalTo(priceLabel.snp.top)
         }
     }
@@ -118,11 +112,7 @@ extension HomeTableCell {
         }
         
         
-        
-        nameLabel.font = UIFont(name: "NanumSquareB", size: 13)
-        priceLabel.font = UIFont(name: "NanumSquareB", size: 13)
-        changeDate.font = UIFont(name: "NanumSquareB", size: 13)
-        pricePercent.font = UIFont(name: "NanumSquareB", size: 13)
+
         
         
         nameLabel.text = resellinfo.name
@@ -131,10 +121,10 @@ extension HomeTableCell {
         let stringofratechange = String( resellinfo.rateOfChange)
         if(stringofratechange[stringofratechange.startIndex] == "-"){
             pricePercent.text = "\(stringofratechange)%"
-            pricePercent.textColor = .blue
+            pricePercent.textColor = .systemBlue
         }else {
             pricePercent.text = "+\(stringofratechange)%"
-            pricePercent.textColor = .red
+            pricePercent.textColor = .systemRed
         }
         
         let url = URL(string: resellinfo.imageUrl)
@@ -171,7 +161,7 @@ extension HomeTableCell {
             $0.top.equalTo(priceLabel.snp.top)
         }
         pricePercent.snp.makeConstraints{
-            $0.trailing.equalTo(changeDate.snp.leading).offset(-15)
+            $0.leading.equalTo(priceLabel.snp.trailing).offset(8)
             $0.top.equalTo(priceLabel.snp.top)
         }
     }
@@ -187,10 +177,10 @@ extension HomeTableCell {
         let stringofratechange = String(home.rateOfChange)
         if(stringofratechange[stringofratechange.startIndex] == "-"){
             pricePercent.text = "\(stringofratechange)%"
-            pricePercent.textColor = .blue
+            pricePercent.textColor = .systemBlue
         }else {
             pricePercent.text = "+\(stringofratechange)%"
-            pricePercent.textColor = .red
+            pricePercent.textColor = .systemRed
         }
         // kf 이미지 둥그렇
         iconimage.clipsToBounds = true
@@ -213,16 +203,16 @@ extension HomeTableCell {
             $0.top.equalToSuperview()
         }
         priceLabel.snp.makeConstraints{
-            $0.leading.equalTo(nameLabel.snp.leading)
             $0.top.equalTo(nameLabel.snp.bottom).offset(5)
+            $0.leading.equalTo(nameLabel.snp.leading)
         }
 
         changeDate.snp.makeConstraints{
-            $0.trailing.equalToSuperview().inset(40)
+            $0.trailing.equalToSuperview().inset(20)
             $0.top.equalTo(pricePercent.snp.top)
         }
         pricePercent.snp.makeConstraints{
-            $0.trailing.equalTo(changeDate.snp.leading).offset(-15)
+            $0.leading.equalTo(priceLabel.snp.trailing).offset(8)
             $0.top.equalTo(priceLabel.snp.top)
         }
     }

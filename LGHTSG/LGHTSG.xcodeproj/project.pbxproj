@@ -67,6 +67,9 @@
 		F0F6B166299139D900F8835D /* AccountSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B164299139D900F8835D /* AccountSettingViewController.swift */; };
 		F0F6B167299139D900F8835D /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B165299139D900F8835D /* MyPageViewController.swift */; };
 		F0F6B16A29913ADB00F8835D /* UserApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B16929913ADB00F8835D /* UserApiModel.swift */; };
+		F51C6FF529991E8800048DEE /* RankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51C6FF429991E8800048DEE /* RankViewController.swift */; };
+		F51C6FF729991EA600048DEE /* RankViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51C6FF629991EA600048DEE /* RankViewCell.swift */; };
+		F51C6FF92999207000048DEE /* RankingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51C6FF82999207000048DEE /* RankingModel.swift */; };
 		F5DAEC00298AD1FA0098A11A /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEBFF298AD1FA0098A11A /* login.swift */; };
 		F5DAEC02298AD2050098A11A /* email.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC01298AD2050098A11A /* email.swift */; };
 		F5DAEC04298AD20E0098A11A /* join.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DAEC03298AD20E0098A11A /* join.swift */; };
@@ -159,6 +162,9 @@
 		F0F6B164299139D900F8835D /* AccountSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSettingViewController.swift; sourceTree = "<group>"; };
 		F0F6B165299139D900F8835D /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		F0F6B16929913ADB00F8835D /* UserApiModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserApiModel.swift; sourceTree = "<group>"; };
+		F51C6FF429991E8800048DEE /* RankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankViewController.swift; sourceTree = "<group>"; };
+		F51C6FF629991EA600048DEE /* RankViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankViewCell.swift; sourceTree = "<group>"; };
+		F51C6FF82999207000048DEE /* RankingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingModel.swift; sourceTree = "<group>"; };
 		F5DAEBFF298AD1FA0098A11A /* login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.swift; sourceTree = "<group>"; };
 		F5DAEC01298AD2050098A11A /* email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = email.swift; sourceTree = "<group>"; };
 		F5DAEC03298AD20E0098A11A /* join.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = join.swift; sourceTree = "<group>"; };
@@ -285,6 +291,7 @@
 				F0F6B15D2991310000F8835D /* UserRoeModel.swift */,
 				078401C1298A486300CDE061 /* EstatePriceModel.swift */,
 				07F0D8872993D6D300D3C186 /* TopViewModel.swift */,
+				F51C6FF82999207000048DEE /* RankingModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -305,6 +312,7 @@
 				078401CA298A49D500CDE061 /* EstateDetailCell.swift */,
 				075BBA39298ACF1D00710F44 /* EstateSaleCell.swift */,
 				0764F26A298642EF00F446CB /* SearchItemCell.swift */,
+				F51C6FF629991EA600048DEE /* RankViewCell.swift */,
 				0764F284298959C600F446CB /* TopViewCell.swift */,
 				F5DAEC1B298AD2F70098A11A /* LoginView.swift */,
 				078401D0298A49E200CDE061 /* ChartMarker.swift */,
@@ -337,6 +345,7 @@
 				078401B3298A484800CDE061 /* HomeViewController.swift */,
 				078401AE298A484800CDE061 /* MainTabController.swift */,
 				078401B0298A484800CDE061 /* StockChartViewController.swift */,
+				F51C6FF429991E8800048DEE /* RankViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -620,6 +629,7 @@
 				F5DAEC04298AD20E0098A11A /* join.swift in Sources */,
 				078401DD298A49E300CDE061 /* StockDateSegmentControl.swift in Sources */,
 				F5DAEC00298AD1FA0098A11A /* login.swift in Sources */,
+				F51C6FF529991E8800048DEE /* RankViewController.swift in Sources */,
 				F5DAEC06298AD2180098A11A /* changePw.swift in Sources */,
 				078401BD298A484800CDE061 /* ExploreViewController.swift in Sources */,
 				F5DAEC3B298AD46B0098A11A /* CheckPageServiceController.swift in Sources */,
@@ -636,10 +646,12 @@
 				F5DAEC14298AD2A30098A11A /* CheckAgreeView.swift in Sources */,
 				F5DAEC20298AD31E0098A11A /* FindPwView.swift in Sources */,
 				F5DAEC1C298AD2F70098A11A /* LoginView.swift in Sources */,
+				F51C6FF729991EA600048DEE /* RankViewCell.swift in Sources */,
 				075BBA3A298ACF1D00710F44 /* EstateSaleCell.swift in Sources */,
 				075BBA30298A78FC00710F44 /* EstateController.swift in Sources */,
 				07F0D88C2995F3AA00D3C186 /* PasswordApiModel.swift in Sources */,
 				F5DAEC0A298AD23D0098A11A /* LoginResultModel.swift in Sources */,
+				F51C6FF92999207000048DEE /* RankingModel.swift in Sources */,
 				F5DAEC1E298AD3080098A11A /* StartView.swift in Sources */,
 				078401E7298A4B2D00CDE061 /* TableCellModel.swift in Sources */,
 				078401E9298A4C2600CDE061 /* TopViewController.swift in Sources */,
@@ -797,7 +809,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9KQS6UJ9YX;
+				DEVELOPMENT_TEAM = KSR8K3JPUM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LGHTSG/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보 제공을 허용합니까?";
@@ -827,7 +839,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9KQS6UJ9YX;
+				DEVELOPMENT_TEAM = KSR8K3JPUM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LGHTSG/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보 제공을 허용합니까?";

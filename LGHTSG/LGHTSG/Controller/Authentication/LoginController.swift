@@ -14,8 +14,6 @@ import Alamofire
 
 class LoginController: UIViewController {
     
-    
-    
     let titleImageView2: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "icon")
@@ -159,20 +157,29 @@ class LoginController: UIViewController {
                 
         login.requestLoginDataModel(bodyData: bodyData){
             data in
-            self.jwt = data.accessToken
+                        
+            // MARK: main탭에 들어가기 위해 토큰 저장
             UserDefaults.standard.set(data.accessToken,forKey: "savedToken")
+            UserDefaults.standard.set(true, forKey: "loginSuccess")
+
+            // MARK: 패스워드 변경을 위한 저장
             UserDefaults.standard.set(password,forKey: "pastPassword")
+    
+            //self.loginWrongheight.isActive = true
             let vc = MainTabController()
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true)
         }
         
+        // MARK: 자동로그인을 위한 메일과 패스워드 저장
+        UserDefaults.standard.set(email, forKey: "email")
+        UserDefaults.standard.set(password, forKey: "password")
         
-        var jwt : String = UserDefaults.standard.string(forKey: "savedToken") ?? ""
-        print("토큰은 \(jwt)")
+        let isTrue = UserDefaults.standard.bool(forKey: "loginSuccess")
+        print(isTrue)
         
-        
-        if jwt == "" {
+
+        if  isTrue == false {
             print("로그인안됨")
             loginWrongheight.isActive = false
         }
@@ -212,9 +219,13 @@ class LoginController: UIViewController {
         view.addSubview(memberInquiryLabel)
         
         
+        UserDefaults.standard.set(false,forKey: "loginSuccess")
+
+        
+        
         // MARK: 맨 위 이미지 위치
         self.titleImageView2.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(170)
+            $0.top.equalToSuperview().offset(240)
             $0.centerX.equalToSuperview()
         }
         
