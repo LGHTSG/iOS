@@ -11,7 +11,9 @@ class EstatePriceModel {
     var PriceLists :  [Int] = []
     var transactionTimeLists : [String] = []
     func requestStockPrice(EstateName : String, onCompleted : @escaping([Int],[String]) -> Void){
-            let urlString = "http://api.lghtsg.site:8090/realestates/prices?area=\(EstateName)"
+        PriceLists = []
+                transactionTimeLists = []
+        let urlString = "http://api.lghtsg.site:8090/realestates/prices?area=\(EstateName)"
         let encodedStr = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let url = URL(string: encodedStr)!
         AF.request(url).responseDecodable(of: realEstates.self) { [weak self] response in

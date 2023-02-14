@@ -47,33 +47,33 @@ class ReSellChartViewController : UIViewController {
     }()
     private lazy var nameLabel : UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = UIFont(name: "NanumSquareEB", size: 17.0)
         label.text = nameText
         label.textColor = .white
         return label
     }()
     private lazy var priceLabel : UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = UIFont(name: "NanumSquareB", size: 14.0)
         label.textColor = UIColor.systemGray
         label.text = PriceText
         return label
     }()
     private lazy var pricePercent : UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.textColor = UIColor.red
+        label.font = UIFont(name: "NanumSquareEB", size: 12.0)
+        label.textColor = UIColor.systemRed
         label.text = pricePercentText
         if (label.text!.prefix(1) == "-"){
-            label.textColor = UIColor.blue
+            label.textColor = UIColor.systemBlue
         }else{
-            label.textColor = UIColor.red
+            label.textColor = UIColor.systemRed
         }
         return label
     }()
     private lazy var changeDate : UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight : .medium)
+        label.font = UIFont(name: "NanumSquareB", size: 12.0)
         label.textColor = UIColor.systemGray
         label.text = changeDateText
         return label
@@ -82,15 +82,15 @@ class ReSellChartViewController : UIViewController {
     private lazy var dealLabel: UILabel = {
         let label = UILabel()
         label.text = "거래 이력"
-        label.font = UIFont.systemFont(ofSize: 12, weight: .light)
+        label.font = UIFont(name: "NanumSquareEB", size: 14.0)
         label.textColor = .white
         return label
     }()
     
     private lazy var revenueLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.textColor = .systemBlue
+        label.font = UIFont(name: "NanumSquareEB", size: 16.0)
         return label
     }()
     private lazy var imageView : UIImageView = {
@@ -107,7 +107,7 @@ class ReSellChartViewController : UIViewController {
     
     //MARK: - SegmentControl
     private lazy var segmentCtrl: UISegmentedControl = {
-        let items = ["일","월", "1년", "3년"]
+        let items = ["3년","반년", "1년", "3년"]
         let seg = UISegmentedControl(items: items)
         seg.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
         seg.layer.cornerRadius = 0.7
@@ -117,14 +117,14 @@ class ReSellChartViewController : UIViewController {
         seg.setTitleTextAttributes(
           [
               NSAttributedString.Key.foregroundColor: UIColor.white,
-            .font: UIFont.systemFont(ofSize: 14, weight: .semibold)
+            .font: UIFont(name: "NanumSquareEB", size: 14.0)
           ],
           for: .selected
         )
         seg.setTitleTextAttributes(
           [
               NSAttributedString.Key.foregroundColor: UIColor.systemGray,
-            .font: UIFont.systemFont(ofSize: 14, weight: .semibold)
+            .font: UIFont(name: "NanumSquareEB", size: 14.0)
           ],
           for: .normal
         )
@@ -137,11 +137,12 @@ class ReSellChartViewController : UIViewController {
         let btn = UIButton()
         var config = UIButton.Configuration.filled()
         config.attributedTitle = "원하시는 구매시점을 클릭해주세요"
+        config.attributedTitle?.font = UIFont(name: "NanumSquareEB", size: 14.0)
+        
         btn.configuration = config
         btn.layer.cornerRadius = 10
-        btn.backgroundColor = .blue
-        btn.tintColor = .blue
-        btn.layer.borderWidth = 1
+        btn.backgroundColor = .systemBlue
+        btn.tintColor = .systemBlue
         btn.addTarget(self, action: #selector(sellbtnclicked), for: .touchUpInside)
         return btn
     }()
@@ -151,13 +152,14 @@ class ReSellChartViewController : UIViewController {
             config.titleAlignment = .center
             if let markerDate = self.markertime {
                 var titleAttribute = AttributeContainer()
-                titleAttribute.font = .systemFont(ofSize: 10, weight: .medium)
+                titleAttribute.font = UIFont(name: "NanumSquareB", size: 10.0)
                 config.attributedTitle = AttributedString(markerDate, attributes: titleAttribute)
                 config.titlePadding = 3.0
             }
             var subtitleAttribute = AttributeContainer()
-            subtitleAttribute.font = .systemFont(ofSize: 15, weight: .bold)
+            subtitleAttribute.font = UIFont(name: "NanumSquareEB", size: 15.0)
             config.attributedSubtitle = AttributedString("판매", attributes: subtitleAttribute)
+            
             self.sellButton.configuration = config
             self.sellButton.backgroundColor = .white
         }
@@ -166,60 +168,72 @@ class ReSellChartViewController : UIViewController {
             config.titleAlignment = .center
             if let markerDate = self.markertime {
                 var titleAttribute = AttributeContainer()
-                titleAttribute.font = .systemFont(ofSize: 10, weight: .medium)
+                titleAttribute.font = UIFont(name: "NanumSquareB", size: 10.0)
                 config.attributedTitle = AttributedString(markerDate, attributes: titleAttribute)
                 config.titlePadding = 3.0
             }
             var subtitleAttribute = AttributeContainer()
-            subtitleAttribute.font = .systemFont(ofSize: 15, weight: .bold)
+            subtitleAttribute.font = UIFont(name: "NanumSquareEB", size: 15.0)
             subtitleAttribute.backgroundColor  = .white
             config.attributedSubtitle = AttributedString("구매", attributes: subtitleAttribute)
             self.sellButton.configuration = config
-            self.sellButton.backgroundColor = .blue
+            self.sellButton.backgroundColor = .systemBlue
         }
     }
     //MARK: - btnclickevent
     @objc func sellbtnclicked(){
         let trademodel = StocktradeModel()
-        if(sellMode == true){
-            trademodel.requestSellstock(assetIdx: self.idx!, category: "resell", price: self.markerprice!, transactionTime: self.markertime!, token: mytoken!){
-                data in
-                if(data.header.resultCode == 4009){
-                    let alertv = UIAlertController(title: "Error", message: "판매하려는 시기 이후에 구매하였습니다.", preferredStyle: UIAlertController.Style.alert)
-                    alertv.addAction(UIAlertAction(title: "OK", style: .default))
-                    self.present(alertv, animated: true)
-                }
-                else if (data.header.resultCode == 4006){
-                    let alertv = UIAlertController(title: "Error", message: "이미 판매를 한 상품입니다.", preferredStyle: UIAlertController.Style.alert)
-                    alertv.addAction(UIAlertAction(title: "OK", style: .default))
-                    self.present(alertv, animated: true)
-                }
-                else{
-                    let alertv = UIAlertController(title: "판매완료", message: "판매가 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
-                    alertv.addAction(UIAlertAction(title: "OK", style: .default))
-                    self.present(alertv, animated: true){
-                        self.getTradeLists()
-                        self.tableView.reloadData()
-                    }
-                }}
-        }else{
-            //구매하기
-            trademodel.requestBuystock(assetIdx: self.idx!, category: "resell", price: self.markerprice!, transactionTime: self.markertime!, token: mytoken!)  {
-                data in
-                if(data.header.resultCode == 4005){
-                    let alertv = UIAlertController(title: "Error", message: "이미 구매를 한 상품입니다.", preferredStyle: UIAlertController.Style.alert)
-                    alertv.addAction(UIAlertAction(title: "OK", style: .default))
-                    self.present(alertv, animated: true)
-                }
-                else if(data.header.resultCode == 1000){
-                    let alertv = UIAlertController(title: "구매완료 ", message: "구매가 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
-                    alertv.addAction(UIAlertAction(title: "OK", style: .default))
-                    self.present(alertv, animated: true)
-                    self.getTradeLists()
-                    self.tableView.reloadData()
-                }
-            }
-        }
+        if let markertime = self.markertime {
+               if(sellMode == true){
+                   trademodel.requestSellstock(assetIdx: self.idx!, category: "resell", price: self.markerprice!, transactionTime: markertime, token: mytoken!){
+                       data in
+                       if(data.header.resultCode == 4009){
+                           let alertv = UIAlertController(title: "Error", message: "판매하려는 시기 이후에 구매하였습니다.", preferredStyle: UIAlertController.Style.alert)
+                           alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                           self.present(alertv, animated: true)
+                       }
+                       else if (data.header.resultCode == 4006){
+                           let alertv = UIAlertController(title: "Error", message: "이미 판매를 한 상품입니다.", preferredStyle: UIAlertController.Style.alert)
+                           alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                           self.present(alertv, animated: true)
+                       }
+                       else if(data.header.resultCode == 1000){
+                                   let alertv = UIAlertController(title: "판매완료", message: "판매가 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
+                                   alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                                   self.present(alertv, animated: true){
+                                       self.getTradeLists()
+                                       self.tableView.reloadData()
+                                   }
+                               }
+                               else{
+                                   let alertv = UIAlertController(title: "Error", message: "Error.", preferredStyle: UIAlertController.Style.alert)
+                                   alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                                   self.present(alertv, animated: true)
+                       }}
+               }else{
+                   //구매하기
+                   trademodel.requestBuystock(assetIdx: self.idx!, category: "resell", price: self.markerprice!, transactionTime: markertime, token: mytoken!)  {
+                       data in
+                       if(data.header.resultCode == 4005){
+                           let alertv = UIAlertController(title: "Error", message: "이미 구매를 한 상품입니다.", preferredStyle: UIAlertController.Style.alert)
+                           alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                           self.present(alertv, animated: true)
+                       }
+                       else if(data.header.resultCode == 1000){
+                           let alertv = UIAlertController(title: "구매완료 ", message: "구매가 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
+                           alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                           self.present(alertv, animated: true)
+                           self.getTradeLists()
+                           self.tableView.reloadData()
+                       }
+                       else if(data.header.resultCode == 4208){
+                                                  let alertv = UIAlertController(title: "구매실패", message: "동일 자산을 2번 이상 구매하였습니다.", preferredStyle: UIAlertController.Style.alert)
+                                                  alertv.addAction(UIAlertAction(title: "OK", style: .default))
+                                                  self.present(alertv, animated: true)
+                                              }
+                   }
+               }
+           }
     }
     //MARK: - TableView
     private lazy var tableView: UITableView = {
@@ -228,6 +242,8 @@ class ReSellChartViewController : UIViewController {
         return table
         
     }()
+    
+    
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -275,6 +291,15 @@ class ReSellChartViewController : UIViewController {
                 self.tradeListData = data.body!
                 //현재 가지고 있는 경우
                 if(data.body!.last?.sellCheck == 0){
+                    
+                    let subData = Double( self.priceListDatas.last! - data.body!.last!.price ) / Double(data.body!.last!.price) * 100
+                    if subData > 0 {
+                        self.revenueLabel.textColor = .systemBlue
+                    }
+                    else {
+                        self.revenueLabel.textColor = .systemRed
+                    }
+                    
                     self.revenueLabel.text = "구매시점에 비해서 \(String(format: "%.2f", Double(( self.priceListDatas.last! - data.body!.last!.price )) / Double(data.body!.last!.price) * 100))% "
                     self.sellMode = true
                 }else{
@@ -288,8 +313,8 @@ class ReSellChartViewController : UIViewController {
     @objc func indexChanged(_ sender: UISegmentedControl){
         switch sender.selectedSegmentIndex{
         case 0:
-            changeDate.text = "일주일 대비"
-            let monthagoday = Calendar.current.date(byAdding: .day, value: -7, to: todayDate)!
+            changeDate.text = "세달 대비"
+            let monthagoday = Calendar.current.date(byAdding: .day, value: -90, to: todayDate)!
             let monthagodate = dateFormatter.string(from: monthagoday)
             // 만약 첫 거래가 7일 최근인경우
             if(timeListDatas[0] > monthagodate ) {
@@ -310,16 +335,16 @@ class ReSellChartViewController : UIViewController {
                 self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
                 pricePercent.text =  "\(String(format: "%.2f", Double((temppriceListDatas.last! - temppriceListDatas[0])) / Double(temppriceListDatas[0]) * 100))%"
                 if(pricePercent.text?.prefix(1) == "-"){
-                    pricePercent.textColor = UIColor.blue
+                    pricePercent.textColor = UIColor.systemBlue
                 }
                 else{
-                    pricePercent.textColor = UIColor.red
+                    pricePercent.textColor = UIColor.systemRed
                 }
                 tableView.reloadData()
             }
         case 1:
-            changeDate.text = "한달 대비"
-            let yearagoday = Calendar.current.date(byAdding: .day, value: -30, to: todayDate)!
+            changeDate.text = "반년 대비"
+            let yearagoday = Calendar.current.date(byAdding: .day, value: -180, to: todayDate)!
             let yearagodate = dateFormatter.string(from: yearagoday)
             // 만약 첫 거래가1년보다 최근인경우
             let firstTradeDate = timeListDatas[0]
@@ -358,10 +383,10 @@ class ReSellChartViewController : UIViewController {
                 self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
                 pricePercent.text =  "\(String(format: "%.2f", Double((temppriceListDatas.last! - temppriceListDatas[0])) / Double(temppriceListDatas[0]) * 100))%"
                 if(pricePercent.text?.prefix(1) == "-"){
-                    pricePercent.textColor = UIColor.blue
+                    pricePercent.textColor = UIColor.systemBlue
                 }
                 else{
-                    pricePercent.textColor = UIColor.red
+                    pricePercent.textColor = UIColor.systemRed
                 }
                 tableView.reloadData()
             }
@@ -407,10 +432,10 @@ class ReSellChartViewController : UIViewController {
                 self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
                 pricePercent.text =  "\(String(format: "%.2f", Double((temppriceListDatas.last! - temppriceListDatas[0])) / Double(temppriceListDatas[0]) * 100))%"
                 if(pricePercent.text?.prefix(1) == "-"){
-                    pricePercent.textColor = UIColor.blue
+                    pricePercent.textColor = UIColor.systemBlue
                 }
                 else{
-                    pricePercent.textColor = UIColor.red
+                    pricePercent.textColor = UIColor.systemRed
                 }
                 tableView.reloadData()
             }
@@ -455,10 +480,10 @@ class ReSellChartViewController : UIViewController {
                 self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
                 pricePercent.text =  "\(String(format: "%.2f", Double((temppriceListDatas.last! - temppriceListDatas[0])) / Double(temppriceListDatas[0]) * 100))%"
                 if(pricePercent.text?.prefix(1) == "-"){
-                    pricePercent.textColor = UIColor.blue
+                    pricePercent.textColor = UIColor.systemBlue
                 }
                 else{
-                    pricePercent.textColor = UIColor.red
+                    pricePercent.textColor = UIColor.systemRed
                 }
                 tableView.reloadData()
             }
@@ -478,6 +503,12 @@ extension ReSellChartViewController : UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: EstateDetailCell.identifier, for: indexPath) as? EstateDetailCell else { return UITableViewCell() }
         
+        
+        cell.date.font = UIFont(name: "NanumSquareEB", size: 13)
+        cell.price.font = UIFont(name: "NanumSquareEB", size: 13)
+        cell.buysell.font = UIFont(name: "NanumSquareEB", size: 13)
+        
+        
         cell.date.text = tradeListData[indexPath.row].transactionTime
         cell.date.textColor = .white
         cell.price.text = "\(tradeListData[indexPath.row].price)원"
@@ -486,11 +517,12 @@ extension ReSellChartViewController : UITableViewDelegate, UITableViewDataSource
 
         if(tradeListData[indexPath.row].sellCheck == 0 ){
             cell.buysell.text = "구매"
+            cell.buysell.textColor = .systemRed
         }
         else if(tradeListData[indexPath.row].sellCheck == 1){
             cell.buysell.text = "판매"
+            cell.buysell.textColor = .systemBlue
         }
-        cell.buysell.textColor = .white
         return cell
     }
 }
@@ -500,7 +532,7 @@ extension ReSellChartViewController {
         let lineChartdataSet = LineChartDataSet(entries: lineChartDataEntries, label: "주가")
         lineChartdataSet.drawValuesEnabled = false
         lineChartdataSet.drawCirclesEnabled = false
-        lineChartdataSet.colors = [.blue]
+        lineChartdataSet.colors = [.systemBlue]
         //선택했을때 라인 지워주기
         lineChartdataSet.drawHorizontalHighlightIndicatorEnabled = false
 //        lineChartdataSet.drawVerticalHighlightIndicatorEnabled = false
@@ -604,7 +636,7 @@ extension ReSellChartViewController {
    
     }
     private func configure(){
-        lineImage.backgroundColor = .label
+        lineImage.backgroundColor = .white
         self.view.addSubview(contentScrollView)
         self.view.addSubview(sellButton)
         // 스크롤뷰 세로로

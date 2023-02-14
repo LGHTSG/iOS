@@ -30,7 +30,6 @@ class LoginApiModel {
                 print("error")
                 print(response.debugDescription)
                 UserDefaults.standard.set(false, forKey: "loginSuccess")
-
             }
         }
         

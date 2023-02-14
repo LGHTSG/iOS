@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -16,17 +17,43 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowscene = (scene as? UIWindowScene) else { return }
                 window = UIWindow(windowScene: windowscene)
                 window?.backgroundColor = .systemBackground
-                
-//        var jwt : String = UserDefaults.standard.string(forKey: "savedToken") ?? ""
-//                if jwt != "" {
-//                    print(jwt)
-//                    window?.rootViewController = MainTabController()
-//                    }
-//                else{
-                    window?.rootViewController = ViewController()
-//                }
-            //window?.rootViewController = UINavigationController(rootViewController: MainTabController())
-
+        //window?.rootViewController = ViewController()
+          
+        // MARK: 회원가입 체크 초기화
+        UserDefaults.standard.set(false, forKey: "allcheck")
+        UserDefaults.standard.set(false, forKey: "check1")
+        UserDefaults.standard.set(false, forKey: "check2")
+        UserDefaults.standard.set(false, forKey: "check3")
+        
+        
+        
+        // MARK: 자동로그인을 위한 코드
+        var loginSuccess : Bool = UserDefaults.standard.bool(forKey: "loginSuccess") ?? false
+        
+        print("자동로그인 \(loginSuccess)")
+        
+        if loginSuccess == true {
+            // MARK: 마지막 로그인 기록
+            let email = UserDefaults.standard.string(forKey: "email")
+            let password = UserDefaults.standard.string(forKey: "password")
+            
+            let bodyData : Parameters = [
+                "email" : email,
+                "password" : password
+            ]
+            
+            LoginApiModel().requestLoginDataModel(bodyData: bodyData){
+                data in
+                print(data.accessToken)
+                print("자동로그인 성공")
+                UserDefaults.standard.set(data.accessToken, forKey: "savedToken")
+                self.window?.rootViewController = MainTabController()
+            }
+        }
+        else if loginSuccess == false {
+            window?.rootViewController = ViewController()
+        }
+           
                 window?.tintColor = .label
                 window?.makeKeyAndVisible()
     }

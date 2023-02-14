@@ -102,7 +102,7 @@ class LoginView: UIViewController {
     
     let findPwBtn2: UIButton = {
         let btn = UIButton()
-        btn.setTitle("비밀번호 찾기", for: .normal)
+        btn.setTitle("비밀번호 변경", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.titleLabel?.font = UIFont(name: "NanumSquareR", size: 12.0)
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -148,16 +148,11 @@ class LoginView: UIViewController {
                 
         login.requestLoginDataModel(bodyData: bodyData){
             data in
-//            self.jwt = data.accessToken
-     //       print(data)
+            
+            self.jwt = data.accessToken
+            UserDefaults.standard.set(email, forKey: "email")
+            UserDefaults.standard.set(password, forKey: "email")
         }
-        
-        /*
-        loginMsgCode.requestLoginDataModel(bodyData: bodyData){
-            data in
-            print(data)
-        }
-        */
         
         var loginSuccess = UserDefaults.standard.bool(forKey: "loginSuccess")
         loginSuccess = UserDefaults.standard.bool(forKey: "loginSuccess")
@@ -219,7 +214,7 @@ class LoginView: UIViewController {
         
         // MARK: 맨 위 이미지 위치
         self.titleImageView2.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(170)
+            $0.top.equalToSuperview().offset(150)
             $0.centerX.equalToSuperview()
         }
         
@@ -234,7 +229,6 @@ class LoginView: UIViewController {
             $0.left.equalToSuperview().offset(50)
             $0.right.equalToSuperview().offset(-30)
         }
-        
         
 
         // MARK: 비밀번호 위치 및 배경
@@ -260,7 +254,7 @@ class LoginView: UIViewController {
         
         // MARK: 로그인 버튼
         self.loginBtn2.snp.makeConstraints {
-            $0.top.equalTo(pwImageView.snp.bottom).offset(40)
+            $0.top.equalTo(pwImageView.snp.bottom).offset(33)
             $0.left.equalToSuperview().offset(30)
             $0.right.equalToSuperview().offset(-30)
         }
@@ -282,18 +276,17 @@ class LoginView: UIViewController {
             $0.top.equalTo(loginBtn2.snp.bottom).offset(20)
             $0.left.equalTo(middleLabel2.snp.right).offset(20)
         }
-                
+        
+        self.privacyPolicyLabel.snp.makeConstraints{
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(findPwBtn2.snp.bottom).offset(30)
+            //$0.bottom.equalToSuperview().offset(-100)
+        }
         
         // MARK: 맨 밑 글자 위치
         self.memberInquiryLabel.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalTo(privacyPolicyLabel.snp.bottom).offset(5)
-        }
-        
-        self.privacyPolicyLabel.snp.makeConstraints{
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-100)
-            
         }
         
         

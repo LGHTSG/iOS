@@ -35,7 +35,7 @@ class AccountSettingViewController: UIViewController, UIGestureRecognizerDelegat
         image.contentMode = .scaleToFill
         image.layer.borderColor = UIColor.clear.cgColor // 원형 이미지의 테두리 제거
         image.clipsToBounds = true
-        image.image = UIImage(named: "profile")
+        image.image = UIImage(named: "profile-money")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -51,13 +51,12 @@ class AccountSettingViewController: UIViewController, UIGestureRecognizerDelegat
     let nameTextLabel: UILabel = {
         let name = UILabel()
         name.text = "라고함"
-        name.textColor = .white // 글자색을 흰색으로
-        name.font = UIFont(name: "NanumSquareR", size: 16.0)
+        name.textColor = .systemGray // 글자색을 흰색으로
+        name.font = UIFont(name: "NanumSquareEB", size: 14.0)
         name.translatesAutoresizingMaskIntoConstraints = false
         return name
     }()
-    
-    
+        
     // MARK: 사용자 이메일
     let emailImageView: UIImageView = {
         let image = UIImageView()
@@ -69,8 +68,8 @@ class AccountSettingViewController: UIViewController, UIGestureRecognizerDelegat
     let emailTextLabel: UILabel = {
         let name = UILabel()
         name.text = "abc123@rghtsg.com"
-        name.textColor = .white // 글자색을 흰색으로
-        name.font = UIFont(name: "NanumSquareR", size: 16.0)
+        name.textColor = .systemGray // 글자색을 흰색으로
+        name.font = UIFont(name: "NanumSquareEB", size: 14.0)
         name.translatesAutoresizingMaskIntoConstraints = false
         return name
     }()
@@ -91,7 +90,7 @@ class AccountSettingViewController: UIViewController, UIGestureRecognizerDelegat
         name.borderStyle = .none
         name.textColor = .white // 글자색을 흰색으로
         name.isSecureTextEntry = true
-        name.font = UIFont(name: "NanumSquareR", size: 16.0)
+        name.font = UIFont(name: "NanumSquareB", size: 14.0)
         name.addTarget(self, action: #selector(pwFieldEdited2), for: UIControl.Event.editingChanged)
         name.enablesReturnKeyAutomatically = true
         name.translatesAutoresizingMaskIntoConstraints = false
@@ -123,7 +122,7 @@ class AccountSettingViewController: UIViewController, UIGestureRecognizerDelegat
         name.borderStyle = .none
         name.textColor = .white // 글자색을 흰색으로
         name.isSecureTextEntry = true
-        name.font = UIFont(name: "NanumSquareR", size: 16.0)
+        name.font = UIFont(name: "NanumSquareB", size: 14.0)
         name.addTarget(self, action: #selector(pwFieldEdited2), for: UIControl.Event.editingChanged)
         name.enablesReturnKeyAutomatically = true
         name.translatesAutoresizingMaskIntoConstraints = false
@@ -189,7 +188,10 @@ class AccountSettingViewController: UIViewController, UIGestureRecognizerDelegat
             "x-access-token" : jwt]
         
         var pastPassword : String = UserDefaults.standard.string(forKey: "pastPassword") ?? ""
+        // profileImg
         print(pastPassword)
+        
+        let image = profileImageView.image
         
         let changePw = PasswordApiModel()
         guard let password = passwordTextLabel.text else {return}
@@ -209,6 +211,10 @@ class AccountSettingViewController: UIViewController, UIGestureRecognizerDelegat
             })
             msg.addAction(YES)
             self.present(msg, animated: true, completion: nil)
+            
+            self.saveBtn.setBackgroundImage(UIImage(named: "not-save-btn"), for: .normal)
+            self.passwordTextLabel.text = ""
+            self.passwordCheckTextLabel.text = ""
 
         }
         
@@ -313,21 +319,34 @@ class AccountSettingViewController: UIViewController, UIGestureRecognizerDelegat
         }
     }
     
-    
     @objc func tapDismissButton(){
         self.presentingViewController?.dismiss(animated: true)
+    }
+    
+    // 키보드때문에 화면이 가려질 경우 화면을 올린다
+    @objc func keyboardWillShow(sender: NSNotification) {
+         self.view.frame.origin.y = -100 // Move view 150 points upward
+    }
+
+    @objc func keyboardWillHide(sender: NSNotification) {
+         self.view.frame.origin.y = 0 // Move view to original position
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
         AutoLayout()
-        loadData()
+        loadData()        
         
         // MARK: 키보드 올라갔을 때 화면 터치해서 내려가게함
         let tapGesture = UITapGestureRecognizer(target: self.view, action: #selector(self.view.endEditing(_:)))
         tapGesture.delegate = self
         self.view.addGestureRecognizer(tapGesture)
+        
+        
+        // MARK: 키보드가 화면을 가릴 때 화면을 위로 올릴 수 있도록
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil);
         
         
         // MARK: 네비게이션 컨트롤러
@@ -386,52 +405,52 @@ class AccountSettingViewController: UIViewController, UIGestureRecognizerDelegat
         
         // MARK: profile 위치 설정
         self.profileImageView.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(150)
+            $0.top.equalToSuperview().offset(140)
             $0.centerX.equalToSuperview()
         }
         
         profileImageView.snp.makeConstraints { make in
-            make.height.equalTo(85)
-            make.width.equalTo(85)
+            make.height.equalTo(100)
+            make.width.equalTo(100)
         }
         
         
         // MARK: 이름 설정 위치
         self.nameImageView.snp.makeConstraints{
             $0.top.equalToSuperview().offset(280)
-            $0.left.equalToSuperview().offset(20)
-            $0.right.equalToSuperview().offset(-20)
+            $0.left.equalToSuperview().offset(30)
+            $0.right.equalToSuperview().offset(-30)
         }
         
         self.nameTextLabel.snp.makeConstraints{
             $0.top.equalToSuperview().offset(295)
-            $0.left.equalToSuperview().offset(35)
-            $0.right.equalToSuperview().offset(-20)
+            $0.left.equalToSuperview().offset(45)
+            $0.right.equalToSuperview().offset(-30)
         }
         
         // MARK: 이메일 작성 및 전송 버튼 위치
         self.emailImageView.snp.makeConstraints{
             $0.top.equalTo(nameImageView.snp.bottom).offset(30)
-            $0.left.equalToSuperview().offset(20)
-            $0.right.equalToSuperview().offset(-20)
+            $0.left.equalToSuperview().offset(30)
+            $0.right.equalToSuperview().offset(-30)
         }
         
         self.emailTextLabel.snp.makeConstraints{
             $0.top.equalTo(nameImageView.snp.bottom).offset(45)
-            $0.left.equalToSuperview().offset(35)
-            $0.right.equalToSuperview().offset(-120)
+            $0.left.equalToSuperview().offset(45)
+            $0.right.equalToSuperview().offset(-30)
         }
         
         self.passwordImageView.snp.makeConstraints{
             $0.top.equalTo(emailImageView.snp.bottom).offset(30)
-            $0.left.equalToSuperview().offset(20)
-            $0.right.equalToSuperview().offset(-20)
+            $0.left.equalToSuperview().offset(30)
+            $0.right.equalToSuperview().offset(-30)
         }
         
         self.passwordTextLabel.snp.makeConstraints{
             $0.top.equalTo(emailImageView.snp.bottom).offset(45)
-            $0.left.equalToSuperview().offset(35)
-            $0.right.equalToSuperview().offset(-120)
+            $0.left.equalToSuperview().offset(45)
+            $0.right.equalToSuperview().offset(-30)
         }
         
         self.passwordValidLabel.snp.makeConstraints{
@@ -441,14 +460,14 @@ class AccountSettingViewController: UIViewController, UIGestureRecognizerDelegat
         
         self.passwordCheckImageView.snp.makeConstraints{
             $0.top.equalTo(passwordImageView.snp.bottom).offset(30)
-            $0.left.equalToSuperview().offset(20)
-            $0.right.equalToSuperview().offset(-20)
+            $0.left.equalToSuperview().offset(30)
+            $0.right.equalToSuperview().offset(-30)
         }
         
         self.passwordCheckTextLabel.snp.makeConstraints{
             $0.top.equalTo(passwordImageView.snp.bottom).offset(45)
-            $0.left.equalToSuperview().offset(35)
-            $0.right.equalToSuperview().offset(-120)
+            $0.left.equalToSuperview().offset(45)
+            $0.right.equalToSuperview().offset(-30)
         }
         
         self.passwordSameLabel.snp.makeConstraints{
@@ -458,7 +477,7 @@ class AccountSettingViewController: UIViewController, UIGestureRecognizerDelegat
         
         // MARK: 저장 버튼
         self.saveBtn.snp.makeConstraints{
-            $0.bottom.equalToSuperview().offset(-50)
+            $0.top.equalTo(passwordCheckImageView.snp.bottom).offset(30)
             $0.left.equalToSuperview().offset(40)
             $0.right.equalToSuperview().offset(-40)
             $0.height.equalTo(passwordImageView.snp.height)

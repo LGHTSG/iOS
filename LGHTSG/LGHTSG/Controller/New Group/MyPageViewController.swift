@@ -58,10 +58,31 @@ class MyPageViewController: UIViewController {
     @objc func logoutBtnClicked(){
         var jwt : String = UserDefaults.standard.string(forKey: "savedToken") ?? ""
         print("토큰은 \(jwt)")
-        let vc = LoginController()
+        
+        //Alert 선언
+        let msg = UIAlertController(title: "", message: "로그아웃 되었습니다.\n앱을 다시 실행하여 시작해보세요 :)", preferredStyle: .alert)
+        //Alert에 부여할 Yes이벤트 선언
+        let YES = UIAlertAction(title: "확인", style: .default, handler: { (action) -> Void in
+            self.YesClick2()
+        })
+        
+        // MARK: 자동로그인을 못하게 막는다
+        UserDefaults.standard.set(false, forKey: "loginSuccess")
+        
+        msg.addAction(YES)
+        self.present(msg, animated: true, completion: nil)
+        /*let vc = LoginController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
+         */
     }
+    
+    @objc func YesClick2(){
+        UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {exit(0)
+        }
+    }
+    
     
     @objc func tapDismissButton(){
         self.presentingViewController?.dismiss(animated: true)

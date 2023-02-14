@@ -46,6 +46,7 @@ class CheckPagePrivacyController: UIViewController {
     }
     
     @objc func tapDismissButton(){
+        UserDefaults.standard.set(true, forKey: "check3")
         self.presentingViewController?.dismiss(animated: true)
     }
     

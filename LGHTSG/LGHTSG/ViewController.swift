@@ -39,7 +39,7 @@ class ViewController: UIViewController {
     
     @objc func joinBtnClicked() {
         let vc = CheckAgreeController()
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true)
     }
     

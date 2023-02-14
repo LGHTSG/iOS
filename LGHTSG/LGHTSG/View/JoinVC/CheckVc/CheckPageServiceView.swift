@@ -80,13 +80,13 @@ class CheckPageServiceView: UIView {
         
         
         self.nextBtnImageView3.snp.makeConstraints{
-            $0.bottom.equalToSuperview().offset(-10)
+            $0.bottom.equalToSuperview().offset(-50)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
         }
         
         self.nextLabel3.snp.makeConstraints{
-            $0.top.equalTo(nextBtnImageView3).offset(10)
+            $0.top.equalTo(nextBtnImageView3.snp.top).offset(10)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
             

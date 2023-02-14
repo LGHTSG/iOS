@@ -512,13 +512,13 @@ class RegisterView : UIView {
 
         // MARK: 다음으로 버튼
         self.nextBtnImageView.snp.makeConstraints{
-            $0.bottom.equalToSuperview().offset(-10)
+            $0.bottom.equalToSuperview().offset(-50)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
         }
         
         self.nextBtn.snp.makeConstraints{
-            $0.top.equalTo(nextBtnImageView).offset(10)
+            $0.top.equalTo(nextBtnImageView.snp.bottom).offset(10)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
             

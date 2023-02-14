@@ -46,6 +46,7 @@ class CheckPageServiceController: UIViewController {
     }
     
     @objc func tapDismissButton(){
+        UserDefaults.standard.set(true, forKey: "check2")
         self.presentingViewController?.dismiss(animated: true)
     }
             

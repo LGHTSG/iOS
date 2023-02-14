@@ -83,7 +83,17 @@ class TopViewDetailController: UIViewController, UITableViewDelegate, UITableVie
             stockChartVC.idx = stockDataLists[indexPath.row].idx
             self.navigationController?.pushViewController(stockChartVC, animated: true)
         }
-        else if label.text! == "#어제 급등한 리셀"{}
+        else if label.text! == "#어제 급등한 리셀"{
+            
+            let resellchartVC = ReSellChartViewController()
+            resellchartVC.nameText = resellDataLists[indexPath.row].name
+            resellchartVC.changeDateText = resellDataLists[indexPath.row].rateCalDateDiff
+            resellchartVC.pricePercentText = "\(resellDataLists[indexPath.row].rateOfChange)%"
+            resellchartVC.idx = resellDataLists[indexPath.row].idx
+            resellchartVC.imageURL = resellDataLists[indexPath.row].imageUrl
+            self.navigationController?.pushViewController(resellchartVC, animated: true)
+            
+        }
         
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -91,13 +101,13 @@ class TopViewDetailController: UIViewController, UITableViewDelegate, UITableVie
         cell.number.font = UIFont(name: "NanumSquareB", size: 15.0)
         cell.title.font = UIFont(name: "NanumSquareEB", size: 15.0)
         cell.price.font = UIFont(name: "NanumSquareB", size: 12.0)
-        cell.percentage.font = UIFont(name: "NanumSquareB", size: 12.0)
+        cell.percentage.font = UIFont(name: "NanumSquareEB", size: 12.0)
         cell.period.font = UIFont(name: "NanumSquareB", size: 12.0)
         if label.text! == "#강남구 집값 Top 10"{
             cell.number.text = String(indexPath.row + 1)
             cell.iconImage.kf.setImage(with:  URL(string: estateDataLists[indexPath.row].iconImage))
             cell.title.text = self.estateDataLists[indexPath.row].name
-            cell.price.text = "\(self.estateDataLists[indexPath.row].price)원/m"
+            cell.price.text = "\(self.estateDataLists[indexPath.row].price.withCommas())원/m2"
             cell.percentage.text = "\(self.estateDataLists[indexPath.row].rateOfChange)%"
             if estateDataLists[indexPath.row].rateOfChange > 0 {
                 cell.percentage.textColor = .systemRed
@@ -112,7 +122,7 @@ class TopViewDetailController: UIViewController, UITableViewDelegate, UITableVie
             cell.number.text = String(indexPath.row + 1)
             cell.iconImage.kf.setImage(with:  URL(string: stockDataLists[indexPath.row].iconImage))
             cell.title.text = self.stockDataLists[indexPath.row].name
-            cell.price.text = "\(self.stockDataLists[indexPath.row].price)원"
+            cell.price.text = "\(self.stockDataLists[indexPath.row].price.withCommas())원"
             cell.percentage.text = "\(self.stockDataLists[indexPath.row].rateOfChange)%"
             if stockDataLists[indexPath.row].rateOfChange > 0 {
                 cell.percentage.textColor = .systemRed
@@ -127,7 +137,7 @@ class TopViewDetailController: UIViewController, UITableViewDelegate, UITableVie
             cell.number.text = String(indexPath.row + 1)
             cell.iconImage.kf.setImage(with:  URL(string: resellDataLists[indexPath.row].imageUrl))
             cell.title.text = self.resellDataLists[indexPath.row].name
-            cell.price.text = "\(self.resellDataLists[indexPath.row].price)원/m"
+            cell.price.text = "\(self.resellDataLists[indexPath.row].price.withCommas())원"
             cell.percentage.text = "\(self.resellDataLists[indexPath.row].rateOfChange)%"
             if resellDataLists[indexPath.row].rateOfChange > 0 {
                 cell.percentage.textColor = .systemRed

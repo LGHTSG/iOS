@@ -33,7 +33,7 @@ class StartView: UIView {
     
     let findPwBtn: UIButton = {
         let btn = UIButton()
-        btn.setTitle("비밀번호 찾기", for: .normal)
+        btn.setTitle("비밀번호 변경", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.titleLabel?.font = UIFont(name: "NanumSquareR", size: 12.0)
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -86,7 +86,7 @@ class StartView: UIView {
         
         // MARK: 맨 위 이미지 위치
         self.titleImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(200)
+            $0.top.equalToSuperview().offset(280)
             $0.centerX.equalToSuperview()
         }
 
@@ -94,7 +94,7 @@ class StartView: UIView {
         
         // MARK: 로그인 버튼
         self.loginBtn.snp.makeConstraints {
-            $0.top.equalTo(titleImageView.snp.bottom).offset(100)
+            $0.top.equalTo(titleImageView.snp.bottom).offset(50)
             $0.centerX.equalToSuperview()
             $0.left.equalToSuperview().offset(30)
             $0.right.equalToSuperview().offset(-30)
