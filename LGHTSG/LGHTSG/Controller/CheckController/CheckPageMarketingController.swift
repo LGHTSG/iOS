@@ -46,6 +46,7 @@ class CheckPageMarketingController: UIViewController {
     }
     
     @objc func tapDismissButton(){
+        UserDefaults.standard.set(true, forKey: "check1")
         self.presentingViewController?.dismiss(animated: true)
     }
 

@@ -86,6 +86,16 @@ class FindPassWordController: UIViewController {
     }()
     
     
+    let codeSuccessLabel: UILabel = {
+        let label = UILabel()
+        label.text = "⎷ 이메일 인증이 완료되었습니다."
+        label.font = UIFont(name: "NanumSquareR", size: 12.0)
+        label.textColor = .systemGreen
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
     lazy var codeConfirmBtn: UIButton = {
         let btn = UIButton()
         btn.titleLabel?.font = UIFont(name: "NanumSquareB", size: 12.0)
@@ -228,11 +238,16 @@ class FindPassWordController: UIViewController {
     
     // MARK: 인증번호 확인 함수
     @objc func codeConfirmBtnClicked(){
+        var code = codeTextField.text
+        code = code?.trimmingCharacters(in: [" "])
+        codeTextField.text
         if codeTextField.text == self.code {
             codeConfirmheight.isActive = true
             emailTextField2.isUserInteractionEnabled = false
             codeTextField.isUserInteractionEnabled = false
             showPwChange()
+            codeConfirmSuccessheight.isActive = false
+            codeConfirmheight.isActive = true
         }
         else {
             codeConfirmheight.isActive = false
@@ -324,6 +339,16 @@ class FindPassWordController: UIViewController {
     let changePw = ChangePwApiModel()
     
     
+    // 키보드때문에 화면이 가려질 경우 화면을 올린다
+    @objc func keyboardWillShow(sender: NSNotification) {
+         self.view.frame.origin.y = -100 // Move view 150 points upward
+    }
+
+    @objc func keyboardWillHide(sender: NSNotification) {
+         self.view.frame.origin.y = 0 // Move view to original position
+    }
+    
+    
     @objc func changePwBtnClicked(){
         print("isCheck1=\(isCheck1), isCheck2=\(isCheck2)")
         if isCheck1 == true {
@@ -348,7 +373,8 @@ class FindPassWordController: UIViewController {
             //Alert 선언
             let msg = UIAlertController(title: "", message: "비밀번호 변경이 완료되었습니다", preferredStyle: .alert)
             //Alert에 부여할 Yes이벤트 선언
-            let YES = UIAlertAction(title: "확인", style: .default, handler: { (action) in
+            let YES = UIAlertAction(title: "확인", style: .default, handler: { (action) -> Void in
+                self.YesClick3()
             })
             msg.addAction(YES)
             self.present(msg, animated: true, completion: nil)
@@ -356,10 +382,15 @@ class FindPassWordController: UIViewController {
         }
     }
     
+    @objc func YesClick3(){
+        self.presentingViewController?.dismiss(animated: true)
+    }
+    
     
     // MARK: 인증번호 관련 동적 변화 라벨
     var sendCodeheight: NSLayoutConstraint!
     var codeConfirmheight: NSLayoutConstraint!
+    var codeConfirmSuccessheight: NSLayoutConstraint!
     
     // MARK: 인증번호가 성공적이면 비밀번호 바꿀 수 있도록 함
     var codeSuccessheight: NSLayoutConstraint!
@@ -397,6 +428,9 @@ class FindPassWordController: UIViewController {
         codeSuccessheight4 = passwordCheckTextField2.heightAnchor.constraint(equalToConstant: 0)
         codeSuccessheight4.isActive = true
         
+        codeConfirmSuccessheight = codeSuccessLabel.heightAnchor.constraint(equalToConstant: 0)
+        codeConfirmSuccessheight.isActive = true
+        
         pwheight1 = pwValidLabel.heightAnchor.constraint(equalToConstant: 0)
         pwheight1.isActive = true
         
@@ -432,10 +466,6 @@ class FindPassWordController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .black
         
-        
- 
-
-        
         // MARK: 네비게이션 컨트롤러
         self.view.addSubview(navigationBar)
         let safeArea = self.view.safeAreaLayoutGuide
@@ -449,14 +479,19 @@ class FindPassWordController: UIViewController {
         navigationBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         navigationBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         
-        let navItem = UINavigationItem(title: "비밀번호 찾기")
+        let navItem = UINavigationItem(title: "비밀번호 변경")
         let leftButton = UIBarButtonItem(image: UIImage(named: "back-arrow"), style: .plain, target: self, action: #selector(tapDismissButton))
         
         navItem.leftBarButtonItem = leftButton
             
         navigationBar.setItems([navItem], animated: true)
 
+        // MARK: 키보드가 화면을 가릴 때 화면을 위로 올릴 수 있도록
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil);
+        
         heightSetting()
+        
         
         view.addSubview(emailLabel)
         view.addSubview(emailSendImageView)
@@ -466,6 +501,7 @@ class FindPassWordController: UIViewController {
         view.addSubview(codeSendImageView)
         view.addSubview(codeTextField)
         view.addSubview(codeConfirmLabel)
+        view.addSubview(codeSuccessLabel)
         
         
         view.addSubview(passwordLabel)
@@ -546,6 +582,12 @@ class FindPassWordController: UIViewController {
         
         // MARK: 인증번호가 다르다는 메세지를 띄움
         self.codeConfirmLabel.snp.makeConstraints{
+            $0.top.equalTo(codeSendImageView.snp.bottom).offset(5)
+            $0.left.equalTo(codeSendImageView.snp.left)
+        }
+        
+        // MARK: 인증번호가 다르다는 메세지를 띄움
+        self.codeSuccessLabel.snp.makeConstraints{
             $0.top.equalTo(codeSendImageView.snp.bottom).offset(5)
             $0.left.equalTo(codeSendImageView.snp.left)
         }

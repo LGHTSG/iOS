@@ -8,17 +8,17 @@
 import UIKit
 
 class CheckAgreeController: UIViewController {
-
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
         let CheckAgreeView = CheckAgreeView()
         view.addSubview(CheckAgreeView)
         
-        UserDefaults.standard.set(false, forKey: "allcheck")
-        UserDefaults.standard.set(false, forKey: "check1")
-        UserDefaults.standard.set(false, forKey: "check2")
-        UserDefaults.standard.set(false, forKey: "check3")
+
         
         CheckAgreeView.translatesAutoresizingMaskIntoConstraints = false
         CheckAgreeView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -89,9 +89,13 @@ class CheckAgreeController: UIViewController {
         var isCheck4 = Int(isChecked4)
         
         if allChecked == 1{
+            let vc = RegisterationController()
+            vc.modalPresentationStyle = .overFullScreen
             self.present(RegisterationController(), animated: true)
         }
         else if isCheck2 == 1 && isCheck3 == 1 && isCheck4 == 1{
+            let vc = RegisterationController()
+            vc.modalPresentationStyle = .overFullScreen
             self.present(RegisterationController(), animated: true)
         }
         else{

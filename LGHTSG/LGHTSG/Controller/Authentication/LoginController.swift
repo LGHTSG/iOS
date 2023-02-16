@@ -14,11 +14,9 @@ import Alamofire
 
 class LoginController: UIViewController {
     
-    
-    
     let titleImageView2: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "icon")
+        image.image = UIImage(named: "lghtsg-hg")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -159,20 +157,29 @@ class LoginController: UIViewController {
                 
         login.requestLoginDataModel(bodyData: bodyData){
             data in
-            self.jwt = data.accessToken
+                        
+            // MARK: main탭에 들어가기 위해 토큰 저장
             UserDefaults.standard.set(data.accessToken,forKey: "savedToken")
+            UserDefaults.standard.set(true, forKey: "loginSuccess")
+
+            // MARK: 패스워드 변경을 위한 저장
             UserDefaults.standard.set(password,forKey: "pastPassword")
+    
+            //self.loginWrongheight.isActive = true
             let vc = MainTabController()
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true)
         }
         
+        // MARK: 자동로그인을 위한 메일과 패스워드 저장
+        UserDefaults.standard.set(email, forKey: "email")
+        UserDefaults.standard.set(password, forKey: "password")
         
-        var jwt : String = UserDefaults.standard.string(forKey: "savedToken") ?? ""
-        print("토큰은 \(jwt)")
+        let isTrue = UserDefaults.standard.bool(forKey: "loginSuccess")
+        print(isTrue)
         
-        
-        if jwt == "" {
+
+        if  isTrue == false {
             print("로그인안됨")
             loginWrongheight.isActive = false
         }
@@ -212,20 +219,27 @@ class LoginController: UIViewController {
         view.addSubview(memberInquiryLabel)
         
         
-        // MARK: 맨 위 이미지 위치
-        self.titleImageView2.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(170)
-            $0.centerX.equalToSuperview()
-        }
+        UserDefaults.standard.set(false,forKey: "loginSuccess")
+
         
+    
         self.emailImageView.snp.makeConstraints {
-            $0.top.equalTo(titleImageView2.snp.bottom).offset(100)
+            $0.top.equalToSuperview().offset(350)
             $0.left.equalToSuperview().offset(30)
             $0.right.equalToSuperview().offset(-30)
         }
         
+        // MARK: 맨 위 이미지 위치
+        self.titleImageView2.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(200)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(emailImageView.snp.top).offset(-30)
+            $0.left.equalToSuperview().offset(90)
+            $0.right.equalToSuperview().offset(-90)
+        }
+        
         self.emailTextField.snp.makeConstraints {
-            $0.top.equalTo(titleImageView2.snp.bottom).offset(115)
+            $0.top.equalToSuperview().offset(365)
             $0.left.equalToSuperview().offset(50)
             $0.right.equalToSuperview().offset(-30)
         }
@@ -255,7 +269,7 @@ class LoginController: UIViewController {
         
         // MARK: 로그인 버튼
         self.loginBtn2.snp.makeConstraints {
-            $0.top.equalTo(pwImageView.snp.bottom).offset(40)
+            $0.top.equalTo(pwImageView.snp.bottom).offset(20)
             $0.left.equalToSuperview().offset(30)
             $0.right.equalToSuperview().offset(-30)
         }
@@ -263,32 +277,33 @@ class LoginController: UIViewController {
         
         // MARK: 회원가입 및 비밀번호 찾기
         self.middleLabel2.snp.makeConstraints{
-            $0.top.equalTo(loginBtn2.snp.bottom).offset(25)
+            $0.top.equalTo(loginBtn2.snp.bottom).offset(15)
             $0.centerX.equalTo(loginBtn2)
         }
         
         self.joinBtn2.snp.makeConstraints{
-            $0.top.equalTo(loginBtn2.snp.bottom).offset(20)
+            $0.top.equalTo(loginBtn2.snp.bottom).offset(10)
             $0.right.equalTo(middleLabel2.snp.left).offset(-20)
         }
         
         
         self.findPwBtn2.snp.makeConstraints{
-            $0.top.equalTo(loginBtn2.snp.bottom).offset(20)
+            $0.top.equalTo(loginBtn2.snp.bottom).offset(10)
             $0.left.equalTo(middleLabel2.snp.right).offset(20)
         }
                 
+        
+
+        
+        self.privacyPolicyLabel.snp.makeConstraints{
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(findPwBtn2.snp.bottom).offset(50)
+        }
         
         // MARK: 맨 밑 글자 위치
         self.memberInquiryLabel.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalTo(privacyPolicyLabel.snp.bottom).offset(5)
-        }
-        
-        self.privacyPolicyLabel.snp.makeConstraints{
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-100)
-            
         }
     }
     

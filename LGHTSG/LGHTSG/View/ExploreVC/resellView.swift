@@ -20,7 +20,7 @@ class resellView : UIViewController{
     var resellSearchLists = [resellData.body]()
     lazy private var segment : UISegmentedControl = {
         let control  = UnderlineSegmentedControl(items: ["급상승", "급하락"])
-        control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.darkGray, .font : UIFont.systemFont(ofSize: 16, weight: .semibold)], for: .normal)
+        control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.darkGray, .font : UIFont(name: "NanumSquareEB", size: 16)], for: .normal)
         control.selectedSegmentIndex = 0
         AssetModel.requestResellModel(segmentIndex: 0){
             data in
@@ -44,6 +44,7 @@ class resellView : UIViewController{
         resellTableView.delegate = self
         segment.addTarget(self, action: #selector(clickSegment), for: .valueChanged)
     }
+    
     //segment이벤트 받아서 급상승, 급하락, 거래량
     @objc func clickSegment(_ sender : UISegmentedControl){
         switch sender.selectedSegmentIndex {
@@ -65,11 +66,12 @@ class resellView : UIViewController{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     func setView() {
         resellTableView.register(HomeTableCell.self, forCellReuseIdentifier: "HomeTabeCell")
         resellTableView.separatorStyle = .none
-
         resellTableView.backgroundColor = .black
+                
         self.view.addSubview(segment)
         segment.snp.makeConstraints{
             $0.leading.top.equalToSuperview()
@@ -90,17 +92,22 @@ extension resellView : UITableViewDataSource , UITableViewDelegate, UIScrollView
         }else{
             return resellDataLists.count  }}
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTabeCell", for: indexPath) as? HomeTableCell else {return UITableViewCell()}
+                
         if(ExploreViewController.isSearching){
             cell.setup(with: resellSearchLists[indexPath.row])
         }else{
             cell.setup(with: resellDataLists[indexPath.row])}
+
+        
         cell.countLabel.text = "\(indexPath.row+1)"
         cell.selectionStyle = .none
 
         return cell
         
     }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if resellTableView.contentOffset.y < 0 {
             delegate?.showSearchBar()
@@ -109,24 +116,24 @@ extension resellView : UITableViewDataSource , UITableViewDelegate, UIScrollView
             delegate?.hideSearchBar()
         }
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let ChartVc = ReSellChartViewController()
-        
        
         if(ExploreViewController.isSearching){
 
             ChartVc.nameText =  resellSearchLists[indexPath.row].name
             ChartVc.changeDateText = resellSearchLists[indexPath.row].rateCalDateDiff
             ChartVc.pricePercentText = "\(resellSearchLists[indexPath.row].rateOfChange)%"
-            ChartVc.PriceText  = "\(String(resellSearchLists[indexPath.row].price))원"
+            ChartVc.PriceText  = "\(String(resellSearchLists[indexPath.row].price.withCommas()))원"
             ChartVc.idx = resellSearchLists[indexPath.row].idx
             ChartVc.imageURL = resellSearchLists[indexPath.row].imageUrl
-            
+
         }else{
             ChartVc.nameText =  resellDataLists[indexPath.row].name
             ChartVc.changeDateText = resellDataLists[indexPath.row].rateCalDateDiff
             ChartVc.pricePercentText =  "\(resellDataLists[indexPath.row].rateOfChange)%"
-            ChartVc.PriceText  = "\(String(resellDataLists[indexPath.row].price))원"
+            ChartVc.PriceText  = "\(String(resellDataLists[indexPath.row].price.withCommas()))원"
             ChartVc.idx = resellDataLists[indexPath.row].idx
             ChartVc.imageURL = resellDataLists[indexPath.row].imageUrl
         }

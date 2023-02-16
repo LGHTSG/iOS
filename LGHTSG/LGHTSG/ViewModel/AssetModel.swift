@@ -27,7 +27,7 @@ class AssetModel {
         guard let url = URL(string: urlString) else {return}
         let headers : HTTPHeaders = ["x-access-token" : token]
         let body : Parameters = [
-            "transactionIdx" : transactionIdx,
+            "assetIdx" : transactionIdx,
             "category" : category
         ]
         AF.request(url, method: .patch, parameters: body,  encoding: JSONEncoding.default, headers: headers ).responseDecodable(of: TradeDateError.self){

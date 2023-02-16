@@ -11,7 +11,7 @@ class StockView : UIViewController {
     var delegate : showNavigationDelegate?
     lazy private var  segment : UISegmentedControl = {
         let control  = UnderlineSegmentedControl(items: ["급상승", "급하락", "거래량", "시가총액"])
-        control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.darkGray, .font : UIFont.systemFont(ofSize: 16, weight: .semibold)], for: .normal)
+        control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.darkGray, .font : UIFont(name: "NanumSquareEB", size: 16)], for: .normal)
         control.selectedSegmentIndex = 0
         AssetModel.requestTableCellModel(segmentIndex: 0){
             data in
@@ -20,6 +20,8 @@ class StockView : UIViewController {
         }
         return control
     }()
+    
+    
     let AssetModel = TableCellModel()
     var stockDataLists = [asset.body]()
     var stockSearchLists = [asset.body]()

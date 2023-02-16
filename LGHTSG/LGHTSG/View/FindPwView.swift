@@ -554,13 +554,14 @@ class FindPwView: UIView {
         
         // MARK: 비밀번호 변경 버튼
         self.nextBtnImageView2.snp.makeConstraints{
-            $0.bottom.equalToSuperview().offset(-50)
+            
+            $0.top.equalTo(pwCheckImageView.snp.bottom).offset(30)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
         }
         
         self.pwChangeBtn.snp.makeConstraints{
-            $0.top.equalTo(nextBtnImageView2).offset(10)
+            $0.top.equalTo(pwCheckImageView.snp.bottom).offset(10)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
         }

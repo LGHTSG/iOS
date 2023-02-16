@@ -27,7 +27,7 @@ class MyPageView : UIView {
         image.contentMode = .scaleToFill
         image.layer.borderColor = UIColor.clear.cgColor // 원형 이미지의 테두리 제거
         image.clipsToBounds = true
-        image.image = UIImage(named: "profile")
+        image.image = UIImage(named: "profile-money")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -71,7 +71,7 @@ class MyPageView : UIView {
         addSubview(logoutLine)
         
         self.profileImageView2.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(100)
+            $0.top.equalToSuperview().offset(150)
             $0.centerX.equalToSuperview()
         }
         

@@ -350,12 +350,12 @@ class CheckAgreeView: UIView {
         
         // MARK: 모두 동의하기
         self.checkBox.snp.makeConstraints{
-            $0.top.equalTo(agreeLabel.snp.bottom).offset(50)
+            $0.top.equalTo(agreeLabel.snp.bottom).offset(30)
             $0.left.equalToSuperview().offset(20)
         }
         
         self.allAgreeLabel.snp.makeConstraints{
-            $0.top.equalTo(agreeLabel.snp.bottom).offset(55)
+            $0.top.equalTo(agreeLabel.snp.bottom).offset(35)
             $0.left.equalTo(checkBox.snp.right).offset(20)
         }
         
@@ -416,14 +416,14 @@ class CheckAgreeView: UIView {
         
         // MARK: 다음으로 버튼
         self.nextBtnImageView2.snp.makeConstraints{
-            $0.bottom.equalToSuperview().offset(-10)
+            $0.bottom.equalToSuperview().offset(-50)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
         }
         
         
         self.nextBtn2.snp.makeConstraints{
-            $0.top.equalTo(nextBtnImageView2).offset(10)
+            $0.top.equalTo(nextBtnImageView2.snp.top).offset(10)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
             

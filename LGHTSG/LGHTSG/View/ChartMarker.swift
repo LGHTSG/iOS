@@ -31,7 +31,7 @@ class ChartMarker: MarkerView {
 //        if (self.pricepercent[self.pricepercent.startIndex] == "-") {
 //            let attributeStr = NSMutableAttributedString(string: text)
 //        }
-        text = "이때 샀다면 지금\(self.pricepercent)"
+        text = "이때 샀다면 지금 \(self.pricepercent)"
         if(priceDate != pricedatelists[Int(entry.x)]){
             let data = [pricedatelists[Int(entry.x)] : Int(entry.y)]
             NotificationCenter.default.post(name: Notification.Name("markerdata"), object: nil, userInfo: data)
@@ -44,8 +44,8 @@ class ChartMarker: MarkerView {
     override func draw(context: CGContext, point: CGPoint) {
         super.draw(context: context, point: point)   
         var drawAttributes = [NSAttributedString.Key : Any]()
-        drawAttributes[.font] = UIFont.systemFont(ofSize: 12)
-        drawAttributes[.foregroundColor] = UIColor.white
+        drawAttributes[.font] = UIFont(name: "NanumSquareEB", size: 12)
+        drawAttributes[.foregroundColor] = UIColor.systemGreen
         drawAttributes[.backgroundColor] = UIColor.clear
         self.bounds.size = ("\(text)" as NSString).size(withAttributes: drawAttributes)
         self.offset = CGPoint(x: -self.bounds.size.width / 2, y: self.bounds.size.height * 2)
@@ -59,10 +59,10 @@ class ChartMarker: MarkerView {
         }
         drawText(text: " \(text) " as NSString, rect: CGRect(origin: CGPoint(x: point.x + offset.x, y:  0), size: self.bounds.size), withAttributes: drawAttributes)
         self.bounds.size = ("\(pricetext)" as NSString).size(withAttributes: drawAttributes)
-        drawAttributes[.font] = UIFont.systemFont(ofSize: 10)
+        drawAttributes[.font] = UIFont(name: "NanumSquareEB", size: 10)
         drawAttributes[.foregroundColor] = UIColor.lightGray
         drawText(text: "\(priceDate)" as NSString, rect: CGRect(origin: CGPoint(x: point.x + offset.x / 2, y:  offset.y), size: self.bounds.size ), withAttributes: drawAttributes)
-        drawAttributes[.font] = UIFont.systemFont(ofSize: 12)
+        drawAttributes[.font] = UIFont(name: "NanumSquareEB", size: 12)
         drawAttributes[.foregroundColor] = UIColor.white
         drawText(text: "\(pricetext)" as NSString, rect: CGRect(origin: CGPoint(x: point.x + offset.x / 2, y: offset.y / 2 ), size: self.bounds.size ), withAttributes: drawAttributes)
 //        let data = [priceDate : price!]

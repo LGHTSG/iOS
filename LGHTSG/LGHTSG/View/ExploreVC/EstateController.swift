@@ -18,9 +18,20 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     var estateModel = EstatePriceModel()
     //MARK: - SearchBar
     var items = [String]()
-        var samples = [String]()
-        let disposeBag = DisposeBag()
+    var samples = [String]()
+    let disposeBag = DisposeBag()
     
+    private let todayDate = Date()
+        var dateFormatter : DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter
+    }()
+        var temppriceListDatas = [Int]()
+        var temptimeListDatas = [String]()
+    
+    var estateDataLists = [EstatePriceDetailModel.EstateBody]()
+
     private lazy var searchBar: UISearchBar = {
         let search = UISearchBar()
         search.searchTextField.font = UIFont(name: "NanumSquareB", size: 15)
@@ -32,7 +43,9 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         search.searchTextField.leftView?.tintColor = .white
          return search
     }()
-    var Areaname = "대전광역시+유성구+계산동"
+    
+    var Areaname = ""
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         tableView2.alpha = 1
     }
@@ -78,7 +91,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         let lineChartdataSet = LineChartDataSet(entries: lineChartDataEntries, label: "가격")
         lineChartdataSet.drawValuesEnabled = false
         lineChartdataSet.drawCirclesEnabled = false
-        lineChartdataSet.colors = [.blue]
+        lineChartdataSet.colors = [.systemBlue]
         //선택했을때 라인 지워주기
         lineChartdataSet.drawHorizontalHighlightIndicatorEnabled = false
         lineChartdataSet.highlightColor = .white
@@ -125,13 +138,12 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     }
     private func setLineChartView(Areaname : String) {
         estateModel.requestStockPrice(EstateName: Areaname, onCompleted: { (pricelists, transctiontime) in
-            DispatchQueue.main.async {
-                self.view.addSubview(self.lineChartView)
+            
                 let sortedtimeLists = transctiontime.sorted{$0.compare($1, options: .numeric) == .orderedAscending}
                 self.pricelists = pricelists
                 self.timeLists = sortedtimeLists
                 self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: pricelists), xAxis: sortedtimeLists, recentPrice : Double(pricelists.last!))
-            }})}
+            })}
     
 
 
@@ -178,12 +190,27 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     private lazy var segmentCtrl: UISegmentedControl = {
         let items = ["1주", "3달", "1년", "5년"]
         let seg = UISegmentedControl(items: items)
+        
         seg.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
         seg.layer.cornerRadius = 5.0
         seg.backgroundColor = UIColor(named: "dropdown")
-        seg.tintColor = .lightGray
-        seg.selectedSegmentTintColor = .white
         seg.selectedSegmentIndex = 1
+        seg.selectedSegmentTintColor = .darkGray
+        
+        seg.setTitleTextAttributes(
+                 [
+                   NSAttributedString.Key.foregroundColor: UIColor.white,
+                   .font: UIFont(name: "NanumSquareEB", size: 14.0)
+                 ],
+                 for: .selected
+               )
+               seg.setTitleTextAttributes(
+                 [
+                     NSAttributedString.Key.foregroundColor: UIColor.systemGray,
+                   .font: UIFont(name: "NanumSquareEB", size: 14.0)
+                 ],
+                 for: .normal
+               )
         
         return seg
     }()
@@ -220,6 +247,9 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.addSubview(self.lineChartView)
+        
         mapView.touchDelegate = self
         searchBar.delegate = self
         configure()
@@ -228,7 +258,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         getEstateList(name: Areaname)
         getAreaList()
         input()
-        setLineChartView(Areaname: Areaname)
+        //setLineChartView(Areaname: Areaname)
         view.backgroundColor = .black
 
     }
@@ -317,6 +347,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
   
   
     //MARK: - EstateList
+    var idxLists = [Int]()
     var nameLists = [String]()
     var rateOfChange = [Double]()
     var rateCalDateDiff = [String]()
@@ -336,6 +367,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
                     do {
                         
                         for index in 0..<res.body.count {
+                            self.idxLists.append(res.body[index].idx)
                             self.nameLists.append(res.body[index].name)
                             self.rateCalDateDiff.append(res.body[index].rateCalDateDiff)
                             self.rateOfChange.append(res.body[index].rateOfChange)
@@ -397,6 +429,7 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
                     let decoder = JSONDecoder()
                     do {
                         self.price.removeAll()
+                        self.idxLists.removeAll()
                         self.rateOfChange.removeAll()
                         self.rateCalDateDiff.removeAll()
                         self.nameLists.removeAll()
@@ -539,14 +572,76 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
     }
     @objc func indexChanged(_ sender: UISegmentedControl){
         switch sender.selectedSegmentIndex{
-                case 0:
-                    print("1주")
-                case 1:
-                    print("3달")
-                case 2:
-                    print("1년")
-                case 3:
-                    print("5년")
+        case 0:
+                        let daypricedata : [Int] = pricelists.suffix(7)
+                        let daytimeListDatas : [String] = timeLists.suffix(7)
+                        self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: daypricedata), xAxis: daytimeListDatas, recentPrice : Double(daypricedata.last!))
+                        temptimeListDatas = daytimeListDatas
+                        temppriceListDatas = daypricedata
+        //                    let yearagoday = Calendar.current.date(byAdding: .day, value: 7, to: todayDate)!
+        //                    let yearagodate = dateFormatter.string(from: yearagoday)
+        //                    var estimateDate : String?
+        //                    for k in self.timeLists {
+        //                        if k >= yearagodate{
+        //                            estimateDate = k
+        //                            break
+        //                        }
+        //                    }
+        //                    let firstindex = timeLists.firstIndex(of: estimateDate!)!
+        //                    temptimeListDatas = Array(timeLists.dropFirst(firstindex))
+        //                    temppriceListDatas = Array(pricelists.dropFirst(firstindex))
+        //                    self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
+                        case 1:
+                    let daypricedata : [Int] = pricelists.suffix(90)
+                    let daytimeListDatas : [String] = timeLists.suffix(90)
+                    self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: daypricedata), xAxis: daytimeListDatas, recentPrice : Double(daypricedata.last!))
+        //                    let yearagoday = Calendar.current.date(byAdding: .day, value: -90, to: todayDate)!
+        //                    let yearagodate = dateFormatter.string(from: yearagoday)
+        //                    var estimateDate : String?
+        //                    for k in self.timeLists {
+        //                        if k >= yearagodate{
+        //                            estimateDate = k
+        //                            break
+        //                        }
+        //                    }
+        //                    let firstindex = timeLists.firstIndex(of: estimateDate!)!
+        //                    temptimeListDatas = Array(timeLists.dropFirst(firstindex))
+        //                    temppriceListDatas = Array(pricelists.dropFirst(firstindex))
+        //                    self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
+                        case 2:
+                    let daypricedata : [Int] = pricelists.suffix(360)
+                    let daytimeListDatas : [String] = timeLists.suffix(360)
+                    self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: daypricedata), xAxis: daytimeListDatas, recentPrice : Double(daypricedata.last!))
+        //            let yearagoday = Calendar.current.date(byAdding: .day, value: -365, to: todayDate)!
+        //            let yearagodate = dateFormatter.string(from: yearagoday)
+        //            var estimateDate : String?
+        //            for k in self.timeLists {
+        //                if k >= yearagodate{
+        //                    estimateDate = k
+        //                    break
+        //                }
+        //            }
+        //            let firstindex = timeLists.firstIndex(of: estimateDate!)!
+        //            temptimeListDatas = Array(timeLists.dropFirst(firstindex))
+        //            temppriceListDatas = Array(pricelists.dropFirst(firstindex))
+        //            self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
+                        case 3:
+                    let daypricedata : [Int] = pricelists.suffix(1000)
+                    let daytimeListDatas : [String] = timeLists.suffix(1000)
+                    self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: daypricedata), xAxis: daytimeListDatas, recentPrice : Double(daypricedata.last!))
+        //            let yearagoday = Calendar.current.date(byAdding: .day, value: -1200, to: todayDate)!
+        //            let yearagodate = dateFormatter.string(from: yearagoday)
+        //            var estimateDate : String?
+        //            for k in self.timeLists {
+        //                if k >= yearagodate{
+        //                    estimateDate = k
+        //                    break
+        //                }
+        //            }
+        //            let firstindex = timeLists.firstIndex(of: estimateDate!)!
+        //            temptimeListDatas = Array(timeLists.dropFirst(firstindex))
+        //            temppriceListDatas = Array(pricelists.dropFirst(firstindex))
+        //            self.setLineData(lineChartView: self.lineChartView, lineChartDataEntries: self.entryData( yvalues: temppriceListDatas), xAxis: temptimeListDatas, recentPrice : Double(temppriceListDatas.last!))
                 default:
                     break
         }
@@ -585,9 +680,9 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
         guard let cell = tableView.dequeueReusableCell(withIdentifier: EstateSaleCell.identifier, for: indexPath) as? EstateSaleCell else { return UITableViewCell() }
             
             cell.number.font = UIFont(name: "NanumSquareB", size: 13)
-            cell.title.font = UIFont(name: "NanumSquareB", size: 13)
+            cell.title.font = UIFont(name: "NanumSquareEB", size: 13)
             cell.area.font = UIFont(name: "NanumSquareB", size: 13)
-            cell.pow.font = UIFont(name: "NanumSquareB", size: 13)
+            cell.pow.font = UIFont(name: "NanumSquareEB", size: 13)
             cell.price.font = UIFont(name: "NanumSquareB", size: 13)
             cell.period.font = UIFont(name: "NanumSquareB", size: 13)
 
@@ -596,7 +691,9 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
             cell.number.textColor = .white
             cell.title.text = self.nameLists[indexPath.row]
             cell.title.textColor = .white
-            cell.area.text = "\(self.price[indexPath.row])원/m"
+            cell.area.text = String(self.price[indexPath.row].withCommas())+"원/m"
+            
+            
             cell.area.textColor = .gray
             cell.pow.text = "2"
             cell.pow.textColor = .gray
@@ -609,6 +706,8 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
                 
             cell.period.text = self.rateCalDateDiff[indexPath.row]
             cell.period.textColor = .gray
+            cell.selectionStyle = .none
+
             return cell
         }
         
@@ -619,18 +718,30 @@ class EstateController: UIViewController, ChartViewDelegate, CLLocationManagerDe
             return cell
         }
     }
+    
+    
     // cell row 선택 시 옵션
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == tableView1{
+            let estateChartVc = EstateChartViewController()
+            
+            estateChartVc.idx = self.idxLists[indexPath.row]
+            estateChartVc.nameText = self.nameLists[indexPath.row]
+            estateChartVc.changeDateText = "\(self.price[indexPath.row])"
+            estateChartVc.pricePercentText = "\(self.rateOfChange[indexPath.row])%"
+            
+            self.navigationController?.pushViewController(estateChartVc, animated: true)
+            
         }
         else{
-            
             tableView2.deselectRow(at: indexPath, animated: true)
             print(self.items[indexPath.row])
             self.searchBar.searchTextField.text = self.items[indexPath.row]
             geocodeget(cityName: self.searchBar.searchTextField.text!)
+            view.endEditing(true)
             tableView2.alpha = 0
             
+            self.setLineChartView(Areaname:self.searchBar.searchTextField.text!)
         }
     }
     

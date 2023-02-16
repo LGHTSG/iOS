@@ -19,6 +19,7 @@ class EstateSaleCell: UITableViewCell {
     
     lazy var title: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "NanumSquareEB", size: 10.0)
         return label
     }()
     
@@ -29,7 +30,7 @@ class EstateSaleCell: UITableViewCell {
     
     lazy var pow: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "NanumSquareB", size: 10.0)
+        label.font = UIFont(name: "NanumSquareEB", size: 10.0)
         return label
     }()
     
@@ -95,3 +96,5 @@ class EstateSaleCell: UITableViewCell {
         
     }
 }
+
+
